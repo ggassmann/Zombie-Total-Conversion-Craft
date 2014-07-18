@@ -1,0 +1,8 @@
+{
+   "pistolShoot": {"category": "master","sounds": [
+        {"name": "pistolShoot1","stream": false},
+        {"name": "pistolShoot2","stream": false},
+        {"name": "pistolShoot3","stream": false},
+        {"name": "pistolShoot4","stream": false}
+    ]}
+}

@@ -1,0 +1,16 @@
+[
+{
+  "modid": "zombietc",
+  "name": "Zombie Total Conversion",
+  "description": "Converts minecraft into a zombie survival game inspired by Call of Duty's Nazi Zombies minigame.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["gigimoi"],
+  "credits": "Jesus",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
