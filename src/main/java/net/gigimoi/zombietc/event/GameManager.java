@@ -6,15 +6,19 @@ import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import javafx.scene.text.TextAlignment;
 import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.helpers.TextRenderHelper;
 import net.gigimoi.zombietc.net.MessageAddNode;
 import net.gigimoi.zombietc.net.MessageAddNodeConnection;
 import net.gigimoi.zombietc.net.MessageSetWave;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
+import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -234,10 +238,14 @@ public class GameManager {
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
         if(event.type == RenderGameOverlayEvent.ElementType.CHAT) {
             if(ZombieTC.editorModeManager.enabled) {
-                Minecraft.getMinecraft().fontRenderer.drawString("Editor mode enabled", 2, 2, 0);
+                TextRenderHelper.drawString("Editor mode enabled", 2, 2, TextAlignment.LEFT);
             }
-            Minecraft.getMinecraft().fontRenderer.drawString("Wave: " + wave, 2, (int) (event.resolution.getScaledHeight()) - 10, 0);
-            Minecraft.getMinecraft().fontRenderer.drawString("Zombies Left: " + (zombiesToSpawn + zombiesAlive), 2, (int) (event.resolution.getScaledHeight()) - 20, 0);
+            TextRenderHelper.drawString("Wave: " + wave, 2, (int) (event.resolution.getScaledHeight()) - 10, TextAlignment.LEFT);
+            TextRenderHelper.drawString("Zombies Left: " + (zombiesToSpawn + zombiesAlive), 2, (int) (event.resolution.getScaledHeight()) - 20, TextAlignment.LEFT);
+            ItemStack heldItem = Minecraft.getMinecraft().thePlayer.getHeldItem();
+            if(heldItem != null && heldItem.getItem().getClass() == ItemWeapon.class) {
+                ((ItemWeapon)heldItem.getItem()).drawUIFor(heldItem, event);
+            }
         }
     }
 }

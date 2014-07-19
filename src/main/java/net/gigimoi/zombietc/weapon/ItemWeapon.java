@@ -1,7 +1,9 @@
 package net.gigimoi.zombietc.weapon;
 
+import javafx.scene.text.TextAlignment;
 import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
+import net.gigimoi.zombietc.helpers.TextRenderHelper;
 import net.gigimoi.zombietc.net.MessagePlayShootSound;
 import net.gigimoi.zombietc.net.MessageShoot;
 import net.gigimoi.zombietc.ZombieTC;
@@ -19,6 +21,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
@@ -29,18 +32,22 @@ import java.util.Random;
  * Created by gigimoi on 7/17/2014.
  */
 public class ItemWeapon extends Item implements IItemRenderer {
-    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1);
+    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90);
 
     public FireMechanism fireMechanism;
     double inventoryScale;
     double adsLift;
+    public int clipSize;
+    public int initialAmmo;
 
-    public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift) {
+    public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo) {
         this.setUnlocalizedName(name);
         setMaxStackSize(1);
         this.fireMechanism = fireMechanism;
         this.inventoryScale = inventoryScale;
         this.adsLift = adsLift;
+        this.clipSize = clipSize;
+        this.initialAmmo = initialAmmo;
     }
 
     @Override
@@ -107,12 +114,14 @@ public class ItemWeapon extends Item implements IItemRenderer {
         return false; //TODO: Deal no damage
     }
 
-    public static void ensureTagCompund(ItemStack stack) {
+    public void ensureTagCompund(ItemStack stack) {
         if(!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
             stack.getTagCompound().setBoolean("InSights", false);
             stack.getTagCompound().setBoolean("Shoot", false);
             stack.getTagCompound().setInteger("ShootCooldown", 0);
+            stack.getTagCompound().setInteger("Rounds", clipSize);
+            stack.getTagCompound().setInteger("Ammo", initialAmmo);
         }
     }
 
@@ -149,5 +158,13 @@ public class ItemWeapon extends Item implements IItemRenderer {
             }
         }
         super.onUpdate(stack, world, entity, p_77663_4_, p_77663_5_);
+    }
+
+    public void drawUIFor(ItemStack stack, RenderGameOverlayEvent event) {
+        ensureTagCompund(stack);
+        int rounds = stack.getTagCompound().getInteger("Rounds");
+        int totalAmmo = stack.getTagCompound().getInteger("Ammo");
+        String out = "Ammo: " + rounds + "/" + clipSize + " - " + totalAmmo;
+        TextRenderHelper.drawString(out, event.resolution.getScaledWidth() - 2, 2, TextAlignment.RIGHT);
     }
 }

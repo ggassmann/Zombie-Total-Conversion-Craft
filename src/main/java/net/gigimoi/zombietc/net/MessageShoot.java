@@ -68,7 +68,10 @@ public class MessageShoot implements IMessage {
             } else {
                 if(message.shooter.getClass() == EntityPlayer.class) {
                     EntityPlayer player = (EntityPlayer) message.shooter;
-                    ItemWeapon.ensureTagCompund(player.getHeldItem());
+                    Item item = player.getHeldItem().getItem();
+                    if(item.getClass() == ItemWeapon.class) {
+                        ((ItemWeapon)item).ensureTagCompund(player.getHeldItem());
+                    }
                 }
             }
             return null;
