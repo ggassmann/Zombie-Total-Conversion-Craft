@@ -14,6 +14,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -65,14 +66,6 @@ public class MessageShoot implements IMessage {
             }
             if(ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
-            } else {
-                if(message.shooter.getClass() == EntityPlayer.class) {
-                    EntityPlayer player = (EntityPlayer) message.shooter;
-                    Item item = player.getHeldItem().getItem();
-                    if(item.getClass() == ItemWeapon.class) {
-                        ((ItemWeapon)item).ensureTagCompund(player.getHeldItem());
-                    }
-                }
             }
             return null;
         }

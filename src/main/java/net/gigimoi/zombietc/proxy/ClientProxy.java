@@ -1,8 +1,6 @@
 package net.gigimoi.zombietc.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.TileNode;
@@ -13,9 +11,7 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ForgeSound;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
 
 /**
@@ -23,6 +19,7 @@ import org.lwjgl.input.Keyboard;
  */
 public class ClientProxy extends CommonProxy {
     public static KeyBinding reset;
+    public static KeyBinding reload;
     @Override
     public void renderers() {
         super.renderers();
@@ -34,7 +31,9 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void keyBinds() {
         reset = new KeyBinding("Reset", Keyboard.KEY_MULTIPLY, "key.categories.zombietc");
+        reload = new KeyBinding("Reload", Keyboard.KEY_R, "key.categories.zombietc");
         ClientRegistry.registerKeyBinding(reset);
+        ClientRegistry.registerKeyBinding(reload);
     }
 
     @Override

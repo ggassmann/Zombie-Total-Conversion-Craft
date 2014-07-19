@@ -9,6 +9,8 @@ import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.SoundHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 
 /**
@@ -38,6 +40,8 @@ public class MessagePlayShootSound implements IMessage {
         @Override
         public MessagePlayShootSound onMessage(MessagePlayShootSound message, MessageContext ctx) {
             if(ctx.side == Side.SERVER) {
+                ItemStack stack = ((EntityLivingBase) message.at).getHeldItem();
+                stack.getTagCompound().setInteger("Rounds", stack.getTagCompound().getInteger("Rounds") - 1);
                 ZombieTC.network.sendToAll(message);
             }
             else {

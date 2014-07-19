@@ -5,9 +5,11 @@ import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
 import net.gigimoi.zombietc.net.MessagePlayShootSound;
+import net.gigimoi.zombietc.net.MessageReload;
 import net.gigimoi.zombietc.net.MessageShoot;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextureHelper;
+import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
@@ -32,15 +34,16 @@ import java.util.Random;
  * Created by gigimoi on 7/17/2014.
  */
 public class ItemWeapon extends Item implements IItemRenderer {
-    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90);
+    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20);
 
     public FireMechanism fireMechanism;
     double inventoryScale;
     double adsLift;
     public int clipSize;
     public int initialAmmo;
+    public int reloadTime;
 
-    public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo) {
+    public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo, int reloadTime) {
         this.setUnlocalizedName(name);
         setMaxStackSize(1);
         this.fireMechanism = fireMechanism;
@@ -48,6 +51,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
         this.adsLift = adsLift;
         this.clipSize = clipSize;
         this.initialAmmo = initialAmmo;
+        this.reloadTime = reloadTime;
     }
 
     @Override
@@ -78,8 +82,12 @@ public class ItemWeapon extends Item implements IItemRenderer {
         GL11.glRotated(90, 1, 0, 0);
         GL11.glRotated(135, 0, 0, 1);
         GL11.glRotated(0, 0, 1, 0);
-        if(type != ItemRenderType.INVENTORY && stack.getTagCompound().getBoolean("InSights")) {
+        if(type != ItemRenderType.INVENTORY && stack.getTagCompound().getBoolean("InSights") && stack.getTagCompound().getInteger("Reload Timer") == 0) {
             GL11.glTranslated(-1, 3.45, -0.65 + -adsLift / 5f);
+        }
+        if(type != ItemRenderType.INVENTORY && stack.getTagCompound().getInteger("Reload Timer") > 0) {
+            GL11.glRotated(10, 0, 1, 0);
+            GL11.glRotated(50, 0, 0, -1);
         }
         boolean shoot = false;
         if(stack.getTagCompound().getBoolean("Shoot")) {
@@ -122,12 +130,20 @@ public class ItemWeapon extends Item implements IItemRenderer {
             stack.getTagCompound().setInteger("ShootCooldown", 0);
             stack.getTagCompound().setInteger("Rounds", clipSize);
             stack.getTagCompound().setInteger("Ammo", initialAmmo);
+            stack.getTagCompound().setInteger("Reload Time", 0);
         }
     }
 
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
-        if(entity != null) {
+        ensureTagCompund(stack);
+        NBTTagCompound tag = stack.getTagCompound();
+        if(tag.getInteger("Reload Timer") > 0) {
+            tag.setInteger("Reload Timer", tag.getInteger("Reload Timer") - 1);
+            if(tag.getInteger("Reload Timer") == 0) {
+                tag.setInteger("Rounds", clipSize);
+            }
+        } if(entity != null) {
             if(world.isRemote && entity.getClass() != EntityClientPlayerMP.class) {
                 return;
             }
@@ -139,18 +155,24 @@ public class ItemWeapon extends Item implements IItemRenderer {
                 player.swingProgress = 0f;
                 player.isSwingInProgress = false;
                 player.swingProgressInt = 0;
-                ensureTagCompund(stack);
-                stack.getTagCompound().setInteger("ShootCooldown", stack.getTagCompound().getInteger("ShootCooldown") - 1);
+                tag.setInteger("ShootCooldown", tag.getInteger("ShootCooldown") - 1);
                 if(world.isRemote) {
-                    if(fireMechanism.checkFire(this, stack)) {
-                        stack.getTagCompound().setBoolean("Shoot", true);
-                        ZombieTC.proxy.playSound("pistolShoot", (float)player.posX, (float)player.posY, (float)player.posZ);
-                        ZombieTC.network.sendToServer(new MessagePlayShootSound(player));
-                        MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F);
-                        if(trace.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
-                            Entity hit = trace.entityHit;
-                            if(hit != null && hit.getClass() == EntityZZombie.class) {
-                                ZombieTC.network.sendToServer(new MessageShoot(player, trace.entityHit, this));
+                    if(ClientProxy.reload.isPressed() && tag.getInteger("Reload Timer") == 0 && tag.getInteger("Rounds") != clipSize) {
+                        tag.setInteger("Reload Timer", reloadTime);
+                        ZombieTC.network.sendToServer(new MessageReload(player));
+                    }
+                    if(tag.getInteger("Reload Timer") == 0 && fireMechanism.checkFire(this, stack)) {
+                        if(tag.getInteger("Rounds") > 0) {
+                            tag.setBoolean("Shoot", true);
+                            tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
+                            ZombieTC.proxy.playSound("pistolShoot", (float)player.posX, (float)player.posY, (float)player.posZ);
+                            ZombieTC.network.sendToServer(new MessagePlayShootSound(player));
+                            MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F);
+                            if(trace.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
+                                Entity hit = trace.entityHit;
+                                if(hit != null && hit.getClass() == EntityZZombie.class) {
+                                    ZombieTC.network.sendToServer(new MessageShoot(player, trace.entityHit, this));
+                                }
                             }
                         }
                     }
@@ -162,9 +184,13 @@ public class ItemWeapon extends Item implements IItemRenderer {
 
     public void drawUIFor(ItemStack stack, RenderGameOverlayEvent event) {
         ensureTagCompund(stack);
-        int rounds = stack.getTagCompound().getInteger("Rounds");
-        int totalAmmo = stack.getTagCompound().getInteger("Ammo");
+        NBTTagCompound tag = stack.getTagCompound();
+        int rounds = tag.getInteger("Rounds");
+        int totalAmmo = tag.getInteger("Ammo");
         String out = "Ammo: " + rounds + "/" + clipSize + " - " + totalAmmo;
         TextRenderHelper.drawString(out, event.resolution.getScaledWidth() - 2, 2, TextAlignment.RIGHT);
+        if(tag.getInteger("Reload Timer") > 0) {
+            TextRenderHelper.drawString("Reloading...", event.resolution.getScaledWidth() - 2, 12, TextAlignment.RIGHT);
+        }
     }
 }

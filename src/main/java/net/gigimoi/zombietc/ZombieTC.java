@@ -76,6 +76,8 @@ public class ZombieTC {
         network.registerMessage(MessageShoot.MessageShootHandler.class, MessageShoot.class, 9, Side.CLIENT);
         network.registerMessage(MessageShoot.MessageShootHandler.class, MessageShoot.class, 10, Side.SERVER);
         network.registerMessage(MessagePlayShootSound.MessagePlayShootSoundHandler.class, MessagePlayShootSound.class, 11, Side.SERVER);
+        network.registerMessage(MessageReload.MessageReloadHandler.class, MessageReload.class, 12, Side.CLIENT);
+        network.registerMessage(MessageReload.MessageReloadHandler.class, MessageReload.class, 13, Side.SERVER);
 
         new ItemSpawnZZombie();
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);

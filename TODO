@@ -1,3 +1,6 @@
 Weapon clips (And sync across client+server)
 Improve Radom Vis UV map
 TextRenderHelper center & Justify
+
+BUGS:
+-Some of the packets are leaking, maybe the MessageShoot ?
