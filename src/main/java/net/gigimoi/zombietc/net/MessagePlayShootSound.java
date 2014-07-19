@@ -26,7 +26,7 @@ public class MessagePlayShootSound implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        at = MinecraftServer.getServer().isServerRunning() ?
+        at = (MinecraftServer.getServer() != null && MinecraftServer.getServer().getEntityWorld() != null && MinecraftServer.getServer().isServerRunning()) ?
                 MinecraftServer.getServer().getEntityWorld().getEntityByID(buf.readInt()) :
                 Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(buf.readInt());
     }

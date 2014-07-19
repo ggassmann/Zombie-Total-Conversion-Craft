@@ -18,6 +18,17 @@ public class FireMechanism {
             return false;
         }
     };
+    public static final FireMechanism automatic = new FireMechanism() {
+        @Override
+        public boolean checkFire(ItemWeapon weaponType, ItemStack stack) {
+            if(ZombieTC.mouseManager.isLeftDown()) {
+                if(stack.getTagCompound().getInteger("ShootCooldown") <= 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    };
     public boolean checkFire(ItemWeapon weaponType, ItemStack stack) {
         return false;
     }

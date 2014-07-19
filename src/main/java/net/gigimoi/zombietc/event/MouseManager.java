@@ -13,6 +13,9 @@ public class MouseManager {
     public boolean isLeftPressed() {
         return leftPressed && !leftPressedLast;
     }
+    public boolean isLeftDown() {
+        return leftPressed;
+    }
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if(event.phase == TickEvent.Phase.START) {
