@@ -47,6 +47,7 @@ public class GameManager {
         int currentWaveMaxZombies = 0;
         List<MCNode> nodes;
         List<BlockNode.MCNodePair> nodeConnections;
+        ArrayList<Vec3> blockBarricades;
         public GameData() {
         }
         public GameData(GameManager manager) {
@@ -58,8 +59,10 @@ public class GameManager {
             currentWaveMaxZombies = manager.currentWaveMaxZombies;
             nodes = BlockNode.nodes;
             nodeConnections = BlockNode.nodeConnections;
+            blockBarricades = manager.blockBarricades;
         }
     }
+    public static ArrayList<Vec3> blockBarricades = new ArrayList<Vec3>();
     public static ArrayList<Vector3f> spawnPositions = new ArrayList<Vector3f>();
     public static ArrayList<World> worldsSpawnedTo = new ArrayList<World>();
     int zombiesToSpawn = 0;
@@ -163,6 +166,7 @@ public class GameManager {
             zombiesAlive = 0;
             BlockNode.nodes = new ArrayList<MCNode>();
             BlockNode.nodeConnections = new ArrayList<BlockNode.MCNodePair>();
+            blockBarricades = new ArrayList<Vec3>();
             return;
         }
         Gson gson = new Gson();
@@ -179,6 +183,10 @@ public class GameManager {
         zombiesToSpawn = saveData.zombiesToSpawn;
         BlockNode.nodes = saveData.nodes;
         BlockNode.nodeConnections = saveData.nodeConnections;
+        blockBarricades = saveData.blockBarricades;
+        if(blockBarricades == null) {
+            blockBarricades = new ArrayList<Vec3>();
+        }
         for(int i = 0; i < BlockNode.nodes.size(); i++) { //Fixes duplicate node entries
             MCNode node = BlockNode.nodes.get(i);
             for(int j = 0; j < BlockNode.nodeConnections.size(); j++) {

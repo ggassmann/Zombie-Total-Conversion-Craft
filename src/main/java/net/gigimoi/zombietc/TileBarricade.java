@@ -1,10 +1,14 @@
 package net.gigimoi.zombietc;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.gigimoi.zombietc.event.GameManager;
+import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Vec3;
 
 import java.util.List;
 

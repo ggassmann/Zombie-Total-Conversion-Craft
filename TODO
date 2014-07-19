@@ -1,6 +1,11 @@
+High Priority:
+Weapon recoil
+ItemWeapon damage field
+
+Low Priority:
 Improve Radom Vis UV map
 TextRenderHelper center & Justify
 
 BUGS:
--Some of the packets are leaking, maybe the MessageShoot ?
--Zombies alive not synced in dedicated server
+-Some packets are leaking, maybe the MessageShoot ?
+-Zombies alive not synced to client in dedicated server

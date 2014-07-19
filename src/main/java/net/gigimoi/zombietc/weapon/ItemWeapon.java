@@ -2,6 +2,7 @@ package net.gigimoi.zombietc.weapon;
 
 import javafx.scene.text.TextAlignment;
 import net.gigimoi.zombietc.EntityZZombie;
+import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
 import net.gigimoi.zombietc.net.MessageTryShoot;
@@ -10,16 +11,19 @@ import net.gigimoi.zombietc.net.MessageShoot;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextureHelper;
 import net.gigimoi.zombietc.proxy.ClientProxy;
+import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -27,6 +31,8 @@ import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -177,7 +183,21 @@ public class ItemWeapon extends Item implements IItemRenderer {
                             tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
                             ZombieTC.proxy.playSound("pistolShoot", (float)player.posX, (float)player.posY, (float)player.posZ);
                             ZombieTC.network.sendToServer(new MessageTryShoot(player));
+
+                            //<fuckmefuckmefuckme>
+                            List blocks = new ArrayList<Block>();
+                            List<Vec3> blockBarricades = (List<Vec3>)GameManager.blockBarricades.clone();
+                            for(int i = 0; i < blockBarricades.size(); i++) {
+                                Vec3 vec = GameManager.blockBarricades.get(i);
+                                blocks.add(world.getBlock((int)vec.xCoord, (int)vec.yCoord, (int)vec.zCoord));
+                                world.setBlock((int)vec.xCoord, (int)vec.yCoord, (int)vec.zCoord, Blocks.air);
+                            }
                             MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F);
+                            for(int i = 0; i < blockBarricades.size(); i++) {
+                                Vec3 vec = blockBarricades.get(i);
+                                world.setBlock((int)vec.xCoord, (int)vec.yCoord, (int)vec.zCoord, (Block)blocks.get(i));
+                            }
+                            //</fuckmefuckmefuckme>
                             if(trace.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
                                 Entity hit = trace.entityHit;
                                 if(hit != null && hit.getClass() == EntityZZombie.class) {
