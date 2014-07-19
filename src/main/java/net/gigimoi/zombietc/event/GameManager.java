@@ -32,8 +32,8 @@ import java.util.Scanner;
 /**
  * Created by gigimoi on 7/14/2014.
  */
-public class WaveEventManager {
-    private static class WaveEventData {
+public class GameManager {
+    private static class GameData {
         int zombiesToSpawn = 0;
         public int wave = 0;
         int zombiesAlive = 0;
@@ -43,9 +43,9 @@ public class WaveEventManager {
         int currentWaveMaxZombies = 0;
         List<MCNode> nodes;
         List<BlockNode.MCNodePair> nodeConnections;
-        public WaveEventData() {
+        public GameData() {
         }
-        public WaveEventData(WaveEventManager manager) {
+        public GameData(GameManager manager) {
             zombiesAlive = manager.zombiesAlive;
             wave = manager.wave;
             zombiesToSpawn = manager.zombiesToSpawn;
@@ -166,7 +166,7 @@ public class WaveEventManager {
         String fileData = "";
         while (in.hasNext()) { fileData += in.next(); }
 
-        WaveEventData saveData = gson.fromJson(fileData, WaveEventData.class);
+        GameData saveData = gson.fromJson(fileData, GameData.class);
         zombiesAlive = saveData.zombiesAlive;
         currentWaveMaxZombies = saveData.currentWaveMaxZombies;
         timeToNextWave = saveData.timeToNextWave;
@@ -192,7 +192,7 @@ public class WaveEventManager {
     public void onSave(WorldEvent.Save event) throws FileNotFoundException {
         Gson gson = new Gson();
         PrintWriter writer = new PrintWriter(getSaveFile(event.world));
-        writer.print(gson.toJson(new WaveEventData(this)));
+        writer.print(gson.toJson(new GameData(this)));
         writer.flush();
         writer.close();
     }

@@ -29,7 +29,7 @@ public class MessageSetWave implements IMessage {
     public static class MessageSetWaveHandler implements IMessageHandler<MessageSetWave, MessageSetWave> {
         @Override
         public MessageSetWave onMessage(MessageSetWave message, MessageContext ctx) {
-            ZombieTC.waveEventManager.wave = message.wave;
+            ZombieTC.gameManager.wave = message.wave;
             return null;
         }
     }

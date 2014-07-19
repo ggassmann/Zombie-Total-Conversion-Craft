@@ -1,6 +1,5 @@
 package net.gigimoi.zombietc;
 
-import com.stackframe.pathfinder.AStar;
 import com.stackframe.pathfinder.Dijkstra;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
@@ -9,15 +8,11 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import scala.Int;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -47,7 +42,7 @@ public class EntityZZombie extends EntityZombie {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ZombieTC.waveEventManager.wave * 2 + 4);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ZombieTC.gameManager.wave * 2 + 4);
     }
     double targetX;
     double targetY;

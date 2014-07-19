@@ -8,8 +8,8 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.event.EditorModeManager;
+import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.event.MouseManager;
-import net.gigimoi.zombietc.event.WaveEventManager;
 import net.gigimoi.zombietc.net.*;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.ItemNodeLinker;
@@ -32,7 +32,7 @@ public class ZombieTC {
 
     public static SimpleNetworkWrapper network;
 
-    public static WaveEventManager waveEventManager;
+    public static GameManager gameManager;
     public static EditorModeManager editorModeManager;
     public static MouseManager mouseManager;
 
@@ -55,11 +55,11 @@ public class ZombieTC {
     public void init(FMLInitializationEvent event) {
         mouseManager = new MouseManager();
         editorModeManager = new EditorModeManager();
-        waveEventManager = new WaveEventManager();
+        gameManager = new GameManager();
         FMLCommonHandler.instance().bus().register(editorModeManager);
-        FMLCommonHandler.instance().bus().register(waveEventManager);
+        FMLCommonHandler.instance().bus().register(gameManager);
         FMLCommonHandler.instance().bus().register(mouseManager);
-        MinecraftForge.EVENT_BUS.register(waveEventManager);
+        MinecraftForge.EVENT_BUS.register(gameManager);
         MinecraftForge.EVENT_BUS.register(mouseManager);
         MinecraftForge.EVENT_BUS.register(new NaturalSpawnStopper());
 

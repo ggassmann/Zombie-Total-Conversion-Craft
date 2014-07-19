@@ -1,6 +1,6 @@
 package net.gigimoi.zombietc;
 
-import net.gigimoi.zombietc.event.WaveEventManager;
+import net.gigimoi.zombietc.event.GameManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -29,8 +29,8 @@ public class TileSpawner extends TileEntity {
     @Override
     public void updateEntity() {
         if(!worldObj.isRemote) {
-            WaveEventManager.spawnPositions.add(new Vector3f(xCoord + 0.5f, yCoord + 1, zCoord + 0.5f));
-            WaveEventManager.worldsSpawnedTo.add(worldObj);
+            GameManager.spawnPositions.add(new Vector3f(xCoord + 0.5f, yCoord + 1, zCoord + 0.5f));
+            GameManager.worldsSpawnedTo.add(worldObj);
         }
     }
 }
