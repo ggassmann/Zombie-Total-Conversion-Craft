@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
+import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.SoundHelper;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
@@ -42,8 +43,17 @@ public class MessageShoot implements IMessage {
     }
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(shooter.getEntityId());
-        buf.writeInt(hit.getEntityId());
+        if(shooter != null) {
+            buf.writeInt(shooter.getEntityId());
+        } else {
+            buf.writeInt(-1);
+        }
+        if(hit != null) {
+            buf.writeInt(hit.getEntityId());
+        }
+        else {
+            buf.writeInt(-1);
+        }
         buf.writeInt(Item.getIdFromItem(weapon));
     }
     public static class MessageShootHandler implements IMessageHandler<MessageShoot, MessageShoot> {
@@ -51,15 +61,14 @@ public class MessageShoot implements IMessage {
         public MessageShoot onMessage(MessageShoot message, MessageContext ctx) {
             World world = ((EntityLivingBase)message.shooter).worldObj;
             if(message.hit != null && message.shooter != null) {
-                if(ctx.side == Side.SERVER) {
-                    message.hit.attackEntityFrom(DamageSource.generic, 5);
-                    ZombieTC.network.sendToAll(message);
-                } else {
-                    message.hit.attackEntityFrom(DamageSource.generic, 5);
-                    if(message.shooter.getClass() == EntityPlayer.class) {
-                        EntityPlayer player = (EntityPlayer) message.shooter;
-                        ItemWeapon.ensureTagCompund(player.getHeldItem());
-                    }
+                message.hit.attackEntityFrom(DamageSource.generic, 2);
+            }
+            if(ctx.side == Side.SERVER) {
+                ZombieTC.network.sendToAll(message);
+            } else {
+                if(message.shooter.getClass() == EntityPlayer.class) {
+                    EntityPlayer player = (EntityPlayer) message.shooter;
+                    ItemWeapon.ensureTagCompund(player.getHeldItem());
                 }
             }
             return null;

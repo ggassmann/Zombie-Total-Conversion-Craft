@@ -68,6 +68,9 @@ public class EntityZZombie extends EntityZombie {
                     );
                 }
             }
+            else {
+                this.setSize(0.0F, 0.0F);
+            }
         }
     }
 
@@ -84,14 +87,14 @@ public class EntityZZombie extends EntityZombie {
         }
         EntityPlayer player = worldObj.getClosestPlayerToEntity(this, Double.MAX_VALUE);
         if(player != null) {
-            if(getEntitySenses().canSee(player)) {
+            Vec3 playerPos = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
+            Vec3 pos = Vec3.createVectorHelper(posX, posY, posZ);
+            if(playerPos.distanceTo(pos) < 1 && getEntitySenses().canSee(player)) {
                 targetX = player.posX;
                 targetY = player.posY;
                 targetZ = player.posZ;
             }
             else {
-                Vec3 pos = Vec3.createVectorHelper(posX, posY, posZ);
-                Vec3 playerPos = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
                 ArrayList<MCNode> goal = new ArrayList();
                 goal.add(BlockNode.getClosestToPosition(worldObj, playerPos, false));
                 MCNode start = BlockNode.getClosestToPosition(worldObj, pos, false);
@@ -116,5 +119,11 @@ public class EntityZZombie extends EntityZombie {
 
     @Override
     protected void dropRareDrop(int p_70600_1_) {
+    }
+
+    @Override
+    protected void damageEntity(DamageSource source, float amount) {
+        super.damageEntity(source, amount);
+        this.hurtResistantTime = 0;
     }
 }

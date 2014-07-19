@@ -58,9 +58,21 @@ public class ItemNodeLinker extends Item {
                             }
                         }
                         if (!unlinked) {
-                            ZombieTC.network.sendToAll(new MessageAddNodeConnection(cVec, oVec));
+                            boolean node1good = false;
+                            boolean node2good = false;
+                            for(int bi = 0; bi < BlockNode.nodes.size(); bi++) {
+                                if(BlockNode.nodes.get(bi).position.distanceTo(cVec) < 0.01) {
+                                    node1good = true;
+                                }
+                                if(BlockNode.nodes.get(bi).position.distanceTo(oVec) < 0.01) {
+                                    node2good = true;
+                                }
+                            }
+                            if(node1good && node2good) {
+                                ZombieTC.network.sendToAll(new MessageAddNodeConnection(cVec, oVec));
+                                player.addChatMessage(new ChatComponentTranslation("Linked nodes"));
+                            }
                             stack.setTagCompound(null);
-                            player.addChatMessage(new ChatComponentTranslation("Linked nodes"));
                         }
                     }
                 }

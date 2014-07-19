@@ -56,7 +56,7 @@ public class BlockNode extends BlockContainer {
     private static int renderID = -1;
     public BlockNode() {
         super(Material.rock);
-        setHardness(1.4f);
+        setHardness(1f);
         setBlockName("Node");
         if(renderID < 0) {
             renderID = RenderingRegistry.getNextAvailableRenderId();
@@ -129,7 +129,6 @@ public class BlockNode extends BlockContainer {
         for (int i = 0; i < nodes.size(); i++) {
             if (nodes.get(i).position.distanceTo(Vec3.createVectorHelper(x, y, z)) < 0.001) {
                 nodes.remove(i);
-                System.out.println("Removed a node");
             }
         }
         while(true) {
@@ -158,12 +157,6 @@ public class BlockNode extends BlockContainer {
             }
             if(node1 == null || node2 == null) continue;
             break;
-        }
-        if(node1 == null) {
-            System.out.println("Node1 was null");
-        }
-        if(node2 == null) {
-            System.out.println("Node2 was null");
         }
         BlockNode.nodeConnections.add(new BlockNode.MCNodePair(node1, node2));
     }

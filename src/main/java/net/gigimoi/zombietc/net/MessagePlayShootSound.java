@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.SoundHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -37,7 +38,10 @@ public class MessagePlayShootSound implements IMessage {
         @Override
         public MessagePlayShootSound onMessage(MessagePlayShootSound message, MessageContext ctx) {
             if(ctx.side == Side.SERVER) {
-                SoundHelper.onEntityPlay("pistolShoot", message.at.worldObj, message.at, 2, 1);
+                ZombieTC.network.sendToAll(message);
+            }
+            else {
+                ZombieTC.proxy.playSound("pistolShoot", (float)message.at.posX, (float)message.at.posY, (float)message.at.posZ);
             }
             return null;
         }

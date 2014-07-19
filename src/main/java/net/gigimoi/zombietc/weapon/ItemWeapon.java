@@ -2,11 +2,11 @@ package net.gigimoi.zombietc.weapon;
 
 import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
-import net.gigimoi.zombietc.helpers.SoundHelper;
 import net.gigimoi.zombietc.net.MessagePlayShootSound;
 import net.gigimoi.zombietc.net.MessageShoot;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextureHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
@@ -30,14 +29,18 @@ import java.util.Random;
  * Created by gigimoi on 7/17/2014.
  */
 public class ItemWeapon extends Item implements IItemRenderer {
-    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic);
+    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1);
 
     public FireMechanism fireMechanism;
+    double inventoryScale;
+    double adsLift;
 
-    public ItemWeapon(String name, FireMechanism fireMechanism) {
+    public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift) {
         this.setUnlocalizedName(name);
         setMaxStackSize(1);
         this.fireMechanism = fireMechanism;
+        this.inventoryScale = inventoryScale;
+        this.adsLift = adsLift;
     }
 
     @Override
@@ -60,13 +63,16 @@ public class ItemWeapon extends Item implements IItemRenderer {
             //EntityPlayer player = (EntityPlayer) data[1];
             GL11.glTranslated(0, 1, 0);
         }
+        if(type == ItemRenderType.INVENTORY) {
+            GL11.glScaled(0.8 * inventoryScale, 0.8 * inventoryScale, 0.8 * inventoryScale);
+        }
         ensureTagCompund(stack);
         GL11.glScaled(0.2f, 0.2f, 0.2f);
         GL11.glRotated(90, 1, 0, 0);
         GL11.glRotated(135, 0, 0, 1);
         GL11.glRotated(0, 0, 1, 0);
         if(type != ItemRenderType.INVENTORY && stack.getTagCompound().getBoolean("InSights")) {
-            GL11.glTranslated(-1, 3.45, -0.65);
+            GL11.glTranslated(-1, 3.45, -0.65 + -adsLift / 5f);
         }
         boolean shoot = false;
         if(stack.getTagCompound().getBoolean("Shoot")) {
@@ -129,6 +135,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
                 if(world.isRemote) {
                     if(fireMechanism.checkFire(this, stack)) {
                         stack.getTagCompound().setBoolean("Shoot", true);
+                        ZombieTC.proxy.playSound("pistolShoot", (float)player.posX, (float)player.posY, (float)player.posZ);
                         ZombieTC.network.sendToServer(new MessagePlayShootSound(player));
                         MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F);
                         if(trace.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {

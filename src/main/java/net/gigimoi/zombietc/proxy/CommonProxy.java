@@ -8,4 +8,6 @@ public class CommonProxy {
     }
     public void keyBinds() {
     }
+    public void playSound(String soundName, float x, float y, float z) {
+    }
 }
