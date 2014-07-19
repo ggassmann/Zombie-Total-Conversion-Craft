@@ -24,9 +24,6 @@ public class ClientProxy extends CommonProxy {
     public void renderers() {
         super.renderers();
         ClientRegistry.bindTileEntitySpecialRenderer(TileNode.class, new TileRendererNode());
-
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockNode.instance), new TileNode());
-        MinecraftForgeClient.registerItemRenderer(ItemWeapon.radomVis, ItemWeapon.radomVis);
     }
     @Override
     public void keyBinds() {
@@ -40,5 +37,10 @@ public class ClientProxy extends CommonProxy {
     public void playSound(String soundName, float x, float y, float z) {
         PositionedSoundRecord snd = PositionedSoundRecord.func_147675_a(new ResourceLocation(ZombieTC.MODID, soundName), x, y, z);
         Minecraft.getMinecraft().getSoundHandler().playSound(snd);
+    }
+
+    @Override
+    public void registerWeaponRender(ItemWeapon weapon) {
+        MinecraftForgeClient.registerItemRenderer(weapon, weapon);
     }
 }

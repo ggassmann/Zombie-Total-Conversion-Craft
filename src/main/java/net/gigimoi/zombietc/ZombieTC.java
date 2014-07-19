@@ -75,7 +75,7 @@ public class ZombieTC {
         network.registerMessage(MessageRemoveNodeConnection.MessageRemoveNodeConnectionHandler.class, MessageRemoveNodeConnection.class, 8, Side.SERVER);
         network.registerMessage(MessageShoot.MessageShootHandler.class, MessageShoot.class, 9, Side.CLIENT);
         network.registerMessage(MessageShoot.MessageShootHandler.class, MessageShoot.class, 10, Side.SERVER);
-        network.registerMessage(MessagePlayShootSound.MessagePlayShootSoundHandler.class, MessagePlayShootSound.class, 11, Side.SERVER);
+        network.registerMessage(MessageTryShoot.MessagePlayShootSoundHandler.class, MessageTryShoot.class, 11, Side.SERVER);
         network.registerMessage(MessageReload.MessageReloadHandler.class, MessageReload.class, 12, Side.CLIENT);
         network.registerMessage(MessageReload.MessageReloadHandler.class, MessageReload.class, 13, Side.SERVER);
 
@@ -85,6 +85,7 @@ public class ZombieTC {
         registerItem(ItemSpawnZZombie.instance());
         registerItem(ItemNodeLinker.instance());
         registerItem(ItemWeapon.radomVis);
+        registerItem(ItemWeapon.stormRifle);
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockBarricade.wooden);

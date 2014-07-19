@@ -4,13 +4,12 @@ import javafx.scene.text.TextAlignment;
 import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
-import net.gigimoi.zombietc.net.MessagePlayShootSound;
+import net.gigimoi.zombietc.net.MessageTryShoot;
 import net.gigimoi.zombietc.net.MessageReload;
 import net.gigimoi.zombietc.net.MessageShoot;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextureHelper;
 import net.gigimoi.zombietc.proxy.ClientProxy;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,7 +33,8 @@ import java.util.Random;
  * Created by gigimoi on 7/17/2014.
  */
 public class ItemWeapon extends Item implements IItemRenderer {
-    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20);
+    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1);
+    public static ItemWeapon stormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.7, 6, 30, 120, 20, 3);
 
     public FireMechanism fireMechanism;
     double inventoryScale;
@@ -42,8 +42,9 @@ public class ItemWeapon extends Item implements IItemRenderer {
     public int clipSize;
     public int initialAmmo;
     public int reloadTime;
+    public int fireDelay;
 
-    public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo, int reloadTime) {
+    public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo, int reloadTime, int fireDelay) {
         this.setUnlocalizedName(name);
         setMaxStackSize(1);
         this.fireMechanism = fireMechanism;
@@ -52,6 +53,8 @@ public class ItemWeapon extends Item implements IItemRenderer {
         this.clipSize = clipSize;
         this.initialAmmo = initialAmmo;
         this.reloadTime = reloadTime;
+        this.fireDelay = fireDelay;
+        ZombieTC.proxy.registerWeaponRender(this);
     }
 
     @Override
@@ -151,11 +154,11 @@ public class ItemWeapon extends Item implements IItemRenderer {
                 return;
             }
             EntityPlayer player = (EntityPlayer)entity;
+            tag.setInteger("ShootCooldown", tag.getInteger("ShootCooldown") - 1);
             if(player.getHeldItem() == stack) {
                 player.swingProgress = 0f;
                 player.isSwingInProgress = false;
                 player.swingProgressInt = 0;
-                tag.setInteger("ShootCooldown", tag.getInteger("ShootCooldown") - 1);
                 if(world.isRemote) {
                     if(ClientProxy.reload.isPressed() && tag.getInteger("Reload Timer") == 0 && tag.getInteger("Rounds") != clipSize) {
                         tag.setInteger("Reload Timer", reloadTime);
@@ -163,10 +166,11 @@ public class ItemWeapon extends Item implements IItemRenderer {
                     }
                     if(tag.getInteger("Reload Timer") == 0 && fireMechanism.checkFire(this, stack)) {
                         if(tag.getInteger("Rounds") > 0) {
+                            tag.setInteger("ShootCooldown", fireDelay);
                             tag.setBoolean("Shoot", true);
                             tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
                             ZombieTC.proxy.playSound("pistolShoot", (float)player.posX, (float)player.posY, (float)player.posZ);
-                            ZombieTC.network.sendToServer(new MessagePlayShootSound(player));
+                            ZombieTC.network.sendToServer(new MessageTryShoot(player));
                             MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F);
                             if(trace.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
                                 Entity hit = trace.entityHit;
