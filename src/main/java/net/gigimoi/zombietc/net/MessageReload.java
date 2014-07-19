@@ -10,6 +10,7 @@ import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 
 /**
@@ -38,9 +39,12 @@ public class MessageReload implements IMessage {
     public static class MessageReloadHandler implements IMessageHandler<MessageReload, MessageReload> {
         @Override
         public MessageReload onMessage(MessageReload message, MessageContext ctx) {
-            message.reloader.getHeldItem().getTagCompound().setInteger("Reload Timer", ((ItemWeapon) message.reloader.getHeldItem().getItem()).reloadTime);
-            if(ctx.side == Side.SERVER) {
-                ZombieTC.network.sendToAll(message);
+            ItemStack stack = message.reloader.getHeldItem();
+            if(stack != null && stack.getItem().getClass() == ItemWeapon.class) {
+                stack.getTagCompound().setInteger("Reload Timer", ((ItemWeapon) message.reloader.getHeldItem().getItem()).reloadTime);
+                if(ctx.side == Side.SERVER) {
+                    ZombieTC.network.sendToAll(message);
+                }
             }
             return null;
         }

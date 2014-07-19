@@ -33,8 +33,8 @@ import java.util.Random;
  * Created by gigimoi on 7/17/2014.
  */
 public class ItemWeapon extends Item implements IItemRenderer {
-    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1);
-    public static ItemWeapon stormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.7, 6, 30, 120, 20, 3);
+    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1).barrelLength(1f).sightHeight(0.1f);
+    public static ItemWeapon stormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.5, 6, 30, 120, 20, 3).barrelLength(2f).sightHeight(1f);
 
     public FireMechanism fireMechanism;
     double inventoryScale;
@@ -43,6 +43,10 @@ public class ItemWeapon extends Item implements IItemRenderer {
     public int initialAmmo;
     public int reloadTime;
     public int fireDelay;
+    private float barrelLength;
+    private float sightHeight;
+    public ItemWeapon barrelLength(float length) { this.barrelLength = length; return this; }
+    public ItemWeapon sightHeight(float height) { this.sightHeight = height; return this; }
 
     public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo, int reloadTime, int fireDelay) {
         this.setUnlocalizedName(name);
@@ -108,6 +112,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
         if(shoot) {
             TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/models/muzzleflash.png"));
             GL11.glTranslated(_r.nextInt(100) / 100f - 0.5f, _r.nextInt(100) / 100f - 0.3f, _r.nextInt(100) / 100f - 0.5f);
+            GL11.glTranslated(-barrelLength * 4, 0, sightHeight * 1.5f);
             modelFlash.renderAll();
         }
         GL11.glPopMatrix();
