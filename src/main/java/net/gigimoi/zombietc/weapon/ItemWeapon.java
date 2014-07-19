@@ -35,6 +35,7 @@ import java.util.Random;
 public class ItemWeapon extends Item implements IItemRenderer {
     public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1).barrelLength(1f).sightHeight(0.1f);
     public static ItemWeapon stormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.5, 6, 30, 120, 20, 3).barrelLength(2f).sightHeight(1f);
+    public static ItemWeapon mk1 = new ItemWeapon("MK1", FireMechanism.automatic, 0.5, 6, 30, 120, 20, 2).barrelLength(2f).sightHeight(0.75f);
 
     public FireMechanism fireMechanism;
     double inventoryScale;

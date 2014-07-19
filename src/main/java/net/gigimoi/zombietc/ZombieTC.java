@@ -86,6 +86,7 @@ public class ZombieTC {
         registerItem(ItemNodeLinker.instance());
         registerItem(ItemWeapon.radomVis);
         registerItem(ItemWeapon.stormRifle);
+        registerItem(ItemWeapon.mk1);
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockBarricade.wooden);

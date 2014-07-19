@@ -13,6 +13,7 @@ import javax.swing.*;
 /**
  * Created by gigimoi on 7/16/2014.
  */
+// The magnitude of the bullshit required to make this work compares favorably with that of the national debt.
 public class BlockBarricade extends BlockContainer {
     public static BlockBarricade wooden = new BlockBarricade();
 
