@@ -1,9 +1,9 @@
 package net.gigimoi.zombietc.weapon;
 
-import javafx.scene.text.TextAlignment;
 import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
+import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
 import net.gigimoi.zombietc.net.MessageTryShoot;
 import net.gigimoi.zombietc.net.MessageReload;
@@ -30,6 +30,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
+import scala.util.Right;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -221,9 +222,9 @@ public class ItemWeapon extends Item implements IItemRenderer {
         int rounds = tag.getInteger("Rounds");
         int totalAmmo = tag.getInteger("Ammo");
         String out = "Ammo: " + rounds + "/" + clipSize + " - " + totalAmmo;
-        TextRenderHelper.drawString(out, event.resolution.getScaledWidth() - 2, 2, TextAlignment.RIGHT);
+        TextRenderHelper.drawString(out, event.resolution.getScaledWidth() - 2, 2, TextAlignment.Right);
         if(tag.getInteger("Reload Timer") > 0) {
-            TextRenderHelper.drawString("Reloading...", event.resolution.getScaledWidth() - 2, 12, TextAlignment.RIGHT);
+            TextRenderHelper.drawString("Reloading...", event.resolution.getScaledWidth() - 2, 12, TextAlignment.Right);
         }
     }
 }

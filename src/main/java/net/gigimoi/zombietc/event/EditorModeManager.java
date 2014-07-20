@@ -5,6 +5,7 @@ import cpw.mods.fml.common.gameevent.InputEvent;
 import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.net.MessageChangeEditorMode;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 /**
  * Created by gigimoi on 7/15/2014.
@@ -15,6 +16,12 @@ public class EditorModeManager {
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if(((ClientProxy) ZombieTC.proxy).reset.isPressed()) {
             ZombieTC.network.sendToServer(new MessageChangeEditorMode(!ZombieTC.editorModeManager.enabled));
+        }
+    }
+    @SubscribeEvent
+    public void getBreakSpeed(PlayerEvent.BreakSpeed event) {
+        if(!enabled) {
+            event.setCanceled(true);
         }
     }
 

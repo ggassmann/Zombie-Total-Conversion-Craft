@@ -61,6 +61,7 @@ public class ZombieTC {
         FMLCommonHandler.instance().bus().register(mouseManager);
         MinecraftForge.EVENT_BUS.register(gameManager);
         MinecraftForge.EVENT_BUS.register(mouseManager);
+        MinecraftForge.EVENT_BUS.register(editorModeManager);
         MinecraftForge.EVENT_BUS.register(new NaturalSpawnStopper());
 
         network = NetworkRegistry.INSTANCE.newSimpleChannel(NETWORK_CHANNEL);

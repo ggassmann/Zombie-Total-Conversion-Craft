@@ -69,13 +69,11 @@ public class BlockBarricade extends BlockContainer {
     public boolean renderAsNormalBlock() {
         return false;
     }
-
     @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         GameManager.blockBarricades.add(Vec3.createVectorHelper(x, y, z));
     }
-
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int side) {
         super.breakBlock(world, x, y, z, block, side);
