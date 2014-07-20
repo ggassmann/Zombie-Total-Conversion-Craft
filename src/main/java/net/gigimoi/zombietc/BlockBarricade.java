@@ -23,6 +23,7 @@ public class BlockBarricade extends BlockContainer {
     public BlockBarricade() {
         super(Material.rock);
         setBlockName("Barricade");
+        setHardness(1.0f);
     }
 
     @Override

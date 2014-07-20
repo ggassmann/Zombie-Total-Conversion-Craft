@@ -76,7 +76,7 @@ public class EntityZZombie extends EntityZombie {
             targetZ = posZ;
             hasSetDefaultTarget = true;
         }
-        getMoveHelper().setMoveTo(targetX + 0.5, targetY, targetZ + 0.5, 1f);
+        getMoveHelper().setMoveTo(targetX + 0.5, targetY, targetZ + 0.5, ZombieTC.gameManager.wave > 4 ? 1.2f : 1f);
         if(targetY > posY) {
             getJumpHelper().setJumping();
         }

@@ -2,6 +2,8 @@
 *.iml
 *.ipr
 *.iws
+*.blend1
+*.mtl
 eclipse/
 gradle/
 out/

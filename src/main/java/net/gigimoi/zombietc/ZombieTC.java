@@ -27,7 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod(modid = ZombieTC.MODID, version = ZombieTC.VERSION)
 public class ZombieTC {
     public static final String MODID = "zombietc";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "0.1";
     public static final String NETWORK_CHANNEL = "channel_zombie_tc";
 
     public static SimpleNetworkWrapper network;
@@ -86,7 +86,6 @@ public class ZombieTC {
         registerItem(ItemNodeLinker.instance());
         registerItem(ItemWeapon.radomVis);
         registerItem(ItemWeapon.stormRifle);
-        registerItem(ItemWeapon.mk1);
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockBarricade.wooden);
