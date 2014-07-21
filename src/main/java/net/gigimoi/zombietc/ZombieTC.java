@@ -12,6 +12,7 @@ import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.event.MouseManager;
 import net.gigimoi.zombietc.event.NaturalSpawnStopper;
 import net.gigimoi.zombietc.net.*;
+import net.gigimoi.zombietc.net.activates.MessageActivatePurchase;
 import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.ItemNodeLinker;
@@ -83,6 +84,8 @@ public class ZombieTC {
         network.registerMessage(MessageReload.MessageReloadHandler.class, MessageReload.class, 13, Side.SERVER);
         network.registerMessage(MessageActivateRepairBarricade.MessageActivateRepairBarricadeHandler.class, MessageActivateRepairBarricade.class, 14, Side.CLIENT);
         network.registerMessage(MessageActivateRepairBarricade.MessageActivateRepairBarricadeHandler.class, MessageActivateRepairBarricade.class, 15, Side.SERVER);
+        network.registerMessage(MessageActivatePurchase.MessageActivatePurchaseHandler.class, MessageActivatePurchase.class, 16, Side.CLIENT);
+        network.registerMessage(MessageActivatePurchase.MessageActivatePurchaseHandler.class, MessageActivatePurchase.class, 17, Side.SERVER);
 
         new ItemSpawnZZombie();
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);
@@ -94,12 +97,15 @@ public class ZombieTC {
         registerItem(ItemWeapon.thompson);
 
         registerBlock(BlockSpawner.zombie);
-        registerBlock(BlockBarricade.wooden);
         registerBlock(BlockNode.instance);
+
+        registerBlock(BlockBarricade.wooden);
+        registerBlock(BlockPurchaseItemstack.instance);
 
         registerTileEntity(TileSpawner.class);
         registerTileEntity(TileBarricade.class);
         registerTileEntity(TileNode.class);
+        registerTileEntity(TilePurchaseItemStack.class);
 
         proxy.renderers();
         proxy.keyBinds();

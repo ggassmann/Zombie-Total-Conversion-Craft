@@ -86,5 +86,4 @@ public class TileBarricade extends TileEntity {
         super.onDataPacket(net, pkt);
         readFromNBT(pkt.func_148857_g());
     }
-
 }

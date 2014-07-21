@@ -47,7 +47,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
     public static ItemWeapon thompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.5, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f);
 
     public FireMechanism fireMechanism;
-    double inventoryScale;
+    public double inventoryScale;
     double adsLift;
     public int clipSize;
     public int initialAmmo;

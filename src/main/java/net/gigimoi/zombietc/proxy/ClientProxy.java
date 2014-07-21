@@ -1,15 +1,13 @@
 package net.gigimoi.zombietc.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
-import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.pathfinding.BlockNode;
+import net.gigimoi.zombietc.*;
 import net.gigimoi.zombietc.pathfinding.TileNode;
 import net.gigimoi.zombietc.pathfinding.TileRendererNode;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.input.Keyboard;
@@ -26,6 +24,7 @@ public class ClientProxy extends CommonProxy {
     public void renderers() {
         super.renderers();
         ClientRegistry.bindTileEntitySpecialRenderer(TileNode.class, new TileRendererNode());
+        ClientRegistry.bindTileEntitySpecialRenderer(TilePurchaseItemStack.class, new TileRendererPurchaseItemstack());
     }
     @Override
     public void keyBinds() {

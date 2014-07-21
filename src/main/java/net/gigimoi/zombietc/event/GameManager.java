@@ -69,8 +69,6 @@ public class GameManager {
     public static ArrayList<Vector3f> spawnPositions = new ArrayList<Vector3f>();
     public static ArrayList<World> worldsSpawnedTo = new ArrayList<World>();
 
-    public static ArrayList<EntityPlayer> activates = new ArrayList<EntityPlayer>();
-
     int zombiesToSpawn = 0;
     public int wave = 0;
     int zombiesAlive = 0;
