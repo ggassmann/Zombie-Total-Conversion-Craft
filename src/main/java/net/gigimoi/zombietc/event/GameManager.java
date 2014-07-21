@@ -2,21 +2,23 @@ package net.gigimoi.zombietc.event;
 
 import com.google.gson.Gson;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.gigimoi.zombietc.EntityZZombie;
+import net.gigimoi.zombietc.TileBarricade;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
-import net.gigimoi.zombietc.net.MessageAddNode;
-import net.gigimoi.zombietc.net.MessageAddNodeConnection;
-import net.gigimoi.zombietc.net.MessageSetWave;
+import net.gigimoi.zombietc.net.*;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
+import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -25,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import scala.reflect.internal.Phase;
 
 import javax.vecmath.Vector3f;
 import java.io.*;
@@ -65,6 +68,9 @@ public class GameManager {
     public static ArrayList<Vec3> blockBarricades = new ArrayList<Vec3>();
     public static ArrayList<Vector3f> spawnPositions = new ArrayList<Vector3f>();
     public static ArrayList<World> worldsSpawnedTo = new ArrayList<World>();
+
+    public static ArrayList<EntityPlayer> activates = new ArrayList<EntityPlayer>();
+
     int zombiesToSpawn = 0;
     public int wave = 0;
     int zombiesAlive = 0;
@@ -241,6 +247,12 @@ public class GameManager {
             zombiesAlive--;
         }
     }
+    private int activateMessageDuration = 0;
+    private String activateMessage;
+    public void setActivateMessage(String message) {
+        activateMessageDuration = 10;
+        activateMessage = message;
+    }
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
@@ -248,11 +260,15 @@ public class GameManager {
             if(ZombieTC.editorModeManager.enabled) {
                 TextRenderHelper.drawString("Editor mode enabled", 2, 2, TextAlignment.Left);
             }
-            TextRenderHelper.drawString("Wave: " + wave, 2, (int) (event.resolution.getScaledHeight()) - 10, TextAlignment.Left);
+            TextRenderHelper.drawString("Wave: " + wave, 2, event.resolution.getScaledHeight() - 10, TextAlignment.Left);
             TextRenderHelper.drawString("Zombies Left: " + (zombiesToSpawn + zombiesAlive), 2, (int) (event.resolution.getScaledHeight()) - 20, TextAlignment.Left);
             ItemStack heldItem = Minecraft.getMinecraft().thePlayer.getHeldItem();
             if(heldItem != null && heldItem.getItem().getClass() == ItemWeapon.class) {
                 ((ItemWeapon)heldItem.getItem()).drawUIFor(heldItem, event);
+            }
+            if(activateMessageDuration > 0) {
+                TextRenderHelper.drawString(activateMessage, event.resolution.getScaledWidth() / 2, event.resolution.getScaledHeight() - 90, TextAlignment.Center);
+                activateMessageDuration--;
             }
         }
     }

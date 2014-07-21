@@ -11,6 +11,7 @@ import net.gigimoi.zombietc.event.EditorModeManager;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.event.MouseManager;
 import net.gigimoi.zombietc.net.*;
+import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.ItemNodeLinker;
 import net.gigimoi.zombietc.pathfinding.TileNode;
@@ -79,6 +80,8 @@ public class ZombieTC {
         network.registerMessage(MessageTryShoot.MessagePlayShootSoundHandler.class, MessageTryShoot.class, 11, Side.SERVER);
         network.registerMessage(MessageReload.MessageReloadHandler.class, MessageReload.class, 12, Side.CLIENT);
         network.registerMessage(MessageReload.MessageReloadHandler.class, MessageReload.class, 13, Side.SERVER);
+        network.registerMessage(MessageActivateRepairBarricade.MessageActivateRepairBarricadeHandler.class, MessageActivateRepairBarricade.class, 14, Side.CLIENT);
+        network.registerMessage(MessageActivateRepairBarricade.MessageActivateRepairBarricadeHandler.class, MessageActivateRepairBarricade.class, 15, Side.SERVER);
 
         new ItemSpawnZZombie();
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);
