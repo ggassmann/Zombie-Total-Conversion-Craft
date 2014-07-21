@@ -5,5 +5,6 @@ package net.gigimoi.zombietc.helpers;
  */
 public enum TextAlignment {
     Left,
-    Right
+    Right,
+    Center
 }
