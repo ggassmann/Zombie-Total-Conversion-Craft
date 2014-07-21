@@ -33,6 +33,9 @@ public class ZombieTC {
     public static final String VERSION = "0.1";
     public static final String NETWORK_CHANNEL = "channel_zombie_tc";
 
+    @Mod.Instance("zombietc")
+    public static ZombieTC instance;
+
     public static SimpleNetworkWrapper network;
 
     public static GameManager gameManager;
@@ -56,6 +59,8 @@ public class ZombieTC {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+
         mouseManager = new MouseManager();
         editorModeManager = new EditorModeManager();
         gameManager = new GameManager();
@@ -86,6 +91,8 @@ public class ZombieTC {
         network.registerMessage(MessageActivateRepairBarricade.MessageActivateRepairBarricadeHandler.class, MessageActivateRepairBarricade.class, 15, Side.SERVER);
         network.registerMessage(MessageActivatePurchase.MessageActivatePurchaseHandler.class, MessageActivatePurchase.class, 16, Side.CLIENT);
         network.registerMessage(MessageActivatePurchase.MessageActivatePurchaseHandler.class, MessageActivatePurchase.class, 17, Side.SERVER);
+        network.registerMessage(MessageSetPurchaseItemStackPrice.MessageSetPurchaseItemStackPriceHandler.class, MessageSetPurchaseItemStackPrice.class, 18, Side.CLIENT);
+        network.registerMessage(MessageSetPurchaseItemStackPrice.MessageSetPurchaseItemStackPriceHandler.class, MessageSetPurchaseItemStackPrice.class, 19, Side.SERVER);
 
         new ItemSpawnZZombie();
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);

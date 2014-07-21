@@ -1,5 +1,7 @@
 package net.gigimoi.zombietc;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import net.gigimoi.zombietc.gui.GuiPurchaseItemStack;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -52,6 +54,15 @@ public class BlockPurchaseItemstack extends BlockContainer {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+        if(ZombieTC.editorModeManager.enabled) {
+            player.openGui(ZombieTC.instance, GuiPurchaseItemStack.GUI_ID, world, x, y, z);
+            return true;
+        }
+        return false;
     }
 
     @Override

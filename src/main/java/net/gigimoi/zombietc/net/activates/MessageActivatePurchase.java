@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.TilePurchaseItemStack;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.helpers.EntityIDHelper;
+import net.gigimoi.zombietc.helpers.NetHelper;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
@@ -32,7 +32,7 @@ public class MessageActivatePurchase implements IMessage {
         x = buf.readInt();
         y = buf.readInt();
         z = buf.readInt();
-        purchaser = (EntityPlayer)EntityIDHelper.getEntityByID(buf.readInt());
+        purchaser = (EntityPlayer) NetHelper.getEntityByID(buf.readInt());
     }
     @Override
     public void toBytes(ByteBuf buf) {
@@ -46,7 +46,6 @@ public class MessageActivatePurchase implements IMessage {
         public MessageActivatePurchase onMessage(MessageActivatePurchase message, MessageContext ctx) {
             TilePurchaseItemStack tile = (TilePurchaseItemStack)message.purchaser.worldObj.getTileEntity(message.x, message.y, message.z);
             if(ctx.side == Side.SERVER) {
-                System.out.println("Server recieved");
                 message.purchaser.inventory.addItemStackToInventory(tile.itemStack.copy());
                 ZombieTC.network.sendToAll(message);
             }

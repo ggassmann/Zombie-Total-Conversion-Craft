@@ -21,6 +21,7 @@ import org.lwjgl.input.Keyboard;
  */
 public class TilePurchaseItemStack extends TileEntity {
     public ItemStack itemStack;
+    public int price = 100;
 
 
     public AxisAlignedBB getPurchaseBounds() {
@@ -30,15 +31,18 @@ public class TilePurchaseItemStack extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         itemStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("ItemStack"));
+        price = tag.getInteger("Price");
         super.readFromNBT(tag);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
-        NBTTagCompound stackTag = new NBTTagCompound();
-        itemStack.writeToNBT(stackTag);
-        tag.setTag("ItemStack", stackTag);
-        System.out.println(itemStack);
+        if(itemStack != null) {
+            NBTTagCompound stackTag = new NBTTagCompound();
+            itemStack.writeToNBT(stackTag);
+            tag.setTag("ItemStack", stackTag);
+        }
+        tag.setInteger("Price", price);
         super.writeToNBT(tag);
     }
 
@@ -46,7 +50,7 @@ public class TilePurchaseItemStack extends TileEntity {
     public void updateEntity() {
         super.updateEntity();
         if(itemStack != null && !ZombieTC.editorModeManager.enabled && worldObj.isRemote && worldObj.getEntitiesWithinAABB(EntityPlayer.class, getPurchaseBounds()).contains(Minecraft.getMinecraft().thePlayer)) {
-            ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to purchase ");
+            ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to purchase (" + price + "exp)");
             if(ClientProxy.activate.isPressed()) {
                 ZombieTC.network.sendToServer(new MessageActivatePurchase(Minecraft.getMinecraft().thePlayer, xCoord, yCoord, zCoord));
             }
