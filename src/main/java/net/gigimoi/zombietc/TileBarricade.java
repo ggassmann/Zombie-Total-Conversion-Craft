@@ -9,6 +9,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -30,18 +33,18 @@ public class TileBarricade extends TileEntity {
     }
     @Override
     public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
         damage = tag.getInteger("Damage");
         ticker = tag.getInteger("Ticker");
         playerTicker = tag.getInteger("Player Ticker");
+        super.readFromNBT(tag);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
         tag.setInteger("Damage", damage);
         tag.setInteger("Ticker", ticker);
         tag.setInteger("Player Ticker", playerTicker);
+        super.writeToNBT(tag);
     }
 
     public AxisAlignedBB getBoundsAround() {
@@ -70,4 +73,18 @@ public class TileBarricade extends TileEntity {
             }
         }
     }
+
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound tagCompound = new NBTTagCompound();
+        writeToNBT(tagCompound);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tagCompound);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        super.onDataPacket(net, pkt);
+        readFromNBT(pkt.func_148857_g());
+    }
+
 }
