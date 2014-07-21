@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.weapon;
 
 import net.gigimoi.zombietc.EntityZZombie;
+import net.gigimoi.zombietc.TileBarricade;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
 import net.gigimoi.zombietc.helpers.TextAlignment;
@@ -21,6 +22,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
@@ -189,17 +191,25 @@ public class ItemWeapon extends Item implements IItemRenderer {
                             ZombieTC.network.sendToServer(new MessageTryShoot(player));
 
                             //<fuckmefuckmefuckme>
+                            ArrayList<Integer> damages = new ArrayList<Integer>();
+                            ArrayList<Integer> tickers = new ArrayList<Integer>();
                             List blocks = new ArrayList<Block>();
                             List<Vec3> blockBarricades = (List<Vec3>)GameManager.blockBarricades.clone();
                             for(int i = 0; i < blockBarricades.size(); i++) {
                                 Vec3 vec = GameManager.blockBarricades.get(i);
                                 blocks.add(world.getBlock((int)vec.xCoord, (int)vec.yCoord, (int)vec.zCoord));
-                                world.setBlock((int)vec.xCoord, (int)vec.yCoord, (int)vec.zCoord, Blocks.air);
+                                TileEntity te = world.getTileEntity((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord);
+                                damages.add(((TileBarricade)te).damage);
+                                tickers.add(((TileBarricade)te).ticker);
+                                world.setBlock((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord, Blocks.air);
                             }
                             MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F);
                             for(int i = 0; i < blockBarricades.size(); i++) {
                                 Vec3 vec = blockBarricades.get(i);
-                                world.setBlock((int)vec.xCoord, (int)vec.yCoord, (int)vec.zCoord, (Block)blocks.get(i));
+                                world.setBlock((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord, (Block) blocks.get(i));
+                                TileBarricade te = (TileBarricade)world.getTileEntity((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord);
+                                te.damage = damages.get(i);
+                                te.ticker = tickers.get(i);
                             }
                             //</fuckmefuckmefuckme>
                             if(trace.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
