@@ -157,6 +157,9 @@ public class ItemWeapon extends Item implements IItemRenderer {
 
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
+        if(ZombieTC.editorModeManager.enabled) {
+            return;
+        }
         ensureTagCompund(stack);
         NBTTagCompound tag = stack.getTagCompound();
         if(tag.getInteger("Reload Timer") > 0) {
