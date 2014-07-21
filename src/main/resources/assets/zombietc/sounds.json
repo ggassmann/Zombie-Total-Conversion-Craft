@@ -4,5 +4,11 @@
         {"name": "pistolShoot2","stream": false},
         {"name": "pistolShoot3","stream": false},
         {"name": "pistolShoot4","stream": false}
+    ]},
+   "barricadeRepair": {"category": "master","sounds": [
+        {"name": "barricadeRepair1","stream": false},
+        {"name": "barricadeRepair2","stream": false},
+        {"name": "barricadeRepair3","stream": false},
+        {"name": "barricadeRepair4","stream": false}
     ]}
 }
