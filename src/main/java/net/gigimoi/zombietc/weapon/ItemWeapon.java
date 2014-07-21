@@ -121,6 +121,9 @@ public class ItemWeapon extends Item implements IItemRenderer {
             modelFlash = AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/muzzleflash.obj"));
         }
         TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/models/guns/" + getUnlocalizedName().substring(5) + ".png"));
+        if(type == ItemRenderType.ENTITY) {
+            GL11.glScaled(0.5, 0.5, 0.5);
+        }
         modelGun.renderAll();
         if(shoot) {
             TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/models/muzzleflash.png"));
