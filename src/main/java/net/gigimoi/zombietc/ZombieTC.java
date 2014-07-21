@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.event.EditorModeManager;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.event.MouseManager;
+import net.gigimoi.zombietc.event.NaturalSpawnStopper;
 import net.gigimoi.zombietc.net.*;
 import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
