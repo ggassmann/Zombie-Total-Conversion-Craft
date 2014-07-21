@@ -20,6 +20,8 @@ import org.lwjgl.input.Keyboard;
 public class ClientProxy extends CommonProxy {
     public static KeyBinding reset;
     public static KeyBinding reload;
+    public static KeyBinding activate;
+
     @Override
     public void renderers() {
         super.renderers();
@@ -27,10 +29,12 @@ public class ClientProxy extends CommonProxy {
     }
     @Override
     public void keyBinds() {
-        reset = new KeyBinding("Reset", Keyboard.KEY_MULTIPLY, "key.categories.zombietc");
+        reset = new KeyBinding("Toggle Editor Mode", Keyboard.KEY_G, "key.categories.zombietc");
         reload = new KeyBinding("Reload", Keyboard.KEY_R, "key.categories.zombietc");
+        activate = new KeyBinding("Activate", Keyboard.KEY_F, "key.categories.zombietc");
         ClientRegistry.registerKeyBinding(reset);
         ClientRegistry.registerKeyBinding(reload);
+        ClientRegistry.registerKeyBinding(activate);
     }
 
     @Override
