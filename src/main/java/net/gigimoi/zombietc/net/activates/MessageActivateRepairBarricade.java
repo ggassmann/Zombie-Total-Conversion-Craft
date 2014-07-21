@@ -43,18 +43,14 @@ public class MessageActivateRepairBarricade implements IMessage {
                 TileEntity tileRaw = MinecraftServer.getServer().getEntityWorld().getTileEntity(message.x, message.y, message.z);
                 if(tileRaw != null && tileRaw.getClass() == TileBarricade.class) {
                     TileBarricade tile = (TileBarricade)tileRaw;
-                    System.out.println("Server tile damage before: " + tile.damage);
                     tile.damage = Math.max(tile.damage - 1, 0);
-                    System.out.println("Server tile damage after: " + tile.damage);
                     ZombieTC.network.sendToAll(message);
                 }
             } else {
                 TileEntity tileRaw = Minecraft.getMinecraft().theWorld.getTileEntity(message.x, message.y, message.z);
                 if(tileRaw != null && tileRaw.getClass() == TileBarricade.class) {
                     TileBarricade tile = (TileBarricade)tileRaw;
-                    System.out.println("Client tile damage before: " + tile.damage);
                     tile.damage = Math.max(tile.damage - 1, 0);
-                    System.out.println("Client tile damage after: " + tile.damage);
                 }
             }
             return null;

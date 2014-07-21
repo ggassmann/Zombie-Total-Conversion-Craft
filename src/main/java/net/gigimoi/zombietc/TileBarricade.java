@@ -65,7 +65,7 @@ public class TileBarricade extends TileEntity {
                 ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to repair" + (playerTicker == 0 ? "" : "..."));
                 if(playerTicker == 0 && Keyboard.isKeyDown(ClientProxy.activate.getKeyCode()) ) {
                     playerTicker = 40;
-                    ZombieTC.network.sendToServer(new MessageActivateRepairBarricade((int)xCoord, (int)yCoord, (int)zCoord));
+                    ZombieTC.network.sendToServer(new MessageActivateRepairBarricade(xCoord, yCoord, zCoord));
                 }
             }
         }
