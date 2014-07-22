@@ -71,6 +71,12 @@ public class BlockBarricade extends BlockContainer {
     public boolean renderAsNormalBlock() {
         return false;
     }
+
+    @Override
+    public boolean getBlocksMovement(IBlockAccess access, int x, int y, int z) {
+        return false;
+    }
+
     @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
