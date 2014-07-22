@@ -1,5 +1,6 @@
 package net.gigimoi.zombietc;
 
+import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.net.activates.MessageActivatePurchase;
 import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
@@ -47,10 +48,10 @@ public class TilePurchaseItemStack extends TileEntity {
     public void updateEntity() {
         super.updateEntity();
         if(worldObj.isRemote) {
-            if(itemStack != null && !ZombieTC.editorModeManager.enabled && worldObj.getEntitiesWithinAABB(EntityPlayer.class, getPurchaseBounds()).contains(ZombieTC.proxy.getPlayerSafe())) {
+            if(itemStack != null && !ZombieTC.editorModeManager.enabled && worldObj.getEntitiesWithinAABB(EntityPlayer.class, getPurchaseBounds()).contains(ZombieTC.proxy.getPlayer())) {
                 ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to purchase (" + price + "exp)");
                 if (ClientProxy.activate.isPressed()) {
-                    ZombieTC.network.sendToServer(new MessageActivatePurchase(ZombieTC.proxy.getPlayerSafe(), xCoord, yCoord, zCoord));
+                    ZombieTC.network.sendToServer(new MessageActivatePurchase(ZombieTC.proxy.getPlayer(), xCoord, yCoord, zCoord));
                 }
             }
         }

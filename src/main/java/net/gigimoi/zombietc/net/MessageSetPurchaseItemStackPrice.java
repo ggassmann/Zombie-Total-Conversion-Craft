@@ -45,7 +45,7 @@ public class MessageSetPurchaseItemStackPrice implements IMessage {
     public static class MessageSetPurchaseItemStackPriceHandler implements IMessageHandler<MessageSetPurchaseItemStackPrice, MessageSetPurchaseItemStackPrice> {
         @Override
         public MessageSetPurchaseItemStackPrice onMessage(MessageSetPurchaseItemStackPrice message, MessageContext ctx) {
-            TileEntity tileraw = ZombieTC.proxy.getTileEntity(message.x, message.y, message.z);
+            TileEntity tileraw = ZombieTC.proxy.getWorld(ctx.side).getTileEntity(message.x, message.y, message.z);
             if(tileraw != null && tileraw.getClass() == TilePurchaseItemStack.class) {
                 TilePurchaseItemStack tile = (TilePurchaseItemStack)tileraw;
                 tile.price = message.price;

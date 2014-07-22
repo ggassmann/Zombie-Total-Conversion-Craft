@@ -34,8 +34,8 @@ public class MessageShoot implements IMessage {
     }
     @Override
     public void fromBytes(ByteBuf buf) {
-        shooter = ZombieTC.proxy.getEntityByID(buf.readInt());
-        hit = ZombieTC.proxy.getEntityByID(buf.readInt());
+        shooter = ZombieTC.proxy.getWorld(Side.SERVER).getEntityByID(buf.readInt());
+        hit = ZombieTC.proxy.getWorld(Side.SERVER).getEntityByID(buf.readInt());
         weapon = Item.getItemById(buf.readInt());
     }
     @Override

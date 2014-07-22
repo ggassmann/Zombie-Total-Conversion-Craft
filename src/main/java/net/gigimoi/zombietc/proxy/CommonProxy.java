@@ -30,13 +30,6 @@ public class CommonProxy implements IGuiHandler {
     }
     public void registerWeaponRender(ItemWeapon weapon) {
     }
-    public EntityPlayer getPlayerSafe() {
-        System.out.println("ERROR: Tried to get player on server");
-        return null;
-    }
-    public Entity getEntityByID(int id) {
-        return MinecraftServer.getServer().getEntityWorld().getEntityByID(id);
-    }
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         return null;
@@ -49,8 +42,8 @@ public class CommonProxy implements IGuiHandler {
         return null;
     }
 
-    public TileEntity getTileEntity(int x, int y, int z) {
-        return MinecraftServer.getServer().getEntityWorld().getTileEntity(x, y, z);
+    public World getWorld(Side sidePrefered) {
+        return MinecraftServer.getServer().getEntityWorld();
     }
     public void network() {
         SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(ZombieTC.NETWORK_CHANNEL);
@@ -75,5 +68,9 @@ public class CommonProxy implements IGuiHandler {
         network.registerMessage(MessageSetPurchaseItemStackPrice.MessageSetPurchaseItemStackPriceHandler.class, MessageSetPurchaseItemStackPrice.class, 18, Side.CLIENT);
         network.registerMessage(MessageSetPurchaseItemStackPrice.MessageSetPurchaseItemStackPriceHandler.class, MessageSetPurchaseItemStackPrice.class, 19, Side.SERVER);
         ZombieTC.network = network;
+    }
+
+    public EntityPlayer getPlayer() {
+        return null;
     }
 }

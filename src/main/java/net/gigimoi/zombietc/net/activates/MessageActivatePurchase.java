@@ -31,7 +31,7 @@ public class MessageActivatePurchase implements IMessage {
         x = buf.readInt();
         y = buf.readInt();
         z = buf.readInt();
-        purchaser = (EntityPlayer) ZombieTC.proxy.getEntityByID(buf.readInt());
+        purchaser = (EntityPlayer) ZombieTC.proxy.getWorld(Side.SERVER).getEntityByID(buf.readInt());
     }
     @Override
     public void toBytes(ByteBuf buf) {
@@ -43,11 +43,12 @@ public class MessageActivatePurchase implements IMessage {
     public static class MessageActivatePurchaseHandler implements IMessageHandler<MessageActivatePurchase, MessageActivatePurchase> {
         @Override
         public MessageActivatePurchase onMessage(MessageActivatePurchase message, MessageContext ctx) {
-            TilePurchaseItemStack tile = (TilePurchaseItemStack)ZombieTC.proxy.getTileEntity(message.x, message.y, message.z);
+            TilePurchaseItemStack tile = (TilePurchaseItemStack)ZombieTC.proxy.getWorld(ctx.side).getTileEntity(message.x, message.y, message.z);
             if(ctx.side == Side.SERVER) {
                 message.purchaser.inventory.addItemStackToInventory(tile.itemStack.copy());
                 ZombieTC.network.sendToAll(message);
             }
+            //TODO: Modify points/EXP
             return null;
         }
     }

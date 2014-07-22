@@ -26,7 +26,9 @@ public class MessageTryShoot implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        at = ZombieTC.proxy.getEntityByID(buf.readInt());
+        at = (MinecraftServer.getServer() != null && MinecraftServer.getServer().getEntityWorld() != null && MinecraftServer.getServer().isServerRunning()) ?
+            MinecraftServer.getServer().getEntityWorld().getEntityByID(buf.readInt()) :
+            Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(buf.readInt());
     }
 
     @Override
@@ -34,7 +36,6 @@ public class MessageTryShoot implements IMessage {
         buf.writeInt(at.getEntityId());
     }
     public static class MessagePlayShootSoundHandler implements IMessageHandler<MessageTryShoot, MessageTryShoot> {
-        // Catching exceptions is for communists
         @Override
         public MessageTryShoot onMessage(MessageTryShoot message, MessageContext ctx) {
             if(ctx.side == Side.SERVER) {

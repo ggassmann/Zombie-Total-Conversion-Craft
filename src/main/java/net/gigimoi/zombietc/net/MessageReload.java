@@ -26,7 +26,7 @@ public class MessageReload implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        reloader = (EntityPlayer)ZombieTC.proxy.getEntityByID(buf.readInt());
+        reloader = (EntityPlayer)ZombieTC.proxy.getWorld(Side.SERVER).getEntityByID(buf.readInt());
     }
 
     @Override

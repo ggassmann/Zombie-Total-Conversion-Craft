@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.*;
 import net.gigimoi.zombietc.pathfinding.TileNode;
 import net.gigimoi.zombietc.pathfinding.TileRendererNode;
@@ -10,8 +11,10 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.input.Keyboard;
 
@@ -44,24 +47,22 @@ public class ClientProxy extends CommonProxy {
         PositionedSoundRecord snd = PositionedSoundRecord.func_147675_a(new ResourceLocation(ZombieTC.MODID, soundName), x, y, z);
         Minecraft.getMinecraft().getSoundHandler().playSound(snd);
     }
-
     @Override
     public void registerWeaponRender(ItemWeapon weapon) {
         MinecraftForgeClient.registerItemRenderer(weapon, weapon);
     }
+    @Override
+    public World getWorld(Side sidePrefered) {
+        if(sidePrefered == Side.SERVER) {
+            if(Minecraft.getMinecraft().isIntegratedServerRunning()) {
+                return MinecraftServer.getServer().getEntityWorld();
+            }
+        }
+        return Minecraft.getMinecraft().theWorld;
+    }
 
     @Override
-    public EntityPlayer getPlayerSafe() {
+    public EntityPlayer getPlayer() {
         return Minecraft.getMinecraft().thePlayer;
-    }
-
-    @Override
-    public Entity getEntityByID(int id) {
-        return Minecraft.getMinecraft().theWorld.getEntityByID(id);
-    }
-
-    @Override
-    public TileEntity getTileEntity(int x, int y, int z) {
-        return Minecraft.getMinecraft().theWorld.getTileEntity(x, y, z);
     }
 }
