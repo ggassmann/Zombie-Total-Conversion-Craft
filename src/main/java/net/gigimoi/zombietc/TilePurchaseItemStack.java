@@ -1,9 +1,7 @@
 package net.gigimoi.zombietc;
 
-import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.net.activates.MessageActivatePurchase;
 import net.gigimoi.zombietc.proxy.ClientProxy;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
