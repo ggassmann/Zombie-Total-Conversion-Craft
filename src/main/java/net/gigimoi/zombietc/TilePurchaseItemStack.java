@@ -48,7 +48,7 @@ public class TilePurchaseItemStack extends TileEntity {
         if(worldObj.isRemote) {
             if(itemStack != null && !ZombieTC.editorModeManager.enabled && worldObj.getEntitiesWithinAABB(EntityPlayer.class, getPurchaseBounds()).contains(ZombieTC.proxy.getPlayer())) {
                 ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to purchase (" + price + "exp)");
-                if (ClientProxy.activate.isPressed()) {
+                if (ZombieTC.gameManager.activating) {
                     ZombieTC.network.sendToServer(new MessageActivatePurchase(ZombieTC.proxy.getPlayer(), xCoord, yCoord, zCoord));
                 }
             }

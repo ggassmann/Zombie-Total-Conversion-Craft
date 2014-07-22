@@ -35,6 +35,8 @@ import java.util.Scanner;
  * Created by gigimoi on 7/14/2014.
  */
 public class GameManager {
+    public boolean activating;
+
     private static class GameData {
         int zombiesToSpawn = 0;
         public int wave = 0;
@@ -206,6 +208,9 @@ public class GameManager {
         writer.print(gson.toJson(new GameData(this)));
         writer.flush();
         writer.close();
+        BlockNode.nodes = new ArrayList<MCNode>();
+        BlockNode.nodeConnections = new ArrayList<BlockNode.MCNodePair>();
+        blockBarricades = new ArrayList<Vec3>();
     }
     @SubscribeEvent
     public void onJoin(PlayerEvent.PlayerLoggedInEvent event) {

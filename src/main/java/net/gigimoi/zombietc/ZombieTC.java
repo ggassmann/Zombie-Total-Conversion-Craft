@@ -10,6 +10,7 @@ import net.gigimoi.zombietc.event.EditorModeManager;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.event.MouseManager;
 import net.gigimoi.zombietc.event.NaturalSpawnStopper;
+import net.gigimoi.zombietc.event.KeyManager;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.ItemNodeLinker;
 import net.gigimoi.zombietc.pathfinding.TileNode;
@@ -37,6 +38,7 @@ public class ZombieTC {
     public static GameManager gameManager;
     public static EditorModeManager editorModeManager;
     public static MouseManager mouseManager;
+    public static KeyManager keyManager;
 
     @SidedProxy(clientSide="net.gigimoi.zombietc.proxy.ClientProxy", serverSide="net.gigimoi.zombietc.proxy.CommonProxy")
     public static CommonProxy proxy;
@@ -60,12 +62,15 @@ public class ZombieTC {
         mouseManager = new MouseManager();
         editorModeManager = new EditorModeManager();
         gameManager = new GameManager();
+        keyManager = new KeyManager();
         FMLCommonHandler.instance().bus().register(editorModeManager);
         FMLCommonHandler.instance().bus().register(gameManager);
         FMLCommonHandler.instance().bus().register(mouseManager);
+        FMLCommonHandler.instance().bus().register(keyManager);
         MinecraftForge.EVENT_BUS.register(gameManager);
         MinecraftForge.EVENT_BUS.register(mouseManager);
         MinecraftForge.EVENT_BUS.register(editorModeManager);
+        MinecraftForge.EVENT_BUS.register(keyManager);
         MinecraftForge.EVENT_BUS.register(new NaturalSpawnStopper());
 
         new ItemSpawnZZombie();
