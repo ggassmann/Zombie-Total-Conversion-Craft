@@ -10,3 +10,4 @@ TextRenderHelper center & Justify
 BUGS:
 -Some packets are leaking, maybe the MessageShoot ?
 -Zombies alive not synced to client in dedicated server
+-Barricade positions are not synced to client in dedicated server

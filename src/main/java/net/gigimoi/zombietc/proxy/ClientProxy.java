@@ -8,6 +8,9 @@ import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.input.Keyboard;
@@ -45,5 +48,20 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerWeaponRender(ItemWeapon weapon) {
         MinecraftForgeClient.registerItemRenderer(weapon, weapon);
+    }
+
+    @Override
+    public EntityPlayer getPlayerSafe() {
+        return Minecraft.getMinecraft().thePlayer;
+    }
+
+    @Override
+    public Entity getEntityByID(int id) {
+        return Minecraft.getMinecraft().theWorld.getEntityByID(id);
+    }
+
+    @Override
+    public TileEntity getTileEntity(int x, int y, int z) {
+        return Minecraft.getMinecraft().theWorld.getTileEntity(x, y, z);
     }
 }

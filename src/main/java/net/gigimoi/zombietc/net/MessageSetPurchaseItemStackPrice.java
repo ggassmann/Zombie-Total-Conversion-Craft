@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.TilePurchaseItemStack;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.helpers.NetHelper;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -45,20 +45,13 @@ public class MessageSetPurchaseItemStackPrice implements IMessage {
     public static class MessageSetPurchaseItemStackPriceHandler implements IMessageHandler<MessageSetPurchaseItemStackPrice, MessageSetPurchaseItemStackPrice> {
         @Override
         public MessageSetPurchaseItemStackPrice onMessage(MessageSetPurchaseItemStackPrice message, MessageContext ctx) {
+            TileEntity tileraw = ZombieTC.proxy.getTileEntity(message.x, message.y, message.z);
+            if(tileraw != null && tileraw.getClass() == TilePurchaseItemStack.class) {
+                TilePurchaseItemStack tile = (TilePurchaseItemStack)tileraw;
+                tile.price = message.price;
+            }
             if(ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
-                TileEntity tileraw = NetHelper.getWorldUnsided().getTileEntity(message.x, message.y, message.z);
-                if(tileraw != null && tileraw.getClass() == TilePurchaseItemStack.class) {
-                    TilePurchaseItemStack tile = (TilePurchaseItemStack)tileraw;
-                    tile.price = message.price;
-                }
-            }
-            if(ctx.side == Side.CLIENT) {
-                TileEntity tileraw = NetHelper.getClientWorld().getTileEntity(message.x, message.y, message.z);
-                if(tileraw != null && tileraw.getClass() == TilePurchaseItemStack.class) {
-                    TilePurchaseItemStack tile = (TilePurchaseItemStack)tileraw;
-                    tile.price = message.price;
-                }
             }
             return null;
         }

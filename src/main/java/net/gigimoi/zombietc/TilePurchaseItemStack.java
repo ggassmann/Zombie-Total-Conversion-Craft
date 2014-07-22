@@ -1,14 +1,11 @@
 package net.gigimoi.zombietc;
 
 import net.gigimoi.zombietc.net.activates.MessageActivatePurchase;
-import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
 import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
@@ -49,10 +46,12 @@ public class TilePurchaseItemStack extends TileEntity {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(itemStack != null && !ZombieTC.editorModeManager.enabled && worldObj.isRemote && worldObj.getEntitiesWithinAABB(EntityPlayer.class, getPurchaseBounds()).contains(Minecraft.getMinecraft().thePlayer)) {
-            ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to purchase (" + price + "exp)");
-            if(ClientProxy.activate.isPressed()) {
-                ZombieTC.network.sendToServer(new MessageActivatePurchase(Minecraft.getMinecraft().thePlayer, xCoord, yCoord, zCoord));
+        if(worldObj.isRemote) {
+            if(itemStack != null && !ZombieTC.editorModeManager.enabled && worldObj.getEntitiesWithinAABB(EntityPlayer.class, getPurchaseBounds()).contains(ZombieTC.proxy.getPlayerSafe())) {
+                ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to purchase (" + price + "exp)");
+                if (ClientProxy.activate.isPressed()) {
+                    ZombieTC.network.sendToServer(new MessageActivatePurchase(ZombieTC.proxy.getPlayerSafe(), xCoord, yCoord, zCoord));
+                }
             }
         }
     }
