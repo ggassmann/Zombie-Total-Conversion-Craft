@@ -34,12 +34,8 @@ public class MessageShoot implements IMessage {
     }
     @Override
     public void fromBytes(ByteBuf buf) {
-        shooter = (MinecraftServer.getServer() != null && MinecraftServer.getServer().getEntityWorld() != null && MinecraftServer.getServer().isServerRunning()) ?
-                MinecraftServer.getServer().getEntityWorld().getEntityByID(buf.readInt()) :
-                Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(buf.readInt());
-        hit = (MinecraftServer.getServer() != null && MinecraftServer.getServer().getEntityWorld() != null && MinecraftServer.getServer().isServerRunning()) ?
-                MinecraftServer.getServer().getEntityWorld().getEntityByID(buf.readInt()) :
-                Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(buf.readInt());
+        shooter = ZombieTC.proxy.getEntityByID(buf.readInt());
+        hit = ZombieTC.proxy.getEntityByID(buf.readInt());
         weapon = Item.getItemById(buf.readInt());
     }
     @Override

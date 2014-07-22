@@ -6,14 +6,10 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.event.EditorModeManager;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.event.MouseManager;
 import net.gigimoi.zombietc.event.NaturalSpawnStopper;
-import net.gigimoi.zombietc.net.*;
-import net.gigimoi.zombietc.net.activates.MessageActivatePurchase;
-import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.ItemNodeLinker;
 import net.gigimoi.zombietc.pathfinding.TileNode;
@@ -72,28 +68,6 @@ public class ZombieTC {
         MinecraftForge.EVENT_BUS.register(editorModeManager);
         MinecraftForge.EVENT_BUS.register(new NaturalSpawnStopper());
 
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(NETWORK_CHANNEL);
-        network.registerMessage(MessageSetWave.MessageSetWaveHandler.class, MessageSetWave.class, 0, Side.CLIENT);
-        network.registerMessage(MessageChangeEditorMode.MessageChangeEditorModeHandler.class, MessageChangeEditorMode.class, 1, Side.SERVER);
-        network.registerMessage(MessageChangeEditorMode.MessageChangeEditorModeHandler.class, MessageChangeEditorMode.class, 2, Side.CLIENT);
-        network.registerMessage(MessageAddNode.MessageAddNodeHandler.class, MessageAddNode.class, 3, Side.CLIENT);
-        network.registerMessage(MessageRemoveNode.MessageRemoveNodeHandler.class, MessageRemoveNode.class, 4, Side.CLIENT);
-        network.registerMessage(MessageAddNodeConnection.MessageAddNodeConnectionHandler.class, MessageAddNodeConnection.class, 5, Side.CLIENT);
-        network.registerMessage(MessageAddNodeConnection.MessageAddNodeConnectionHandler.class, MessageAddNodeConnection.class, 6, Side.SERVER);
-        network.registerMessage(MessageRemoveNodeConnection.MessageRemoveNodeConnectionHandler.class, MessageRemoveNodeConnection.class, 7, Side.CLIENT);
-        network.registerMessage(MessageRemoveNodeConnection.MessageRemoveNodeConnectionHandler.class, MessageRemoveNodeConnection.class, 8, Side.SERVER);
-        network.registerMessage(MessageShoot.MessageShootHandler.class, MessageShoot.class, 9, Side.CLIENT);
-        network.registerMessage(MessageShoot.MessageShootHandler.class, MessageShoot.class, 10, Side.SERVER);
-        network.registerMessage(MessageTryShoot.MessagePlayShootSoundHandler.class, MessageTryShoot.class, 11, Side.SERVER);
-        network.registerMessage(MessageReload.MessageReloadHandler.class, MessageReload.class, 12, Side.CLIENT);
-        network.registerMessage(MessageReload.MessageReloadHandler.class, MessageReload.class, 13, Side.SERVER);
-        network.registerMessage(MessageActivateRepairBarricade.MessageActivateRepairBarricadeHandler.class, MessageActivateRepairBarricade.class, 14, Side.CLIENT);
-        network.registerMessage(MessageActivateRepairBarricade.MessageActivateRepairBarricadeHandler.class, MessageActivateRepairBarricade.class, 15, Side.SERVER);
-        network.registerMessage(MessageActivatePurchase.MessageActivatePurchaseHandler.class, MessageActivatePurchase.class, 16, Side.CLIENT);
-        network.registerMessage(MessageActivatePurchase.MessageActivatePurchaseHandler.class, MessageActivatePurchase.class, 17, Side.SERVER);
-        network.registerMessage(MessageSetPurchaseItemStackPrice.MessageSetPurchaseItemStackPriceHandler.class, MessageSetPurchaseItemStackPrice.class, 18, Side.CLIENT);
-        network.registerMessage(MessageSetPurchaseItemStackPrice.MessageSetPurchaseItemStackPriceHandler.class, MessageSetPurchaseItemStackPrice.class, 19, Side.SERVER);
-
         new ItemSpawnZZombie();
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);
 
@@ -115,8 +89,10 @@ public class ZombieTC {
         registerTileEntity(TilePurchaseItemStack.class);
 
         proxy.renderers();
+        proxy.network();
         proxy.keyBinds();
     }
+
     public void registerTileEntity(Class c) {
         GameRegistry.registerTileEntity(c, c.getCanonicalName());
     }

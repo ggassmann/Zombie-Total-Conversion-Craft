@@ -26,9 +26,7 @@ public class MessageReload implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        reloader = (EntityPlayer)((MinecraftServer.getServer() != null && MinecraftServer.getServer().getEntityWorld() != null && MinecraftServer.getServer().isServerRunning()) ?
-                MinecraftServer.getServer().getEntityWorld().getEntityByID(buf.readInt()) :
-                Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(buf.readInt()));
+        reloader = (EntityPlayer)ZombieTC.proxy.getEntityByID(buf.readInt());
     }
 
     @Override

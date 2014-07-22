@@ -26,9 +26,7 @@ public class MessageTryShoot implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        at = (MinecraftServer.getServer() != null && MinecraftServer.getServer().getEntityWorld() != null && MinecraftServer.getServer().isServerRunning()) ?
-                MinecraftServer.getServer().getEntityWorld().getEntityByID(buf.readInt()) :
-                Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(buf.readInt());
+        at = ZombieTC.proxy.getEntityByID(buf.readInt());
     }
 
     @Override
