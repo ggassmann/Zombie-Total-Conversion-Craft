@@ -28,7 +28,6 @@ minecraft {
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
-
 }
 
 processResources
@@ -49,4 +48,12 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    appendix = 'deobf'
+}
+artifacts {
+    archives deobfJar
 }

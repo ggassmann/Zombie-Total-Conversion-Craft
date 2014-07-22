@@ -10,10 +10,10 @@ import java.util.List;
  * Created by gigimoi on 7/16/2014.
  */
 public class MCNode implements Node<MCNode> {
-    public Vec3 position;
+    public Point3 position;
 
     public MCNode(Vec3 pos) {
-        this.position = pos;
+        this.position = Point3.fromVec3(pos);
     }
 
     @Override

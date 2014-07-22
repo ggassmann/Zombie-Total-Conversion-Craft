@@ -30,14 +30,14 @@ public class ItemNodeLinker extends Item {
             if (target.getClass() == BlockNode.class) {
                 if (!stack.hasTagCompound()) {
                     stack.setTagCompound(new NBTTagCompound());
-                    stack.getTagCompound().setInteger("x", x);
-                    stack.getTagCompound().setInteger("y", y);
-                    stack.getTagCompound().setInteger("z", z);
+                    stack.getTagCompound().setInteger("xCoord", x);
+                    stack.getTagCompound().setInteger("yCoord", y);
+                    stack.getTagCompound().setInteger("zCoord", z);
                     player.addChatMessage(new ChatComponentTranslation("Set n1 node"));
                 } else {
-                    int oX = stack.getTagCompound().getInteger("x");
-                    int oY = stack.getTagCompound().getInteger("y");
-                    int oZ = stack.getTagCompound().getInteger("z");
+                    int oX = stack.getTagCompound().getInteger("xCoord");
+                    int oY = stack.getTagCompound().getInteger("yCoord");
+                    int oZ = stack.getTagCompound().getInteger("zCoord");
                     if (oX == x && oY == y && oZ == z) {
                         stack.setTagCompound(null);
                         player.addChatMessage(new ChatComponentTranslation("Cancelling node link"));
@@ -47,8 +47,8 @@ public class ItemNodeLinker extends Item {
                         boolean unlinked = false;
                         for (int index = 0; index < BlockNode.nodeConnections.size(); index++) {
                             BlockNode.MCNodePair pair = BlockNode.nodeConnections.get(index);
-                            if ((pair.n1.position.distanceTo(cVec) < 0.01f || pair.n2.position.distanceTo(cVec) < 0.01f) &&
-                                (pair.n1.position.distanceTo(oVec) < 0.01f || pair.n2.position.distanceTo(oVec) < 0.01f)) {
+                            if ((pair.n1.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f) &&
+                                (pair.n1.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f)) {
                                 stack.setTagCompound(null);
                                 ZombieTC.network.sendToAll(new MessageRemoveNodeConnection(cVec, oVec));
                                 unlinked = true;
@@ -60,10 +60,10 @@ public class ItemNodeLinker extends Item {
                             boolean node1good = false;
                             boolean node2good = false;
                             for(int bi = 0; bi < BlockNode.nodes.size(); bi++) {
-                                if(BlockNode.nodes.get(bi).position.distanceTo(cVec) < 0.01) {
+                                if(BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(cVec)) < 0.01) {
                                     node1good = true;
                                 }
-                                if(BlockNode.nodes.get(bi).position.distanceTo(oVec) < 0.01) {
+                                if(BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(oVec)) < 0.01) {
                                     node2good = true;
                                 }
                             }

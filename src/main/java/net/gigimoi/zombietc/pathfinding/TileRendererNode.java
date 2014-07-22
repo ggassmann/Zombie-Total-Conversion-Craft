@@ -4,7 +4,6 @@ import net.gigimoi.zombietc.ZombieTC;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
@@ -27,7 +26,7 @@ public class TileRendererNode extends TileEntitySpecialRenderer {
             if(BlockNode.nodeConnections != null) {
                 for(int i = 0; i < BlockNode.nodeConnections.size(); i++) {
                     BlockNode.MCNodePair link = BlockNode.nodeConnections.get(i);
-                    if(link.n1.position.distanceTo(Vec3.createVectorHelper(tile.xCoord, tile.yCoord, tile.zCoord)) < 0.01) {
+                    if(link.n1.position.distanceTo(new Point3(tile.xCoord, tile.yCoord, tile.zCoord)) < 0.01) {
                         GL11.glLineWidth(5f);
                         GL11.glEnable(GL11.GL_BLEND);
                         GL11.glBegin(GL11.GL_LINES);

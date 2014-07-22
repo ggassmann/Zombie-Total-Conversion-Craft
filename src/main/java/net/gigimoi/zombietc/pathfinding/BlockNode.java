@@ -37,12 +37,12 @@ public class BlockNode extends BlockContainer {
         for(int i = 0; i < BlockNode.nodes.size(); i++) {
             MCNode node = BlockNode.nodes.get(i);
             if(raytrace) {
-                MovingObjectPosition trace = world.rayTraceBlocks(node.position, position, true);
+                MovingObjectPosition trace = world.rayTraceBlocks(node.position.toVec3(), position, true);
                 if(trace != null && trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                     continue;
                 }
             }
-            double distance = position.distanceTo(node.position);
+            double distance = position.distanceTo(node.position.toVec3());
             if(distance < shortestDistance) {
                 shortestDistance = distance;
                 closest = node;
@@ -127,7 +127,7 @@ public class BlockNode extends BlockContainer {
 
     public static void removeNodeAt(double x, double y, double z) {
         for (int i = 0; i < nodes.size(); i++) {
-            if (nodes.get(i).position.distanceTo(Vec3.createVectorHelper(x, y, z)) < 0.001) {
+            if (nodes.get(i).position.distanceTo(new Point3((int)x, (int)y, (int)z)) < 0.001) {
                 nodes.remove(i);
             }
         }
@@ -135,7 +135,7 @@ public class BlockNode extends BlockContainer {
             boolean shouldReloop = false;
             for (int i = 0; i < nodeConnections.size(); i++) {
                 MCNodePair link = nodeConnections.get(i);
-                if (link.n1.position.distanceTo(Vec3.createVectorHelper(x, y, z)) < 0.01 || link.n2.position.distanceTo(Vec3.createVectorHelper(x, y, z)) < 0.01) {
+                if (link.n1.position.distanceTo(new Point3((int)x, (int)y, (int)z)) < 0.01 || link.n2.position.distanceTo(new Point3((int)x, (int)y, (int)z)) < 0.01) {
                     nodeConnections.remove(i);
                     shouldReloop = true;
                 }
@@ -149,10 +149,10 @@ public class BlockNode extends BlockContainer {
         MCNode node1 = null;
         MCNode node2 = null;
         for(int r = 0; r < BlockNode.nodes.size(); r++) {
-            if(oVec.distanceTo(BlockNode.nodes.get(r).position) < 0.001) {
+            if(oVec.distanceTo(BlockNode.nodes.get(r).position.toVec3()) < 0.001) {
                 node1 = BlockNode.nodes.get(r);
             }
-            if(cVec.distanceTo(BlockNode.nodes.get(r).position) < 0.001) {
+            if(cVec.distanceTo(BlockNode.nodes.get(r).position.toVec3()) < 0.001) {
                 node2 = BlockNode.nodes.get(r);
             }
             if(node1 == null || node2 == null) continue;
@@ -162,8 +162,8 @@ public class BlockNode extends BlockContainer {
     }
     public static void removeNodeConnection(Vec3 first, Vec3 second) {
         for(int i = 0; i < nodeConnections.size(); i++) {
-            if(nodeConnections.get(i).n1.position.distanceTo(first) < 0.01 || nodeConnections.get(i).n1.position.distanceTo(second) < 0.01) {
-                if(nodeConnections.get(i).n2.position.distanceTo(first) < 0.01 || nodeConnections.get(i).n2.position.distanceTo(second) < 0.01) {
+            if(nodeConnections.get(i).n1.position.distanceTo(Point3.fromVec3(first)) < 0.01 || nodeConnections.get(i).n1.position.distanceTo(Point3.fromVec3(second)) < 0.01) {
+                if(nodeConnections.get(i).n2.position.distanceTo(Point3.fromVec3(first)) < 0.01 || nodeConnections.get(i).n2.position.distanceTo(Point3.fromVec3(second)) < 0.01) {
                     nodeConnections.remove(i);
                 }
             }
