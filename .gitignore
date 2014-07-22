@@ -5,5 +5,4 @@
 *.blend1
 *.mtl
 eclipse/
-gradle/
 out/
