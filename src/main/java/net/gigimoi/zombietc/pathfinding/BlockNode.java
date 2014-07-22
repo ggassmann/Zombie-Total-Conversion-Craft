@@ -2,8 +2,8 @@ package net.gigimoi.zombietc.pathfinding;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.net.MessageAddNode;
-import net.gigimoi.zombietc.net.MessageRemoveNode;
+import net.gigimoi.zombietc.net.map.MessageAddNode;
+import net.gigimoi.zombietc.net.map.MessageRemoveNode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

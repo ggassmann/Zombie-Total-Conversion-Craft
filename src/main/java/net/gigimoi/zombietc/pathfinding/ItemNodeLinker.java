@@ -1,14 +1,13 @@
 package net.gigimoi.zombietc.pathfinding;
 
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.net.MessageAddNodeConnection;
-import net.gigimoi.zombietc.net.MessageRemoveNodeConnection;
+import net.gigimoi.zombietc.net.map.MessageAddNodeConnection;
+import net.gigimoi.zombietc.net.map.MessageRemoveNodeConnection;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;

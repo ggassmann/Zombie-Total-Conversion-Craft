@@ -6,6 +6,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.proxy.ClientProxy;
+import net.minecraft.server.MinecraftServer;
 
 /**
  * Created by gigimoi on 7/22/2014.
@@ -13,7 +14,7 @@ import net.gigimoi.zombietc.proxy.ClientProxy;
 public class KeyManager {
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if(event.phase == TickEvent.Phase.END) {
+        if(event.phase == TickEvent.Phase.END && event.side.isClient()) {
             if(ClientProxy.activate.isPressed()) {
                 ZombieTC.gameManager.activating = true;
             } else {

@@ -1,11 +1,13 @@
-package net.gigimoi.zombietc.net;
+package net.gigimoi.zombietc.net.map;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
-import net.gigimoi.zombietc.pathfinding.MCNode;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.Vec3;
 
 /**
@@ -32,6 +34,9 @@ public class MessageRemoveNode implements IMessage {
         @Override
         public MessageRemoveNode onMessage(MessageRemoveNode message, MessageContext ctx) {
             BlockNode.removeNodeAt(message.pos.xCoord, message.pos.yCoord, message.pos.zCoord);
+            if(ctx.side == Side.SERVER) {
+                ZombieTC.network.sendToAll(message);
+            }
             return null;
         }
     }

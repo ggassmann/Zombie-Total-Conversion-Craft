@@ -11,6 +11,10 @@ import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
 import net.gigimoi.zombietc.net.*;
+import net.gigimoi.zombietc.net.map.MessageAddBarricade;
+import net.gigimoi.zombietc.net.map.MessageAddNode;
+import net.gigimoi.zombietc.net.map.MessageAddNodeConnection;
+import net.gigimoi.zombietc.net.map.MessagePrepareStaticVariables;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
@@ -208,13 +212,11 @@ public class GameManager {
         writer.print(gson.toJson(new GameData(this)));
         writer.flush();
         writer.close();
-        BlockNode.nodes = new ArrayList<MCNode>();
-        BlockNode.nodeConnections = new ArrayList<BlockNode.MCNodePair>();
-        blockBarricades = new ArrayList<Vec3>();
     }
     @SubscribeEvent
     public void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
         if(!event.player.getEntityWorld().isRemote && !MinecraftServer.getServer().isSinglePlayer()) {
+            ZombieTC.network.sendTo(new MessagePrepareStaticVariables(), (EntityPlayerMP)event.player);
             ZombieTC.network.sendTo(new MessageSetWave(wave), (EntityPlayerMP) event.player);
             for(int i = 0; i < BlockNode.nodes.size(); i++) {
                 ZombieTC.network.sendTo(new MessageAddNode(
@@ -235,6 +237,13 @@ public class GameManager {
                                 (int)BlockNode.nodeConnections.get(i).n2.position.yCoord,
                                 (int)BlockNode.nodeConnections.get(i).n2.position.zCoord
                         )
+                ), (EntityPlayerMP)event.player);
+            }
+            for(int i = 0; i < blockBarricades.size(); i++) {
+                ZombieTC.network.sendTo(new MessageAddBarricade(
+                        (int)blockBarricades.get(i).xCoord,
+                        (int)blockBarricades.get(i).yCoord,
+                        (int)blockBarricades.get(i).zCoord
                 ), (EntityPlayerMP)event.player);
             }
         }

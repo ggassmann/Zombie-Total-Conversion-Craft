@@ -1,11 +1,15 @@
-package net.gigimoi.zombietc.net;
+package net.gigimoi.zombietc.net.map;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
+import net.minecraft.client.Minecraft;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Vec3;
 
 /**
@@ -32,6 +36,9 @@ public class MessageAddNode implements IMessage {
         @Override
         public MessageAddNode onMessage(MessageAddNode message, MessageContext ctx) {
             BlockNode.nodes.add(new MCNode(message.pos));
+            if(ctx.side == Side.SERVER) {
+                ZombieTC.network.sendToAll(message);
+            }
             return null;
         }
     }

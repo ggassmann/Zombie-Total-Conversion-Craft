@@ -1,4 +1,4 @@
-package net.gigimoi.zombietc.net;
+package net.gigimoi.zombietc.net.map;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -7,17 +7,18 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
+import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Vec3;
 
 /**
  * Created by gigimoi on 7/16/2014.
  */
-public class MessageRemoveNodeConnection implements IMessage {
+public class MessageAddNodeConnection implements IMessage {
     Vec3 first;
     Vec3 second;
-    public MessageRemoveNodeConnection() {}
-    public MessageRemoveNodeConnection(Vec3 v1, Vec3 v2) {
+    public MessageAddNodeConnection() {}
+    public MessageAddNodeConnection(Vec3 v1, Vec3 v2) {
         first = v1;
         second = v2;
     }
@@ -44,12 +45,12 @@ public class MessageRemoveNodeConnection implements IMessage {
         buf.writeInt((int)second.yCoord);
         buf.writeInt((int)second.zCoord);
     }
-    public static class MessageRemoveNodeConnectionHandler implements IMessageHandler<MessageRemoveNodeConnection, MessageRemoveNodeConnection> {
+    public static class MessageAddNodeConnectionHandler implements IMessageHandler<MessageAddNodeConnection, MessageAddNodeConnection> {
 
         @Override
-        public MessageRemoveNodeConnection onMessage(MessageRemoveNodeConnection message, MessageContext ctx) {
-            BlockNode.removeNodeConnection(message.first, message.second);
-            if(ctx.side == Side.SERVER && !MinecraftServer.getServer().isSinglePlayer()) {
+        public MessageAddNodeConnection onMessage(MessageAddNodeConnection message, MessageContext ctx) {
+            BlockNode.addNodeConnection(message.first, message.second);
+            if(ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }
             return null;

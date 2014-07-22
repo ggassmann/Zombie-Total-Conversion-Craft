@@ -9,14 +9,11 @@ import net.gigimoi.zombietc.gui.GuiPurchaseItemStack;
 import net.gigimoi.zombietc.net.*;
 import net.gigimoi.zombietc.net.activates.MessageActivatePurchase;
 import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
+import net.gigimoi.zombietc.net.map.*;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import java.nio.channels.NetworkChannel;
 
 /**
  * Created by gigimoi on 7/16/2014.
@@ -67,6 +64,9 @@ public class CommonProxy implements IGuiHandler {
         network.registerMessage(MessageActivatePurchase.MessageActivatePurchaseHandler.class, MessageActivatePurchase.class, 17, Side.SERVER);
         network.registerMessage(MessageSetPurchaseItemStackPrice.MessageSetPurchaseItemStackPriceHandler.class, MessageSetPurchaseItemStackPrice.class, 18, Side.CLIENT);
         network.registerMessage(MessageSetPurchaseItemStackPrice.MessageSetPurchaseItemStackPriceHandler.class, MessageSetPurchaseItemStackPrice.class, 19, Side.SERVER);
+        network.registerMessage(MessageAddBarricade.MessageAddBarricadeHandler.class, MessageAddBarricade.class, 20, Side.CLIENT);
+        network.registerMessage(MessageRemoveBarricade.MessageRemoveBarricadeHandler.class, MessageRemoveBarricade.class, 21, Side.CLIENT);
+        network.registerMessage(MessagePrepareStaticVariables.MessagePrepareStaticVariablesHandler.class, MessagePrepareStaticVariables.class, 22, Side.CLIENT);
         ZombieTC.network = network;
     }
 
