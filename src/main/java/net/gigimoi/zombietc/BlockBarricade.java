@@ -3,6 +3,7 @@ package net.gigimoi.zombietc;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.map.MessageRemoveBarricade;
 import net.gigimoi.zombietc.net.map.MessageAddBarricade;
+import net.gigimoi.zombietc.pathfinding.Point3;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -80,15 +81,15 @@ public class BlockBarricade extends BlockContainer {
     @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
-        GameManager.blockBarricades.add(Vec3.createVectorHelper(x, y, z));
+        GameManager.blockBarricades.add(new Point3(x, y, z));
         ZombieTC.network.sendToAll(new MessageAddBarricade(x, y, z));
     }
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int side) {
         super.breakBlock(world, x, y, z, block, side);
         for(int i = 0; i < GameManager.blockBarricades.size(); i++) {
-            Vec3 vec = GameManager.blockBarricades.get(i);
-            if(vec.distanceTo(Vec3.createVectorHelper(x, y, z)) < 0.01) {
+            Point3 vec = GameManager.blockBarricades.get(i);
+            if(vec.distanceTo(new Point3(x, y, z)) < 0.01) {
                 GameManager.blockBarricades.remove(i);
             }
         }

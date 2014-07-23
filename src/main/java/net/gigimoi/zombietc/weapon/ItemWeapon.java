@@ -11,6 +11,7 @@ import net.gigimoi.zombietc.net.MessageReload;
 import net.gigimoi.zombietc.net.MessageShoot;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextureHelper;
+import net.gigimoi.zombietc.pathfinding.Point3;
 import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -201,9 +202,9 @@ public class ItemWeapon extends Item implements IItemRenderer {
                             ArrayList<Integer> damages = new ArrayList<Integer>();
                             ArrayList<Integer> tickers = new ArrayList<Integer>();
                             List blocks = new ArrayList<Block>();
-                            List<Vec3> blockBarricades = (List<Vec3>)GameManager.blockBarricades.clone();
+                            List<Point3> blockBarricades = (List<Point3>)GameManager.blockBarricades.clone();
                             for(int i = 0; i < blockBarricades.size(); i++) {
-                                Vec3 vec = GameManager.blockBarricades.get(i);
+                                Point3 vec = GameManager.blockBarricades.get(i);
                                 blocks.add(world.getBlock((int)vec.xCoord, (int)vec.yCoord, (int)vec.zCoord));
                                 TileEntity te = world.getTileEntity((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord);
                                 damages.add(((TileBarricade)te).damage);
@@ -212,7 +213,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
                             }
                             MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F);
                             for(int i = 0; i < blockBarricades.size(); i++) {
-                                Vec3 vec = blockBarricades.get(i);
+                                Point3 vec = blockBarricades.get(i);
                                 world.setBlock((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord, (Block) blocks.get(i));
                                 TileBarricade te = (TileBarricade)world.getTileEntity((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord);
                                 te.damage = damages.get(i);

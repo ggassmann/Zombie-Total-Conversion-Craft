@@ -6,6 +6,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.pathfinding.BlockNode;
 
 /**
  * Created by gigimoi on 7/15/2014.
@@ -32,6 +33,9 @@ public class MessageChangeEditorMode implements IMessage {
         @Override
         public MessageChangeEditorMode onMessage(MessageChangeEditorMode message, MessageContext ctx) {
             ZombieTC.editorModeManager.enabled = message.enabled;
+            if(!ZombieTC.editorModeManager.enabled) {
+                ZombieTC.gameManager.regeneratePathMap();
+            }
             if(ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }

@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.event.GameManager;
+import net.gigimoi.zombietc.pathfinding.Point3;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Vec3;
 
@@ -42,8 +43,8 @@ public class MessageRemoveBarricade implements IMessage {
                 return null;
             }
             for(int i = 0; i < GameManager.blockBarricades.size(); i++) {
-                Vec3 vec = GameManager.blockBarricades.get(i);
-                if(vec.distanceTo(Vec3.createVectorHelper(message.x, message.y, message.z)) < 0.01) {
+                Point3 vec = GameManager.blockBarricades.get(i);
+                if(vec.distanceTo(new Point3(message.x, message.y, message.z)) < 0.01) {
                     GameManager.blockBarricades.remove(i);
                 }
             }

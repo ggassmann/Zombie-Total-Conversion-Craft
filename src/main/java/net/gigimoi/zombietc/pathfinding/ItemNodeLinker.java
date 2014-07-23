@@ -25,7 +25,7 @@ public class ItemNodeLinker extends Item {
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float i, float j, float k) {
-        if(!world.isRemote) {
+        if(world.isRemote) {
             Block target = world.getBlock(x, y, z);
             if (target.getClass() == BlockNode.class) {
                 if (!stack.hasTagCompound()) {
@@ -33,7 +33,7 @@ public class ItemNodeLinker extends Item {
                     stack.getTagCompound().setInteger("xCoord", x);
                     stack.getTagCompound().setInteger("yCoord", y);
                     stack.getTagCompound().setInteger("zCoord", z);
-                    player.addChatMessage(new ChatComponentTranslation("Set n1 node"));
+                    player.addChatMessage(new ChatComponentTranslation("Selected node"));
                 } else {
                     int oX = stack.getTagCompound().getInteger("xCoord");
                     int oY = stack.getTagCompound().getInteger("yCoord");
@@ -50,7 +50,7 @@ public class ItemNodeLinker extends Item {
                             if ((pair.n1.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f) &&
                                 (pair.n1.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f)) {
                                 stack.setTagCompound(null);
-                                ZombieTC.network.sendToAll(new MessageRemoveNodeConnection(cVec, oVec));
+                                ZombieTC.network.sendToServer(new MessageRemoveNodeConnection(cVec, oVec));
                                 unlinked = true;
                                 player.addChatMessage(new ChatComponentTranslation("Unlinked nodes"));
                                 break;
@@ -68,7 +68,7 @@ public class ItemNodeLinker extends Item {
                                 }
                             }
                             if(node1good && node2good) {
-                                ZombieTC.network.sendToAll(new MessageAddNodeConnection(cVec, oVec));
+                                ZombieTC.network.sendToServer(new MessageAddNodeConnection(cVec, oVec));
                                 player.addChatMessage(new ChatComponentTranslation("Linked nodes"));
                             }
                             stack.setTagCompound(null);

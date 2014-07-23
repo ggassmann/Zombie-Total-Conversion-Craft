@@ -17,6 +17,7 @@ import net.gigimoi.zombietc.net.map.MessageAddNodeConnection;
 import net.gigimoi.zombietc.net.map.MessagePrepareStaticVariables;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
+import net.gigimoi.zombietc.pathfinding.Point3;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -40,7 +41,6 @@ import java.util.Scanner;
  */
 public class GameManager {
     public boolean activating;
-
     private static class GameData {
         int zombiesToSpawn = 0;
         public int wave = 0;
@@ -51,7 +51,7 @@ public class GameManager {
         int currentWaveMaxZombies = 0;
         List<MCNode> nodes;
         List<BlockNode.MCNodePair> nodeConnections;
-        ArrayList<Vec3> blockBarricades;
+        ArrayList<Point3> blockBarricades;
         public GameData() {
         }
         public GameData(GameManager manager) {
@@ -66,7 +66,7 @@ public class GameManager {
             blockBarricades = manager.blockBarricades;
         }
     }
-    public static ArrayList<Vec3> blockBarricades = new ArrayList<Vec3>();
+    public static ArrayList<Point3> blockBarricades = new ArrayList<Point3>();
     public static ArrayList<Vector3f> spawnPositions = new ArrayList<Vector3f>();
     public static ArrayList<World> worldsSpawnedTo = new ArrayList<World>();
 
@@ -171,7 +171,7 @@ public class GameManager {
             zombiesAlive = 0;
             BlockNode.nodes = new ArrayList<MCNode>();
             BlockNode.nodeConnections = new ArrayList<BlockNode.MCNodePair>();
-            blockBarricades = new ArrayList<Vec3>();
+            blockBarricades = new ArrayList<Point3>();
             return;
         }
         Gson gson = new Gson();
@@ -190,7 +190,7 @@ public class GameManager {
         BlockNode.nodeConnections = saveData.nodeConnections;
         blockBarricades = saveData.blockBarricades;
         if(blockBarricades == null) {
-            blockBarricades = new ArrayList<Vec3>();
+            blockBarricades = new ArrayList<Point3>();
         }
         for(int i = 0; i < BlockNode.nodes.size(); i++) { //Fixes duplicate node entries
             MCNode node = BlockNode.nodes.get(i);
@@ -204,6 +204,7 @@ public class GameManager {
                 }
             }
         }
+        regeneratePathMap();
     }
     @SubscribeEvent
     public void onSave(WorldEvent.Save event) throws FileNotFoundException {
@@ -246,6 +247,7 @@ public class GameManager {
                         (int)blockBarricades.get(i).zCoord
                 ), (EntityPlayerMP)event.player);
             }
+            ZombieTC.network.sendTo(new MessageRegeneratePathMap(), (EntityPlayerMP)event.player);
         }
     }
     @SubscribeEvent
@@ -276,6 +278,21 @@ public class GameManager {
             if(activateMessageDuration > 0) {
                 TextRenderHelper.drawString(activateMessage, event.resolution.getScaledWidth() / 2, event.resolution.getScaledHeight() - 90, TextAlignment.Center);
                 activateMessageDuration--;
+            }
+        }
+    }
+    public void regeneratePathMap() {
+        for(int i = 0; i < BlockNode.nodes.size(); i++) {
+            MCNode node = BlockNode.nodes.get(i);
+            node.linksTo = new ArrayList<MCNode>();
+            for(int j = 0; j < BlockNode.nodeConnections.size(); j++) {
+                BlockNode.MCNodePair pair = BlockNode.nodeConnections.get(j);
+                if(pair.n1.position.distanceTo(node.position) < 0.01) {
+                    node.linksTo.add(pair.n2);
+                }
+                if(pair.n2.position.distanceTo(node.position) < 0.01) {
+                    node.linksTo.add(pair.n1);
+                }
             }
         }
     }

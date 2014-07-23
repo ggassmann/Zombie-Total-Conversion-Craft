@@ -12,7 +12,16 @@ import java.util.List;
 public class MCNode implements Node<MCNode> {
     public Point3 position;
 
+    public transient List<MCNode> linksTo;
+                                           //GameManager should have a
+                                           //method to reset all links.
+                                           //Reset links on editor mode toggle and join
+    public MCNode() {
+        this.linksTo = new ArrayList();
+    }
+
     public MCNode(Vec3 pos) {
+        this();
         this.position = Point3.fromVec3(pos);
     }
 
@@ -28,16 +37,6 @@ public class MCNode implements Node<MCNode> {
 
     @Override
     public Iterable<MCNode> neighbors() {
-        List<MCNode> neighbors = new ArrayList<MCNode>();
-        for(int i = 0; i < BlockNode.nodeConnections.size(); i++) {
-            BlockNode.MCNodePair link = BlockNode.nodeConnections.get(i);
-            if(link.n1.position.distanceTo(position) < 0.001) {
-                neighbors.add(link.n2);
-            }
-            if(link.n2.position.distanceTo(position) < 0.001) {
-                neighbors.add(link.n1);
-            }
-        }
-        return neighbors;
+        return linksTo;
     }
 }

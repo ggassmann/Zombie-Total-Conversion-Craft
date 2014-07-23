@@ -45,7 +45,7 @@ public class TileRendererPurchaseItemstack extends TileEntitySpecialRenderer {
             if(side == ForgeDirection.WEST) {
                 GL11.glRotated(180, 0, 0, 1);
             }
-            bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/misc/xCoord.png"));
+            bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/misc/x.png"));
             AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/purchaseUnset.obj")).renderAll();
         }
 
