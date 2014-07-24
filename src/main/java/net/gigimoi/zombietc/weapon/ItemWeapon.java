@@ -96,6 +96,10 @@ public class ItemWeapon extends Item implements IItemRenderer {
         if(type == ItemRenderType.INVENTORY) {
             GL11.glScaled(0.8 * inventoryScale, 0.8 * inventoryScale, 0.8 * inventoryScale);
         }
+        if(type == ItemRenderType.EQUIPPED) {
+            GL11.glRotated(90, 0, 1, 0);
+            GL11.glTranslated(0, 1, 0);
+        }
         ensureTagCompund(stack);
         GL11.glScaled(0.2f, 0.2f, 0.2f);
         GL11.glRotated(90, 1, 0, 0);
