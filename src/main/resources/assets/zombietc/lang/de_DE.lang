@@ -1,0 +1,11 @@
+item.Radom Vis.name=Radom Vis
+item.Storm Rifle.name=Sturmgewehr
+item.Thompson.name=Thompson
+item.Karbine.name=Karbiner
+
+item.Node Linker.name=Knoten Linker
+
+tile.Barricade.name=Barrikade
+tile.Spawner.name=Laichener
+tile.Node.name=Knoten
+tile.Purchase Itemstack.name=Kaufen Article
