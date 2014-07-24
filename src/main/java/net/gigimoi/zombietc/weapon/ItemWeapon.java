@@ -46,6 +46,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
     public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1).barrelLength(1f).sightHeight(0.1f);
     public static ItemWeapon stormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.5, 6, 30, 120, 20, 3).barrelLength(2f).sightHeight(1f);
     public static ItemWeapon thompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.5, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f);
+    public static ItemWeapon karbine = new ItemWeapon("Karbine", FireMechanism.semiAutomatic, 0.7, 1, 9, 90, 20, 20).barrelLength(2.5f).sightHeight(0.1f);
 
     public FireMechanism fireMechanism;
     public double inventoryScale;
@@ -195,6 +196,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
                             tag.setInteger("ShootCooldown", fireDelay);
                             tag.setBoolean("Shoot", true);
                             tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
+                            //player.cameraYaw += 1;
                             ZombieTC.proxy.playSound("pistolShoot", (float)player.posX, (float)player.posY, (float)player.posZ);
                             ZombieTC.network.sendToServer(new MessageTryShoot(player));
 
