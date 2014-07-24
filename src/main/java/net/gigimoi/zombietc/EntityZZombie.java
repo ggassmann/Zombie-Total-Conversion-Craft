@@ -3,11 +3,13 @@ package net.gigimoi.zombietc;
 import com.stackframe.pathfinder.Dijkstra;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -48,13 +50,20 @@ public class EntityZZombie extends EntityZombie {
     double targetY;
     double targetZ;
     boolean hasSetDefaultTarget = false;
+
+    boolean yieldingToOtherZombie = false;
+
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if(ZombieTC.editorModeManager.enabled) {
             isDead = true;
         } else {
-            move();
+            if(!yieldingToOtherZombie) {
+                move();
+            } else {
+                yieldingToOtherZombie = false;
+            }
             if(!isDead && this.getHealth() > 0) {
                 EntityPlayer nearest = worldObj.getClosestPlayerToEntity(this, Int.MaxValue());
                 if(nearest != null && Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(nearest.posX, nearest.posY, nearest.posZ)) < 1) {
@@ -75,11 +84,27 @@ public class EntityZZombie extends EntityZombie {
             targetY = posY;
             targetZ = posZ;
             hasSetDefaultTarget = true;
+        }/*
+        List nearbyEntities = worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(posX - 1, posY - 1, posZ - 1, posX + 1, posY + 1, posZ + 1));
+        for(int i = 0; i < nearbyEntities.size(); i++) {
+            Entity entityRaw = (Entity)nearbyEntities.get(i);
+            if(entityRaw.getClass() == EntityZZombie.class) {
+                if(entityRaw != this) {
+                    ((EntityZZombie)entityRaw).yieldingToOtherZombie = true;
+                }
+            }
         }
-        getMoveHelper().setMoveTo(targetX + 0.5, targetY, targetZ + 0.5, ZombieTC.gameManager.wave > 4 ? 1.2f : 1f);
+        */
+        getMoveHelper().setMoveTo(targetX, targetY, targetZ, ZombieTC.gameManager.wave > 4 ? 1.2f : 1f);
         if(targetY > posY) {
             getJumpHelper().setJumping();
         }
+        if(_r.nextInt(10) == 5 || Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(targetX, targetY, targetZ)) < 0.5) {
+            resetTarget();
+        }
+    }
+
+    private void resetTarget() {
         EntityPlayer player = worldObj.getClosestPlayerToEntity(this, Double.MAX_VALUE);
         if(player != null) {
             Vec3 playerPos = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
@@ -97,9 +122,9 @@ public class EntityZZombie extends EntityZombie {
                     List<MCNode> path = new Dijkstra<MCNode>().findPath(BlockNode.nodes, start, goal);
                     if(path != null) {
                         if(path.size() > 1) {
-                            targetX = path.get(1).position.xCoord;
+                            targetX = path.get(1).position.xCoord + 0.5;
                             targetY = path.get(1).position.yCoord;
-                            targetZ = path.get(1).position.zCoord;
+                            targetZ = path.get(1).position.zCoord + 0.5;
                         }
                     }
                 }

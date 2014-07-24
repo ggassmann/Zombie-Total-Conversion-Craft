@@ -36,13 +36,7 @@ public class BlockNode extends BlockContainer {
         MCNode closest = null;
         for(int i = 0; i < BlockNode.nodes.size(); i++) {
             MCNode node = BlockNode.nodes.get(i);
-            if(raytrace) {
-                MovingObjectPosition trace = world.rayTraceBlocks(node.position.toVec3(), position, true);
-                if(trace != null && trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                    continue;
-                }
-            }
-            double distance = position.distanceTo(node.position.toVec3());
+            double distance = position.distanceTo(node.position.toVec3().addVector(0.5, 0, 0.5));
             if(distance < shortestDistance) {
                 shortestDistance = distance;
                 closest = node;
