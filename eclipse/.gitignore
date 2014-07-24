@@ -1,0 +1,13 @@
+.metadata/
+asm/
+config/
+crash-reports/
+logs/
+maps/
+resourcepacks/
+saves/
+screenshots/
+*.json
+*.txt
+server.*
+servers.dat
