@@ -3,6 +3,7 @@ package net.gigimoi.zombietc;
 import com.stackframe.pathfinder.Dijkstra;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
+import net.gigimoi.zombietc.pathfinding.Point3;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -123,10 +124,22 @@ public class EntityZZombie extends EntityZombie {
                 if(start != null && goal.get(0) != null && BlockNode.nodes != null) {
                     List<MCNode> path = new Dijkstra<MCNode>().findPath(BlockNode.nodes, start, goal);
                     if(path != null) {
-                        if(path.size() > 1) {
-                            targetX = path.get(1).position.xCoord + 0.5;
-                            targetY = path.get(1).position.yCoord;
-                            targetZ = path.get(1).position.zCoord + 0.5;
+                        if(path.get(0).position.toVec3().addVector(0.5, 0, 0.5).distanceTo(Vec3.createVectorHelper(posX, posY, posZ)) < 0.1) {
+                            lastPassed = path.get(0);
+                        }
+                        if(lastPassed == path.get(0)) {
+                            if(path.size() > 1) {
+                                targetX = path.get(1).position.xCoord + 0.5;
+                                targetY = path.get(1).position.yCoord;
+                                targetZ = path.get(1).position.zCoord + 0.5;
+                            }
+                        }
+                        else {
+                            if(path.size() > 0) {
+                                targetX = path.get(0).position.xCoord + 0.5;
+                                targetY = path.get(0).position.yCoord;
+                                targetZ = path.get(0).position.zCoord + 0.5;
+                            }
                         }
                     }
                 }
