@@ -172,6 +172,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
             tag.setInteger("Reload Timer", tag.getInteger("Reload Timer") - 1);
             if(tag.getInteger("Reload Timer") == 0) {
                 tag.setInteger("Rounds", clipSize);
+                tag.setInteger("ShootCooldown", 0);
             }
         }
         if(ZombieTC.editorModeManager.enabled) {
