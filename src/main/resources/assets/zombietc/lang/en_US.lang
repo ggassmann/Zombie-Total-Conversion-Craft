@@ -8,3 +8,4 @@ item.Node Linker.name=Node Linker
 tile.Barricade.name=Barricade
 tile.Spawner.name=Spawner
 tile.Node.name=Node
+tile.Purchase Itemstack.name=Purchase Item
