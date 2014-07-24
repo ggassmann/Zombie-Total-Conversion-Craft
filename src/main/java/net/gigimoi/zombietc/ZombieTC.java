@@ -27,7 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod(modid = ZombieTC.MODID, version = ZombieTC.VERSION)
 public class ZombieTC {
     public static final String MODID = "zombietc";
-    public static final String VERSION = "0.1a";
+    public static final String VERSION = "0.2";
     public static final String NETWORK_CHANNEL = "channel_zombie_tc";
 
     @Mod.Instance("zombietc")

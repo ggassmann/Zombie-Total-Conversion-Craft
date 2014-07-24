@@ -15,9 +15,10 @@ buildscript {
     }
 }
 
+apply plugin: 'java'
 apply plugin: 'forge'
 
-version = "0.1a"
+version = "0.2"
 group= "net.gigimoi.zombietc" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "zombietc"
 
