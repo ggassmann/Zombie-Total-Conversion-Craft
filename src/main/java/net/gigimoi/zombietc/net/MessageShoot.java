@@ -58,7 +58,7 @@ public class MessageShoot implements IMessage {
         public MessageShoot onMessage(MessageShoot message, MessageContext ctx) {
             World world = ((EntityLivingBase)message.shooter).worldObj;
             if(message.hit != null && message.shooter != null) {
-                message.hit.attackEntityFrom(DamageSource.generic, 2);
+                message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon)message.weapon).getBulletDamage());
             }
             if(ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);

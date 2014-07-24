@@ -43,10 +43,10 @@ import java.util.Random;
  * Created by gigimoi on 7/17/2014.
  */
 public class ItemWeapon extends Item implements IItemRenderer {
-    public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1).barrelLength(1f).sightHeight(0.1f);
-    public static ItemWeapon stormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.55, 6, 30, 120, 20, 3).barrelLength(2f).sightHeight(1f);
-    public static ItemWeapon thompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.55, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f);
-    public static ItemWeapon karbine = new ItemWeapon("Karbine", FireMechanism.semiAutomatic, 0.5, 1, 4, 90, 20, 20).barrelLength(2.5f).sightHeight(0.1f);
+    public static ItemWeapon radomVis = new ItemWeapon(  "Radom Vis",   FireMechanism.semiAutomatic, 1,    1, 9,  90,  20, 1 ).barrelLength(1.0f).sightHeight(0.1f).damage(2);
+    public static ItemWeapon stormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic,     0.55, 6, 30, 120, 20, 3 ).barrelLength(2.0f).sightHeight(1.0f).damage(2);
+    public static ItemWeapon thompson = new ItemWeapon(  "Thompson",    FireMechanism.automatic,     0.55, 6, 30, 120, 20, 2 ).barrelLength(1.8f).sightHeight(0.1f).damage(2);
+    public static ItemWeapon karbine = new ItemWeapon(   "Karbine",     FireMechanism.semiAutomatic, 0.5,  1, 4,  40,  20, 20).barrelLength(2.5f).sightHeight(0.1f).damage(5);
 
     public FireMechanism fireMechanism;
     public double inventoryScale;
@@ -55,10 +55,12 @@ public class ItemWeapon extends Item implements IItemRenderer {
     public int initialAmmo;
     public int reloadTime;
     public int fireDelay;
+    private int damage;
     private float barrelLength;
     private float sightHeight;
     public ItemWeapon barrelLength(float length) { this.barrelLength = length; return this; }
     public ItemWeapon sightHeight(float height) { this.sightHeight = height; return this; }
+    public ItemWeapon damage(int damage) { this.damage = damage; return this; }
 
     public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo, int reloadTime, int fireDelay) {
         this.setUnlocalizedName(name);
@@ -251,5 +253,9 @@ public class ItemWeapon extends Item implements IItemRenderer {
         if(tag.getInteger("Reload Timer") > 0) {
             TextRenderHelper.drawString("Reloading...", event.resolution.getScaledWidth() - 2, 12, TextAlignment.Right);
         }
+    }
+
+    public float getBulletDamage() {
+        return damage;
     }
 }
