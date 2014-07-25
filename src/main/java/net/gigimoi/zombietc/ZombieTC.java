@@ -6,11 +6,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.gigimoi.zombietc.event.EditorModeManager;
-import net.gigimoi.zombietc.event.GameManager;
-import net.gigimoi.zombietc.event.MouseManager;
-import net.gigimoi.zombietc.event.NaturalSpawnStopper;
-import net.gigimoi.zombietc.event.KeyManager;
+import net.gigimoi.zombietc.event.*;
+import net.gigimoi.zombietc.event.client.MainGuiOverrideManager;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.ItemNodeLinker;
 import net.gigimoi.zombietc.pathfinding.TileNode;
@@ -39,6 +36,8 @@ public class ZombieTC {
     public static EditorModeManager editorModeManager;
     public static MouseManager mouseManager;
     public static KeyManager keyManager;
+    public static ScoreboardManager scoreboardManager;
+    public static MainGuiOverrideManager mainGuiOverrideManager;
 
     @SidedProxy(clientSide="net.gigimoi.zombietc.proxy.ClientProxy", serverSide="net.gigimoi.zombietc.proxy.CommonProxy")
     public static CommonProxy proxy;
@@ -59,18 +58,24 @@ public class ZombieTC {
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
+        scoreboardManager = new ScoreboardManager();
         mouseManager = new MouseManager();
         editorModeManager = new EditorModeManager();
         gameManager = new GameManager();
         keyManager = new KeyManager();
+        mainGuiOverrideManager = new MainGuiOverrideManager();
         FMLCommonHandler.instance().bus().register(editorModeManager);
         FMLCommonHandler.instance().bus().register(gameManager);
         FMLCommonHandler.instance().bus().register(mouseManager);
         FMLCommonHandler.instance().bus().register(keyManager);
+        FMLCommonHandler.instance().bus().register(scoreboardManager);
+        FMLCommonHandler.instance().bus().register(mainGuiOverrideManager);
         MinecraftForge.EVENT_BUS.register(gameManager);
         MinecraftForge.EVENT_BUS.register(mouseManager);
         MinecraftForge.EVENT_BUS.register(editorModeManager);
         MinecraftForge.EVENT_BUS.register(keyManager);
+        MinecraftForge.EVENT_BUS.register(scoreboardManager);
+        MinecraftForge.EVENT_BUS.register(mainGuiOverrideManager);
         MinecraftForge.EVENT_BUS.register(new NaturalSpawnStopper());
 
         new ItemSpawnZZombie();

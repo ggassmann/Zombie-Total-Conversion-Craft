@@ -9,3 +9,6 @@ tile.Barricade.name=Barricade
 tile.Spawner.name=Spawner
 tile.Node.name=Node
 tile.Purchase Itemstack.name=Purchase Item
+
+ui.Wave=Wave
+ui.Scoreboard=Scoreboard

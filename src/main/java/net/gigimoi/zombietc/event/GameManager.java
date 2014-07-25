@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.event;
 
 import com.google.gson.Gson;
+import com.sun.imageio.plugins.common.I18N;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -20,6 +21,7 @@ import net.gigimoi.zombietc.pathfinding.MCNode;
 import net.gigimoi.zombietc.pathfinding.Point3;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -216,7 +218,7 @@ public class GameManager {
     }
     @SubscribeEvent
     public void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        if(!event.player.getEntityWorld().isRemote && !MinecraftServer.getServer().isSinglePlayer()) {
+        if(!MinecraftServer.getServer().isSinglePlayer()) {
             ZombieTC.network.sendTo(new MessagePrepareStaticVariables(), (EntityPlayerMP)event.player);
             ZombieTC.network.sendTo(new MessageSetWave(wave), (EntityPlayerMP) event.player);
             for(int i = 0; i < BlockNode.nodes.size(); i++) {
