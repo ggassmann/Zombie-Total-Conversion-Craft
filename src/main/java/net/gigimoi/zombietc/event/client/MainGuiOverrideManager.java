@@ -4,10 +4,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.gui.GuiStartGame;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiCreateWorld;
-import net.minecraft.client.gui.GuiMainMenu;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.*;
 import net.minecraftforge.client.event.GuiScreenEvent;
 
 /**
@@ -24,6 +21,13 @@ public class MainGuiOverrideManager {
             button.width -= 2;
             GuiButton buttonNewGame = new GuiButton(BUTTON_ID_NEW_GAME, button.xPosition + button.width + 4, button.yPosition, button.width, button.height, "New Game");
             event.buttonList.add(buttonNewGame);
+        }
+        if(event.gui.getClass() == GuiSelectWorld.class && event.buttonList.size() > 0) {
+            event.buttonList.remove(4);
+            GuiButton cancelButton = (GuiButton) event.buttonList.get(4);
+            cancelButton.xPosition -= cancelButton.width + 6;
+            cancelButton.width *= 2;
+            cancelButton.width += 6;
         }
     }
     @SubscribeEvent
