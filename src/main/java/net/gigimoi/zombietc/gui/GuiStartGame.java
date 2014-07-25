@@ -5,8 +5,18 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.Tessellator;
+import org.apache.commons.io.FileUtils;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.lwjgl.opengl.GL11;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by gigimoi on 7/24/2014.
@@ -47,8 +57,18 @@ public class GuiStartGame extends GuiScreen {
         super.initGui();
         closebutton = new GuiButton(CLOSE_BUTTON_ID, 10, this.height - 28, 40, 20, "Close");
         buttonList.add(closebutton);
-        GitHubClient client = new GitHubClient();
-        
+        ArrayList<String> mapsList = new ArrayList<String>();
+        try {
+            URL url = new URL("https://raw.githubusercontent.com/gigimoi/Zombie-Total-Conversion-Craft/master/maps/maps.txt");
+            FileUtils.copyURLToFile(url, new File("tmp"));
+            mapsList = (ArrayList<String>)FileUtils.readLines(new File("tmp"));
+            FileUtils.forceDelete(new File("tmp"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for(int i = 0; i < mapsList.size(); i++) {
+            buttonList.add(new GuiButton(700 + i, width / 2 - 150, 0, 300, 20, mapsList.get(i)));
+        }
     }
 
     @Override
