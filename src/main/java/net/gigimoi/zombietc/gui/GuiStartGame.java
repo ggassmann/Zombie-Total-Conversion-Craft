@@ -79,7 +79,6 @@ public class GuiStartGame extends GuiScreen {
             URL url = new URL("https://raw.githubusercontent.com/gigimoi/Zombie-Total-Conversion-Craft/master/maps/maps.txt");
             FileUtils.copyURLToFile(url, new File("tmp"));
             mapsList = (ArrayList<String>)FileUtils.readLines(new File("tmp"));
-            FileUtils.forceDelete(new File("tmp"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,6 +88,14 @@ public class GuiStartGame extends GuiScreen {
             buttonList.add(new GuiButton(700 + i, width / 2 - 150, 30 + i * 30, 300, 20, mapName));
             mapUrls.add(mapsList.get(i).substring(mapName.length() + 1));
             mapNames.add(mapName);
+            File thumbnail = new File(".imagecache/" + mapName + ".png");
+            if(!thumbnail.exists()) {
+                try {
+                    FileUtils.copyURLToFile(new URL("https://github.com/gigimoi/Zombie-Total-Conversion-Craft/raw/master/maps/" + mapName + ".png"), thumbnail);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
