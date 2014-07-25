@@ -11,3 +11,4 @@ screenshots/
 *.txt
 server.*
 servers.dat
+.imagecache/
