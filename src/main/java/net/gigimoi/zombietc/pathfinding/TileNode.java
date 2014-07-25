@@ -15,9 +15,6 @@ import org.lwjgl.opengl.GL11;
 public class TileNode extends TileEntity implements IItemRenderer {
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        if(type == ItemRenderType.INVENTORY) {
-            return true;
-        }
         return true;
     }
 

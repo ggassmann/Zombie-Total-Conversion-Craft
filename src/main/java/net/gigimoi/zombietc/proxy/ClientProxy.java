@@ -1,8 +1,10 @@
 package net.gigimoi.zombietc.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.*;
+import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.TileNode;
 import net.gigimoi.zombietc.pathfinding.TileRendererNode;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
@@ -11,6 +13,7 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +32,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void renderers() {
         super.renderers();
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockNode.instance), new TileNode());
         ClientRegistry.bindTileEntitySpecialRenderer(TileNode.class, new TileRendererNode());
         ClientRegistry.bindTileEntitySpecialRenderer(TilePurchaseItemStack.class, new TileRendererPurchaseItemstack());
     }
