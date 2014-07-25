@@ -44,6 +44,7 @@ public class GuiStartGame extends GuiScreen {
     public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         super.drawScreen(par1, par2, par3);
+        TextRenderHelper.drawString("Select a map:", width / 2, 2, TextAlignment.Center);
         if(downloading != null) {
             TextRenderHelper.drawString("Downloading...", 0, 0, TextAlignment.Left);
             hasRenderedDownloading = true;
@@ -85,7 +86,7 @@ public class GuiStartGame extends GuiScreen {
         for(int i = 0; i < mapsList.size(); i++) {
             String mapName = mapsList.get(i).substring(0, mapsList.get(i).lastIndexOf(":"));
             mapName = mapName.substring(0, mapName.lastIndexOf(":"));
-            buttonList.add(new GuiButton(700 + i, width / 2 - 150, 0, 300, 20, mapName));
+            buttonList.add(new GuiButton(700 + i, width / 2 - 150, 30 + i * 30, 300, 20, mapName));
             mapUrls.add(mapsList.get(i).substring(mapName.length() + 1));
             mapNames.add(mapName);
         }
@@ -105,15 +106,18 @@ public class GuiStartGame extends GuiScreen {
                 FMLClientHandler.instance().tryLoadExistingWorld(null, mapName, mapName);
             } catch (IOException e) {
                 e.printStackTrace();
+                downloading = null;
+                hasRenderedDownloading = false;
             } catch (ZipException e) {
                 e.printStackTrace();
+                downloading = null;
+                hasRenderedDownloading = false;
             }
         }
     }
 
     @Override
-    public boolean doesGuiPauseGame()
-    {
+    public boolean doesGuiPauseGame() {
         return false;
     }
 }
