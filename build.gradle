@@ -29,7 +29,6 @@ minecraft {
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
-	classpath 'org.eclipse.egit.github.core'
 }
 
 processResources

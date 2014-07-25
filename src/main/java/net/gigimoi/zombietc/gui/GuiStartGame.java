@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.Tessellator;
+import org.eclipse.egit.github.core.client.GitHubClient;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -46,6 +47,7 @@ public class GuiStartGame extends GuiScreen {
         super.initGui();
         closebutton = new GuiButton(CLOSE_BUTTON_ID, 10, this.height - 28, 40, 20, "Close");
         buttonList.add(closebutton);
+        GitHubClient client = new GitHubClient();
         
     }
 
