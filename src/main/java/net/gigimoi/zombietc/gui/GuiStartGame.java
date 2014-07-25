@@ -1,12 +1,16 @@
 package net.gigimoi.zombietc.gui;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import net.gigimoi.zombietc.helpers.TextAlignment;
+import net.gigimoi.zombietc.helpers.TextRenderHelper;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.Tessellator;
 import org.apache.commons.io.FileUtils;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.lwjgl.opengl.GL11;
 
 import java.io.BufferedReader;
@@ -24,6 +28,12 @@ import java.util.List;
 public class GuiStartGame extends GuiScreen {
     public GuiScreen returnTo;
 
+    public URL downloading = null;
+    boolean hasRenderedDownloading = false;
+    public String mapName;
+    List<String> mapUrls = new ArrayList<String>();
+    List<String> mapNames = new ArrayList<String>();
+
     public final int CLOSE_BUTTON_ID = 600;
     public GuiButton closebutton;
     public GuiStartGame(GuiScreen screen) {
@@ -34,10 +44,10 @@ public class GuiStartGame extends GuiScreen {
     public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         super.drawScreen(par1, par2, par3);
-        GL11.glPushMatrix();
-        GL11.glTranslated(50, 20, 0);
-        GL11.glPopMatrix();
-        //this.drawCenteredString(this.fontRendererObj, I18n.format("selectWorld.create", new Object[0]), this.width / 2, 20, -1);
+        if(downloading != null) {
+            TextRenderHelper.drawString("Downloading...", 0, 0, TextAlignment.Left);
+            hasRenderedDownloading = true;
+        }
     }
 
     @Override
@@ -49,6 +59,12 @@ public class GuiStartGame extends GuiScreen {
     protected void actionPerformed(GuiButton button) {
         if(button == closebutton) {
             Minecraft.getMinecraft().displayGuiScreen(returnTo);
+        }
+        if(button.id >= 700) {
+            URL map = null;
+            try { map = new URL(mapUrls.get(button.id - 700)); } catch (MalformedURLException e) {e.printStackTrace(); }
+            downloading = map;
+            mapName = mapNames.get(button.id - 700);
         }
     }
 
@@ -67,7 +83,31 @@ public class GuiStartGame extends GuiScreen {
             e.printStackTrace();
         }
         for(int i = 0; i < mapsList.size(); i++) {
-            buttonList.add(new GuiButton(700 + i, width / 2 - 150, 0, 300, 20, mapsList.get(i)));
+            String mapName = mapsList.get(i).substring(0, mapsList.get(i).lastIndexOf(":"));
+            mapName = mapName.substring(0, mapName.lastIndexOf(":"));
+            buttonList.add(new GuiButton(700 + i, width / 2 - 150, 0, 300, 20, mapName));
+            mapUrls.add(mapsList.get(i).substring(mapName.length() + 1));
+            mapNames.add(mapName);
+        }
+    }
+
+    @Override
+    public void updateScreen() {
+        super.updateScreen();
+        if(downloading != null && hasRenderedDownloading == true) {
+            try {
+                FileUtils.copyURLToFile(downloading, new File("tmpmap"));
+                ZipFile zipFile = new ZipFile("tmpmap");
+                zipFile.extractAll("saves/");
+                FileUtils.forceDelete(new File("tmpmap"));
+                downloading = null;
+                hasRenderedDownloading = false;
+                FMLClientHandler.instance().tryLoadExistingWorld(null, mapName, mapName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ZipException e) {
+                e.printStackTrace();
+            }
         }
     }
 
