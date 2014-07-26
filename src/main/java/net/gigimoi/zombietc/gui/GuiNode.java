@@ -50,7 +50,7 @@ public class GuiNode extends GuiScreen {
         if(button == buttonNoOnlyAfterEvent) {
             buttonYesOnlyAfterEvent.enabled = true;
             buttonNoOnlyAfterEvent.enabled = false;
-            ZombieTC.network.sendToServer(new MessageChangeNodeDisabledUntilEvent(x, y, z, true));
+            ZombieTC.network.sendToServer(new MessageChangeNodeDisabledUntilEvent(x, y, z, false));
         }
         if(button == buttonYesOnlyAfterEvent) {
             buttonYesOnlyAfterEvent.enabled = false;
