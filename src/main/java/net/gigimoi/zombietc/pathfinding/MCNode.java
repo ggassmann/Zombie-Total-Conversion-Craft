@@ -1,6 +1,10 @@
 package net.gigimoi.zombietc.pathfinding;
 
 import com.stackframe.pathfinder.Node;
+import cpw.mods.fml.relauncher.Side;
+import net.gigimoi.zombietc.ZombieTC;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
 import java.util.ArrayList;
@@ -12,7 +16,7 @@ import java.util.List;
 public class MCNode implements Node<MCNode> {
     public Point3 position;
 
-    public transient List<MCNode> linksTo;
+    public transient ArrayList<MCNode> linksTo;
                                            //GameManager should have a
                                            //method to reset all links.
                                            //Reset links on editor mode toggle and join

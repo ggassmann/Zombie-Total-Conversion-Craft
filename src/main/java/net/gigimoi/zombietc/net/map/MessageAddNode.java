@@ -36,6 +36,7 @@ public class MessageAddNode implements IMessage {
         @Override
         public MessageAddNode onMessage(MessageAddNode message, MessageContext ctx) {
             BlockNode.nodes.add(new MCNode(message.pos));
+            ZombieTC.gameManager.regeneratePathMap();
             if(ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }

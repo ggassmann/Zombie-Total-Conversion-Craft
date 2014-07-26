@@ -13,7 +13,6 @@ public class BlockSpawner extends BlockContainer {
     protected BlockSpawner() {
         super(Material.dragonEgg);
         setBlockName("Spawner");
-
     }
 
     @Override

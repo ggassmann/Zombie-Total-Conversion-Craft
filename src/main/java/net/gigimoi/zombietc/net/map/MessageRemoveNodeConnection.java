@@ -50,6 +50,7 @@ public class MessageRemoveNodeConnection implements IMessage {
         @Override
         public MessageRemoveNodeConnection onMessage(MessageRemoveNodeConnection message, MessageContext ctx) {
             BlockNode.removeNodeConnection(message.first, message.second);
+            ZombieTC.gameManager.regeneratePathMap();
             if(ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }
