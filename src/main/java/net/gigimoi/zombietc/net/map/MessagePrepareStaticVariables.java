@@ -29,6 +29,7 @@ public class MessagePrepareStaticVariables implements IMessage {
             ZombieTC.gameManager.blockBarricades = new ArrayList<Point3>();
             BlockNode.nodes = new ArrayList<MCNode>();
             BlockNode.nodeConnections = new ArrayList<BlockNode.MCNodePair>();
+            ZombieTC.editorModeManager.enabled = false;
             return null;
         }
     }

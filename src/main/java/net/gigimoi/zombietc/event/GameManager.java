@@ -250,6 +250,9 @@ public class GameManager {
                 ), (EntityPlayerMP)event.player);
             }
             ZombieTC.network.sendTo(new MessageRegeneratePathMap(), (EntityPlayerMP)event.player);
+            if(ZombieTC.editorModeManager.enabled) {
+                ZombieTC.network.sendTo(new MessageChangeEditorMode(), (EntityPlayerMP)event.player);
+            }
         }
     }
     @SubscribeEvent
@@ -296,6 +299,7 @@ public class GameManager {
                     node.linksTo.add(pair.n1);
                 }
             }
+            node.disabled = false;
         }
     }
 }

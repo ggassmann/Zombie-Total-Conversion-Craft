@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class MCNode implements Node<MCNode> {
     public Point3 position;
+    public boolean disabled = false;
 
     public transient ArrayList<MCNode> linksTo;
                                            //GameManager should have a
@@ -41,6 +42,12 @@ public class MCNode implements Node<MCNode> {
 
     @Override
     public Iterable<MCNode> neighbors() {
-        return linksTo;
+        ArrayList<MCNode> links = (ArrayList<MCNode>)linksTo.clone();
+        for(int i = 0; i < links.size(); i++) {
+            if(links.get(i).disabled) {
+                links.remove(i);
+            }
+        }
+        return links;
     }
 }

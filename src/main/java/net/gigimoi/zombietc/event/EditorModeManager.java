@@ -11,7 +11,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
  * Created by gigimoi on 7/15/2014.
  */
 public class EditorModeManager {
-    public boolean enabled = true;
+    public boolean enabled = false;
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if(((ClientProxy) ZombieTC.proxy).reset.isPressed()) {

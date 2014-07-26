@@ -9,6 +9,7 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by gigimoi on 7/16/2014.
@@ -28,8 +29,11 @@ public class TileRendererNode extends TileEntitySpecialRenderer {
             for(int i = 0; i < BlockNode.nodes.size(); i++) {
                 MCNode node = BlockNode.nodes.get(i);
                 if(node.position.distanceTo(new Point3(tile.xCoord, tile.yCoord, tile.zCoord)) < 0.01) {
-                    ArrayList<MCNode> links = (ArrayList<MCNode>)node.neighbors();
+                    ArrayList<MCNode> links = node.linksTo;
                     for(int j = 0; j < links.size(); j++) {
+                        if(!((List)node.neighbors()).contains(links.get(j))) {
+                            GL11.glColor3b((byte)0, (byte)0, (byte)255);
+                        }
                         GL11.glLineWidth(5f);
                         GL11.glEnable(GL11.GL_BLEND);
                         GL11.glBegin(GL11.GL_LINES);
