@@ -8,7 +8,8 @@ resourcepacks/
 saves/
 screenshots/
 *.json
-*.txt
 server.*
 servers.dat
 .imagecache/
+eula.txt
+options.txt

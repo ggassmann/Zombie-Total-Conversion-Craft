@@ -1,5 +1,0 @@
-These are mods that will be shipped with the modpack
-
-NEI
-Code Chicken Core
-Chisel
