@@ -1,6 +1,6 @@
-package net.gigimoi.zombietc;
+package net.gigimoi.zombietc.block;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.gui.GuiPurchaseItemStack;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.block.BlockContainer;

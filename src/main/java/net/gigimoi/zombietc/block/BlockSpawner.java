@@ -1,4 +1,4 @@
-package net.gigimoi.zombietc;
+package net.gigimoi.zombietc.block;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

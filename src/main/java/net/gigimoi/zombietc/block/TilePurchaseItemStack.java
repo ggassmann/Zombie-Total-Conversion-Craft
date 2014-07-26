@@ -1,5 +1,6 @@
-package net.gigimoi.zombietc;
+package net.gigimoi.zombietc.block;
 
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.net.activates.MessageActivatePurchase;
 import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.minecraft.entity.player.EntityPlayer;

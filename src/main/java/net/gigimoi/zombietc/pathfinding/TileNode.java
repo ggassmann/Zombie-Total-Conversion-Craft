@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TileNode extends TileEntity {
     public boolean deactivatedUntilEvent = false;
+    public String eventWaitFor = "";
 
     public TileNode() {
         super();
@@ -18,14 +19,15 @@ public class TileNode extends TileEntity {
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
-        System.out.println("read " + deactivatedUntilEvent);
         deactivatedUntilEvent = tag.getBoolean("Deactivated Until Event");
+        eventWaitFor = tag.getString("Event Wait For");
         super.readFromNBT(tag);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         tag.setBoolean("Deactivated Until Event", deactivatedUntilEvent);
+        tag.setString("Event Wait For", eventWaitFor);
         super.writeToNBT(tag);
     }
     @Override

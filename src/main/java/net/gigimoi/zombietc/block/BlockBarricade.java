@@ -1,5 +1,7 @@
-package net.gigimoi.zombietc;
+package net.gigimoi.zombietc.block;
 
+import net.gigimoi.zombietc.EntityZZombie;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.map.MessageRemoveBarricade;
 import net.gigimoi.zombietc.net.map.MessageAddBarricade;
@@ -10,7 +12,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 

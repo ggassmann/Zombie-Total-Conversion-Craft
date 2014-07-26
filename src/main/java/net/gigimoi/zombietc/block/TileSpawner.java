@@ -1,4 +1,4 @@
-package net.gigimoi.zombietc;
+package net.gigimoi.zombietc.block;
 
 import net.gigimoi.zombietc.event.GameManager;
 import net.minecraft.nbt.NBTTagCompound;

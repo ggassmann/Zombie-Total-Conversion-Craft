@@ -1,7 +1,7 @@
 package net.gigimoi.zombietc.weapon;
 
 import net.gigimoi.zombietc.EntityZZombie;
-import net.gigimoi.zombietc.TileBarricade;
+import net.gigimoi.zombietc.block.TileBarricade;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
 import net.gigimoi.zombietc.helpers.TextAlignment;
@@ -26,14 +26,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
-import scala.util.Right;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,8 @@
-package net.gigimoi.zombietc;
+package net.gigimoi.zombietc.block;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.gigimoi.zombietc.EntityZZombie;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
 import net.gigimoi.zombietc.proxy.ClientProxy;

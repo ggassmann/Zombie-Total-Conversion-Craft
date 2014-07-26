@@ -74,6 +74,9 @@ public class CommonProxy implements IGuiHandler {
         network.registerMessage(MessageRegeneratePathMap.MessageRegeneratePathMapHandler.class, MessageRegeneratePathMap.class, 24, Side.SERVER);
         network.registerMessage(MessageChangeNodeDisabledUntilEvent.MessageChangeNodeDisabledUntilEventHandler.class, MessageChangeNodeDisabledUntilEvent.class, 25, Side.CLIENT);
         network.registerMessage(MessageChangeNodeDisabledUntilEvent.MessageChangeNodeDisabledUntilEventHandler.class, MessageChangeNodeDisabledUntilEvent.class, 26, Side.SERVER);
+        network.registerMessage(MessageChangeNodeEventWaitFor.MessageChangeNodeEventWaitForHandler.class, MessageChangeNodeEventWaitFor.class, 27, Side.CLIENT);
+        network.registerMessage(MessageChangeNodeEventWaitFor.MessageChangeNodeEventWaitForHandler.class, MessageChangeNodeEventWaitFor.class, 28, Side.SERVER);
+        network.registerMessage(MessageSetWorldVariables.MessageSetWorldVariablesHandler.class, MessageSetWorldVariables.class, 29, Side.CLIENT);
         ZombieTC.network = network;
     }
 

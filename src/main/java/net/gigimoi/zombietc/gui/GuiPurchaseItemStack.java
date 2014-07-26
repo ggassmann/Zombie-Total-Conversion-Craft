@@ -1,6 +1,6 @@
 package net.gigimoi.zombietc.gui;
 
-import net.gigimoi.zombietc.TilePurchaseItemStack;
+import net.gigimoi.zombietc.block.TilePurchaseItemStack;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.net.MessageSetPurchaseItemStackPrice;
 import net.minecraft.client.gui.GuiButton;

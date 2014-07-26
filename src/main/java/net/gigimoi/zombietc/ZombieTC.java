@@ -6,6 +6,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.gigimoi.zombietc.block.*;
 import net.gigimoi.zombietc.event.*;
 import net.gigimoi.zombietc.event.client.MainGuiOverrideManager;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
@@ -90,6 +91,7 @@ public class ZombieTC {
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockNode.instance);
+        registerBlock(BlockPurchaseEventLever.instance);
 
         registerBlock(BlockBarricade.wooden);
         registerBlock(BlockPurchaseItemstack.instance);

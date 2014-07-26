@@ -1,7 +1,6 @@
 package net.gigimoi.zombietc.event;
 
 import com.google.gson.Gson;
-import com.sun.imageio.plugins.common.I18N;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -21,7 +20,6 @@ import net.gigimoi.zombietc.pathfinding.MCNode;
 import net.gigimoi.zombietc.pathfinding.Point3;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -33,10 +31,7 @@ import net.minecraftforge.event.world.WorldEvent;
 
 import javax.vecmath.Vector3f;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by gigimoi on 7/14/2014.
@@ -54,6 +49,7 @@ public class GameManager {
         List<MCNode> nodes;
         List<BlockNode.MCNodePair> nodeConnections;
         ArrayList<Point3> blockBarricades;
+        HashMap<String, Object> worldVariables;
         public GameData() {
         }
         public GameData(GameManager manager) {
@@ -66,11 +62,13 @@ public class GameManager {
             nodes = BlockNode.nodes;
             nodeConnections = BlockNode.nodeConnections;
             blockBarricades = manager.blockBarricades;
+            worldVariables = manager.worldVariables;
         }
     }
     public static ArrayList<Point3> blockBarricades = new ArrayList<Point3>();
     public static ArrayList<Vector3f> spawnPositions = new ArrayList<Vector3f>();
     public static ArrayList<World> worldsSpawnedTo = new ArrayList<World>();
+    public static HashMap<String, Object> worldVariables = new HashMap<String, Object>();
 
     int zombiesToSpawn = 0;
     public int wave = 0;
@@ -174,6 +172,7 @@ public class GameManager {
             BlockNode.nodes = new ArrayList<MCNode>();
             BlockNode.nodeConnections = new ArrayList<BlockNode.MCNodePair>();
             blockBarricades = new ArrayList<Point3>();
+            worldVariables = new HashMap<String, Object>();
             return;
         }
         Gson gson = new Gson();
@@ -191,6 +190,7 @@ public class GameManager {
         BlockNode.nodes = saveData.nodes;
         BlockNode.nodeConnections = saveData.nodeConnections;
         blockBarricades = saveData.blockBarricades;
+        worldVariables = saveData.worldVariables;
         if(blockBarricades == null) {
             blockBarricades = new ArrayList<Point3>();
         }
@@ -249,6 +249,7 @@ public class GameManager {
                         (int)blockBarricades.get(i).zCoord
                 ), (EntityPlayerMP)event.player);
             }
+            ZombieTC.network.sendTo(new MessageSetWorldVariables(worldVariables), (EntityPlayerMP)event.player);
             ZombieTC.network.sendTo(new MessageRegeneratePathMap(), (EntityPlayerMP)event.player);
             if(ZombieTC.editorModeManager.enabled) {
                 ZombieTC.network.sendTo(new MessageChangeEditorMode(), (EntityPlayerMP)event.player);

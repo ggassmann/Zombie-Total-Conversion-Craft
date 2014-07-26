@@ -1,5 +1,6 @@
-package net.gigimoi.zombietc;
+package net.gigimoi.zombietc.block;
 
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

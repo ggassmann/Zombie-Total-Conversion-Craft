@@ -4,7 +4,8 @@ import cpw.mods.fml.client.config.GuiButtonExt;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
-import net.gigimoi.zombietc.net.MessageChangeNodeDisabledUntilEvent;
+import net.gigimoi.zombietc.net.map.MessageChangeNodeDisabledUntilEvent;
+import net.gigimoi.zombietc.net.map.MessageChangeNodeEventWaitFor;
 import net.gigimoi.zombietc.pathfinding.TileNode;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -43,6 +44,13 @@ public class GuiNode extends GuiScreen {
     }
 
     @Override
+    protected void keyTyped(char par1, int par2) {
+        super.keyTyped(par1, par2);
+        textFieldEvent.textboxKeyTyped(par1, par2);
+        ZombieTC.network.sendToAll(new MessageChangeNodeEventWaitFor(x, y, z, textFieldEvent.getText()));
+    }
+
+    @Override
     protected void actionPerformed(GuiButton button) {
         if(button == buttonDone) {
             mc.displayGuiScreen(null);
@@ -51,11 +59,14 @@ public class GuiNode extends GuiScreen {
             buttonYesOnlyAfterEvent.enabled = true;
             buttonNoOnlyAfterEvent.enabled = false;
             ZombieTC.network.sendToServer(new MessageChangeNodeDisabledUntilEvent(x, y, z, false));
+            textFieldEvent.setEnabled(false);
+            textFieldEvent.setText("");
         }
         if(button == buttonYesOnlyAfterEvent) {
             buttonYesOnlyAfterEvent.enabled = false;
             buttonNoOnlyAfterEvent.enabled = true;
             ZombieTC.network.sendToServer(new MessageChangeNodeDisabledUntilEvent(x, y, z, true));
+            textFieldEvent.setEnabled(true);
         }
     }
 
@@ -65,6 +76,9 @@ public class GuiNode extends GuiScreen {
         buttonYesOnlyAfterEvent = new GuiButtonExt(1, buttonDone.xPosition, buttonDone.yPosition + 22, 30, 20, "Yes");
         buttonNoOnlyAfterEvent = new GuiButtonExt(1, buttonDone.xPosition + 32, buttonDone.yPosition + 22, 30, 20, "No");
 
+        textFieldEvent = new GuiTextField(mc.fontRenderer, width / 2 - 100 + 64, height / 2 - 100 + 22, 200 - 64, 20);
+        textFieldEvent.setText(getTile().eventWaitFor);
+
         if(getTile().deactivatedUntilEvent) {
             buttonNoOnlyAfterEvent.enabled = true;
             buttonYesOnlyAfterEvent.enabled = false;
@@ -72,13 +86,12 @@ public class GuiNode extends GuiScreen {
         else {
             buttonNoOnlyAfterEvent.enabled = false;
             buttonYesOnlyAfterEvent.enabled = true;
+            textFieldEvent.setEnabled(false);
         }
 
         this.buttonList.add(buttonDone);
         this.buttonList.add(buttonYesOnlyAfterEvent);
         this.buttonList.add(buttonNoOnlyAfterEvent);
-
-        textFieldEvent = new GuiTextField(mc.fontRenderer, width / 2 - 100 + 64, height / 2 - 100 + 22, 200 - 64, 20);
     }
 
     @Override

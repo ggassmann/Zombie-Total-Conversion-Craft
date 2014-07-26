@@ -1,9 +1,10 @@
 package net.gigimoi.zombietc.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.*;
+import net.gigimoi.zombietc.block.TilePurchaseItemStack;
+import net.gigimoi.zombietc.block.TileRendererPurchaseItemstack;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.TileNode;
 import net.gigimoi.zombietc.pathfinding.TileRendererNode;
@@ -11,11 +12,9 @@ import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;

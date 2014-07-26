@@ -1,22 +1,15 @@
 package net.gigimoi.zombietc.gui;
 
-import com.sun.prism.util.tess.Tess;
 import cpw.mods.fml.client.FMLClientHandler;
 import de.matthiasmann.twl.utils.PNGDecoder;
-import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
-import net.gigimoi.zombietc.helpers.TextureHelper;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiSlot;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.FileUtils;
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL30;
