@@ -2,11 +2,15 @@ package net.gigimoi.zombietc.pathfinding;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.gui.GuiNode;
+import net.gigimoi.zombietc.helpers.TextureHelper;
 import net.gigimoi.zombietc.net.map.MessageAddNode;
 import net.gigimoi.zombietc.net.map.MessageRemoveNode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -14,6 +18,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.IItemRenderer;
+import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +27,7 @@ import java.util.List;
 /**
  * Created by gigimoi on 7/16/2014.
  */
-public class BlockNode extends BlockContainer {
-
+public class BlockNode extends BlockContainer implements IItemRenderer {
     public static class MCNodePair {
         public MCNode n1;
         public MCNode n2;
@@ -119,6 +124,15 @@ public class BlockNode extends BlockContainer {
         }
     }
 
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+        if(player.getHeldItem() == null || player.getHeldItem().getItem().getClass() != ItemNodeLinker.class) {
+            player.openGui(ZombieTC.instance, GuiNode.GUI_ID, world, x, y, z);
+            return true;
+        }
+        return false;
+    }
+
     public static void removeNodeAt(double x, double y, double z) {
         for (int i = 0; i < nodes.size(); i++) {
             if (nodes.get(i).position.distanceTo(new Point3((int)x, (int)y, (int)z)) < 0.001) {
@@ -162,5 +176,27 @@ public class BlockNode extends BlockContainer {
                 }
             }
         }
+    }
+    @Override
+    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+        return true;
+    }
+
+    @Override
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glPushMatrix();
+        if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+            //EntityPlayer player = (EntityPlayer) data[1];
+            GL11.glTranslated(0, 1, 0);
+        }
+        TextureHelper.bindTexture(TileRendererNode.texture);
+        TileRendererNode.model.renderAll();
+        GL11.glPopMatrix();
     }
 }

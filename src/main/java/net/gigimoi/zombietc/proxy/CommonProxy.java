@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.gui.GuiNode;
 import net.gigimoi.zombietc.gui.GuiPurchaseItemStack;
 import net.gigimoi.zombietc.net.*;
 import net.gigimoi.zombietc.net.activates.MessageActivatePurchase;
@@ -36,6 +37,8 @@ public class CommonProxy implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if ( ID == GuiPurchaseItemStack.GUI_ID )
             return new GuiPurchaseItemStack(x, y, z);
+        if ( ID == GuiNode.GUI_ID )
+            return new GuiNode(x, y, z);
         return null;
     }
 
@@ -69,6 +72,8 @@ public class CommonProxy implements IGuiHandler {
         network.registerMessage(MessagePrepareStaticVariables.MessagePrepareStaticVariablesHandler.class, MessagePrepareStaticVariables.class, 22, Side.CLIENT);
         network.registerMessage(MessageRegeneratePathMap.MessageRegeneratePathMapHandler.class, MessageRegeneratePathMap.class, 23, Side.CLIENT);
         network.registerMessage(MessageRegeneratePathMap.MessageRegeneratePathMapHandler.class, MessageRegeneratePathMap.class, 24, Side.SERVER);
+        network.registerMessage(MessageChangeNodeDisabledUntilEvent.MessageChangeNodeDisabledUntilEventHandler.class, MessageChangeNodeDisabledUntilEvent.class, 25, Side.CLIENT);
+        network.registerMessage(MessageChangeNodeDisabledUntilEvent.MessageChangeNodeDisabledUntilEventHandler.class, MessageChangeNodeDisabledUntilEvent.class, 26, Side.SERVER);
         ZombieTC.network = network;
     }
 

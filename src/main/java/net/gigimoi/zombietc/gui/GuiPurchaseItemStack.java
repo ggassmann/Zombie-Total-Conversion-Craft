@@ -16,8 +16,6 @@ public class GuiPurchaseItemStack extends GuiScreen {
     public GuiTextField priceTextField;
     public GuiButton done;
 
-    public GuiPurchaseItemStack () {}
-
     int xCoord;
     int yCoord;
     int zCoord;
