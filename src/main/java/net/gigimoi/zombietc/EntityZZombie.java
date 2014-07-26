@@ -69,7 +69,7 @@ public class EntityZZombie extends EntityZombie {
             }
             if(!isDead && this.getHealth() > 0) {
                 EntityPlayer nearest = worldObj.getClosestPlayerToEntity(this, Int.MaxValue());
-                if(nearest != null && Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(nearest.posX, nearest.posY, nearest.posZ)) < 1) {
+                if(nearest != null && Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(nearest.posX, nearest.posY, nearest.posZ)) < 1.5) {
                     nearest.attackEntityFrom(
                             new DamageSource("Zombie"), 2
                     );
