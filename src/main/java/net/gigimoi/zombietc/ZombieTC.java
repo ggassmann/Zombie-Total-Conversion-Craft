@@ -94,12 +94,13 @@ public class ZombieTC {
         registerBlock(BlockPurchaseEventLever.instance);
 
         registerBlock(BlockBarricade.wooden);
-        registerBlock(BlockPurchaseItemstack.instance);
+        registerBlock(BlockPurchaseItemstack.instance, false);
 
         registerTileEntity(TileSpawner.class);
         registerTileEntity(TileBarricade.class);
         registerTileEntity(TileNode.class);
         registerTileEntity(TilePurchaseItemStack.class);
+        registerTileEntity(TilePurchaseEventLever.class);
 
         proxy.renderers();
         proxy.network();
@@ -110,8 +111,11 @@ public class ZombieTC {
         GameRegistry.registerTileEntity(c, c.getCanonicalName());
     }
     public void registerBlock(Block block) {
+        registerBlock(block, true);
+    }
+    public void registerBlock(Block block, boolean setTextureName) {
         block.setCreativeTab(tab);
-        block.setBlockTextureName(MODID + ":" + block.getUnlocalizedName().substring(5));
+        if(setTextureName) block.setBlockTextureName(MODID + ":" + block.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(block, block.getUnlocalizedName());
     }
     public void registerItem(Item item) {

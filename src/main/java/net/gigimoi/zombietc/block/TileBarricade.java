@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.block;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.GameManager;
@@ -25,7 +26,7 @@ import java.util.List;
 /**
  * Created by gigimoi on 7/15/2014.
  */
-public class TileBarricade extends TileEntity {
+public class TileBarricade extends TileEntitySynced {
     public int damage = 0;
     public int ticker = 0;
     public int playerTicker = 0;
@@ -74,18 +75,5 @@ public class TileBarricade extends TileEntity {
                 }
             }
         }
-    }
-
-    @Override
-    public Packet getDescriptionPacket() {
-        NBTTagCompound tagCompound = new NBTTagCompound();
-        writeToNBT(tagCompound);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tagCompound);
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        super.onDataPacket(net, pkt);
-        readFromNBT(pkt.func_148857_g());
     }
 }

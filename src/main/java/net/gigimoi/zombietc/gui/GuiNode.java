@@ -47,7 +47,7 @@ public class GuiNode extends GuiScreen {
     protected void keyTyped(char par1, int par2) {
         super.keyTyped(par1, par2);
         textFieldEvent.textboxKeyTyped(par1, par2);
-        ZombieTC.network.sendToAll(new MessageChangeNodeEventWaitFor(x, y, z, textFieldEvent.getText()));
+        ZombieTC.network.sendToServer(new MessageChangeNodeEventWaitFor(x, y, z, textFieldEvent.getText()));
     }
 
     @Override

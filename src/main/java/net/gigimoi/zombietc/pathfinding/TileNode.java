@@ -1,5 +1,7 @@
 package net.gigimoi.zombietc.pathfinding;
 
+import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.event.GameManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -30,6 +32,16 @@ public class TileNode extends TileEntity {
         tag.setString("Event Wait For", eventWaitFor);
         super.writeToNBT(tag);
     }
+
+    int eventCooldown = 0;
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if(deactivatedUntilEvent && GameManager.isEventTriggering("")) {
+            eventCooldown = 100;
+        }
+    }
+
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound tagCompound = new NBTTagCompound();

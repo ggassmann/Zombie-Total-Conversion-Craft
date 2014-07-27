@@ -1,10 +1,10 @@
 package net.gigimoi.zombietc.block;
 
+import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.gui.GuiPurchaseEventLever;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockLever;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -87,6 +87,15 @@ public class BlockPurchaseEventLever extends BlockContainer {
                 world.isSideSolid(x, y, z + 1, NORTH) ||
                 world.isSideSolid(x, y - 1, z, UP   ) ||
                 world.isSideSolid(x, y + 1, z, DOWN );
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+        if(ZombieTC.editorModeManager.enabled) {
+            player.openGui(ZombieTC.instance, GuiPurchaseEventLever.GUI_ID, player.worldObj, x, y, z);
+            return true;
+        }
+        return false;
     }
 
     public int onBlockPlaced(World p_149660_1_, int p_149660_2_, int p_149660_3_, int p_149660_4_, int p_149660_5_, float p_149660_6_, float p_149660_7_, float p_149660_8_, int p_149660_9_)

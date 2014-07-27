@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.block.ITileEntityPurchasable;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
 import net.gigimoi.zombietc.net.*;
@@ -18,16 +19,21 @@ import net.gigimoi.zombietc.net.map.MessagePrepareStaticVariables;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
 import net.gigimoi.zombietc.pathfinding.Point3;
+import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import org.lwjgl.input.Keyboard;
 
 import javax.vecmath.Vector3f;
 import java.io.*;
@@ -49,7 +55,6 @@ public class GameManager {
         List<MCNode> nodes;
         List<BlockNode.MCNodePair> nodeConnections;
         ArrayList<Point3> blockBarricades;
-        HashMap<String, Object> worldVariables;
         public GameData() {
         }
         public GameData(GameManager manager) {
@@ -62,13 +67,26 @@ public class GameManager {
             nodes = BlockNode.nodes;
             nodeConnections = BlockNode.nodeConnections;
             blockBarricades = manager.blockBarricades;
-            worldVariables = manager.worldVariables;
         }
     }
     public static ArrayList<Point3> blockBarricades = new ArrayList<Point3>();
     public static ArrayList<Vector3f> spawnPositions = new ArrayList<Vector3f>();
     public static ArrayList<World> worldsSpawnedTo = new ArrayList<World>();
-    public static HashMap<String, Object> worldVariables = new HashMap<String, Object>();
+    public static ArrayList<String> currentEvents = new ArrayList<String>();
+    public static ArrayList<String> somewhatcurrentEvents = new ArrayList<String>();
+    public static boolean isEventTriggering(String event) {
+        for(int i = 0; i < currentEvents.size(); i++) {
+            if(currentEvents.get(i).equals(event)) {
+                return true;
+            }
+        }
+        for(int i = 0; i < somewhatcurrentEvents.size(); i++) {
+            if(somewhatcurrentEvents.get(i).equals(event)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     int zombiesToSpawn = 0;
     public int wave = 0;
@@ -82,7 +100,11 @@ public class GameManager {
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if(event.side == Side.SERVER) {
+        if(event.phase == TickEvent.Phase.END) {
+            somewhatcurrentEvents = currentEvents;
+            currentEvents = new ArrayList<String>();
+        }
+        if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START) {
             if(ZombieTC.editorModeManager.enabled) {
                 wave = 0;
                 zombiesAlive = 0;
@@ -112,6 +134,18 @@ public class GameManager {
             if(timeToNextWave == 1) {
                 currentWaveMaxZombies = nextWaveZombies;
                 zombiesToSpawn = currentWaveMaxZombies;
+            }
+        } else if (event.side == Side.CLIENT && Minecraft.getMinecraft().theWorld != null) {
+            EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+            TileEntity tilePlayerOver = player.getEntityWorld().getTileEntity((int)player.posX, (int)player.posY, (int)player.posZ - 1);
+            if(tilePlayerOver != null && ITileEntityPurchasable.class.isAssignableFrom(tilePlayerOver.getClass())) {
+                ITileEntityPurchasable purchasable = (ITileEntityPurchasable) tilePlayerOver;
+                if(purchasable.getEnabled()) {
+                    setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) +"] to " + purchasable.getVerb() + ":" + purchasable.getPrice() + "exp");
+                    if(activating) {
+                        purchasable.onPurchase(Minecraft.getMinecraft().thePlayer);
+                    }
+                }
             }
         }
     }
@@ -172,7 +206,6 @@ public class GameManager {
             BlockNode.nodes = new ArrayList<MCNode>();
             BlockNode.nodeConnections = new ArrayList<BlockNode.MCNodePair>();
             blockBarricades = new ArrayList<Point3>();
-            worldVariables = new HashMap<String, Object>();
             return;
         }
         Gson gson = new Gson();
@@ -190,7 +223,6 @@ public class GameManager {
         BlockNode.nodes = saveData.nodes;
         BlockNode.nodeConnections = saveData.nodeConnections;
         blockBarricades = saveData.blockBarricades;
-        worldVariables = saveData.worldVariables;
         if(blockBarricades == null) {
             blockBarricades = new ArrayList<Point3>();
         }
@@ -249,7 +281,6 @@ public class GameManager {
                         (int)blockBarricades.get(i).zCoord
                 ), (EntityPlayerMP)event.player);
             }
-            ZombieTC.network.sendTo(new MessageSetWorldVariables(worldVariables), (EntityPlayerMP)event.player);
             ZombieTC.network.sendTo(new MessageRegeneratePathMap(), (EntityPlayerMP)event.player);
             if(ZombieTC.editorModeManager.enabled) {
                 ZombieTC.network.sendTo(new MessageChangeEditorMode(), (EntityPlayerMP)event.player);
