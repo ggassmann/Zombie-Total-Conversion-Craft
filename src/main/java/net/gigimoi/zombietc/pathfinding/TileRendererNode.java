@@ -35,9 +35,11 @@ public class TileRendererNode extends TileEntitySpecialRenderer {
                     ArrayList<MCNode> links = node.linksTo;
                     for(int j = 0; j < links.size(); j++) {
                         GL11.glPushMatrix();
-                        if(tile.deactivated || !((List)node.neighbors()).contains(links.get(j))) {
+                        if(links.get(j).isDisabled() || node.isDisabled() || !((List)node.neighbors()).contains(links.get(j))) {
                             GL11.glColor3b((byte)0, (byte)0, (byte)255);
                             GL11.glTranslated(0, 0.1, 0);
+                        } else {
+                            GL11.glColor3d(1, 1, 1);
                         }
                         GL11.glLineWidth(5f);
                         GL11.glEnable(GL11.GL_BLEND);
