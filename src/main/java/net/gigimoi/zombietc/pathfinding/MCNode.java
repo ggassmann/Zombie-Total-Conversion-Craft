@@ -42,12 +42,16 @@ public class MCNode implements Node<MCNode> {
 
     @Override
     public Iterable<MCNode> neighbors() {
+        if(isDisabled()) {
+            return new ArrayList<MCNode>();
+        }
         ArrayList<MCNode> links = (ArrayList<MCNode>)linksTo.clone();
         for(int i = 0; i < links.size(); i++) {
             if(links.get(i).isDisabled()) {
                 links.remove(i);
             }
         }
+
         return links;
     }
 
