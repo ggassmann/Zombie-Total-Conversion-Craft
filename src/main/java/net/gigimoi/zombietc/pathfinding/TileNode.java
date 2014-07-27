@@ -33,12 +33,10 @@ public class TileNode extends TileEntity {
         super.writeToNBT(tag);
     }
 
-    int eventCooldown = 0;
     @Override
     public void updateEntity() {
         super.updateEntity();
         if(deactivatedUntilEvent && GameManager.isEventTriggering("")) {
-            eventCooldown = 100;
         }
     }
 
