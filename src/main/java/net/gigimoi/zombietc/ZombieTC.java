@@ -84,10 +84,10 @@ public class ZombieTC {
 
         registerItem(ItemSpawnZZombie.instance());
         registerItem(ItemNodeLinker.instance());
-        registerItem(ItemWeapon.radomVis);
-        registerItem(ItemWeapon.stormRifle);
-        registerItem(ItemWeapon.thompson);
-        registerItem(ItemWeapon.karbine);
+        registerItem(ItemWeapon.radomVis, false);
+        registerItem(ItemWeapon.stormRifle, false);
+        registerItem(ItemWeapon.thompson, false);
+        registerItem(ItemWeapon.karbine, false);
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockNode.instance);
@@ -119,8 +119,11 @@ public class ZombieTC {
         GameRegistry.registerBlock(block, block.getUnlocalizedName());
     }
     public void registerItem(Item item) {
+        registerItem(item, true);
+    }
+    public void registerItem(Item item, boolean setTextureName) {
         item.setCreativeTab(tab);
-        item.setTextureName(MODID + ":" + item.getUnlocalizedName().substring(5));
+        if(setTextureName) item.setTextureName(MODID + ":" + item.getUnlocalizedName().substring(5));
         GameRegistry.registerItem(item, item.getUnlocalizedName(), MODID);
     }
 }

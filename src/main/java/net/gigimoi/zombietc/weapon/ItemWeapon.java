@@ -62,6 +62,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
 
     public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo, int reloadTime, int fireDelay) {
         this.setUnlocalizedName(name);
+        setTextureName(ZombieTC.MODID + ":guns/" + name);
         setMaxStackSize(1);
         this.fireMechanism = fireMechanism;
         this.inventoryScale = inventoryScale;
@@ -126,7 +127,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
         if(modelFlash == null) {
             modelFlash = AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/muzzleflash.obj"));
         }
-        TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/models/guns/" + getUnlocalizedName().substring(5) + ".png"));
+        TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/items/guns/" + getUnlocalizedName().substring(5) + ".png"));
         if(type == ItemRenderType.ENTITY) {
             GL11.glScaled(0.5, 0.5, 0.5);
         }
