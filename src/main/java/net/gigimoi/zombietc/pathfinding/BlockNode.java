@@ -41,6 +41,9 @@ public class BlockNode extends BlockContainer implements IItemRenderer {
         MCNode closest = null;
         for(int i = 0; i < BlockNode.nodes.size(); i++) {
             MCNode node = BlockNode.nodes.get(i);
+            if(node.isDisabled()) {
+                continue;
+            }
             double distance = position.distanceTo(node.position.toVec3().addVector(0.5, 0, 0.5));
             if(distance < shortestDistance) {
                 shortestDistance = distance;
