@@ -91,10 +91,10 @@ public class ZombieTC {
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockNode.instance);
-        registerBlock(BlockPurchaseEventLever.instance);
 
+        registerBlock(BlockPurchaseEventLever.instance, false);
         registerBlock(BlockBarricade.wooden);
-        registerBlock(BlockPurchaseItemstack.instance, false);
+        registerBlock(BlockPurchaseItemstack.instance);
 
         registerTileEntity(TileSpawner.class);
         registerTileEntity(TileBarricade.class);

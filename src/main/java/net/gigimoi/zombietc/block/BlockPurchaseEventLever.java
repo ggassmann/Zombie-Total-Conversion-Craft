@@ -28,7 +28,7 @@ public class BlockPurchaseEventLever extends BlockContainer {
         setBlockName("Purchase Event Lever");
         setHardness(0.5f);
         setStepSound(soundTypeWood);
-        setBlockTextureName("lever");
+        setBlockTextureName("minecraft:lever");
     }
 
     /**
@@ -98,48 +98,44 @@ public class BlockPurchaseEventLever extends BlockContainer {
         return false;
     }
 
-    public int onBlockPlaced(World p_149660_1_, int p_149660_2_, int p_149660_3_, int p_149660_4_, int p_149660_5_, float p_149660_6_, float p_149660_7_, float p_149660_8_, int p_149660_9_)
+    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int par9)
     {
-        int k1 = p_149660_9_ & 8;
-        int j1 = p_149660_9_ & 7;
+        int k1 = par9 & 8;
+        int j1 = par9 & 7;
         byte b0 = -1;
 
-        if (p_149660_5_ == 0 && p_149660_1_.isSideSolid(p_149660_2_, p_149660_3_ + 1, p_149660_4_, DOWN))
+        if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
         {
             b0 = 0;
         }
 
-        if (p_149660_5_ == 1 && p_149660_1_.isSideSolid(p_149660_2_, p_149660_3_ - 1, p_149660_4_, UP))
+        if (side == 1 && world.isSideSolid(x, y - 1, z, UP))
         {
             b0 = 5;
         }
 
-        if (p_149660_5_ == 2 && p_149660_1_.isSideSolid(p_149660_2_, p_149660_3_, p_149660_4_ + 1, NORTH))
+        if (side == 2 && world.isSideSolid(x, y, z + 1, NORTH))
         {
             b0 = 4;
         }
 
-        if (p_149660_5_ == 3 && p_149660_1_.isSideSolid(p_149660_2_, p_149660_3_, p_149660_4_ - 1, SOUTH))
+        if (side == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
         {
             b0 = 3;
         }
 
-        if (p_149660_5_ == 4 && p_149660_1_.isSideSolid(p_149660_2_ + 1, p_149660_3_, p_149660_4_, WEST))
+        if (side == 4 && world.isSideSolid(x + 1, y, z, WEST))
         {
             b0 = 2;
         }
 
-        if (p_149660_5_ == 5 && p_149660_1_.isSideSolid(p_149660_2_ - 1, p_149660_3_, p_149660_4_, EAST))
+        if (side == 5 && world.isSideSolid(x - 1, y, z, EAST))
         {
             b0 = 1;
         }
 
         return b0 + k1;
     }
-
-    /**
-     * Called when the block is placed in the world.
-     */
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack)
     {
         int l = world.getBlockMetadata(x, y, z);
@@ -170,9 +166,9 @@ public class BlockPurchaseEventLever extends BlockContainer {
         }
     }
 
-    public static int invertMetadata(int p_149819_0_)
+    public static int invertMetadata(int meta)
     {
-        switch (p_149819_0_)
+        switch (meta)
         {
             case 0:
                 return 0;
@@ -334,7 +330,28 @@ public class BlockPurchaseEventLever extends BlockContainer {
 
         super.breakBlock(world, x, y, z, block, meta);
     }
+    public int isProvidingWeakPower(IBlockAccess access, int x, int y, int z, int side)
+    {
+        return (access.getBlockMetadata(x, y, z) & 8) > 0 ? 15 : 0;
+    }
+    public int isProvidingStrongPower(IBlockAccess access, int x, int y, int z, int side)
+    {
+        int i1 = access.getBlockMetadata(x, y, z);
 
+        if ((i1 & 8) == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            int j1 = i1 & 7;
+            return j1 == 0 && side == 0 ? 15 : (j1 == 7 && side == 0 ? 15 : (j1 == 6 && side == 1 ? 15 : (j1 == 5 && side == 1 ? 15 : (j1 == 4 && side == 2 ? 15 : (j1 == 3 && side == 3 ? 15 : (j1 == 2 && side == 4 ? 15 : (j1 == 1 && side == 5 ? 15 : 0)))))));
+        }
+    }
+    public boolean canProvidePower()
+    {
+        return true;
+    }
     @Override
     public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
         return new TilePurchaseEventLever();
