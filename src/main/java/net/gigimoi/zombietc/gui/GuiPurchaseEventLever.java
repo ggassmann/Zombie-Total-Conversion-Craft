@@ -1,8 +1,10 @@
 package net.gigimoi.zombietc.gui;
 
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.TilePurchaseEventLever;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
+import net.gigimoi.zombietc.net.map.MessageSetPurchaseEventLeverInfo;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -75,7 +77,7 @@ public class GuiPurchaseEventLever extends GuiScreen {
     @Override
     protected void actionPerformed(GuiButton button) {
         if(button == done) {
-            //ZombieTC.network.sendToServer(new MessageSetPurchaseItemStackPrice(xCoord, yCoord, zCoord, Integer.parseInt(textFieldPrice.getText())));
+            ZombieTC.network.sendToServer(new MessageSetPurchaseEventLeverInfo(xCoord, yCoord, zCoord, textFieldEvent.getText(), Integer.parseInt(textFieldPrice.getText())));
             mc.displayGuiScreen(null);
         }
     }
