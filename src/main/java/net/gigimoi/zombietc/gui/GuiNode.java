@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.gui;
 
 import cpw.mods.fml.client.config.GuiButtonExt;
+import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
@@ -11,6 +12,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import org.lwjgl.input.Keyboard;
 
 /**
  * Created by gigimoi on 7/26/2014.
@@ -33,7 +35,7 @@ public class GuiNode extends GuiScreen {
     }
 
     public TileNode getTile() {
-        return (TileNode) mc.theWorld.getTileEntity(x, y, z);
+        return (TileNode) ZombieTC.proxy.getWorld(Side.CLIENT).getTileEntity(x, y, z);
     }
 
     @Override
@@ -47,7 +49,9 @@ public class GuiNode extends GuiScreen {
     protected void keyTyped(char par1, int par2) {
         super.keyTyped(par1, par2);
         textFieldEvent.textboxKeyTyped(par1, par2);
-        ZombieTC.network.sendToServer(new MessageChangeNodeEventWaitFor(x, y, z, textFieldEvent.getText()));
+        if(par2 != Keyboard.KEY_ESCAPE) {
+            ZombieTC.network.sendToServer(new MessageChangeNodeEventWaitFor(x, y, z, textFieldEvent.getText()));
+        }
     }
 
     @Override

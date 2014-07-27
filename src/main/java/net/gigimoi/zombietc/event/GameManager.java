@@ -331,7 +331,6 @@ public class GameManager {
                     node.linksTo.add(pair.n1);
                 }
             }
-            node.disabled = false;
         }
     }
 }

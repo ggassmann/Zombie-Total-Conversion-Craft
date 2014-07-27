@@ -4,6 +4,7 @@ import com.stackframe.pathfinder.Node;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
@@ -15,7 +16,6 @@ import java.util.List;
  */
 public class MCNode implements Node<MCNode> {
     public Point3 position;
-    public boolean disabled = false;
 
     public transient ArrayList<MCNode> linksTo;
                                            //GameManager should have a
@@ -44,10 +44,16 @@ public class MCNode implements Node<MCNode> {
     public Iterable<MCNode> neighbors() {
         ArrayList<MCNode> links = (ArrayList<MCNode>)linksTo.clone();
         for(int i = 0; i < links.size(); i++) {
-            if(links.get(i).disabled) {
+            if(links.get(i).isDisabled()) {
                 links.remove(i);
             }
         }
         return links;
+    }
+
+    public boolean isDisabled() {
+        TileEntity tileRaw = ZombieTC.proxy.getWorld(Side.SERVER).getTileEntity(position.xCoord, position.yCoord, position.zCoord);
+        TileNode tile = (TileNode)tileRaw;
+        return tile == null || tile.deactivated;
     }
 }
