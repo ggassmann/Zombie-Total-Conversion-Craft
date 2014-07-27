@@ -23,7 +23,6 @@ public class ScoreboardManager {
     public List<Integer> scoreboardScores = new ArrayList<Integer>();
     @SubscribeEvent
     public void onLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-        System.out.println("ASDF");
         for(int i = 0; i < scoreboardNames.size(); i++) {
             if(scoreboardNames.get(i).equals(event.player.getCommandSenderName())) {
                 scoreboardNames.remove(i);

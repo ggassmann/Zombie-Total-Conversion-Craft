@@ -52,7 +52,6 @@ public class MessageAddNodeConnection implements IMessage {
             BlockNode.addNodeConnection(message.first, message.second);
             ZombieTC.gameManager.regeneratePathMap();
             if(ctx.side == Side.SERVER) {
-                System.out.println("Server recieved add node connection");
                 ZombieTC.network.sendToAll(message);
             }
             return null;

@@ -31,7 +31,6 @@ public class MessageChangeNodeEventWaitFor implements IMessage {
         y = buf.readInt();
         z = buf.readInt();
         event = ByteBufHelper.readString(buf);
-        System.out.println(event);
     }
     @Override
     public void toBytes(ByteBuf buf) {
