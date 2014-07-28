@@ -28,6 +28,7 @@ public class GuiNode extends GuiScreen {
     int x;
     int y;
     int z;
+
     public GuiNode(int x, int y, int z) {
         this.x = x;
         this.y = y;
@@ -49,24 +50,24 @@ public class GuiNode extends GuiScreen {
     protected void keyTyped(char par1, int par2) {
         super.keyTyped(par1, par2);
         textFieldEvent.textboxKeyTyped(par1, par2);
-        if(par2 != Keyboard.KEY_ESCAPE) {
+        if (par2 != Keyboard.KEY_ESCAPE) {
             ZombieTC.network.sendToServer(new MessageChangeNodeEventWaitFor(x, y, z, textFieldEvent.getText()));
         }
     }
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        if(button == buttonDone) {
+        if (button == buttonDone) {
             mc.displayGuiScreen(null);
         }
-        if(button == buttonNoOnlyAfterEvent) {
+        if (button == buttonNoOnlyAfterEvent) {
             buttonYesOnlyAfterEvent.enabled = true;
             buttonNoOnlyAfterEvent.enabled = false;
             ZombieTC.network.sendToServer(new MessageChangeNodeDisabledUntilEvent(x, y, z, false));
             textFieldEvent.setEnabled(false);
             textFieldEvent.setText("");
         }
-        if(button == buttonYesOnlyAfterEvent) {
+        if (button == buttonYesOnlyAfterEvent) {
             buttonYesOnlyAfterEvent.enabled = false;
             buttonNoOnlyAfterEvent.enabled = true;
             ZombieTC.network.sendToServer(new MessageChangeNodeDisabledUntilEvent(x, y, z, true));
@@ -83,11 +84,10 @@ public class GuiNode extends GuiScreen {
         textFieldEvent = new GuiTextField(mc.fontRenderer, width / 2 - 100 + 64, height / 2 - 100 + 22, 200 - 64, 20);
         textFieldEvent.setText(getTile().eventWaitFor);
 
-        if(getTile().deactivatedUntilEvent) {
+        if (getTile().deactivatedUntilEvent) {
             buttonNoOnlyAfterEvent.enabled = true;
             buttonYesOnlyAfterEvent.enabled = false;
-        }
-        else {
+        } else {
             buttonNoOnlyAfterEvent.enabled = false;
             buttonYesOnlyAfterEvent.enabled = true;
             textFieldEvent.setEnabled(false);

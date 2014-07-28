@@ -17,15 +17,19 @@ import net.minecraft.world.World;
  */
 public class ItemNodeLinker extends Item {
     private static ItemNodeLinker _instance = new ItemNodeLinker();
-    public static ItemNodeLinker instance() { return _instance; }
+
     public ItemNodeLinker() {
         setUnlocalizedName("Node Linker");
         setMaxStackSize(1);
     }
 
+    public static ItemNodeLinker instance() {
+        return _instance;
+    }
+
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float i, float j, float k) {
-        if(world.isRemote) {
+        if (world.isRemote) {
             Block target = world.getBlock(x, y, z);
             if (target.getClass() == BlockNode.class) {
                 if (!stack.hasTagCompound()) {
@@ -48,7 +52,7 @@ public class ItemNodeLinker extends Item {
                         for (int index = 0; index < BlockNode.nodeConnections.size(); index++) {
                             BlockNode.MCNodePair pair = BlockNode.nodeConnections.get(index);
                             if ((pair.n1.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f) &&
-                                (pair.n1.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f)) {
+                                    (pair.n1.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f)) {
                                 stack.setTagCompound(null);
                                 ZombieTC.network.sendToServer(new MessageRemoveNodeConnection(cVec, oVec));
                                 unlinked = true;
@@ -59,15 +63,15 @@ public class ItemNodeLinker extends Item {
                         if (!unlinked) {
                             boolean node1good = false;
                             boolean node2good = false;
-                            for(int bi = 0; bi < BlockNode.nodes.size(); bi++) {
-                                if(BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(cVec)) < 0.01) {
+                            for (int bi = 0; bi < BlockNode.nodes.size(); bi++) {
+                                if (BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(cVec)) < 0.01) {
                                     node1good = true;
                                 }
-                                if(BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(oVec)) < 0.01) {
+                                if (BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(oVec)) < 0.01) {
                                     node2good = true;
                                 }
                             }
-                            if(node1good && node2good) {
+                            if (node1good && node2good) {
                                 ZombieTC.network.sendToServer(new MessageAddNodeConnection(cVec, oVec));
                                 player.addChatMessage(new ChatComponentTranslation("Linked nodes"));
                             }

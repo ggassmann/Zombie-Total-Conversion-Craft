@@ -15,11 +15,13 @@ public class Point3 {
         this.yCoord = y;
         this.zCoord = z;
     }
+
+    public static Point3 fromVec3(Vec3 vec) {
+        return new Point3((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord);
+    }
+
     public double distanceTo(Point3 pos) {
         return toVec3().distanceTo(pos.toVec3());
-    }
-    public static Point3 fromVec3(Vec3 vec) {
-        return new Point3((int)vec.xCoord, (int)vec.yCoord, (int)vec.zCoord);
     }
 
     public Vec3 toVec3() {

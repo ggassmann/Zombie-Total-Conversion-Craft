@@ -17,26 +17,27 @@ import java.util.List;
 public class TileRendererNode extends TileEntitySpecialRenderer {
     public static ResourceLocation texture = new ResourceLocation(ZombieTC.MODID, "textures/models/node.png");
     public static IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/node.obj"));
+
     @Override
     public void renderTileEntityAt(TileEntity rawTile, double x, double y, double z, float par5) {
-        if(ZombieTC.editorModeManager.enabled || true) {
-            TileNode tile = (TileNode)rawTile;
+        if (ZombieTC.editorModeManager.enabled || true) {
+            TileNode tile = (TileNode) rawTile;
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
             GL11.glEnable(GL11.GL_BLEND);
             bindTexture(texture);
-            if(tile.deactivated) {
-                GL11.glColor3b((byte)0, (byte)0, (byte)255);
+            if (tile.deactivated) {
+                GL11.glColor3b((byte) 0, (byte) 0, (byte) 255);
             }
             model.renderAll();
-            for(int i = 0; i < BlockNode.nodes.size(); i++) {
+            for (int i = 0; i < BlockNode.nodes.size(); i++) {
                 MCNode node = BlockNode.nodes.get(i);
-                if(node.position.distanceTo(new Point3(tile.xCoord, tile.yCoord, tile.zCoord)) < 0.01) {
+                if (node.position.distanceTo(new Point3(tile.xCoord, tile.yCoord, tile.zCoord)) < 0.01) {
                     ArrayList<MCNode> links = node.linksTo;
-                    for(int j = 0; j < links.size(); j++) {
+                    for (int j = 0; j < links.size(); j++) {
                         GL11.glPushMatrix();
-                        if(links.get(j).isDisabled() || node.isDisabled() || !((List)node.neighbors()).contains(links.get(j))) {
-                            GL11.glColor3b((byte)0, (byte)0, (byte)255);
+                        if (links.get(j).isDisabled() || node.isDisabled() || !((List) node.neighbors()).contains(links.get(j))) {
+                            GL11.glColor3b((byte) 0, (byte) 0, (byte) 255);
                             GL11.glTranslated(0, 0.1, 0);
                         } else {
                             GL11.glColor3d(1, 1, 1);

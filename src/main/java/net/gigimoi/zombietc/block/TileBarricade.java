@@ -23,6 +23,7 @@ public class TileBarricade extends TileEntitySynced {
     public TileBarricade() {
         super();
     }
+
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         damage = tag.getInteger("Damage");
@@ -42,23 +43,24 @@ public class TileBarricade extends TileEntitySynced {
     public AxisAlignedBB getBoundsAround() {
         return AxisAlignedBB.getBoundingBox(xCoord - 0.5, yCoord - 0.5, zCoord - 0.5, xCoord + 1.5, yCoord + 1.5, zCoord + 1.5);
     }
+
     @Override
     public void updateEntity() {
-        if(damage < 5) {
+        if (damage < 5) {
             List<EntityZZombie> zombies = worldObj.getEntitiesWithinAABB(EntityZZombie.class, getBoundsAround());
-            if(zombies.size() > 0) {
+            if (zombies.size() > 0) {
                 ticker++;
-                if(ticker > 30) {
+                if (ticker > 30) {
                     damage++;
                     ticker = 0;
                 }
             }
         }
         playerTicker = Math.max(0, playerTicker - 1);
-        if(damage > 0 && worldObj.isRemote) {
-            if(worldObj.getEntitiesWithinAABB(EntityPlayer.class, getBoundsAround()).contains(Minecraft.getMinecraft().thePlayer)) {
+        if (damage > 0 && worldObj.isRemote) {
+            if (worldObj.getEntitiesWithinAABB(EntityPlayer.class, getBoundsAround()).contains(Minecraft.getMinecraft().thePlayer)) {
                 ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to repair" + (playerTicker == 0 ? "" : "..."));
-                if(playerTicker == 0 && Keyboard.isKeyDown(ClientProxy.activate.getKeyCode()) ) {
+                if (playerTicker == 0 && Keyboard.isKeyDown(ClientProxy.activate.getKeyCode())) {
                     playerTicker = 40;
                     ZombieTC.network.sendToServer(new MessageActivateRepairBarricade(xCoord, yCoord, zCoord));
                 }

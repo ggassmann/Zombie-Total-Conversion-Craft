@@ -10,6 +10,7 @@ import net.minecraft.world.World;
  */
 public class BlockSpawner extends BlockContainer {
     public static final BlockSpawner zombie = new BlockSpawner();
+
     protected BlockSpawner() {
         super(Material.dragonEgg);
         setBlockName("Spawner");
@@ -24,6 +25,7 @@ public class BlockSpawner extends BlockContainer {
     public boolean renderAsNormalBlock() {
         return false;
     }
+
     @Override
     public boolean isOpaqueCube() {
         return false;

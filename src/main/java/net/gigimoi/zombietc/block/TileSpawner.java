@@ -11,6 +11,7 @@ import java.util.Random;
  * Created by gigimoi on 7/14/2014.
  */
 public class TileSpawner extends TileEntity {
+    static Random _r = new Random();
     public String entityToSpawn = "";
 
     @Override
@@ -25,10 +26,9 @@ public class TileSpawner extends TileEntity {
         tag.setString("entity", entityToSpawn);
     }
 
-    static Random _r = new Random();
     @Override
     public void updateEntity() {
-        if(!worldObj.isRemote) {
+        if (!worldObj.isRemote) {
             GameManager.spawnPositions.add(new Vector3f(xCoord + 0.5f, yCoord + 1, zCoord + 0.5f));
             GameManager.worldsSpawnedTo.add(worldObj);
         }

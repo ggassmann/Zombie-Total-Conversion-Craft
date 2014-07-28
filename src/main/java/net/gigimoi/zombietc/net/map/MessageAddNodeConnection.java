@@ -15,11 +15,15 @@ import net.minecraft.util.Vec3;
 public class MessageAddNodeConnection implements IMessage {
     Vec3 first;
     Vec3 second;
-    public MessageAddNodeConnection() {}
+
+    public MessageAddNodeConnection() {
+    }
+
     public MessageAddNodeConnection(Vec3 v1, Vec3 v2) {
         first = v1;
         second = v2;
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         first = Vec3.createVectorHelper(
@@ -36,20 +40,21 @@ public class MessageAddNodeConnection implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt((int)first.xCoord);
-        buf.writeInt((int)first.yCoord);
-        buf.writeInt((int)first.zCoord);
-        buf.writeInt((int)second.xCoord);
-        buf.writeInt((int)second.yCoord);
-        buf.writeInt((int)second.zCoord);
+        buf.writeInt((int) first.xCoord);
+        buf.writeInt((int) first.yCoord);
+        buf.writeInt((int) first.zCoord);
+        buf.writeInt((int) second.xCoord);
+        buf.writeInt((int) second.yCoord);
+        buf.writeInt((int) second.zCoord);
     }
+
     public static class MessageAddNodeConnectionHandler implements IMessageHandler<MessageAddNodeConnection, MessageAddNodeConnection> {
 
         @Override
         public MessageAddNodeConnection onMessage(MessageAddNodeConnection message, MessageContext ctx) {
             BlockNode.addNodeConnection(message.first, message.second);
             ZombieTC.gameManager.regeneratePathMap();
-            if(ctx.side == Side.SERVER) {
+            if (ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }
             return null;

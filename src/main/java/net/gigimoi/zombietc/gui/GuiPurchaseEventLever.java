@@ -30,8 +30,7 @@ public class GuiPurchaseEventLever extends GuiScreen {
     }
 
     @Override
-    public void updateScreen()
-    {
+    public void updateScreen() {
         this.textFieldEvent.updateCursorCounter();
         this.textFieldPrice.updateCursorCounter();
         String text = this.textFieldPrice.getText();
@@ -62,11 +61,13 @@ public class GuiPurchaseEventLever extends GuiScreen {
         buttonList.clear();
         this.buttonList.add(done = new GuiButton(0, this.width / 2 - 4 - 150 / 2, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.done", new Object[0])));
     }
+
     @Override
     protected void keyTyped(char par1, int par2) {
         textFieldPrice.textboxKeyTyped(par1, par2);
         textFieldEvent.textboxKeyTyped(par1, par2);
     }
+
     @Override
     protected void mouseClicked(int par1, int par2, int par3) {
         super.mouseClicked(par1, par2, par3);
@@ -76,7 +77,7 @@ public class GuiPurchaseEventLever extends GuiScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        if(button == done) {
+        if (button == done) {
             ZombieTC.network.sendToServer(new MessageSetPurchaseEventLeverInfo(xCoord, yCoord, zCoord, textFieldEvent.getText(), Integer.parseInt(textFieldPrice.getText())));
             mc.displayGuiScreen(null);
         }

@@ -10,15 +10,18 @@ import org.lwjgl.input.Mouse;
 public class MouseManager {
     boolean leftPressed = false;
     boolean leftPressedLast = false;
+
     public boolean isLeftPressed() {
         return leftPressed && !leftPressedLast;
     }
+
     public boolean isLeftDown() {
         return leftPressed;
     }
+
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
-        if(event.phase == TickEvent.Phase.START) {
+        if (event.phase == TickEvent.Phase.START) {
             leftPressedLast = leftPressed;
             leftPressed = Mouse.isButtonDown(0);
         }

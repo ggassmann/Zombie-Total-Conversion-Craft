@@ -10,8 +10,8 @@ public class FireMechanism {
     public static final FireMechanism semiAutomatic = new FireMechanism() {
         @Override
         public boolean checkFire(ItemWeapon weaponType, ItemStack stack) {
-            if(ZombieTC.mouseManager.isLeftPressed()) {
-                if(stack.getTagCompound().getInteger("ShootCooldown") <= 0) {
+            if (ZombieTC.mouseManager.isLeftPressed()) {
+                if (stack.getTagCompound().getInteger("ShootCooldown") <= 0) {
                     return true;
                 }
             }
@@ -21,14 +21,15 @@ public class FireMechanism {
     public static final FireMechanism automatic = new FireMechanism() {
         @Override
         public boolean checkFire(ItemWeapon weaponType, ItemStack stack) {
-            if(ZombieTC.mouseManager.isLeftDown()) {
-                if(stack.getTagCompound().getInteger("ShootCooldown") <= 0) {
+            if (ZombieTC.mouseManager.isLeftDown()) {
+                if (stack.getTagCompound().getInteger("ShootCooldown") <= 0) {
                     return true;
                 }
             }
             return false;
         }
     };
+
     public boolean checkFire(ItemWeapon weaponType, ItemStack stack) {
         return false;
     }

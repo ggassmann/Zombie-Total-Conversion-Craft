@@ -11,8 +11,8 @@ import net.gigimoi.zombietc.proxy.ClientProxy;
 public class KeyManager {
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if(event.phase == TickEvent.Phase.END && event.side.isClient()) {
-            if(ClientProxy.activate.isPressed()) {
+        if (event.phase == TickEvent.Phase.END && event.side.isClient()) {
+            if (ClientProxy.activate.isPressed()) {
                 ZombieTC.gameManager.activating = true;
             } else {
                 ZombieTC.gameManager.activating = false;

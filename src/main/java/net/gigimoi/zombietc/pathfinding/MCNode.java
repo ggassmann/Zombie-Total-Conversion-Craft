@@ -15,9 +15,10 @@ public class MCNode implements Node<MCNode> {
     public Point3 position;
 
     public transient ArrayList<MCNode> linksTo;
-                                           //GameManager should have a
-                                           //method to reset all links.
-                                           //Reset links on editor mode toggle and join
+
+    //GameManager should have a
+    //method to reset all links.
+    //Reset links on editor mode toggle and join
     public MCNode() {
         this.linksTo = new ArrayList();
     }
@@ -39,12 +40,12 @@ public class MCNode implements Node<MCNode> {
 
     @Override
     public Iterable<MCNode> neighbors() {
-        if(isDisabled()) {
+        if (isDisabled()) {
             return new ArrayList<MCNode>();
         }
-        ArrayList<MCNode> links = (ArrayList<MCNode>)linksTo.clone();
-        for(int i = 0; i < links.size(); i++) {
-            if(links.get(i).isDisabled()) {
+        ArrayList<MCNode> links = (ArrayList<MCNode>) linksTo.clone();
+        for (int i = 0; i < links.size(); i++) {
+            if (links.get(i).isDisabled()) {
                 links.remove(i);
             }
         }
@@ -54,7 +55,7 @@ public class MCNode implements Node<MCNode> {
 
     public boolean isDisabled() {
         TileEntity tileRaw = ZombieTC.proxy.getWorld(Side.CLIENT).getTileEntity(position.xCoord, position.yCoord, position.zCoord);
-        TileNode tile = (TileNode)tileRaw;
+        TileNode tile = (TileNode) tileRaw;
         return tile == null || tile.deactivated;
     }
 }

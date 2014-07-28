@@ -18,9 +18,11 @@ public class MessagePrepareStaticVariables implements IMessage {
     @Override
     public void fromBytes(ByteBuf buf) {
     }
+
     @Override
     public void toBytes(ByteBuf buf) {
     }
+
     public static class MessagePrepareStaticVariablesHandler implements IMessageHandler<MessagePrepareStaticVariables, MessagePrepareStaticVariables> {
 
         @Override

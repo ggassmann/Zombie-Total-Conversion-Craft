@@ -31,17 +31,16 @@ import static org.lwjgl.opengl.GL11.glBindTexture;
  * Created by gigimoi on 7/24/2014.
  */
 public class GuiStartGame extends GuiScreen {
+    public final int CLOSE_BUTTON_ID = 600;
     public GuiScreen returnTo;
-
     public URL downloading = null;
-    boolean hasRenderedDownloading = false;
     public String mapName;
+    public GuiButton closebutton;
+    boolean hasRenderedDownloading = false;
     List<String> mapUrls = new ArrayList<String>();
     List<String> mapNames = new ArrayList<String>();
     List<Integer> mapThumbnailTextureNames = new ArrayList<Integer>();
 
-    public final int CLOSE_BUTTON_ID = 600;
-    public GuiButton closebutton;
     public GuiStartGame(GuiScreen screen) {
         returnTo = screen;
     }
@@ -50,16 +49,16 @@ public class GuiStartGame extends GuiScreen {
     public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         TextRenderHelper.drawString("Select a map:", width / 2, 2, TextAlignment.Center);
-        for(int i = 0; i < mapNames.size(); i++) {
+        for (int i = 0; i < mapNames.size(); i++) {
             TextRenderHelper.drawString(mapNames.get(i), width / 2 - 5, 64 + i * 30, TextAlignment.Left);
             glBindTexture(GL_TEXTURE_2D, mapThumbnailTextureNames.get(i));
             GL11.glPushMatrix();
-            GL11.glTranslated(width/2 - 110, 20 + i * 30, 0);
+            GL11.glTranslated(width / 2 - 110, 20 + i * 30, 0);
             GL11.glScaled(0.3, 0.3, 0.3);
             drawTexturedModalRect(0, 0, 0, 0, 250, 250);
             GL11.glPopMatrix();
         }
-        if(downloading != null) {
+        if (downloading != null) {
             TextRenderHelper.drawString("Downloading...", 0, 0, TextAlignment.Left);
             hasRenderedDownloading = true;
         }
@@ -73,12 +72,16 @@ public class GuiStartGame extends GuiScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        if(button == closebutton) {
+        if (button == closebutton) {
             Minecraft.getMinecraft().displayGuiScreen(returnTo);
         }
-        if(button.id >= 700) {
+        if (button.id >= 700) {
             URL map = null;
-            try { map = new URL(mapUrls.get(button.id - 700)); } catch (MalformedURLException e) {e.printStackTrace(); }
+            try {
+                map = new URL(mapUrls.get(button.id - 700));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
             downloading = map;
             mapName = mapNames.get(button.id - 700);
         }
@@ -96,26 +99,26 @@ public class GuiStartGame extends GuiScreen {
         try {
             URL url = new URL("https://raw.githubusercontent.com/gigimoi/Zombie-Total-Conversion-Craft/master/maps/maps.txt");
             FileUtils.copyURLToFile(url, new File("tmp"));
-            mapsList = (ArrayList<String>)FileUtils.readLines(new File("tmp"));
+            mapsList = (ArrayList<String>) FileUtils.readLines(new File("tmp"));
             FileUtils.forceDelete(new File("tmp"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(int i = 0; i < mapsList.size(); i++) {
+        for (int i = 0; i < mapsList.size(); i++) {
             String mapName = mapsList.get(i).substring(0, mapsList.get(i).lastIndexOf(":"));
             mapName = mapName.substring(0, mapName.lastIndexOf(":"));
             buttonList.add(new GuiButton(700 + i, width / 2 - 10, 72 + i * 30, 150, 20, "Play"));
             mapUrls.add(mapsList.get(i).substring(mapName.length() + 1));
             mapNames.add(mapName);
             File thumbnail = new File(".imagecache/" + mapName + ".png");
-            if(!thumbnail.exists()) {
+            if (!thumbnail.exists()) {
                 try {
                     FileUtils.copyURLToFile(new URL("https://raw.githubusercontent.com/gigimoi/Zombie-Total-Conversion-Craft/master/maps/" + mapName.replace(" ", "%20") + ".png"), thumbnail);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if(thumbnail.exists()) {
+            if (thumbnail.exists()) {
                 mapThumbnailTextureNames.add(loadPNGTexture(thumbnail.getAbsolutePath(), GL13.GL_TEXTURE0));
             }
         }
@@ -124,7 +127,7 @@ public class GuiStartGame extends GuiScreen {
     @Override
     public void updateScreen() {
         super.updateScreen();
-        if(downloading != null && hasRenderedDownloading == true) {
+        if (downloading != null && hasRenderedDownloading == true) {
             try {
                 FileUtils.copyURLToFile(downloading, new File("tmpmap"));
                 ZipFile zipFile = new ZipFile("tmpmap");
@@ -149,6 +152,7 @@ public class GuiStartGame extends GuiScreen {
     public boolean doesGuiPauseGame() {
         return false;
     }
+
     private int loadPNGTexture(String filename, int textureUnit) {
         ByteBuffer buf = null;
         int tWidth = 0;

@@ -20,41 +20,46 @@ public class MessageShoot implements IMessage {
     public Entity shooter;
     public Entity hit;
     public Item weapon;
-    public MessageShoot() { }
+
+    public MessageShoot() {
+    }
+
     public MessageShoot(Entity shooter, Entity hit, Item weapon) {
         this.shooter = shooter;
         this.weapon = weapon;
         this.hit = hit;
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         shooter = ZombieTC.proxy.getWorld(Side.SERVER).getEntityByID(buf.readInt());
         hit = ZombieTC.proxy.getWorld(Side.SERVER).getEntityByID(buf.readInt());
         weapon = Item.getItemById(buf.readInt());
     }
+
     @Override
     public void toBytes(ByteBuf buf) {
-        if(shooter != null) {
+        if (shooter != null) {
             buf.writeInt(shooter.getEntityId());
         } else {
             buf.writeInt(-1);
         }
-        if(hit != null) {
+        if (hit != null) {
             buf.writeInt(hit.getEntityId());
-        }
-        else {
+        } else {
             buf.writeInt(-1);
         }
         buf.writeInt(Item.getIdFromItem(weapon));
     }
+
     public static class MessageShootHandler implements IMessageHandler<MessageShoot, MessageShoot> {
         @Override
         public MessageShoot onMessage(MessageShoot message, MessageContext ctx) {
-            World world = ((EntityLivingBase)message.shooter).worldObj;
-            if(message.hit != null && message.shooter != null) {
-                message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon)message.weapon).getBulletDamage());
+            World world = ((EntityLivingBase) message.shooter).worldObj;
+            if (message.hit != null && message.shooter != null) {
+                message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon) message.weapon).getBulletDamage());
             }
-            if(ctx.side == Side.SERVER) {
+            if (ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }
             return null;

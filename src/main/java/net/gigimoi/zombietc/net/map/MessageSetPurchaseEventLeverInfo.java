@@ -18,7 +18,10 @@ public class MessageSetPurchaseEventLeverInfo implements IMessage {
     int z;
     String event;
     int price;
-    public MessageSetPurchaseEventLeverInfo() { }
+
+    public MessageSetPurchaseEventLeverInfo() {
+    }
+
     public MessageSetPurchaseEventLeverInfo(int x, int y, int z, String event, int price) {
         this.x = x;
         this.y = y;
@@ -26,6 +29,7 @@ public class MessageSetPurchaseEventLeverInfo implements IMessage {
         this.event = event;
         this.price = price;
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         x = buf.readInt();
@@ -43,13 +47,14 @@ public class MessageSetPurchaseEventLeverInfo implements IMessage {
         ByteBufHelper.writeString(event, buf);
         buf.writeInt(price);
     }
+
     public static class MessageSetPurchaseEventLeverInfoHandler implements IMessageHandler<MessageSetPurchaseEventLeverInfo, MessageSetPurchaseEventLeverInfo> {
         @Override
         public MessageSetPurchaseEventLeverInfo onMessage(MessageSetPurchaseEventLeverInfo message, MessageContext ctx) {
             TilePurchaseEventLever leverTile = (TilePurchaseEventLever) ZombieTC.proxy.getWorld(ctx.side).getTileEntity(message.x, message.y, message.z);
             leverTile.setPrice(message.price);
             leverTile.event = message.event;
-            if(ctx.side == Side.SERVER) {
+            if (ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }
             return null;

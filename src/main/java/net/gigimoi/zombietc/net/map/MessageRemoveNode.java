@@ -14,10 +14,14 @@ import net.minecraft.util.Vec3;
  */
 public class MessageRemoveNode implements IMessage {
     Vec3 pos;
-    public MessageRemoveNode() {}
+
+    public MessageRemoveNode() {
+    }
+
     public MessageRemoveNode(int x, int y, int z) {
         pos = Vec3.createVectorHelper(x, y, z);
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         pos = Vec3.createVectorHelper(buf.readInt(), buf.readInt(), buf.readInt());
@@ -25,16 +29,17 @@ public class MessageRemoveNode implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt((int)pos.xCoord);
-        buf.writeInt((int)pos.yCoord);
-        buf.writeInt((int)pos.zCoord);
+        buf.writeInt((int) pos.xCoord);
+        buf.writeInt((int) pos.yCoord);
+        buf.writeInt((int) pos.zCoord);
     }
+
     public static class MessageRemoveNodeHandler implements IMessageHandler<MessageRemoveNode, MessageRemoveNode> {
         @Override
         public MessageRemoveNode onMessage(MessageRemoveNode message, MessageContext ctx) {
             BlockNode.removeNodeAt(message.pos.xCoord, message.pos.yCoord, message.pos.zCoord);
             ZombieTC.gameManager.regeneratePathMap();
-            if(ctx.side == Side.SERVER) {
+            if (ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }
             return null;

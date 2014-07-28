@@ -13,9 +13,11 @@ public class MessageRegeneratePathMap implements IMessage {
     @Override
     public void fromBytes(ByteBuf buf) {
     }
+
     @Override
     public void toBytes(ByteBuf buf) {
     }
+
     public static class MessageRegeneratePathMapHandler implements IMessageHandler<MessageRegeneratePathMap, MessageRegeneratePathMap> {
         @Override
         public MessageRegeneratePathMap onMessage(MessageRegeneratePathMap message, MessageContext ctx) {

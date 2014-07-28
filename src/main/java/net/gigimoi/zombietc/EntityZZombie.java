@@ -22,6 +22,13 @@ import java.util.Random;
  * Created by gigimoi on 7/14/2014.
  */
 public class EntityZZombie extends EntityZombie {
+    static Random _r = new Random();
+    double targetX;
+    double targetY;
+    double targetZ;
+    boolean hasSetDefaultTarget = false;
+    boolean yieldingToOtherZombie = false;
+    MCNode lastPassed;
     public EntityZZombie(World world) {
         super(world);
         this.tasks.taskEntries = new ArrayList();
@@ -33,54 +40,44 @@ public class EntityZZombie extends EntityZombie {
 
     @Override
     public void setFire(int duration) {
-        if(duration == 8) {
+        if (duration == 8) {
             return;
         }
         super.setFire(duration);
     }
 
-    static Random _r = new Random();
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ZombieTC.gameManager.wave * 2 + 4);
     }
-    double targetX;
-    double targetY;
-    double targetZ;
-    boolean hasSetDefaultTarget = false;
-
-    boolean yieldingToOtherZombie = false;
-
-    MCNode lastPassed;
 
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if(ZombieTC.editorModeManager.enabled) {
+        if (ZombieTC.editorModeManager.enabled) {
             isDead = true;
         } else {
-            if(!yieldingToOtherZombie) {
+            if (!yieldingToOtherZombie) {
                 move();
             } else {
                 yieldingToOtherZombie = false;
             }
-            if(!isDead && this.getHealth() > 0) {
+            if (!isDead && this.getHealth() > 0) {
                 EntityPlayer nearest = worldObj.getClosestPlayerToEntity(this, Int.MaxValue());
-                if(nearest != null && Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(nearest.posX, nearest.posY, nearest.posZ)) < 1.5) {
+                if (nearest != null && Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(nearest.posX, nearest.posY, nearest.posZ)) < 1.5) {
                     nearest.attackEntityFrom(
                             new DamageSource("Zombie"), 2
                     );
                 }
-            }
-            else {
+            } else {
                 this.setSize(0.0F, 0.0F);
             }
         }
     }
 
     private void move() {
-        if(!hasSetDefaultTarget) {
+        if (!hasSetDefaultTarget) {
             targetX = posX;
             targetY = posY;
             targetZ = posZ;
@@ -97,43 +94,41 @@ public class EntityZZombie extends EntityZombie {
         }
         */
         getMoveHelper().setMoveTo(targetX, targetY, targetZ, ZombieTC.gameManager.wave > 4 ? 1.2f : 0.9f);
-        if(targetY > posY) {
+        if (targetY > posY) {
             getJumpHelper().setJumping();
         }
-        if(_r.nextInt(10) == 5 || Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(targetX, targetY, targetZ)) < 0.5) {
+        if (_r.nextInt(10) == 5 || Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(targetX, targetY, targetZ)) < 0.5) {
             resetTarget();
         }
     }
 
     private void resetTarget() {
         EntityPlayer player = worldObj.getClosestPlayerToEntity(this, Double.MAX_VALUE);
-        if(player != null) {
+        if (player != null) {
             Vec3 playerPos = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
             Vec3 pos = Vec3.createVectorHelper(posX, posY, posZ);
-            if(playerPos.distanceTo(pos) < 1 && getEntitySenses().canSee(player)) {
+            if (playerPos.distanceTo(pos) < 1 && getEntitySenses().canSee(player)) {
                 targetX = player.posX;
                 targetY = player.posY;
                 targetZ = player.posZ;
-            }
-            else {
+            } else {
                 ArrayList<MCNode> goal = new ArrayList();
                 goal.add(BlockNode.getClosestToPosition(worldObj, playerPos, false));
                 MCNode start = BlockNode.getClosestToPosition(worldObj, pos, false);
-                if(start != null && goal.get(0) != null && BlockNode.nodes != null) {
+                if (start != null && goal.get(0) != null && BlockNode.nodes != null) {
                     List<MCNode> path = new Dijkstra<MCNode>().findPath(BlockNode.nodes, start, goal);
-                    if(path != null) {
-                        if(path.get(0).position.toVec3().addVector(0.5, 0, 0.5).distanceTo(Vec3.createVectorHelper(posX, posY, posZ)) < 0.1) {
+                    if (path != null) {
+                        if (path.get(0).position.toVec3().addVector(0.5, 0, 0.5).distanceTo(Vec3.createVectorHelper(posX, posY, posZ)) < 0.1) {
                             lastPassed = path.get(0);
                         }
-                        if(lastPassed == path.get(0)) {
-                            if(path.size() > 1) {
+                        if (lastPassed == path.get(0)) {
+                            if (path.size() > 1) {
                                 targetX = path.get(1).position.xCoord + 0.5;
                                 targetY = path.get(1).position.yCoord;
                                 targetZ = path.get(1).position.zCoord + 0.5;
                             }
-                        }
-                        else {
-                            if(path.size() > 0) {
+                        } else {
+                            if (path.size() > 0) {
                                 targetX = path.get(0).position.xCoord + 0.5;
                                 targetY = path.get(0).position.yCoord;
                                 targetZ = path.get(0).position.zCoord + 0.5;

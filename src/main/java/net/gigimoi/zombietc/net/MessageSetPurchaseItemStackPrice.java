@@ -18,7 +18,9 @@ public class MessageSetPurchaseItemStackPrice implements IMessage {
     public int z;
     public int price;
 
-    public MessageSetPurchaseItemStackPrice() {}
+    public MessageSetPurchaseItemStackPrice() {
+    }
+
     public MessageSetPurchaseItemStackPrice(int x, int y, int z, int price) {
         this.x = x;
         this.y = y;
@@ -41,15 +43,16 @@ public class MessageSetPurchaseItemStackPrice implements IMessage {
         buf.writeInt(z);
         buf.writeInt(price);
     }
+
     public static class MessageSetPurchaseItemStackPriceHandler implements IMessageHandler<MessageSetPurchaseItemStackPrice, MessageSetPurchaseItemStackPrice> {
         @Override
         public MessageSetPurchaseItemStackPrice onMessage(MessageSetPurchaseItemStackPrice message, MessageContext ctx) {
             TileEntity tileraw = ZombieTC.proxy.getWorld(ctx.side).getTileEntity(message.x, message.y, message.z);
-            if(tileraw != null && tileraw.getClass() == TilePurchaseItemStack.class) {
-                TilePurchaseItemStack tile = (TilePurchaseItemStack)tileraw;
+            if (tileraw != null && tileraw.getClass() == TilePurchaseItemStack.class) {
+                TilePurchaseItemStack tile = (TilePurchaseItemStack) tileraw;
                 tile.setPrice(message.price);
             }
-            if(ctx.side == Side.SERVER) {
+            if (ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }
             return null;

@@ -14,39 +14,6 @@ import java.util.Map;
  */
 public class AStar<T extends Node<T>> extends AbstractPathFinder<T> {
 
-    private class State extends NodeState<T> implements Comparable<State> {
-
-        private final double costFromStart;
-        private final double costToGoal;
-
-        private State(T node, double costFromStart, State parent, Collection<T> goals) {
-            super(node, parent);
-            this.costFromStart = costFromStart;
-            costToGoal = minimumPathCostEstimate(node, goals);
-        }
-
-        private double minimumPathCostEstimate(T node, Collection<T> goals) {
-            double min = Double.MAX_VALUE;
-            for (T goal : goals) {
-                double cost = node.pathCostEstimate(goal);
-                if (cost < min) {
-                    min = cost;
-                }
-            }
-
-            return min;
-        }
-
-        private double totalCost() {
-            return costFromStart + costToGoal;
-        }
-
-        public int compareTo(State other) {
-            return (int)(totalCost() - other.totalCost());
-        }
-
-    }
-
     public List<T> findPath(Collection<T> graph, T start, Collection<T> goals) {
         canceled = false;
         Map<T, State> open = new HashMap<T, State>();
@@ -100,6 +67,39 @@ public class AStar<T extends Node<T>> extends AbstractPathFinder<T> {
 
     public String name() {
         return "A*";
+    }
+
+    private class State extends NodeState<T> implements Comparable<State> {
+
+        private final double costFromStart;
+        private final double costToGoal;
+
+        private State(T node, double costFromStart, State parent, Collection<T> goals) {
+            super(node, parent);
+            this.costFromStart = costFromStart;
+            costToGoal = minimumPathCostEstimate(node, goals);
+        }
+
+        private double minimumPathCostEstimate(T node, Collection<T> goals) {
+            double min = Double.MAX_VALUE;
+            for (T goal : goals) {
+                double cost = node.pathCostEstimate(goal);
+                if (cost < min) {
+                    min = cost;
+                }
+            }
+
+            return min;
+        }
+
+        private double totalCost() {
+            return costFromStart + costToGoal;
+        }
+
+        public int compareTo(State other) {
+            return (int) (totalCost() - other.totalCost());
+        }
+
     }
 
 }

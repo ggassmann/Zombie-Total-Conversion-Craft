@@ -44,31 +44,35 @@ public class BlockBarricade extends BlockContainer {
     public boolean isBlockSolid(IBlockAccess access, int x, int y, int z, int meta) {
         return false;
     }
+
     @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List mask, Entity entity) {
-        if(entity != null) {
-            if(entity.getClass() == EntityZZombie.class) {
-                if(((TileBarricade)world.getTileEntity(x, y, z)).damage == 5) {
+        if (entity != null) {
+            if (entity.getClass() == EntityZZombie.class) {
+                if (((TileBarricade) world.getTileEntity(x, y, z)).damage == 5) {
                     return;
                 }
                 super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
             } else {
-                if(!ZombieTC.editorModeManager.enabled) {
+                if (!ZombieTC.editorModeManager.enabled) {
                     super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
                 }
             }
         } else {
-            super.addCollisionBoxesToList(world, x, y ,z, aabb, mask, entity);
+            super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
         }
     }
+
     @Override
     public boolean isOpaqueCube() {
         return false;
     }
+
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
         super.setBlockBoundsBasedOnState(access, x, y, z);
     }
+
     @Override
     public boolean renderAsNormalBlock() {
         return false;
@@ -85,12 +89,13 @@ public class BlockBarricade extends BlockContainer {
         GameManager.blockBarricades.add(new Point3(x, y, z));
         ZombieTC.network.sendToAll(new MessageAddBarricade(x, y, z));
     }
+
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int side) {
         super.breakBlock(world, x, y, z, block, side);
-        for(int i = 0; i < GameManager.blockBarricades.size(); i++) {
+        for (int i = 0; i < GameManager.blockBarricades.size(); i++) {
             Point3 vec = GameManager.blockBarricades.get(i);
-            if(vec.distanceTo(new Point3(x, y, z)) < 0.01) {
+            if (vec.distanceTo(new Point3(x, y, z)) < 0.01) {
                 GameManager.blockBarricades.remove(i);
             }
         }

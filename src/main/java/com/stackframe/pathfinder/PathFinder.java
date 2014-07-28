@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * An interface implemented by classes that provide a mechanism to find routes between nodes.
- *
+ * <p/>
  * When the path has been found or all possible paths have been exhausted, a {@link PathEvent} will be sent.
  *
  * @author Gene McCulley

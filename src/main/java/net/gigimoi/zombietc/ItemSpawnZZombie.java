@@ -10,19 +10,21 @@ import net.minecraft.world.World;
  */
 public class ItemSpawnZZombie extends Item {
     static ItemSpawnZZombie _instance;
-    public static ItemSpawnZZombie instance() {
-        if(_instance == null) {
-            _instance = new ItemSpawnZZombie();
-        }
-        return _instance;
-    }
+
     ItemSpawnZZombie() {
         setUnlocalizedName("[DEBUG]Spawn Z Zombie");
     }
 
+    public static ItemSpawnZZombie instance() {
+        if (_instance == null) {
+            _instance = new ItemSpawnZZombie();
+        }
+        return _instance;
+    }
+
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if(world.isRemote) {
+        if (world.isRemote) {
             return stack;
         }
         EntityZZombie zombie = new EntityZZombie(world);

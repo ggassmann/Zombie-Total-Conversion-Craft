@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 /**
  * Created by gigimoi on 7/21/2014.
  */
-public class TilePurchaseItemStack extends TileEntity implements ITileEntityActivatable, ITileEntityPurchasable{
+public class TilePurchaseItemStack extends TileEntity implements ITileEntityActivatable, ITileEntityPurchasable {
     public ItemStack itemStack;
     int price = 100;
 
@@ -31,7 +31,7 @@ public class TilePurchaseItemStack extends TileEntity implements ITileEntityActi
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
-        if(itemStack != null) {
+        if (itemStack != null) {
             NBTTagCompound stackTag = new NBTTagCompound();
             itemStack.writeToNBT(stackTag);
             tag.setTag("ItemStack", stackTag);
@@ -39,6 +39,7 @@ public class TilePurchaseItemStack extends TileEntity implements ITileEntityActi
         tag.setInteger("Price", price);
         super.writeToNBT(tag);
     }
+
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound tagCompound = new NBTTagCompound();
@@ -55,20 +56,20 @@ public class TilePurchaseItemStack extends TileEntity implements ITileEntityActi
     @Override
     public void activate(Entity activator, Side side) {
         System.out.println(activator.getClass());
-        if(side.isServer() && activator.getClass() == EntityPlayerMP.class) {
+        if (side.isServer() && activator.getClass() == EntityPlayerMP.class) {
             EntityPlayer player = (EntityPlayer) activator;
             player.inventory.addItemStackToInventory(itemStack.copy());
         }
     }
 
     @Override
-    public void setPrice(int value) {
-        price = value;
+    public int getPrice() {
+        return price;
     }
 
     @Override
-    public int getPrice() {
-        return price;
+    public void setPrice(int value) {
+        price = value;
     }
 
     @Override

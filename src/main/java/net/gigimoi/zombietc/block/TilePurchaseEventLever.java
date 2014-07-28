@@ -14,9 +14,9 @@ import net.minecraft.util.AxisAlignedBB;
  * Created by gigimoi on 7/26/2014.
  */
 public class TilePurchaseEventLever extends TileEntitySynced implements ITileEntityActivatable, ITileEntityPurchasable {
+    public String event;
     boolean isDown;
     int price = 500;
-    public String event;
 
     public AxisAlignedBB getPurchaseBounds() {
         return AxisAlignedBB.getBoundingBox(xCoord + 0.1, yCoord - 1, zCoord + 0.1, xCoord + 0.9, yCoord + 1.9, zCoord + 0.9);
@@ -41,7 +41,7 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
 
     @Override
     public void updateEntity() {
-        if(ZombieTC.editorModeManager.enabled && isDown) {
+        if (ZombieTC.editorModeManager.enabled && isDown) {
             activate(null, Side.SERVER);
             isDown = false;
         }
@@ -49,15 +49,14 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
 
     @Override
     public void activate(Entity activator, Side side) {
-        if(activator != null) {
+        if (activator != null) {
             GameManager.currentEvents.add(event);
         }
         isDown = true;
         //Copypasta from BlockLever.onBlockActivated
         if (worldObj.isRemote) {
             return;
-        }
-        else {
+        } else {
             int i1 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
             int j1 = i1 & 7;
             int k1 = 8 - (i1 & 8);
@@ -67,35 +66,30 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
 
             if (j1 == 1) {
                 worldObj.notifyBlocksOfNeighborChange(xCoord - 1, yCoord, zCoord, BlockPurchaseEventLever.instance);
-            }
-            else if (j1 == 2) {
+            } else if (j1 == 2) {
                 worldObj.notifyBlocksOfNeighborChange(xCoord + 1, yCoord, zCoord, BlockPurchaseEventLever.instance);
-            }
-            else if (j1 == 3) {
+            } else if (j1 == 3) {
                 worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord - 1, BlockPurchaseEventLever.instance);
-            }
-            else if (j1 == 4) {
+            } else if (j1 == 4) {
                 worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord + 1, BlockPurchaseEventLever.instance);
-            }
-            else if (j1 != 5 && j1 != 6) {
+            } else if (j1 != 5 && j1 != 6) {
                 if (j1 == 0 || j1 == 7) {
                     worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord + 1, zCoord, BlockPurchaseEventLever.instance);
                 }
-            }
-            else {
+            } else {
                 worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, BlockPurchaseEventLever.instance);
             }
         }
     }
 
     @Override
-    public void setPrice(int value) {
-        price = value;
+    public int getPrice() {
+        return price;
     }
 
     @Override
-    public int getPrice() {
-        return price;
+    public void setPrice(int value) {
+        price = value;
     }
 
     @Override

@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
  */
 public class TextureHelper {
     public static void bindTexture(ResourceLocation location) {
-        if(TileEntityRendererDispatcher.instance != null && TileEntityRendererDispatcher.instance.field_147553_e != null) {
+        if (TileEntityRendererDispatcher.instance != null && TileEntityRendererDispatcher.instance.field_147553_e != null) {
             TileEntityRendererDispatcher.instance.field_147553_e.bindTexture(location);
         }
     }

@@ -16,34 +16,34 @@ import org.lwjgl.opengl.GL11;
 public class TileRendererPurchaseItemstack extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileraw, double x, double y, double z, float par5) {
-        TilePurchaseItemStack tile = (TilePurchaseItemStack)tileraw;
+        TilePurchaseItemStack tile = (TilePurchaseItemStack) tileraw;
         ForgeDirection side = ForgeDirection.getOrientation(tile.getWorldObj().getBlockMetadata(tile.xCoord, tile.yCoord, tile.zCoord));
         GL11.glPushMatrix();
         GL11.glTranslated(x, y + 0.6, z);
-        if(side == ForgeDirection.NORTH) {
+        if (side == ForgeDirection.NORTH) {
             GL11.glRotated(90, 0, 1, 0);
             GL11.glTranslated(-0.9, 0, 0.5);
         }
-        if(side == ForgeDirection.WEST) {
+        if (side == ForgeDirection.WEST) {
             GL11.glTranslated(0.9, 0, 0.5);
         }
-        if(side == ForgeDirection.EAST) {
+        if (side == ForgeDirection.EAST) {
             GL11.glTranslated(0.1, 0, 0.5);
         }
-        if(side == ForgeDirection.SOUTH) {
+        if (side == ForgeDirection.SOUTH) {
             GL11.glRotated(-90, 0, 1, 0);
             GL11.glTranslated(0.1, 0, -0.5);
         }
-        if(tile.itemStack != null) {
+        if (tile.itemStack != null) {
             GL11.glRotated(45, 0, 1, 0);
             ItemWeapon itemWeapon = (ItemWeapon) tile.itemStack.getItem();
             GL11.glScaled(itemWeapon.inventoryScale, itemWeapon.inventoryScale, itemWeapon.inventoryScale);
             itemWeapon.renderItem(IItemRenderer.ItemRenderType.ENTITY, tile.itemStack);
-        }  else {
+        } else {
             GL11.glScaled(0.1, 0.1, 0.1);
             GL11.glRotated(90, 0, 0, 1);
             GL11.glRotated(-90, 0, 1, 0);
-            if(side == ForgeDirection.WEST) {
+            if (side == ForgeDirection.WEST) {
                 GL11.glRotated(180, 0, 0, 1);
             }
             bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/blocks/Purchase Itemstack.png"));

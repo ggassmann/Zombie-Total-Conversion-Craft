@@ -18,13 +18,17 @@ public class MessageChangeNodeEventWaitFor implements IMessage {
     int y;
     int z;
     String event;
-    public MessageChangeNodeEventWaitFor() { }
+
+    public MessageChangeNodeEventWaitFor() {
+    }
+
     public MessageChangeNodeEventWaitFor(int x, int y, int z, String event) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.event = event;
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         x = buf.readInt();
@@ -32,6 +36,7 @@ public class MessageChangeNodeEventWaitFor implements IMessage {
         z = buf.readInt();
         event = ByteBufHelper.readString(buf);
     }
+
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(x);
@@ -39,16 +44,17 @@ public class MessageChangeNodeEventWaitFor implements IMessage {
         buf.writeInt(z);
         ByteBufHelper.writeString(event, buf);
     }
+
     public static class MessageChangeNodeEventWaitForHandler implements IMessageHandler<MessageChangeNodeEventWaitFor, MessageChangeNodeEventWaitFor> {
         @Override
         public MessageChangeNodeEventWaitFor onMessage(MessageChangeNodeEventWaitFor message, MessageContext ctx) {
             World world = ZombieTC.proxy.getWorld(ctx.side);
             TileNode tile = (TileNode) world.getTileEntity(message.x, message.y, message.z);
             tile.eventWaitFor = message.event;
-            if(message.event == "") {
+            if (message.event == "") {
                 tile.deactivatedUntilEvent = true;
             }
-            if(ctx.side == Side.SERVER) {
+            if (ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }
             return null;

@@ -16,21 +16,6 @@ import java.util.Map.Entry;
  */
 public class Dijkstra<T extends Node<T>> extends AbstractPathFinder<T> {
 
-    private class State extends NodeState<T> implements Comparable<State> {
-
-        private double dist;
-
-        private State(T node, State parent, double dist) {
-            super(node, parent);
-            this.dist = dist;
-        }
-
-        public int compareTo(State other) {
-            return (int)(dist - other.dist);
-        }
-
-    }
-
     public List<T> findPath(Collection<T> graph, T start, Collection<T> goals) {
         canceled = false;
         final Map<T, State> states = new HashMap<T, State>();
@@ -86,6 +71,21 @@ public class Dijkstra<T extends Node<T>> extends AbstractPathFinder<T> {
 
     public String name() {
         return "Dijkstra";
+    }
+
+    private class State extends NodeState<T> implements Comparable<State> {
+
+        private double dist;
+
+        private State(T node, State parent, double dist) {
+            super(node, parent);
+            this.dist = dist;
+        }
+
+        public int compareTo(State other) {
+            return (int) (dist - other.dist);
+        }
+
     }
 
 }

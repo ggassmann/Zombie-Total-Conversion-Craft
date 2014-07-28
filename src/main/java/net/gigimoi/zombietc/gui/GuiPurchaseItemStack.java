@@ -27,8 +27,7 @@ public class GuiPurchaseItemStack extends GuiScreen {
     }
 
     @Override
-    public void updateScreen()
-    {
+    public void updateScreen() {
         this.priceTextField.updateCursorCounter();
         String text = this.priceTextField.getText();
         text = text.replaceAll("[^\\d]", "");
@@ -48,25 +47,25 @@ public class GuiPurchaseItemStack extends GuiScreen {
         priceTextField = new GuiTextField(this.fontRendererObj, this.width / 2 - 150, 50, 300, 20);
         priceTextField.setMaxStringLength(Integer.MAX_VALUE);
         priceTextField.setFocused(true);
-        priceTextField.setText(((TilePurchaseItemStack)mc.theWorld.getTileEntity(xCoord, yCoord, zCoord)).getPrice() + "");
+        priceTextField.setText(((TilePurchaseItemStack) mc.theWorld.getTileEntity(xCoord, yCoord, zCoord)).getPrice() + "");
         buttonList.clear();
         this.buttonList.add(done = new GuiButton(0, this.width / 2 - 4 - 150 / 2, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.done", new Object[0])));
     }
+
     @Override
-    protected void keyTyped(char par1, int par2)
-    {
+    protected void keyTyped(char par1, int par2) {
         this.priceTextField.textboxKeyTyped(par1, par2);
     }
+
     @Override
-    protected void mouseClicked(int par1, int par2, int par3)
-    {
+    protected void mouseClicked(int par1, int par2, int par3) {
         super.mouseClicked(par1, par2, par3);
         this.priceTextField.mouseClicked(par1, par2, par3);
     }
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        if(button == done) {
+        if (button == done) {
             ZombieTC.network.sendToServer(new MessageSetPurchaseItemStackPrice(xCoord, yCoord, zCoord, Integer.parseInt(priceTextField.getText())));
             mc.displayGuiScreen(null);
         }

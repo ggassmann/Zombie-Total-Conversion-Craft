@@ -16,14 +16,16 @@ import net.minecraft.item.ItemStack;
 public class MessageReload implements IMessage {
     EntityPlayer reloader;
 
-    public MessageReload() { }
+    public MessageReload() {
+    }
+
     public MessageReload(EntityPlayer reloader) {
         this.reloader = reloader;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        reloader = (EntityPlayer)ZombieTC.proxy.getWorld(Side.SERVER).getEntityByID(buf.readInt());
+        reloader = (EntityPlayer) ZombieTC.proxy.getWorld(Side.SERVER).getEntityByID(buf.readInt());
     }
 
     @Override
@@ -35,9 +37,9 @@ public class MessageReload implements IMessage {
         @Override
         public MessageReload onMessage(MessageReload message, MessageContext ctx) {
             ItemStack stack = message.reloader.getHeldItem();
-            if(stack != null && stack.getItem().getClass() == ItemWeapon.class) {
+            if (stack != null && stack.getItem().getClass() == ItemWeapon.class) {
                 stack.getTagCompound().setInteger("Reload Timer", ((ItemWeapon) message.reloader.getHeldItem().getItem()).reloadTime);
-                if(ctx.side == Side.SERVER) {
+                if (ctx.side == Side.SERVER) {
                     ZombieTC.network.sendToAll(message);
                 }
             }

@@ -13,17 +13,18 @@ import net.minecraftforge.client.event.GuiScreenEvent;
  */
 public class MainGuiOverrideManager {
     public static final int BUTTON_ID_NEW_GAME = 500;
+
     @SubscribeEvent
     public void onInitGui(GuiScreenEvent.InitGuiEvent.Post event) {
-        if(event.gui.getClass() == GuiMainMenu.class && event.buttonList.size() > 0) {
-            GuiButton button = (GuiButton)event.buttonList.get(0);
+        if (event.gui.getClass() == GuiMainMenu.class && event.buttonList.size() > 0) {
+            GuiButton button = (GuiButton) event.buttonList.get(0);
             button.displayString = "Continue";
             button.width /= 2;
             button.width -= 2;
             GuiButton buttonNewGame = new GuiButton(BUTTON_ID_NEW_GAME, button.xPosition + button.width + 4, button.yPosition, button.width, button.height, "New Game");
             event.buttonList.add(buttonNewGame);
         }
-        if(event.gui.getClass() == GuiSelectWorld.class && event.buttonList.size() > 0) {
+        if (event.gui.getClass() == GuiSelectWorld.class && event.buttonList.size() > 0) {
             event.buttonList.remove(4);
             GuiButton cancelButton = (GuiButton) event.buttonList.get(4);
             cancelButton.xPosition -= cancelButton.width + 6;
@@ -31,10 +32,11 @@ public class MainGuiOverrideManager {
             cancelButton.width += 6;
         }
     }
+
     @SubscribeEvent
     public void onGuiActivate(GuiScreenEvent.ActionPerformedEvent.Pre event) {
-        if(event.gui.getClass() == GuiMainMenu.class) {
-            if(event.button.id == BUTTON_ID_NEW_GAME) {
+        if (event.gui.getClass() == GuiMainMenu.class) {
+            if (event.button.id == BUTTON_ID_NEW_GAME) {
                 Minecraft.getMinecraft().displayGuiScreen(new GuiStartGame(event.gui));
             }
         }

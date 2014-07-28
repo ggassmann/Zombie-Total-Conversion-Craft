@@ -27,33 +27,18 @@ public class ZombieTC {
     public static final String MODID = "zombietc";
     public static final String VERSION = "0.2";
     public static final String NETWORK_CHANNEL = "channel_zombie_tc";
-
+    public static final CreativeTabs tab = new CreativeTabsExt("Zombie Total Conversion");
     @Mod.Instance("zombietc")
     public static ZombieTC instance;
-
     public static SimpleNetworkWrapper network;
-
     public static GameManager gameManager;
     public static EditorModeManager editorModeManager;
     public static MouseManager mouseManager;
     public static KeyManager keyManager;
     public static ScoreboardManager scoreboardManager;
     public static MainGuiOverrideManager mainGuiOverrideManager;
-
-    @SidedProxy(clientSide="net.gigimoi.zombietc.proxy.ClientProxy", serverSide="net.gigimoi.zombietc.proxy.CommonProxy")
+    @SidedProxy(clientSide = "net.gigimoi.zombietc.proxy.ClientProxy", serverSide = "net.gigimoi.zombietc.proxy.CommonProxy")
     public static CommonProxy proxy;
-
-    public static final CreativeTabs tab = new CreativeTabsExt("Zombie Total Conversion");
-
-    private static class CreativeTabsExt extends CreativeTabs {
-        public CreativeTabsExt(String lable) {
-            super(lable);
-        }
-        @Override
-        public Item getTabIconItem() {
-            return ItemSpawnZZombie.instance();
-        }
-    }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
@@ -110,20 +95,35 @@ public class ZombieTC {
     public void registerTileEntity(Class c) {
         GameRegistry.registerTileEntity(c, c.getCanonicalName());
     }
+
     public void registerBlock(Block block) {
         registerBlock(block, true);
     }
+
     public void registerBlock(Block block, boolean setTextureName) {
         block.setCreativeTab(tab);
-        if(setTextureName) block.setBlockTextureName(MODID + ":" + block.getUnlocalizedName().substring(5));
+        if (setTextureName) block.setBlockTextureName(MODID + ":" + block.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(block, block.getUnlocalizedName());
     }
+
     public void registerItem(Item item) {
         registerItem(item, true);
     }
+
     public void registerItem(Item item, boolean setTextureName) {
         item.setCreativeTab(tab);
-        if(setTextureName) item.setTextureName(MODID + ":" + item.getUnlocalizedName().substring(5));
+        if (setTextureName) item.setTextureName(MODID + ":" + item.getUnlocalizedName().substring(5));
         GameRegistry.registerItem(item, item.getUnlocalizedName(), MODID);
+    }
+
+    private static class CreativeTabsExt extends CreativeTabs {
+        public CreativeTabsExt(String lable) {
+            super(lable);
+        }
+
+        @Override
+        public Item getTabIconItem() {
+            return ItemSpawnZZombie.instance();
+        }
     }
 }

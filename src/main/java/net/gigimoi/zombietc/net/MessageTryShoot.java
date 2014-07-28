@@ -17,7 +17,9 @@ import net.minecraft.item.ItemStack;
 public class MessageTryShoot implements IMessage {
     Entity at;
 
-    public MessageTryShoot() { }
+    public MessageTryShoot() {
+    }
+
     public MessageTryShoot(Entity playAt) {
         at = playAt;
     }
@@ -31,19 +33,19 @@ public class MessageTryShoot implements IMessage {
     public void toBytes(ByteBuf buf) {
         buf.writeInt(at.getEntityId());
     }
+
     public static class MessagePlayShootSoundHandler implements IMessageHandler<MessageTryShoot, MessageTryShoot> {
         @Override
         public MessageTryShoot onMessage(MessageTryShoot message, MessageContext ctx) {
-            if(ctx.side == Side.SERVER) {
+            if (ctx.side == Side.SERVER) {
                 ItemStack stack = ((EntityLivingBase) message.at).getHeldItem();
-                if(stack != null && stack.getItem().getClass() == ItemWeapon.class) {
+                if (stack != null && stack.getItem().getClass() == ItemWeapon.class) {
                     stack.getTagCompound().setInteger("Rounds", stack.getTagCompound().getInteger("Rounds") - 1);
-                    stack.getTagCompound().setInteger("ShootCooldown", ((ItemWeapon)stack.getItem()).fireDelay);
+                    stack.getTagCompound().setInteger("ShootCooldown", ((ItemWeapon) stack.getItem()).fireDelay);
                     ZombieTC.network.sendToAll(message);
                 }
-            }
-            else {
-                ZombieTC.proxy.playSound("pistolShoot", (float)message.at.posX, (float)message.at.posY, (float)message.at.posZ);
+            } else {
+                ZombieTC.proxy.playSound("pistolShoot", (float) message.at.posX, (float) message.at.posY, (float) message.at.posZ);
             }
             return null;
         }

@@ -22,12 +22,16 @@ import net.minecraft.world.World;
 public class CommonProxy implements IGuiHandler {
     public void renderers() {
     }
+
     public void keyBinds() {
     }
+
     public void playSound(String soundName, float x, float y, float z) {
     }
+
     public void registerWeaponRender(ItemWeapon weapon) {
     }
+
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         return null;
@@ -35,11 +39,11 @@ public class CommonProxy implements IGuiHandler {
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if ( ID == GuiPurchaseItemStack.GUI_ID )
+        if (ID == GuiPurchaseItemStack.GUI_ID)
             return new GuiPurchaseItemStack(x, y, z);
-        if ( ID == GuiNode.GUI_ID )
+        if (ID == GuiNode.GUI_ID)
             return new GuiNode(x, y, z);
-        if ( ID == GuiPurchaseEventLever.GUI_ID)
+        if (ID == GuiPurchaseEventLever.GUI_ID)
             return new GuiPurchaseEventLever(x, y, z);
         return null;
     }
@@ -47,6 +51,7 @@ public class CommonProxy implements IGuiHandler {
     public World getWorld(Side sidePrefered) {
         return MinecraftServer.getServer().getEntityWorld();
     }
+
     public void network() {
         SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(ZombieTC.NETWORK_CHANNEL);
         network.registerMessage(MessageSetWave.MessageSetWaveHandler.class, MessageSetWave.class, 0, Side.CLIENT);

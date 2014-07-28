@@ -16,7 +16,9 @@ public class MessageAddBarricade implements IMessage {
     int y;
     int z;
 
-    public MessageAddBarricade() { }
+    public MessageAddBarricade() {
+    }
+
     public MessageAddBarricade(int x, int y, int z) {
         this.x = x;
         this.y = y;
@@ -36,10 +38,11 @@ public class MessageAddBarricade implements IMessage {
         buf.writeInt(y);
         buf.writeInt(z);
     }
+
     public static class MessageAddBarricadeHandler implements IMessageHandler<MessageAddBarricade, MessageAddBarricade> {
         @Override
         public MessageAddBarricade onMessage(MessageAddBarricade message, MessageContext ctx) {
-            if(MinecraftServer.getServer() != null && MinecraftServer.getServer().isServerRunning()) {
+            if (MinecraftServer.getServer() != null && MinecraftServer.getServer().isServerRunning()) {
                 return null;
             }
             ZombieTC.gameManager.blockBarricades.add(new Point3(message.x, message.y, message.z));

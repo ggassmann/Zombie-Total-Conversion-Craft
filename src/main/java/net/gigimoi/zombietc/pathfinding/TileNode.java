@@ -36,10 +36,10 @@ public class TileNode extends TileEntitySynced {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(ZombieTC.editorModeManager.enabled) {
+        if (ZombieTC.editorModeManager.enabled) {
             deactivated = deactivatedUntilEvent;
         }
-        if(deactivatedUntilEvent && GameManager.isEventTriggering(eventWaitFor)) {
+        if (deactivatedUntilEvent && GameManager.isEventTriggering(eventWaitFor)) {
             deactivated = false;
         }
     }

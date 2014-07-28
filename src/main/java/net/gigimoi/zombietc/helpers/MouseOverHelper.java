@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class MouseOverHelper {
     private static Entity pointedEntity;
+
     public static MovingObjectPosition getMouseOver(float maxDistance) {
         MovingObjectPosition trace = null;
         Minecraft mc = Minecraft.getMinecraft();

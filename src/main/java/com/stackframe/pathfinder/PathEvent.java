@@ -16,7 +16,7 @@ public abstract class PathEvent<T extends Node> extends EventObject {
      * Create a new path event.
      *
      * @param source the source of this event
-     * @param path the path related to the event
+     * @param path   the path related to the event
      */
     protected PathEvent(Object source) {
         super(source);

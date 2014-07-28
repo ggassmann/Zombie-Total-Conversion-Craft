@@ -12,12 +12,15 @@ import net.gigimoi.zombietc.ZombieTC;
  */
 public class MessageChangeEditorMode implements IMessage {
     boolean enabled;
+
     public MessageChangeEditorMode(boolean enabled) {
         this.enabled = enabled;
     }
+
     public MessageChangeEditorMode() {
 
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         enabled = buf.readBoolean();
@@ -27,15 +30,16 @@ public class MessageChangeEditorMode implements IMessage {
     public void toBytes(ByteBuf buf) {
         buf.writeBoolean(enabled);
     }
+
     public static class MessageChangeEditorModeHandler implements IMessageHandler<MessageChangeEditorMode, MessageChangeEditorMode> {
 
         @Override
         public MessageChangeEditorMode onMessage(MessageChangeEditorMode message, MessageContext ctx) {
             ZombieTC.editorModeManager.enabled = message.enabled;
-            if(!ZombieTC.editorModeManager.enabled) {
+            if (!ZombieTC.editorModeManager.enabled) {
                 ZombieTC.gameManager.regeneratePathMap();
             }
-            if(ctx.side == Side.SERVER) {
+            if (ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);
             }
             return null;

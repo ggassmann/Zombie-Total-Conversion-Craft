@@ -12,15 +12,17 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
  */
 public class EditorModeManager {
     public boolean enabled = false;
+
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        if(((ClientProxy) ZombieTC.proxy).reset.isPressed()) {
+        if (((ClientProxy) ZombieTC.proxy).reset.isPressed()) {
             ZombieTC.network.sendToServer(new MessageChangeEditorMode(!ZombieTC.editorModeManager.enabled));
         }
     }
+
     @SubscribeEvent
     public void getBreakSpeed(PlayerEvent.BreakSpeed event) {
-        if(!enabled) {
+        if (!enabled) {
             event.setCanceled(true);
         }
     }

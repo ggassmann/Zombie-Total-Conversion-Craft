@@ -11,16 +11,20 @@ import net.gigimoi.zombietc.ZombieTC;
  */
 public class MessageSetWave implements IMessage {
     public int wave;
+
     public MessageSetWave() {
         this(0);
     }
+
     public MessageSetWave(int wave) {
         this.wave = wave;
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         wave = buf.getInt(0);
     }
+
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(wave);

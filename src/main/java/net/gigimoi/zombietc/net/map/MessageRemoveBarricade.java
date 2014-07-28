@@ -15,7 +15,10 @@ public class MessageRemoveBarricade implements IMessage {
     public int x;
     public int y;
     public int z;
-    public MessageRemoveBarricade() { }
+
+    public MessageRemoveBarricade() {
+    }
+
     public MessageRemoveBarricade(int x, int y, int z) {
         this.x = x;
         this.y = y;
@@ -35,15 +38,16 @@ public class MessageRemoveBarricade implements IMessage {
         buf.writeInt(y);
         buf.writeInt(z);
     }
+
     public static class MessageRemoveBarricadeHandler implements IMessageHandler<MessageRemoveBarricade, MessageRemoveBarricade> {
         @Override
         public MessageRemoveBarricade onMessage(MessageRemoveBarricade message, MessageContext ctx) {
-            if(MinecraftServer.getServer() != null && MinecraftServer.getServer().isServerRunning()) {
+            if (MinecraftServer.getServer() != null && MinecraftServer.getServer().isServerRunning()) {
                 return null;
             }
-            for(int i = 0; i < GameManager.blockBarricades.size(); i++) {
+            for (int i = 0; i < GameManager.blockBarricades.size(); i++) {
                 Point3 vec = GameManager.blockBarricades.get(i);
-                if(vec.distanceTo(new Point3(message.x, message.y, message.z)) < 0.01) {
+                if (vec.distanceTo(new Point3(message.x, message.y, message.z)) < 0.01) {
                     GameManager.blockBarricades.remove(i);
                 }
             }

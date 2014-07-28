@@ -17,12 +17,16 @@ public class MessageActivateRepairBarricade implements IMessage {
     int x;
     int y;
     int z;
-    public MessageActivateRepairBarricade() { }
+
+    public MessageActivateRepairBarricade() {
+    }
+
     public MessageActivateRepairBarricade(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         x = buf.readInt();
@@ -36,20 +40,21 @@ public class MessageActivateRepairBarricade implements IMessage {
         buf.writeInt(y);
         buf.writeInt(z);
     }
+
     public static class MessageActivateRepairBarricadeHandler implements IMessageHandler<MessageActivateRepairBarricade, MessageActivateRepairBarricade> {
         @Override
         public MessageActivateRepairBarricade onMessage(MessageActivateRepairBarricade message, MessageContext ctx) {
-            if(ctx.side.isServer()) {
+            if (ctx.side.isServer()) {
                 TileEntity tileRaw = MinecraftServer.getServer().getEntityWorld().getTileEntity(message.x, message.y, message.z);
-                if(tileRaw != null && tileRaw.getClass() == TileBarricade.class) {
-                    TileBarricade tile = (TileBarricade)tileRaw;
+                if (tileRaw != null && tileRaw.getClass() == TileBarricade.class) {
+                    TileBarricade tile = (TileBarricade) tileRaw;
                     tile.damage = Math.max(tile.damage - 1, 0);
                     ZombieTC.network.sendToAll(message);
                 }
             } else {
                 TileEntity tileRaw = Minecraft.getMinecraft().theWorld.getTileEntity(message.x, message.y, message.z);
-                if(tileRaw != null && tileRaw.getClass() == TileBarricade.class) {
-                    TileBarricade tile = (TileBarricade)tileRaw;
+                if (tileRaw != null && tileRaw.getClass() == TileBarricade.class) {
+                    TileBarricade tile = (TileBarricade) tileRaw;
                     tile.damage = Math.max(tile.damage - 1, 0);
                 }
             }

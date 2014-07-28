@@ -18,19 +18,21 @@ import java.util.List;
 public class ScoreboardManager {
     public List<String> scoreboardNames = new ArrayList<String>();
     public List<Integer> scoreboardScores = new ArrayList<Integer>();
+
     @SubscribeEvent
     public void onLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-        for(int i = 0; i < scoreboardNames.size(); i++) {
-            if(scoreboardNames.get(i).equals(event.player.getCommandSenderName())) {
+        for (int i = 0; i < scoreboardNames.size(); i++) {
+            if (scoreboardNames.get(i).equals(event.player.getCommandSenderName())) {
                 scoreboardNames.remove(i);
                 scoreboardScores.remove(i);
             }
         }
     }
+
     @SubscribeEvent
     public void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        for(int i = 0; i < scoreboardNames.size(); i++) {
-            if(scoreboardNames.get(i).equals(event.player.getCommandSenderName())) {
+        for (int i = 0; i < scoreboardNames.size(); i++) {
+            if (scoreboardNames.get(i).equals(event.player.getCommandSenderName())) {
                 scoreboardNames.remove(i);
                 scoreboardScores.remove(i);
             }
@@ -38,10 +40,11 @@ public class ScoreboardManager {
         scoreboardNames.add(event.player.getCommandSenderName());
         scoreboardScores.add(100);
     }
+
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
-        if(ZombieTC.editorModeManager.enabled) {
+        if (ZombieTC.editorModeManager.enabled) {
             return;
         }
         if (event.type == RenderGameOverlayEvent.ElementType.CHAT) {
@@ -49,7 +52,7 @@ public class ScoreboardManager {
             TextRenderHelper.drawString("Scoreboard", 2, yOff, TextAlignment.Left);
             yOff += 6;
             TextRenderHelper.drawString("----------", 2, yOff, TextAlignment.Left);
-            for(int i = 0; i < scoreboardNames.size(); i++) {
+            for (int i = 0; i < scoreboardNames.size(); i++) {
                 yOff += 10;
                 TextRenderHelper.drawString(scoreboardNames.get(i) + ": " + scoreboardScores.get(i), 2, yOff, TextAlignment.Left);
             }

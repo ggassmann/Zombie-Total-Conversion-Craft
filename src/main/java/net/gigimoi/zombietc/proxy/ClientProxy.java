@@ -35,6 +35,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileNode.class, new TileRendererNode());
         ClientRegistry.bindTileEntitySpecialRenderer(TilePurchaseItemStack.class, new TileRendererPurchaseItemstack());
     }
+
     @Override
     public void keyBinds() {
         reset = new KeyBinding("Toggle Editor Mode", Keyboard.KEY_G, "key.categories.zombietc");
@@ -50,14 +51,16 @@ public class ClientProxy extends CommonProxy {
         PositionedSoundRecord snd = PositionedSoundRecord.func_147675_a(new ResourceLocation(ZombieTC.MODID, soundName), x, y, z);
         Minecraft.getMinecraft().getSoundHandler().playSound(snd);
     }
+
     @Override
     public void registerWeaponRender(ItemWeapon weapon) {
         MinecraftForgeClient.registerItemRenderer(weapon, weapon);
     }
+
     @Override
     public World getWorld(Side sidePrefered) {
-        if(sidePrefered == Side.SERVER) {
-            if(Minecraft.getMinecraft().isIntegratedServerRunning()) {
+        if (sidePrefered == Side.SERVER) {
+            if (Minecraft.getMinecraft().isIntegratedServerRunning()) {
                 return MinecraftServer.getServer().getEntityWorld();
             }
         }

@@ -17,13 +17,17 @@ public class MessageActivateTile implements IMessage {
     int y;
     int z;
     Entity activator;
-    public MessageActivateTile() { }
+
+    public MessageActivateTile() {
+    }
+
     public MessageActivateTile(int xCoord, int yCoord, int zCoord, Entity activator) {
         x = xCoord;
         y = yCoord;
         z = zCoord;
         this.activator = activator;
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         x = buf.readInt();
@@ -31,6 +35,7 @@ public class MessageActivateTile implements IMessage {
         z = buf.readInt();
         activator = ZombieTC.proxy.getWorld(Side.SERVER).getEntityByID(buf.readInt());
     }
+
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(x);
@@ -38,12 +43,13 @@ public class MessageActivateTile implements IMessage {
         buf.writeInt(z);
         buf.writeInt(activator.getEntityId());
     }
+
     public static class MessageActivateTileHandler implements IMessageHandler<MessageActivateTile, MessageActivateTile> {
         @Override
         public MessageActivateTile onMessage(MessageActivateTile message, MessageContext ctx) {
             ITileEntityActivatable tile = (ITileEntityActivatable) ZombieTC.proxy.getWorld(ctx.side).getTileEntity(message.x, message.y, message.z);
             tile.activate(message.activator, ctx.side);
-            if(ctx.side.isServer()) {
+            if (ctx.side.isServer()) {
                 ZombieTC.network.sendToAll(message);
             }
             return null;
