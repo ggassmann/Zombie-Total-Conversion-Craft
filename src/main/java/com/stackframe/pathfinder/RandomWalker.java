@@ -3,11 +3,8 @@
 package com.stackframe.pathfinder;
 
 import com.google.common.collect.Lists;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+
+import java.util.*;
 
 /**
  * An implementation of the Depth First Search path finding algorithm.

@@ -1,16 +1,16 @@
 package net.gigimoi.zombietc.weapon;
 
 import net.gigimoi.zombietc.EntityZZombie;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.TileBarricade;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
-import net.gigimoi.zombietc.net.MessageTryShoot;
+import net.gigimoi.zombietc.helpers.TextureHelper;
 import net.gigimoi.zombietc.net.MessageReload;
 import net.gigimoi.zombietc.net.MessageShoot;
-import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.helpers.TextureHelper;
+import net.gigimoi.zombietc.net.MessageTryShoot;
 import net.gigimoi.zombietc.pathfinding.Point3;
 import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.minecraft.block.Block;

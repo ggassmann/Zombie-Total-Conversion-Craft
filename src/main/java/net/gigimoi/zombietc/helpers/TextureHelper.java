@@ -1,6 +1,5 @@
 package net.gigimoi.zombietc.helpers;
 
-import net.gigimoi.zombietc.pathfinding.TileRendererNode;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.ResourceLocation;
 

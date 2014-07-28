@@ -7,11 +7,9 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 
 /**
  * Created by gigimoi on 7/17/2014.

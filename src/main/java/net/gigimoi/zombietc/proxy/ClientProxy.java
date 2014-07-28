@@ -2,7 +2,7 @@ package net.gigimoi.zombietc.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.relauncher.Side;
-import net.gigimoi.zombietc.*;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.TilePurchaseItemStack;
 import net.gigimoi.zombietc.block.TileRendererPurchaseItemstack;
 import net.gigimoi.zombietc.pathfinding.BlockNode;

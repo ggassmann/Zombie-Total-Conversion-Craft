@@ -7,7 +7,6 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.Vec3;
 
 /**

@@ -2,8 +2,6 @@ package net.gigimoi.zombietc.pathfinding;
 
 import net.minecraft.util.Vec3;
 
-import java.util.List;
-
 /**
  * Created by gigimoi on 7/22/2014.
  */

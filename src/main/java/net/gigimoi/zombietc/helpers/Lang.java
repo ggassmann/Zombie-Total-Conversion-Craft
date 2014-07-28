@@ -1,6 +1,5 @@
 package net.gigimoi.zombietc.helpers;
 
-import net.gigimoi.zombietc.ZombieTC;
 import net.minecraft.client.resources.I18n;
 
 /**

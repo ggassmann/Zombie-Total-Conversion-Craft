@@ -8,7 +8,6 @@ import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
 import net.gigimoi.zombietc.pathfinding.Point3;
-import net.minecraft.util.Vec3;
 
 import java.util.ArrayList;
 

@@ -3,13 +3,10 @@ package net.gigimoi.zombietc.pathfinding;
 import com.stackframe.pathfinder.Node;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by gigimoi on 7/16/2014.

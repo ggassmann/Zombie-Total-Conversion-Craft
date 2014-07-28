@@ -8,7 +8,6 @@ import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.ITileEntityActivatable;
 import net.minecraft.entity.Entity;
-import net.minecraft.server.MinecraftServer;
 
 /**
  * Created by gigimoi on 7/26/2014.

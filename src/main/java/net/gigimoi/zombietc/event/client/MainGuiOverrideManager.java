@@ -1,10 +1,11 @@
 package net.gigimoi.zombietc.event.client;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.gui.GuiStartGame;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiSelectWorld;
 import net.minecraftforge.client.event.GuiScreenEvent;
 
 /**

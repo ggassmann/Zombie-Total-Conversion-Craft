@@ -1,6 +1,7 @@
 package com.stackframe.pathfinder;
 
 import com.google.common.collect.Ordering;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;

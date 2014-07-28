@@ -3,6 +3,7 @@
 package com.stackframe.pathfinder;
 
 import com.google.common.collect.Ordering;
+
 import java.util.Map;
 
 /**

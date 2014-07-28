@@ -4,15 +4,11 @@ import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.MessageActivateTile;
-import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
-import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import org.lwjgl.input.Keyboard;
 
 /**
  * Created by gigimoi on 7/26/2014.

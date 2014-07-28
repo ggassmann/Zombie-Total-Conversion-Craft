@@ -7,7 +7,6 @@ import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.pathfinding.Point3;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.Vec3;
 
 /**
  * Created by gigimoi on 7/22/2014.
