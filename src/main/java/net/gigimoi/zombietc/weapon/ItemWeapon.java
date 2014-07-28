@@ -2,8 +2,7 @@ package net.gigimoi.zombietc.weapon;
 
 import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.block.TileBarricade;
-import net.gigimoi.zombietc.event.GameManager;
+import net.gigimoi.zombietc.block.BlockBarricade;
 import net.gigimoi.zombietc.helpers.MouseOverHelper;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
@@ -11,7 +10,6 @@ import net.gigimoi.zombietc.helpers.TextureHelper;
 import net.gigimoi.zombietc.net.MessageReload;
 import net.gigimoi.zombietc.net.MessageShoot;
 import net.gigimoi.zombietc.net.MessageTryShoot;
-import net.gigimoi.zombietc.pathfinding.Point3;
 import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -19,11 +17,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -33,8 +29,6 @@ import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -58,6 +52,9 @@ public class ItemWeapon extends Item implements IItemRenderer {
     private int damage;
     private float barrelLength;
     private float sightHeight;
+    private static final Block[] ignoredBlocksList = new Block[] {
+        BlockBarricade.wooden
+    };
 
     public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo, int reloadTime, int fireDelay) {
         this.setUnlocalizedName(name);
@@ -217,28 +214,8 @@ public class ItemWeapon extends Item implements IItemRenderer {
                             ZombieTC.proxy.playSound("pistolShoot", (float) player.posX, (float) player.posY, (float) player.posZ);
                             ZombieTC.network.sendToServer(new MessageTryShoot(player));
 
-                            //<fuckmefuckmefuckme>
-                            ArrayList<Integer> damages = new ArrayList<Integer>();
-                            ArrayList<Integer> tickers = new ArrayList<Integer>();
-                            List blocks = new ArrayList<Block>();
-                            List<Point3> blockBarricades = (List<Point3>) GameManager.blockBarricades.clone();
-                            for (int i = 0; i < blockBarricades.size(); i++) {
-                                Point3 vec = GameManager.blockBarricades.get(i);
-                                blocks.add(world.getBlock((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord));
-                                TileEntity te = world.getTileEntity((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord);
-                                damages.add(((TileBarricade) te).damage);
-                                tickers.add(((TileBarricade) te).ticker);
-                                world.setBlock((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord, Blocks.air);
-                            }
-                            MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F);
-                            for (int i = 0; i < blockBarricades.size(); i++) {
-                                Point3 vec = blockBarricades.get(i);
-                                world.setBlock((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord, (Block) blocks.get(i));
-                                TileBarricade te = (TileBarricade) world.getTileEntity((int) vec.xCoord, (int) vec.yCoord, (int) vec.zCoord);
-                                te.damage = damages.get(i);
-                                te.ticker = tickers.get(i);
-                            }
-                            //</fuckmefuckmefuckme>
+                            MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F, ignoredBlocksList);
+
                             if (trace.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
                                 Entity hit = trace.entityHit;
                                 if (hit != null && hit.getClass() == EntityZZombie.class) {

@@ -1,11 +1,17 @@
 package net.gigimoi.zombietc.helpers;
 
+import net.gigimoi.zombietc.pathfinding.Point3;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,14 +20,35 @@ import java.util.List;
 public class MouseOverHelper {
     private static Entity pointedEntity;
 
-    public static MovingObjectPosition getMouseOver(float maxDistance) {
+    public static MovingObjectPosition getMouseOver(float maxDistance, Block[] ignoredBlocks) {
         MovingObjectPosition trace = null;
         Minecraft mc = Minecraft.getMinecraft();
+
+        List<Block> blocksRemoved = new ArrayList();
+        List<Point3> blockPositions = new ArrayList();
+        List<NBTTagCompound> blockDatas = new ArrayList();
+
         if (mc.renderViewEntity != null) {
             if (mc.theWorld != null) {
                 pointedEntity = null;
                 double d0 = (double) maxDistance;
-                trace = mc.renderViewEntity.rayTrace(d0, 1);
+                while(trace == null ||
+                        (
+                         trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK &&
+                         mc.theWorld.getBlock(trace.blockX, trace.blockY, trace.blockZ) == ignoredBlocks[0]
+                        )
+                        ){
+                    if(trace != null && trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+                        NBTTagCompound nbt = new NBTTagCompound();
+                        TileEntity tile = mc.theWorld.getTileEntity(trace.blockX, trace.blockY, trace.blockZ);
+                        if(tile != null) {tile.writeToNBT(nbt); blockDatas.add(nbt); }
+                        else { blockDatas.add(null); }
+                        blocksRemoved.add(mc.theWorld.getBlock(trace.blockX, trace.blockY, trace.blockZ));
+                        blockPositions.add(new Point3(trace.blockX, trace.blockY, trace.blockZ));
+                        mc.theWorld.setBlock(trace.blockX, trace.blockY, trace.blockZ, Blocks.air);
+                    }
+                    trace = mc.renderViewEntity.rayTrace(d0, 1);
+                }
                 double d1 = d0;
                 Vec3 vec3 = mc.renderViewEntity.getPosition(1);
 
@@ -73,6 +100,16 @@ public class MouseOverHelper {
                 if (pointedEntity != null && (d2 < d1 || trace == null)) {
                     trace = new MovingObjectPosition(pointedEntity, vec33);
                 }
+            }
+        }
+        for(int i = 0; i < blocksRemoved.size(); i++) {
+            Block block = blocksRemoved.get(i);
+            Point3 position = blockPositions.get(i);
+            NBTTagCompound data = blockDatas.get(i);
+            mc.theWorld.setBlock(position.xCoord, position.yCoord, position.zCoord, block);
+            TileEntity tile = mc.theWorld.getTileEntity(position.xCoord, position.yCoord, position.zCoord);
+            if(tile != null && data != null) {
+                tile.readFromNBT(data);
             }
         }
         return trace;
