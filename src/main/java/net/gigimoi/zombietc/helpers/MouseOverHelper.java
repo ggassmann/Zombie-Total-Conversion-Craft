@@ -27,6 +27,10 @@ public class MouseOverHelper {
         List<Block> blocksRemoved = new ArrayList();
         List<Point3> blockPositions = new ArrayList();
         List<NBTTagCompound> blockDatas = new ArrayList();
+        List<Block> blocksIgnored = new ArrayList(ignoredBlocks.length);
+        for(int i = 0; i < ignoredBlocks.length; i++) {
+            blocksIgnored.add(ignoredBlocks[i]);
+        }
 
         if (mc.renderViewEntity != null) {
             if (mc.theWorld != null) {
@@ -35,7 +39,7 @@ public class MouseOverHelper {
                 while(trace == null ||
                         (
                          trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK &&
-                         mc.theWorld.getBlock(trace.blockX, trace.blockY, trace.blockZ) == ignoredBlocks[0]
+                         blocksIgnored.contains(mc.theWorld.getBlock(trace.blockX, trace.blockY, trace.blockZ))
                         )
                         ){
                     if(trace != null && trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
