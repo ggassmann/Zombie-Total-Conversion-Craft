@@ -30,6 +30,8 @@ public class MainGuiOverrideManager {
             cancelButton.xPosition -= cancelButton.width + 6;
             cancelButton.width *= 2;
             cancelButton.width += 6;
+            GuiButton createWorldButton = (GuiButton)event.buttonList.get(1);
+            createWorldButton.displayString = "New World (Editor mode)";
         }
     }
 
