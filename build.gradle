@@ -50,8 +50,3 @@ processResources
 		exclude 'mcmod.info'
 	}
 }
-
-task zipOutput(type: Zip) {
-    from 'packaging'
-    into 'out/zombie-total-conversion.zip'
-}
