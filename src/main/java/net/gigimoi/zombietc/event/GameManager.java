@@ -21,7 +21,6 @@ import net.gigimoi.zombietc.pathfinding.MCNode;
 import net.gigimoi.zombietc.pathfinding.Point3;
 import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -143,7 +142,7 @@ public class GameManager {
                 if(purchasable.getEnabled()) {
                     setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) +"] to " + purchasable.getVerb() + ":" + purchasable.getPrice() + "exp");
                     if(activating) {
-                        purchasable.onPurchase(Minecraft.getMinecraft().thePlayer);
+                        purchasable.onClientPurchase(Minecraft.getMinecraft().thePlayer);
                     }
                 }
             }

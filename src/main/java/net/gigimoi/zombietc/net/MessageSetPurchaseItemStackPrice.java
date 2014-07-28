@@ -47,7 +47,7 @@ public class MessageSetPurchaseItemStackPrice implements IMessage {
             TileEntity tileraw = ZombieTC.proxy.getWorld(ctx.side).getTileEntity(message.x, message.y, message.z);
             if(tileraw != null && tileraw.getClass() == TilePurchaseItemStack.class) {
                 TilePurchaseItemStack tile = (TilePurchaseItemStack)tileraw;
-                tile.price = message.price;
+                tile.setPrice(message.price);
             }
             if(ctx.side == Side.SERVER) {
                 ZombieTC.network.sendToAll(message);

@@ -1,5 +1,6 @@
 package net.gigimoi.zombietc.block;
 
+import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.MessageActivateTile;
@@ -45,13 +46,13 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
     @Override
     public void updateEntity() {
         if(ZombieTC.editorModeManager.enabled && isDown) {
-            activate(null);
+            activate(null, Side.SERVER);
             isDown = false;
         }
     }
 
     @Override
-    public void activate(Entity activator) {
+    public void activate(Entity activator, Side side) {
         if(activator != null) {
             GameManager.currentEvents.add(event);
         }
@@ -107,7 +108,7 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
     }
 
     @Override
-    public void onPurchase(EntityPlayer purchaser) {
+    public void onClientPurchase(EntityPlayer purchaser) {
         ZombieTC.network.sendToServer(new MessageActivateTile(xCoord, yCoord, zCoord, Minecraft.getMinecraft().thePlayer));
     }
 

@@ -1,29 +1,26 @@
 package net.gigimoi.zombietc.block;
 
+import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.net.activates.MessageActivatePurchase;
-import net.gigimoi.zombietc.proxy.ClientProxy;
+import net.gigimoi.zombietc.helpers.Lang;
+import net.gigimoi.zombietc.net.MessageActivateTile;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import org.lwjgl.input.Keyboard;
 
 /**
  * Created by gigimoi on 7/21/2014.
  */
-public class TilePurchaseItemStack extends TileEntity {
+public class TilePurchaseItemStack extends TileEntity implements ITileEntityActivatable, ITileEntityPurchasable{
     public ItemStack itemStack;
-    public int price = 100;
-
-
-    public AxisAlignedBB getPurchaseBounds() {
-        return AxisAlignedBB.getBoundingBox(xCoord, yCoord - 1, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
-    }
+    int price = 100;
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
@@ -42,19 +39,6 @@ public class TilePurchaseItemStack extends TileEntity {
         tag.setInteger("Price", price);
         super.writeToNBT(tag);
     }
-
-    @Override
-    public void updateEntity() {
-        super.updateEntity();
-        if(worldObj.isRemote) {
-            if(itemStack != null && !ZombieTC.editorModeManager.enabled && worldObj.getEntitiesWithinAABB(EntityPlayer.class, getPurchaseBounds()).contains(ZombieTC.proxy.getPlayer())) {
-                ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to purchase (" + price + "exp)");
-                if (ZombieTC.gameManager.activating) {
-                    ZombieTC.network.sendToServer(new MessageActivatePurchase(ZombieTC.proxy.getPlayer(), xCoord, yCoord, zCoord));
-                }
-            }
-        }
-    }
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound tagCompound = new NBTTagCompound();
@@ -66,5 +50,39 @@ public class TilePurchaseItemStack extends TileEntity {
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
         readFromNBT(pkt.func_148857_g());
+    }
+
+    @Override
+    public void activate(Entity activator, Side side) {
+        System.out.println(activator.getClass());
+        if(side.isServer() && activator.getClass() == EntityPlayerMP.class) {
+            EntityPlayer player = (EntityPlayer) activator;
+            player.inventory.addItemStackToInventory(itemStack.copy());
+        }
+    }
+
+    @Override
+    public void setPrice(int value) {
+        price = value;
+    }
+
+    @Override
+    public int getPrice() {
+        return price;
+    }
+
+    @Override
+    public boolean getEnabled() {
+        return true;
+    }
+
+    @Override
+    public void onClientPurchase(EntityPlayer purchaser) {
+        ZombieTC.network.sendToServer(new MessageActivateTile(xCoord, yCoord, zCoord, Minecraft.getMinecraft().thePlayer));
+    }
+
+    @Override
+    public String getVerb() {
+        return "Purchase " + Lang.get(itemStack.getUnlocalizedName() + ".name");
     }
 }

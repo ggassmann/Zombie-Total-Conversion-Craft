@@ -43,7 +43,7 @@ public class MessageActivateTile implements IMessage {
         @Override
         public MessageActivateTile onMessage(MessageActivateTile message, MessageContext ctx) {
             ITileEntityActivatable tile = (ITileEntityActivatable) ZombieTC.proxy.getWorld(ctx.side).getTileEntity(message.x, message.y, message.z);
-            tile.activate(message.activator);
+            tile.activate(message.activator, ctx.side);
             if(ctx.side.isServer()) {
                 ZombieTC.network.sendToAll(message);
             }

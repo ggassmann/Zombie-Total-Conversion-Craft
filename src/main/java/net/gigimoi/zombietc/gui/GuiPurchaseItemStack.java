@@ -48,7 +48,7 @@ public class GuiPurchaseItemStack extends GuiScreen {
         priceTextField = new GuiTextField(this.fontRendererObj, this.width / 2 - 150, 50, 300, 20);
         priceTextField.setMaxStringLength(Integer.MAX_VALUE);
         priceTextField.setFocused(true);
-        priceTextField.setText(((TilePurchaseItemStack)mc.theWorld.getTileEntity(xCoord, yCoord, zCoord)).price + "");
+        priceTextField.setText(((TilePurchaseItemStack)mc.theWorld.getTileEntity(xCoord, yCoord, zCoord)).getPrice() + "");
         buttonList.clear();
         this.buttonList.add(done = new GuiButton(0, this.width / 2 - 4 - 150 / 2, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.done", new Object[0])));
     }

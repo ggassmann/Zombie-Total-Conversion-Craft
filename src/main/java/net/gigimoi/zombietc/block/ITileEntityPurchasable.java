@@ -9,6 +9,6 @@ public interface ITileEntityPurchasable {
     void setPrice(int value);
     int getPrice();
     boolean getEnabled();
-    void onPurchase(EntityPlayer purchaser);
+    void onClientPurchase(EntityPlayer purchaser);
     String getVerb();
 }
