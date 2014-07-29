@@ -4,7 +4,6 @@ import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
 import net.gigimoi.zombietc.proxy.ClientProxy;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -58,7 +57,7 @@ public class TileBarricade extends TileEntitySynced {
         }
         playerTicker = Math.max(0, playerTicker - 1);
         if (damage > 0 && worldObj.isRemote) {
-            if (worldObj.getEntitiesWithinAABB(EntityPlayer.class, getBoundsAround()).contains(Minecraft.getMinecraft().thePlayer)) {
+            if (worldObj.getEntitiesWithinAABB(EntityPlayer.class, getBoundsAround()).contains(ZombieTC.proxy.getPlayer())) {
                 ZombieTC.gameManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to repair" + (playerTicker == 0 ? "" : "..."));
                 if (playerTicker == 0 && Keyboard.isKeyDown(ClientProxy.activate.getKeyCode())) {
                     playerTicker = 40;

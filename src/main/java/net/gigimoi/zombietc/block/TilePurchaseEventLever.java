@@ -4,7 +4,6 @@ import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.MessageActivateTile;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -99,7 +98,7 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
 
     @Override
     public void onClientPurchase(EntityPlayer purchaser) {
-        ZombieTC.network.sendToServer(new MessageActivateTile(xCoord, yCoord, zCoord, Minecraft.getMinecraft().thePlayer));
+        ZombieTC.network.sendToServer(new MessageActivateTile(xCoord, yCoord, zCoord, ZombieTC.proxy.getPlayer()));
     }
 
     @Override

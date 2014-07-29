@@ -23,7 +23,6 @@ import net.gigimoi.zombietc.pathfinding.MCNode;
 import net.gigimoi.zombietc.pathfinding.Point3;
 import net.gigimoi.zombietc.proxy.ClientProxy;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -114,7 +113,7 @@ public class GameManager {
                 currentWaveMaxZombies = nextWaveZombies;
                 zombiesToSpawn = currentWaveMaxZombies;
             }
-        } else if (event.side == Side.CLIENT && Minecraft.getMinecraft().theWorld != null) {
+        } else if (event.side == Side.CLIENT && ZombieTC.proxy.getWorld(Side.CLIENT) != null) {
             EntityPlayer player = ZombieTC.proxy.getPlayer();
             TileEntity tilePlayerOver = player.getEntityWorld().getTileEntity((int) player.posX, (int) player.posY, (int) player.posZ - 1);
             if (tilePlayerOver != null && ITileEntityPurchasable.class.isAssignableFrom(tilePlayerOver.getClass())) {

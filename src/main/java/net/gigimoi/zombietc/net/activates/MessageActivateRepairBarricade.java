@@ -3,10 +3,10 @@ package net.gigimoi.zombietc.net.activates;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.TileBarricade;
-import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -52,7 +52,7 @@ public class MessageActivateRepairBarricade implements IMessage {
                     ZombieTC.network.sendToAll(message);
                 }
             } else {
-                TileEntity tileRaw = Minecraft.getMinecraft().theWorld.getTileEntity(message.x, message.y, message.z);
+                TileEntity tileRaw = ZombieTC.proxy.getWorld(Side.CLIENT).getTileEntity(message.x, message.y, message.z);
                 if (tileRaw != null && tileRaw.getClass() == TileBarricade.class) {
                     TileBarricade tile = (TileBarricade) tileRaw;
                     tile.damage = Math.max(tile.damage - 1, 0);
