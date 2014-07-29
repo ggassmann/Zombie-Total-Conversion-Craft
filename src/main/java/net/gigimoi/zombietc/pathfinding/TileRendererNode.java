@@ -20,7 +20,7 @@ public class TileRendererNode extends TileEntitySpecialRenderer {
 
     @Override
     public void renderTileEntityAt(TileEntity rawTile, double x, double y, double z, float par5) {
-        if (ZombieTC.editorModeManager.enabled || true) {
+        if (ZombieTC.editorModeManager.enabled) {
             TileNode tile = (TileNode) rawTile;
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
