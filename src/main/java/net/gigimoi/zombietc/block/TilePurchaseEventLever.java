@@ -44,6 +44,9 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
             activate(null, Side.SERVER);
             isDown = false;
         }
+        else if(GameManager.isEventTriggering(event) && !isDown) {
+            activate(null, worldObj.isRemote ? Side.CLIENT : Side.SERVER);
+        }
     }
 
     @Override
@@ -53,31 +56,27 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
         }
         isDown = true;
         //Copypasta from BlockLever.onBlockActivated
-        if (worldObj.isRemote) {
-            return;
-        } else {
-            int i1 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-            int j1 = i1 & 7;
-            int k1 = 8 - (i1 & 8);
-            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, j1 + k1, 3);
-            worldObj.playSoundEffect((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D, "random.click", 0.3F, k1 > 0 ? 0.6F : 0.5F);
-            worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, BlockPurchaseEventLever.instance);
+        int i1 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int j1 = i1 & 7;
+        int k1 = 8 - (i1 & 8);
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, j1 + k1, 3);
+        worldObj.playSoundEffect((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D, "random.click", 0.3F, k1 > 0 ? 0.6F : 0.5F);
+        worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, BlockPurchaseEventLever.instance);
 
-            if (j1 == 1) {
-                worldObj.notifyBlocksOfNeighborChange(xCoord - 1, yCoord, zCoord, BlockPurchaseEventLever.instance);
-            } else if (j1 == 2) {
-                worldObj.notifyBlocksOfNeighborChange(xCoord + 1, yCoord, zCoord, BlockPurchaseEventLever.instance);
-            } else if (j1 == 3) {
-                worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord - 1, BlockPurchaseEventLever.instance);
-            } else if (j1 == 4) {
-                worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord + 1, BlockPurchaseEventLever.instance);
-            } else if (j1 != 5 && j1 != 6) {
-                if (j1 == 0 || j1 == 7) {
-                    worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord + 1, zCoord, BlockPurchaseEventLever.instance);
-                }
-            } else {
-                worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, BlockPurchaseEventLever.instance);
+        if (j1 == 1) {
+            worldObj.notifyBlocksOfNeighborChange(xCoord - 1, yCoord, zCoord, BlockPurchaseEventLever.instance);
+        } else if (j1 == 2) {
+            worldObj.notifyBlocksOfNeighborChange(xCoord + 1, yCoord, zCoord, BlockPurchaseEventLever.instance);
+        } else if (j1 == 3) {
+            worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord - 1, BlockPurchaseEventLever.instance);
+        } else if (j1 == 4) {
+            worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord + 1, BlockPurchaseEventLever.instance);
+        } else if (j1 != 5 && j1 != 6) {
+            if (j1 == 0 || j1 == 7) {
+                worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord + 1, zCoord, BlockPurchaseEventLever.instance);
             }
+        } else {
+            worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, BlockPurchaseEventLever.instance);
         }
     }
 
