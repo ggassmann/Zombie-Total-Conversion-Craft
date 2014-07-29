@@ -75,9 +75,18 @@ public class GameManager {
         }
         return false;
     }
-
+    short refreshFoodbarsCooldown = 0;
     @SubscribeEvent
     public void onTick(TickEvent event) {
+        refreshFoodbarsCooldown++;
+        if(refreshFoodbarsCooldown > 200 && ZombieTC.proxy.getWorld(event.side) != null) {
+            refreshFoodbarsCooldown = 0;
+            List playerEntities = ZombieTC.proxy.getWorld(event.side).playerEntities;
+            for(int i = 0; i < playerEntities.size(); i++) {
+                EntityPlayer player = (EntityPlayer)playerEntities.get(i);
+                player.getFoodStats().setFoodLevel(20);
+            }
+        }
         if (event.phase == TickEvent.Phase.END) {
             somewhatcurrentEvents = currentEvents;
             currentEvents = new ArrayList<String>();
@@ -288,6 +297,10 @@ public class GameManager {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
+        if(event.type == RenderGameOverlayEvent.ElementType.FOOD) {
+            event.setCanceled(true);
+            return;
+        }
         if (event.type == RenderGameOverlayEvent.ElementType.CHAT) {
             if (ZombieTC.editorModeManager.enabled) {
                 TextRenderHelper.drawString("Editor mode enabled", 2, 2, TextAlignment.Left);
