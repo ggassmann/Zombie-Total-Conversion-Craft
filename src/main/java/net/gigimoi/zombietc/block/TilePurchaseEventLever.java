@@ -13,7 +13,7 @@ import net.minecraft.util.AxisAlignedBB;
  * Created by gigimoi on 7/26/2014.
  */
 public class TilePurchaseEventLever extends TileEntitySynced implements ITileEntityActivatable, ITileEntityPurchasable {
-    public String event;
+    public String event = "";
     boolean isDown;
     int price = 500;
 
