@@ -39,6 +39,12 @@ public class ScoreboardManager {
         }
         scoreboardNames.add(event.player.getCommandSenderName());
         scoreboardScores.add(100);
+        ZombieTC.network.sendToAll(
+                new MessageScoreboardAddRemoveEntry(
+                        event.player.getCommandSenderName(),
+                        scoreboardScores.get(scoreboardScores.size() - 1)
+                )
+        );
     }
 
     @SideOnly(Side.CLIENT)

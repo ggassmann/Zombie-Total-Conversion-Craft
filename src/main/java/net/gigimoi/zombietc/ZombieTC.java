@@ -49,19 +49,17 @@ public class ZombieTC {
         editorModeManager = new EditorModeManager();
         gameManager = new GameManager();
         keyManager = new KeyManager();
-        mainGuiOverrideManager = new MainGuiOverrideManager();
+        proxy.registerGui();
         FMLCommonHandler.instance().bus().register(editorModeManager);
         FMLCommonHandler.instance().bus().register(gameManager);
         FMLCommonHandler.instance().bus().register(mouseManager);
         FMLCommonHandler.instance().bus().register(keyManager);
         FMLCommonHandler.instance().bus().register(scoreboardManager);
-        FMLCommonHandler.instance().bus().register(mainGuiOverrideManager);
         MinecraftForge.EVENT_BUS.register(gameManager);
         MinecraftForge.EVENT_BUS.register(mouseManager);
         MinecraftForge.EVENT_BUS.register(editorModeManager);
         MinecraftForge.EVENT_BUS.register(keyManager);
         MinecraftForge.EVENT_BUS.register(scoreboardManager);
-        MinecraftForge.EVENT_BUS.register(mainGuiOverrideManager);
         MinecraftForge.EVENT_BUS.register(new NaturalSpawnStopper());
 
         new ItemSpawnZZombie();

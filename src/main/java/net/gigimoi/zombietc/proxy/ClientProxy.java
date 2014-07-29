@@ -1,10 +1,12 @@
 package net.gigimoi.zombietc.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.TilePurchaseItemStack;
 import net.gigimoi.zombietc.block.TileRendererPurchaseItemstack;
+import net.gigimoi.zombietc.event.client.MainGuiOverrideManager;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.TileNode;
 import net.gigimoi.zombietc.pathfinding.TileRendererNode;
@@ -18,6 +20,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
 
 /**
@@ -70,5 +73,12 @@ public class ClientProxy extends CommonProxy {
     @Override
     public EntityPlayer getPlayer() {
         return Minecraft.getMinecraft().thePlayer;
+    }
+
+    @Override
+    public void registerGui() {
+        ZombieTC.mainGuiOverrideManager = new MainGuiOverrideManager();
+        FMLCommonHandler.instance().bus().register(ZombieTC.mainGuiOverrideManager);
+        MinecraftForge.EVENT_BUS.register(ZombieTC.mainGuiOverrideManager);
     }
 }

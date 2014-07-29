@@ -115,14 +115,14 @@ public class GameManager {
                 zombiesToSpawn = currentWaveMaxZombies;
             }
         } else if (event.side == Side.CLIENT && Minecraft.getMinecraft().theWorld != null) {
-            EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+            EntityPlayer player = ZombieTC.proxy.getPlayer();
             TileEntity tilePlayerOver = player.getEntityWorld().getTileEntity((int) player.posX, (int) player.posY, (int) player.posZ - 1);
             if (tilePlayerOver != null && ITileEntityPurchasable.class.isAssignableFrom(tilePlayerOver.getClass())) {
                 ITileEntityPurchasable purchasable = (ITileEntityPurchasable) tilePlayerOver;
                 if (purchasable.getEnabled()) {
                     setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to " + purchasable.getVerb() + ":" + purchasable.getPrice() + "exp");
                     if (activating) {
-                        purchasable.onClientPurchase(Minecraft.getMinecraft().thePlayer);
+                        purchasable.onClientPurchase(ZombieTC.proxy.getPlayer());
                     }
                 }
             }
@@ -295,7 +295,7 @@ public class GameManager {
             }
             TextRenderHelper.drawString("Wave: " + wave, 2, event.resolution.getScaledHeight() - 10, TextAlignment.Left);
             TextRenderHelper.drawString("Zombies Left: " + (zombiesToSpawn + zombiesAlive), 2, (int) (event.resolution.getScaledHeight()) - 20, TextAlignment.Left);
-            ItemStack heldItem = Minecraft.getMinecraft().thePlayer.getHeldItem();
+            ItemStack heldItem = ZombieTC.proxy.getPlayer().getHeldItem();
             if (heldItem != null && heldItem.getItem().getClass() == ItemWeapon.class) {
                 ((ItemWeapon) heldItem.getItem()).drawUIFor(heldItem, event);
             }
@@ -333,6 +333,8 @@ public class GameManager {
         List<MCNode> nodes;
         List<BlockNode.MCNodePair> nodeConnections;
         ArrayList<Point3> blockBarricades;
+        List<String> scoreboardNames;
+        List<Integer> scoreboardScores;
 
         public GameData() {
         }
@@ -347,6 +349,8 @@ public class GameManager {
             nodes = BlockNode.nodes;
             nodeConnections = BlockNode.nodeConnections;
             blockBarricades = manager.blockBarricades;
+            scoreboardNames = ZombieTC.scoreboardManager.scoreboardNames;
+            scoreboardScores = ZombieTC.scoreboardManager.scoreboardScores;
         }
     }
 }
