@@ -10,7 +10,8 @@ item.Node Linker.name=Knoten Linker
 tile.Barricade.name=Barrikade
 tile.Spawner.name=Laichener
 tile.Node.name=Knoten
-tile.Purchase Itemstack.name=Kaufen Article
+tile.Purchase Itemstack.name=Kaufen Artikelstapel
+tile.Purchase Event Lever.name=Kaufen Ereignis Hebel
 
 ui.Wave=Welle
 ui.Scoreboard=Anzeigetafel

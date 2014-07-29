@@ -10,7 +10,8 @@ item.Node Linker.name=Node Linker
 tile.Barricade.name=Barricade
 tile.Spawner.name=Spawner
 tile.Node.name=Node
-tile.Purchase Itemstack.name=Purchase Item
+tile.Purchase Itemstack.name=Purchase Item Stack
+tile.Purchase Event Lever.name=Purchase Event Lever
 
 ui.Wave=Wave
 ui.Scoreboard=Scoreboard
