@@ -36,12 +36,10 @@ public class MouseOverHelper {
             if (mc.theWorld != null) {
                 pointedEntity = null;
                 double d0 = (double) maxDistance;
-                while(trace == null ||
-                        (
+                while(trace == null ||(
                          trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK &&
                          blocksIgnored.contains(mc.theWorld.getBlock(trace.blockX, trace.blockY, trace.blockZ))
-                        )
-                        ){
+                    )){
                     if(trace != null && trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                         NBTTagCompound nbt = new NBTTagCompound();
                         TileEntity tile = mc.theWorld.getTileEntity(trace.blockX, trace.blockY, trace.blockZ);
