@@ -39,6 +39,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
     public static ItemWeapon stormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.55, 6, 30, 120, 20, 3).barrelLength(2.0f).sightHeight(1.0f).damage(2);
     public static ItemWeapon thompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.55, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f).damage(2);
     public static ItemWeapon karbine = new ItemWeapon("Karbine", FireMechanism.semiAutomatic, 0.5, 1, 4, 40, 20, 20).barrelLength(2.5f).sightHeight(0.1f).damage(5);
+    public static ItemWeapon vbrB = new ItemWeapon("VBR-B", FireMechanism.automatic, 1, 6, 42, 420, 22, 1).barrelLength(1.0f).sightHeight(0.2f).damage(1);
     public static IModelCustom modelFlash;
     private static Random _r = new Random();
     public FireMechanism fireMechanism;
