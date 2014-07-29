@@ -41,9 +41,9 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void keyBinds() {
-        reset = new KeyBinding("Toggle Editor Mode", Keyboard.KEY_G, "key.categories.zombietc");
-        reload = new KeyBinding("Reload", Keyboard.KEY_R, "key.categories.zombietc");
-        activate = new KeyBinding("Activate", Keyboard.KEY_F, "key.categories.zombietc");
+        reset = new KeyBinding("key.binding.toggleEditorMode", Keyboard.KEY_G, "key.categories.zombietc");
+        reload = new KeyBinding("key.binding.reload", Keyboard.KEY_R, "key.categories.zombietc");
+        activate = new KeyBinding("key.binding.activate", Keyboard.KEY_F, "key.categories.zombietc");
         ClientRegistry.registerKeyBinding(reset);
         ClientRegistry.registerKeyBinding(reload);
         ClientRegistry.registerKeyBinding(activate);

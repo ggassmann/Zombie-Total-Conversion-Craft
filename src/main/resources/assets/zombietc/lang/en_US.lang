@@ -1,4 +1,4 @@
-itemGroup.Zombie Total Conversion=Zombie Total Conversion
+itemGroup.Zombie Total Conversion=Zombie Total Conversion Craft
 
 item.Radom Vis.name=Radom Vis
 item.Storm Rifle.name=Sturmgewehr
@@ -15,3 +15,8 @@ tile.Purchase Event Lever.name=Purchase Event Lever
 
 ui.Wave=Wave
 ui.Scoreboard=Scoreboard
+
+key.categories.zombietc=Zombie Total Conversion Craft
+key.binding.activate=Activate
+key.binding.reload=Reload
+key.binding.toggleEditorMode=Toggle Editor Mode
