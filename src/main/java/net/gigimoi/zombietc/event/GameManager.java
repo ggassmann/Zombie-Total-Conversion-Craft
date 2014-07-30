@@ -87,7 +87,7 @@ public class GameManager {
                 player.getFoodStats().setFoodLevel(20);
             }
         }
-        if (event.phase == TickEvent.Phase.END) {
+        if (event.phase == TickEvent.Phase.END && currentEvents.size() > 0 || somewhatcurrentEvents.size() > 0) {
             somewhatcurrentEvents = currentEvents;
             currentEvents = new ArrayList<String>();
         }
