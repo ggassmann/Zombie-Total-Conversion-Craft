@@ -84,7 +84,7 @@ public class GameManager {
             List playerEntities = ZombieTC.proxy.getWorld(event.side).playerEntities;
             for(int i = 0; i < playerEntities.size(); i++) {
                 EntityPlayer player = (EntityPlayer)playerEntities.get(i);
-                player.getFoodStats().setFoodLevel(20);
+                player.getFoodStats().addStats(100, 100);
             }
         }
         if (event.phase == TickEvent.Phase.END && currentEvents.size() > 0 || somewhatcurrentEvents.size() > 0) {
