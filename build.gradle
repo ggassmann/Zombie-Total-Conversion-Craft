@@ -23,7 +23,7 @@ group = "net.gigimoi.zombietc" // http://maven.apache.org/guides/mini/guide-nami
 archivesBaseName = "zombietc"
 
 minecraft {
-    version = "1.7.10-10.13.0.1187"
+    version = "1.7.10-10.13.0.1189"
     assetDir = "eclipse/assets"
 }
 
