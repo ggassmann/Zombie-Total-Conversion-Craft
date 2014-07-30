@@ -49,6 +49,7 @@ public class MessageScoreboardAddRemoveEntry implements IMessage {
                 return null;
             }
             if(message.add) {
+                System.out.println("Recieved" + message.entry);
                 ZombieTC.scoreboardManager.scoreboardNames.add(message.entry);
                 ZombieTC.scoreboardManager.scoreboardScores.add(message.initalValueAdd);
             } else {

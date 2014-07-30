@@ -27,9 +27,10 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
+
+import static org.lwjgl.opengl.GL11.*;
 
 /**
  * Created by gigimoi on 7/17/2014.
@@ -37,9 +38,10 @@ import java.util.Random;
 public class ItemWeapon extends Item implements IItemRenderer {
     public static ItemWeapon radomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1).barrelLength(1.0f).sightHeight(0.1f).damage(2);
     public static ItemWeapon stormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.55, 6, 30, 120, 20, 3).barrelLength(2.0f).sightHeight(1.0f).damage(2);
-    public static ItemWeapon thompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.55, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f).damage(2);
+    public static ItemWeapon thompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.53, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f).damage(2);
     public static ItemWeapon karbine = new ItemWeapon("Karbine", FireMechanism.semiAutomatic, 0.5, 1, 4, 40, 20, 20).barrelLength(2.5f).sightHeight(0.1f).damage(5);
     public static ItemWeapon vbrB = new ItemWeapon("VBR-B", FireMechanism.automatic, 1, 6, 42, 420, 22, 1).barrelLength(1.0f).sightHeight(0.2f).damage(1);
+    public static ItemWeapon venusSMP = new ItemWeapon("Venus SMP", FireMechanism.automatic, 0.47, 3.9, 25, 200, 17, 2).barrelLength(2.0f).sightHeight(0.3f).damage(3);
     public static IModelCustom modelFlash;
     private static Random _r = new Random();
     public FireMechanism fireMechanism;
@@ -98,32 +100,32 @@ public class ItemWeapon extends Item implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack stack, Object... data) {
-        GL11.glPushMatrix();
+        glPushMatrix();
         if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
             //EntityPlayer player = (EntityPlayer) data[1];
-            GL11.glTranslated(0, 1, 0);
+            glTranslated(0, 1, 0);
         }
         if (type == ItemRenderType.INVENTORY) {
-            GL11.glScaled(0.8 * inventoryScale, 0.8 * inventoryScale, 0.8 * inventoryScale);
+            glScaled(0.8 * inventoryScale, 0.8 * inventoryScale, 0.8 * inventoryScale);
         }
         if (type == ItemRenderType.EQUIPPED) {
-            GL11.glRotated(90, 0, 1, 0);
-            GL11.glTranslated(0, 1, 0);
+            glRotated(90, 0, 1, 0);
+            glTranslated(0, 1, 0);
         }
         ensureTagCompund(stack);
-        GL11.glScaled(0.2f, 0.2f, 0.2f);
-        GL11.glRotated(90, 1, 0, 0);
-        GL11.glRotated(135, 0, 0, 1);
-        GL11.glRotated(0, 0, 1, 0);
+        glScaled(0.2f, 0.2f, 0.2f);
+        glRotated(90, 1, 0, 0);
+        glRotated(135, 0, 0, 1);
+        glRotated(0, 0, 1, 0);
         if (type != ItemRenderType.INVENTORY && stack.getTagCompound().getBoolean("InSights") && stack.getTagCompound().getInteger("Reload Timer") == 0) {
-            GL11.glTranslated(-1, 3.45, -0.65 + -adsLift / 5f);
+            glTranslated(-1, 3.45, -0.65 + -adsLift / 5f);
         }
         if (type != ItemRenderType.INVENTORY && stack.getTagCompound().getInteger("Reload Timer") > 0) {
-            GL11.glRotated(10, 0, 1, 0);
-            GL11.glRotated(50, 0, 0, -1);
+            glRotated(10, 0, 1, 0);
+            glRotated(50, 0, 0, -1);
         }
         if (type == ItemRenderType.INVENTORY) {
-            GL11.glRotated(-45, 0, 1, 0);
+            glRotated(-45, 0, 1, 0);
         }
         boolean shoot = false;
         if (stack.getTagCompound().getBoolean("Shoot")) {
@@ -138,16 +140,19 @@ public class ItemWeapon extends Item implements IItemRenderer {
         }
         TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/items/guns/" + getUnlocalizedName().substring(5) + ".png"));
         if (type == ItemRenderType.ENTITY) {
-            GL11.glScaled(0.5, 0.5, 0.5);
+            glScaled(0.5, 0.5, 0.5);
         }
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         modelGun.renderAll();
         if (shoot) {
             TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/models/muzzleflash.png"));
-            GL11.glTranslated(_r.nextInt(100) / 100f - 0.5f, _r.nextInt(100) / 100f - 0.3f, _r.nextInt(100) / 100f - 0.5f);
-            GL11.glTranslated(-barrelLength * 4, 0, sightHeight * 1.5f);
+            glTranslated(_r.nextInt(100) / 100f - 0.5f, _r.nextInt(100) / 100f - 0.3f, _r.nextInt(100) / 100f - 0.5f);
+            glTranslated(-barrelLength * 4, 0, sightHeight * 1.5f);
             modelFlash.renderAll();
         }
-        GL11.glPopMatrix();
+        glDisable(GL_BLEND);
+        glPopMatrix();
     }
 
     @Override

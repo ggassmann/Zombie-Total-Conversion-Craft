@@ -297,6 +297,10 @@ public class GameManager {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
+        if(event.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && !ZombieTC.editorModeManager.enabled) {
+            event.setCanceled(true);
+            return;
+        }
         if(event.type == RenderGameOverlayEvent.ElementType.FOOD) {
             event.setCanceled(true);
             return;

@@ -29,22 +29,32 @@ public class ScoreboardManager {
         }
     }
 
-    @SubscribeEvent
-    public void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
+    void cleanOldNames(PlayerEvent event) {
         for (int i = 0; i < scoreboardNames.size(); i++) {
             if (scoreboardNames.get(i).equals(event.player.getCommandSenderName())) {
                 scoreboardNames.remove(i);
                 scoreboardScores.remove(i);
             }
         }
+    }
+    @SubscribeEvent
+    public void onLeave(PlayerEvent.PlayerLoggedOutEvent event) {
+        cleanOldNames(event);
+        ZombieTC.network.sendToAll(new MessageScoreboardAddRemoveEntry(
+                event.player.getCommandSenderName()
+        ));
+    }
+    @SubscribeEvent
+    public void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
+        cleanOldNames(event);
         scoreboardNames.add(event.player.getCommandSenderName());
         scoreboardScores.add(100);
-        ZombieTC.network.sendToAll(
-                new MessageScoreboardAddRemoveEntry(
-                        event.player.getCommandSenderName(),
-                        scoreboardScores.get(scoreboardScores.size() - 1)
-                )
-        );
+        for(int i = 0; i < scoreboardNames.size(); i++) {
+            new MessageScoreboardAddRemoveEntry(
+                    scoreboardNames.get(i),
+                    scoreboardScores.get(i)
+            );
+        }
     }
 
     @SideOnly(Side.CLIENT)

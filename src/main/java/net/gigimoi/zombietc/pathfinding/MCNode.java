@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
@@ -54,7 +55,11 @@ public class MCNode implements Node<MCNode> {
     }
 
     public boolean isDisabled() {
-        TileEntity tileRaw = ZombieTC.proxy.getWorld(Side.CLIENT).getTileEntity(position.xCoord, position.yCoord, position.zCoord);
+        World world = ZombieTC.proxy.getWorld(Side.CLIENT);
+        if(world == null) {
+            return true;
+        }
+        TileEntity tileRaw = world.getTileEntity(position.xCoord, position.yCoord, position.zCoord);
         TileNode tile = (TileNode) tileRaw;
         return tile == null || tile.deactivated;
     }
