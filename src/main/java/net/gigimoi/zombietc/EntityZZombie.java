@@ -118,7 +118,7 @@ public class EntityZZombie extends EntityZombie {
                 if (start != null && goal.get(0) != null && BlockNode.nodes != null) {
                     List<MCNode> path = new Dijkstra<MCNode>().findPath(BlockNode.nodes, start, goal);
                     if (path != null) {
-                        if (path.get(0).position.toVec3().addVector(0.5, 0, 0.5).distanceTo(Vec3.createVectorHelper(posX, posY, posZ)) < 0.1) {
+                        if (path.get(0).position.toVec3().addVector(0.5, 0, 0.5).distanceTo(Vec3.createVectorHelper(posX, posY, posZ)) < 0.5) {
                             lastPassed = path.get(0);
                         }
                         if (lastPassed == path.get(0)) {

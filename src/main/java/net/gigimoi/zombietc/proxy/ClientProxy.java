@@ -6,6 +6,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.TilePurchaseItemStack;
 import net.gigimoi.zombietc.block.TileRendererPurchaseItemstack;
+import net.gigimoi.zombietc.event.client.FogManager;
 import net.gigimoi.zombietc.event.client.MainGuiOverrideManager;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.TileNode;
@@ -78,7 +79,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerGui() {
         ZombieTC.mainGuiOverrideManager = new MainGuiOverrideManager();
+        ZombieTC.fogManager = new FogManager();
         FMLCommonHandler.instance().bus().register(ZombieTC.mainGuiOverrideManager);
+        FMLCommonHandler.instance().bus().register(ZombieTC.fogManager);
         MinecraftForge.EVENT_BUS.register(ZombieTC.mainGuiOverrideManager);
+        MinecraftForge.EVENT_BUS.register(ZombieTC.fogManager);
+
     }
 }

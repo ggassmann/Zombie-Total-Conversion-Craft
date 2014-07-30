@@ -11,6 +11,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.gigimoi.zombietc.block.*;
 import net.gigimoi.zombietc.event.*;
+import net.gigimoi.zombietc.event.client.FogManager;
 import net.gigimoi.zombietc.event.client.MainGuiOverrideManager;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.ItemNodeLinker;
@@ -37,6 +38,7 @@ public class ZombieTC {
     public static KeyManager keyManager;
     public static ScoreboardManager scoreboardManager;
     public static MainGuiOverrideManager mainGuiOverrideManager;
+    public static FogManager fogManager;
     @SidedProxy(clientSide = "net.gigimoi.zombietc.proxy.ClientProxy", serverSide = "net.gigimoi.zombietc.proxy.CommonProxy")
     public static CommonProxy proxy;
 
