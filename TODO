@@ -1,13 +1,11 @@
 High Priority:
 Weapon recoil
-ItemWeapon damage field
-Noclip zombies
+Noclip zombies/ghosts
 
 Low Priority:
+Bosses
 Improve Radom Vis UV map
-TextRenderHelper center & Justify
 
 BUGS:
 -Some packets are leaking, maybe the MessageShoot ?
 -Zombies alive not synced to client in dedicated server
--Barricade positions are not synced to client in dedicated server
