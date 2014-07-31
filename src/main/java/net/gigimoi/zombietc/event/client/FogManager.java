@@ -13,4 +13,12 @@ public class FogManager {
         event.setCanceled(true);
         event.density = ZombieTC.editorModeManager.enabled ? 0.001f : 0.05f;
     }
+    @SubscribeEvent
+    public void onFogColor(EntityViewRenderEvent.FogColors event) {
+        if(!ZombieTC.editorModeManager.enabled) {
+            event.red = 0f;
+            event.blue = 0f;
+            event.green = 0f;
+        }
+    }
 }
