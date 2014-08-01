@@ -56,8 +56,7 @@ public class TilePurchaseItemStack extends TileEntity implements ITileEntityActi
 
     @Override
     public void activate(Entity activator, Side side) {
-        System.out.println(activator.getClass());
-        if (side.isServer() && activator.getClass() == EntityPlayerMP.class) {
+        if (itemStack != null && side.isServer() && activator.getClass() == EntityPlayerMP.class) {
             EntityPlayer player = (EntityPlayer) activator;
             player.inventory.addItemStackToInventory(itemStack.copy());
         }
