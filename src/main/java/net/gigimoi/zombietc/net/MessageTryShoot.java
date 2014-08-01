@@ -10,6 +10,7 @@ import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Created by gigimoi on 7/17/2014.
@@ -39,9 +40,11 @@ public class MessageTryShoot implements IMessage {
         public MessageTryShoot onMessage(MessageTryShoot message, MessageContext ctx) {
             if (ctx.side == Side.SERVER) {
                 ItemStack stack = ((EntityLivingBase) message.at).getHeldItem();
+                NBTTagCompound tag = stack.getTagCompound();
                 if (stack != null && stack.getItem().getClass() == ItemWeapon.class) {
-                    stack.getTagCompound().setInteger("Rounds", stack.getTagCompound().getInteger("Rounds") - 1);
-                    stack.getTagCompound().setInteger("ShootCooldown", ((ItemWeapon) stack.getItem()).fireDelay);
+                    ItemWeapon weapon = (ItemWeapon) stack.getItem();
+                    tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
+                    tag.setInteger("ShootCooldown", weapon.fireDelay);
                     ZombieTC.network.sendToAll(message);
                 }
             } else {

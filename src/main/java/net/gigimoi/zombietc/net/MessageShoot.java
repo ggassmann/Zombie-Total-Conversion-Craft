@@ -56,6 +56,7 @@ public class MessageShoot implements IMessage {
         @Override
         public MessageShoot onMessage(MessageShoot message, MessageContext ctx) {
             World world = ((EntityLivingBase) message.shooter).worldObj;
+            //TODO: Server side raytracing
             if (message.hit != null && message.shooter != null) {
                 message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon) message.weapon).getBulletDamage());
             }
