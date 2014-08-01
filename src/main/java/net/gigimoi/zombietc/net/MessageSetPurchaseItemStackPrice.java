@@ -6,7 +6,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.block.TilePurchaseItemStack;
+import net.gigimoi.zombietc.block.purchasable.TilePurchaseItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 /**

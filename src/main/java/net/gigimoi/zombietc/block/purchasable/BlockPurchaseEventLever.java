@@ -1,4 +1,4 @@
-package net.gigimoi.zombietc.block;
+package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.gui.GuiPurchaseEventLever;

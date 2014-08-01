@@ -1,7 +1,7 @@
 package net.gigimoi.zombietc.gui;
 
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.block.TilePurchaseEventLever;
+import net.gigimoi.zombietc.block.purchasable.TilePurchaseEventLever;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
 import net.gigimoi.zombietc.net.map.MessageSetPurchaseEventLeverInfo;
