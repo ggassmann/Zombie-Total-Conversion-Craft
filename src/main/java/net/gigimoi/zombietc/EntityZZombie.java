@@ -97,7 +97,7 @@ public class EntityZZombie extends EntityZombie {
         if (targetY > posY) {
             getJumpHelper().setJumping();
         }
-        if (_r.nextInt(10) == 5 || Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(targetX, targetY, targetZ)) < 0.5) {
+        if (_r.nextInt(6) == 5 || Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(targetX, targetY, targetZ)) < 0.5) {
             resetTarget();
         }
     }
@@ -107,7 +107,7 @@ public class EntityZZombie extends EntityZombie {
         if (player != null) {
             Vec3 playerPos = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
             Vec3 pos = Vec3.createVectorHelper(posX, posY, posZ);
-            if (playerPos.distanceTo(pos) < 1 && getEntitySenses().canSee(player)) {
+            if (playerPos.distanceTo(pos) < 1.5 && getEntitySenses().canSee(player)) {
                 targetX = player.posX;
                 targetY = player.posY;
                 targetZ = player.posZ;

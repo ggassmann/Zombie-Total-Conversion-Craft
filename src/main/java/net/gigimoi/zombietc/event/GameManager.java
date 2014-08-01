@@ -124,7 +124,7 @@ public class GameManager {
             }
         } else if (event.side == Side.CLIENT && ZombieTC.proxy.getWorld(Side.CLIENT) != null) {
             EntityPlayer player = ZombieTC.proxy.getPlayer();
-            TileEntity tilePlayerOver = player.getEntityWorld().getTileEntity((int) player.posX, (int) player.posY, (int) player.posZ - 1);
+            TileEntity tilePlayerOver = player.worldObj.getTileEntity((int)Math.round(player.posX - 0.5), (int)Math.round(player.posY - 0.5), (int)Math.round(player.posZ - 0.5));
             if (tilePlayerOver != null && ITileEntityPurchasable.class.isAssignableFrom(tilePlayerOver.getClass())) {
                 ITileEntityPurchasable purchasable = (ITileEntityPurchasable) tilePlayerOver;
                 if (purchasable.getEnabled()) {
