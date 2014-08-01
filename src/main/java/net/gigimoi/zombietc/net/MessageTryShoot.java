@@ -40,12 +40,14 @@ public class MessageTryShoot implements IMessage {
         public MessageTryShoot onMessage(MessageTryShoot message, MessageContext ctx) {
             if (ctx.side == Side.SERVER) {
                 ItemStack stack = ((EntityLivingBase) message.at).getHeldItem();
-                NBTTagCompound tag = stack.getTagCompound();
-                if (stack != null && stack.getItem().getClass() == ItemWeapon.class) {
-                    ItemWeapon weapon = (ItemWeapon) stack.getItem();
-                    tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
-                    tag.setInteger("ShootCooldown", weapon.fireDelay);
-                    ZombieTC.network.sendToAll(message);
+                if(stack.hasTagCompound()) {
+                    NBTTagCompound tag = stack.getTagCompound();
+                    if (stack != null && stack.getItem().getClass() == ItemWeapon.class) {
+                        ItemWeapon weapon = (ItemWeapon) stack.getItem();
+                        tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
+                        tag.setInteger("ShootCooldown", weapon.fireDelay);
+                        ZombieTC.network.sendToAll(message);
+                    }
                 }
             } else {
                 ZombieTC.proxy.playSound("pistolShoot", (float) message.at.posX, (float) message.at.posY, (float) message.at.posZ);
