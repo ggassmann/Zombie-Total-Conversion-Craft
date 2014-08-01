@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemBaubleRingOfHealth extends ItemZombieTCBauble {
     private ItemBaubleRingOfHealth() {
+        super();
         setUnlocalizedName("Ring of Health");
     }
 
@@ -21,15 +22,8 @@ public class ItemBaubleRingOfHealth extends ItemZombieTCBauble {
     public void onWornTick(ItemStack stack, EntityLivingBase entityLivingBase) {
 
     }
-
-    @Override
-    public void onEquipped(ItemStack stack, EntityLivingBase entityLivingBase) {
-
-    }
-
     @Override
     public void onUnequipped(ItemStack stack, EntityLivingBase entityLivingBase) {
-
     }
 
     static private ItemBaubleRingOfHealth _instance;
