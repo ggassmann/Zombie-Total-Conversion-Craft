@@ -18,6 +18,7 @@ tile.Purchase Event Lever.name=Purchase Event Lever
 
 ui.Wave=Wave
 ui.Scoreboard=Scoreboard
+ui.purchaseItemStack.setItemInEditor=Set item in editor mode
 
 key.categories.zombietc=Zombie Total Conversion Craft
 key.binding.activate=Activate

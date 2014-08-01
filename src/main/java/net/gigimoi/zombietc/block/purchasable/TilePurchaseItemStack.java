@@ -85,6 +85,8 @@ public class TilePurchaseItemStack extends TileEntity implements ITileEntityActi
 
     @Override
     public String getVerb() {
-        return "Purchase " + Lang.get(itemStack.getUnlocalizedName() + ".name");
+        return itemStack != null ?
+                "Purchase " + Lang.get(itemStack.getUnlocalizedName() + ".name") :
+                Lang.get("ui.purchaseItemStack.setItemInEditor");
     }
 }

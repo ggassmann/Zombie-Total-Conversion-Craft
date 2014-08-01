@@ -18,6 +18,7 @@ tile.Purchase Event Lever.name=Kaufen Ereignis Hebel
 
 ui.Wave=Welle
 ui.Scoreboard=Anzeigetafel
+ui.purchaseItemStack.setItemInEditor=Ins Editiermodus Artikel gelegen
 
 key.categories.zombietc=Zombie Total Conversion Craft
 key.binding.activate=Aktivieren
