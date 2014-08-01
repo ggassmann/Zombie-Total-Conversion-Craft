@@ -8,6 +8,7 @@ import net.gigimoi.zombietc.block.purchasable.TilePurchaseItemStack;
 import net.gigimoi.zombietc.block.purchasable.TileRendererPurchaseItemstack;
 import net.gigimoi.zombietc.event.client.FogManager;
 import net.gigimoi.zombietc.event.client.MainGuiOverrideManager;
+import net.gigimoi.zombietc.event.client.PlayerBuffRenderManager;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.TileNode;
 import net.gigimoi.zombietc.pathfinding.TileRendererNode;
@@ -80,10 +81,13 @@ public class ClientProxy extends CommonProxy {
     public void registerGui() {
         ZombieTC.mainGuiOverrideManager = new MainGuiOverrideManager();
         ZombieTC.fogManager = new FogManager();
+        ZombieTC.playerBuffRenderManager = new PlayerBuffRenderManager();
         FMLCommonHandler.instance().bus().register(ZombieTC.mainGuiOverrideManager);
         FMLCommonHandler.instance().bus().register(ZombieTC.fogManager);
+        FMLCommonHandler.instance().bus().register(ZombieTC.playerBuffRenderManager);
         MinecraftForge.EVENT_BUS.register(ZombieTC.mainGuiOverrideManager);
         MinecraftForge.EVENT_BUS.register(ZombieTC.fogManager);
+        MinecraftForge.EVENT_BUS.register(ZombieTC.playerBuffRenderManager);
 
     }
 }

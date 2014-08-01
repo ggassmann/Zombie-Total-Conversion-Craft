@@ -17,6 +17,7 @@ import net.gigimoi.zombietc.block.purchasable.TilePurchaseItemStack;
 import net.gigimoi.zombietc.event.*;
 import net.gigimoi.zombietc.event.client.FogManager;
 import net.gigimoi.zombietc.event.client.MainGuiOverrideManager;
+import net.gigimoi.zombietc.event.client.PlayerBuffRenderManager;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.ItemNodeLinker;
 import net.gigimoi.zombietc.pathfinding.TileNode;
@@ -43,6 +44,7 @@ public class ZombieTC {
     public static ScoreboardManager scoreboardManager;
     public static MainGuiOverrideManager mainGuiOverrideManager;
     public static FogManager fogManager;
+    public static PlayerBuffRenderManager playerBuffRenderManager;
     @SidedProxy(clientSide = "net.gigimoi.zombietc.proxy.ClientProxy", serverSide = "net.gigimoi.zombietc.proxy.CommonProxy")
     public static CommonProxy proxy;
 
