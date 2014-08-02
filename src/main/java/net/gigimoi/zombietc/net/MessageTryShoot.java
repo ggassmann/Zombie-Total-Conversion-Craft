@@ -40,7 +40,7 @@ public class MessageTryShoot implements IMessage {
         public MessageTryShoot onMessage(MessageTryShoot message, MessageContext ctx) {
             if (ctx.side == Side.SERVER) {
                 ItemStack stack = ((EntityLivingBase) message.at).getHeldItem();
-                if(stack.hasTagCompound()) {
+                if(stack != null && stack.hasTagCompound()) {
                     NBTTagCompound tag = stack.getTagCompound();
                     if (stack != null && stack.getItem().getClass() == ItemWeapon.class) {
                         ItemWeapon weapon = (ItemWeapon) stack.getItem();
