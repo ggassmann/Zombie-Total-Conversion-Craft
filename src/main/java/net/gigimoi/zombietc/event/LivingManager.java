@@ -26,12 +26,9 @@ public class LivingManager {
             event.entity.registerExtendedProperties(ZombieTC.MODID, new ZombieTCPlayerProperties());
         }
     }
-    int ticker = 0;
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        ticker++;
-        if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START && ticker % 20 == 0) {
-            ticker = 0;
+        if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START) {
             World world = ZombieTC.proxy.getWorld(event.side);
             if(world == null) {
                 return;
@@ -39,10 +36,10 @@ public class LivingManager {
             for(int i = 0; i < world.playerEntities.size(); i++) {
                 EntityPlayer player = (EntityPlayer) world.playerEntities.get(i);
                 ZombieTCPlayerProperties playerProperties = (ZombieTCPlayerProperties) player.getExtendedProperties(ZombieTC.MODID);
-                if(playerProperties.timeSinceHit < 5) {
+                if(playerProperties.timeSinceHit < 90) {
                     playerProperties.timeSinceHit++;
                 } else if(player.getHealth() < player.getMaxHealth()) {
-                    player.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 10, 3));
+                    player.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 5, 3));
                 }
             }
         }

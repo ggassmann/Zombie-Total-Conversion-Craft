@@ -218,7 +218,13 @@ public class ItemWeapon extends Item implements IItemRenderer {
                             tag.setInteger("ShootCooldown", fireDelay);
                             tag.setBoolean("Shoot", true);
                             tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
-                            //player.cameraYaw += 1;
+                            player.setPositionAndRotation(
+                                    player.posX,
+                                    player.posY,
+                                    player.posZ,
+                                    player.rotationYaw + ((float)_r.nextInt(100) - 50f) / 20f,
+                                    player.rotationPitch - ((float)_r.nextInt(100)) / 20f
+                            );
                             ZombieTC.proxy.playSound("pistolShoot", (float) player.posX, (float) player.posY, (float) player.posZ);
                             ZombieTC.network.sendToServer(new MessageTryShoot(player));
 
