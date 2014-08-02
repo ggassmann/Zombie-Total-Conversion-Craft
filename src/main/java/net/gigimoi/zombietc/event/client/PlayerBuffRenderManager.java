@@ -1,9 +1,12 @@
 package net.gigimoi.zombietc.event.client;
 
+import baubles.api.BaublesApi;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.helpers.TextureHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -16,7 +19,7 @@ import static org.lwjgl.opengl.GL11.*;
  * Created by gigimoi on 8/1/2014.
  */
 public class PlayerBuffRenderManager {
-    private static final ResourceLocation texture = new ResourceLocation(ZombieTC.MODID, "textures/misc/ringOfHealth.png");
+    private static final ResourceLocation textureRingOfHealth = new ResourceLocation(ZombieTC.MODID, "textures/misc/ringOfHealth.png");
     private static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/playerBuffShadow.obj"));
     @SubscribeEvent
     public void onRenderPlayerEventPost(RenderLivingEvent.Post event) {
@@ -24,9 +27,13 @@ public class PlayerBuffRenderManager {
             glPushMatrix();
             glEnable(GL_BLEND);
             glTranslated(event.x, event.y, event.z);
-            //if(BaublesApi.getBaubles(event.entity));
-            TextureHelper.bindTexture(texture);
-            model.renderAll();
+            if(EntityPlayer.class.isAssignableFrom(event.entity.getClass())) {
+                IInventory baubles = BaublesApi.getBaubles((EntityPlayer) event.entity);
+                if(baubles.getStackInSlot(2) != null) {
+                    TextureHelper.bindTexture(textureRingOfHealth);
+                    model.renderAll();
+                }
+            }
             glDisable(GL_BLEND);
             glPopMatrix();
         }
@@ -36,8 +43,11 @@ public class PlayerBuffRenderManager {
         glPushMatrix();
         glTranslated(0, -1.6, 0);
         glEnable(GL_BLEND);
-        TextureHelper.bindTexture(texture);
-        model.renderAll();
+        IInventory baubles = BaublesApi.getBaubles(Minecraft.getMinecraft().thePlayer);
+        if(baubles.getStackInSlot(2) != null) {
+            TextureHelper.bindTexture(textureRingOfHealth);
+            model.renderAll();
+        }
         glDisable(GL_BLEND);
         glPopMatrix();
     }
