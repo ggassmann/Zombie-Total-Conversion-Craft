@@ -1,7 +1,6 @@
 package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.block.purchasable.TilePurchaseItemStack;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -35,12 +34,15 @@ public class TileRendererPurchaseItemstack extends TileEntitySpecialRenderer {
             GL11.glRotated(-90, 0, 1, 0);
             GL11.glTranslated(0.1, 0, -0.5);
         }
-        if (tile.itemStack != null) {
+        if (tile.itemStack != null && ItemWeapon.class == tile.itemStack.getItem().getClass()) {
             GL11.glRotated(45, 0, 1, 0);
             ItemWeapon itemWeapon = (ItemWeapon) tile.itemStack.getItem();
             GL11.glScaled(itemWeapon.inventoryScale, itemWeapon.inventoryScale, itemWeapon.inventoryScale);
             itemWeapon.renderItem(IItemRenderer.ItemRenderType.ENTITY, tile.itemStack);
         } else {
+            if(tile.itemStack != null) {
+                //TODO: Allow all itemstacks to render
+            }
             GL11.glScaled(0.1, 0.1, 0.1);
             GL11.glRotated(90, 0, 0, 1);
             GL11.glRotated(-90, 0, 1, 0);

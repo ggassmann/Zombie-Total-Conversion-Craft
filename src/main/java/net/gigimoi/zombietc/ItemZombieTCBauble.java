@@ -41,6 +41,9 @@ public abstract class ItemZombieTCBauble extends Item implements IBauble {
 
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
+        if(ZombieTC.editorModeManager.enabled) {
+            return;
+        }
         if(EntityPlayer.class.isAssignableFrom(entity.getClass())) {
             EntityPlayer player = (EntityPlayer)entity;
             BaublesApi.getBaubles(player).setInventorySlotContents(2, stack);

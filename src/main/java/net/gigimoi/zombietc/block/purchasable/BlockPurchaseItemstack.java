@@ -2,7 +2,6 @@ package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.gui.GuiPurchaseItemStack;
-import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -79,7 +78,7 @@ public class BlockPurchaseItemstack extends BlockContainer {
     public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
         super.onBlockClicked(world, x, y, z, player);
         if (ZombieTC.editorModeManager.enabled) {
-            if (player.getHeldItem() == null || (player.getHeldItem() != null && player.getHeldItem().getItem().getClass() == ItemWeapon.class)) {
+            if (player.getHeldItem() == null || (player.getHeldItem() != null)) {
                 TilePurchaseItemStack tile = (TilePurchaseItemStack) world.getTileEntity(x, y, z);
                 if (player.getHeldItem() == null) {
                     tile.itemStack = null;
