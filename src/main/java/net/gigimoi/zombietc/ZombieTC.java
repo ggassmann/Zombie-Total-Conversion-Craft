@@ -45,29 +45,33 @@ public class ZombieTC {
     public static MainGuiOverrideManager mainGuiOverrideManager;
     public static FogManager fogManager;
     public static PlayerBuffRenderManager playerBuffRenderManager;
+    public static LivingManager livingManager;
     @SidedProxy(clientSide = "net.gigimoi.zombietc.proxy.ClientProxy", serverSide = "net.gigimoi.zombietc.proxy.CommonProxy")
     public static CommonProxy proxy;
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+        proxy.registerGui();
 
         scoreboardManager = new ScoreboardManager();
         mouseManager = new MouseManager();
         editorModeManager = new EditorModeManager();
         gameManager = new GameManager();
         keyManager = new KeyManager();
-        proxy.registerGui();
+        livingManager = new LivingManager();
         FMLCommonHandler.instance().bus().register(editorModeManager);
         FMLCommonHandler.instance().bus().register(gameManager);
         FMLCommonHandler.instance().bus().register(mouseManager);
         FMLCommonHandler.instance().bus().register(keyManager);
         FMLCommonHandler.instance().bus().register(scoreboardManager);
+        FMLCommonHandler.instance().bus().register(livingManager);
         MinecraftForge.EVENT_BUS.register(gameManager);
         MinecraftForge.EVENT_BUS.register(mouseManager);
         MinecraftForge.EVENT_BUS.register(editorModeManager);
         MinecraftForge.EVENT_BUS.register(keyManager);
         MinecraftForge.EVENT_BUS.register(scoreboardManager);
+        MinecraftForge.EVENT_BUS.register(livingManager);
         MinecraftForge.EVENT_BUS.register(new NaturalSpawnStopper());
 
         new ItemSpawnZZombie();
