@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc;
 
 import com.stackframe.pathfinder.Dijkstra;
+import net.gigimoi.zombietc.event.LivingManager;
 import net.gigimoi.zombietc.pathfinding.BlockNode;
 import net.gigimoi.zombietc.pathfinding.MCNode;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -69,6 +70,7 @@ public class EntityZZombie extends EntityZombie {
                     nearest.attackEntityFrom(
                             new DamageSource("Zombie"), 2
                     );
+                    ((LivingManager.ZombieTCPlayerProperties)nearest.getExtendedProperties(ZombieTC.MODID)).timeSinceHit = 0;
                 }
             } else {
                 this.setSize(0.0F, 0.0F);
