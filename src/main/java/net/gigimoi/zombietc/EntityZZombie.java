@@ -97,7 +97,7 @@ public class EntityZZombie extends EntityZombie {
         if (targetY > posY) {
             getJumpHelper().setJumping();
         }
-        if (_r.nextInt(6) == 5 || Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(targetX, targetY, targetZ)) < 0.5) {
+        if (_r.nextInt(15) == 5 || Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(targetX, targetY, targetZ)) < 0.5) {
             resetTarget();
         }
     }
