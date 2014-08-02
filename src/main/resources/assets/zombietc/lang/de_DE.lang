@@ -16,6 +16,8 @@ tile.Node.name=Knoten
 tile.Purchase Itemstack.name=Kaufen Artikelstapel
 tile.Purchase Event Lever.name=Kaufen Ereignis Hebel
 
+item.Ring of Health.name=Ring von Leben
+
 ui.Wave=Welle
 ui.Scoreboard=Anzeigetafel
 ui.purchaseItemStack.setItemInEditor=Ins Editiermodus Artikel gelegen
