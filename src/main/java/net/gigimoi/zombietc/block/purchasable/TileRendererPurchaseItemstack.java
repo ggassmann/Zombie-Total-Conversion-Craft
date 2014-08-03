@@ -2,7 +2,10 @@ package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -14,6 +17,11 @@ import org.lwjgl.opengl.GL11;
  * Created by gigimoi on 7/21/2014.
  */
 public class TileRendererPurchaseItemstack extends TileEntitySpecialRenderer {
+    private static RenderItem renderItem = new RenderItem() {
+        @Override
+        public boolean shouldBob() { return false; }
+    };
+
     @Override
     public void renderTileEntityAt(TileEntity tileraw, double x, double y, double z, float par5) {
         TilePurchaseItemStack tile = (TilePurchaseItemStack) tileraw;
@@ -41,16 +49,26 @@ public class TileRendererPurchaseItemstack extends TileEntitySpecialRenderer {
             itemWeapon.renderItem(IItemRenderer.ItemRenderType.ENTITY, tile.itemStack);
         } else {
             if(tile.itemStack != null) {
-                //TODO: Allow all itemstacks to render
+                EntityItem eItem = new EntityItem(tile.getWorldObj());
+                eItem.hoverStart = 0.0F;
+                eItem.setEntityItemStack(tile.itemStack);
+
+                GL11.glPushMatrix();
+                GL11.glRotated(90, 0, 1, 0);
+
+                renderItem.setRenderManager(RenderManager.instance);
+                renderItem.doRender(eItem, 0, 0, 0, 0, 0);
+                GL11.glPopMatrix();
+            } else if(ZombieTC.editorModeManager.enabled) {
+                GL11.glScaled(0.1, 0.1, 0.1);
+                GL11.glRotated(90, 0, 0, 1);
+                GL11.glRotated(-90, 0, 1, 0);
+                if (side == ForgeDirection.WEST) {
+                    GL11.glRotated(180, 0, 0, 1);
+                }
+                bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/blocks/Purchase Itemstack.png"));
+                AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/purchaseUnset.obj")).renderAll();
             }
-            GL11.glScaled(0.1, 0.1, 0.1);
-            GL11.glRotated(90, 0, 0, 1);
-            GL11.glRotated(-90, 0, 1, 0);
-            if (side == ForgeDirection.WEST) {
-                GL11.glRotated(180, 0, 0, 1);
-            }
-            bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/blocks/Purchase Itemstack.png"));
-            AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/purchaseUnset.obj")).renderAll();
         }
 
         GL11.glPopMatrix();

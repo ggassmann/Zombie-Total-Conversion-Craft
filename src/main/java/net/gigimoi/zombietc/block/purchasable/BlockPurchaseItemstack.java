@@ -2,6 +2,7 @@ package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.gui.GuiPurchaseItemStack;
+import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -85,7 +86,9 @@ public class BlockPurchaseItemstack extends BlockContainer {
                     return;
                 }
                 tile.itemStack = player.getHeldItem().copy();
-                tile.itemStack.getTagCompound().setBoolean("InSights", false);
+                if(tile.itemStack.hasTagCompound() && tile.itemStack.getItem().getClass() == ItemWeapon.class) {
+                    tile.itemStack.getTagCompound().setBoolean("InSights", false);
+                }
             }
         }
     }
