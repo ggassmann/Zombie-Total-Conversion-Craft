@@ -81,13 +81,14 @@ public class ZombieTC {
         registerItem(ItemBaubleRingOfHealth.instance());
         registerItem(ItemSpawnZZombie.instance());
         registerItem(ItemNodeLinker.instance());
-        registerItem(ItemWeapon.radomVis, false);
-        registerItem(ItemWeapon.stormRifle, false);
-        registerItem(ItemWeapon.thompson, false);
-        registerItem(ItemWeapon.karbine, false);
-        registerItem(ItemWeapon.vbrB, false);
-        registerItem(ItemWeapon.venusSMP, false);
-        registerItem(ItemWeapon.fDRbine, false);
+        registerItem(ItemWeapon.weaponRadomVis, false);
+        registerItem(ItemWeapon.weaponStormRifle, false);
+        registerItem(ItemWeapon.weaponThompson, false);
+        registerItem(ItemWeapon.weaponKarbine, false);
+        registerItem(ItemWeapon.weaponVBR_B, false);
+        registerItem(ItemWeapon.weaponVenusSMP, false);
+        registerItem(ItemWeapon.weaponFDRbine, false);
+        registerItem(ItemWeapon.weaponACP44, false);
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockNode.instance);
