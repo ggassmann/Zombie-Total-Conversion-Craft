@@ -14,6 +14,11 @@ public class ItemBaubleRingOfHealth extends ItemZombieTCBauble {
     }
 
     @Override
+    public int getStackSlot() {
+        return 2;
+    }
+
+    @Override
     public BaubleType getBaubleType(ItemStack stack) {
         return BaubleType.RING;
     }

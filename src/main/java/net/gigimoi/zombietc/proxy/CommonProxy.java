@@ -5,7 +5,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.event.MessageScoreboardAddRemoveEntry;
 import net.gigimoi.zombietc.gui.GuiNode;
 import net.gigimoi.zombietc.gui.GuiPurchaseEventLever;
 import net.gigimoi.zombietc.gui.GuiPurchaseItemStack;
@@ -86,7 +85,6 @@ public class CommonProxy implements IGuiHandler {
         network.registerMessage(MessageActivateTile.MessageActivateTileHandler.class, MessageActivateTile.class, 28, Side.SERVER);
         network.registerMessage(MessageSetPurchaseEventLeverInfo.MessageSetPurchaseEventLeverInfoHandler.class, MessageSetPurchaseEventLeverInfo.class, 29, Side.CLIENT);
         network.registerMessage(MessageSetPurchaseEventLeverInfo.MessageSetPurchaseEventLeverInfoHandler.class, MessageSetPurchaseEventLeverInfo.class, 30, Side.SERVER);
-        network.registerMessage(MessageScoreboardAddRemoveEntry.MessageScoreboardAddRemoveEntryHandler.class, MessageScoreboardAddRemoveEntry.class, 31, Side.CLIENT);
         ZombieTC.network = network;
     }
 

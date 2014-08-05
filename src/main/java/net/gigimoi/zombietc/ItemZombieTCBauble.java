@@ -46,7 +46,7 @@ public abstract class ItemZombieTCBauble extends Item implements IBauble {
         }
         if(EntityPlayer.class.isAssignableFrom(entity.getClass())) {
             EntityPlayer player = (EntityPlayer)entity;
-            BaublesApi.getBaubles(player).setInventorySlotContents(2, stack);
+            BaublesApi.getBaubles(player).setInventorySlotContents(getStackSlot(), stack);
             for(int i = 0; i < player.inventory.getSizeInventory(); i++) {
                 if(player.inventory.getStackInSlot(i) == stack) {
                     player.inventory.setInventorySlotContents(i, null);
@@ -57,6 +57,8 @@ public abstract class ItemZombieTCBauble extends Item implements IBauble {
         }
         super.onUpdate(stack, world, entity, par4, par5);
     }
+
+    public abstract int getStackSlot();
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {

@@ -365,8 +365,6 @@ public class GameManager {
             nodes = BlockNode.nodes;
             nodeConnections = BlockNode.nodeConnections;
             blockBarricades = manager.blockBarricades;
-            scoreboardNames = ZombieTC.scoreboardManager.scoreboardNames;
-            scoreboardScores = ZombieTC.scoreboardManager.scoreboardScores;
         }
     }
 }
