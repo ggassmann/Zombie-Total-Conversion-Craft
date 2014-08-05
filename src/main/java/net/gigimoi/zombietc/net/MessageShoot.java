@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
+import net.gigimoi.zombietc.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.PlayerManager;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
@@ -68,8 +69,11 @@ public class MessageShoot implements IMessage {
                     if(player != null) {
                         PlayerManager.ZombieTCPlayerProperties.get(player).vim += 10;
                         message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon) message.weapon).getBulletDamage());
-                        if(message.hit.isDead) {
-                            PlayerManager.ZombieTCPlayerProperties.get(player).vim += 90;
+                        if(EntityZZombie.class.isAssignableFrom(message.hit.getClass())) {
+                            EntityZZombie zombie = (EntityZZombie)message.hit;
+                            if(zombie.getHealth() <= 0) {
+                                PlayerManager.ZombieTCPlayerProperties.get(player).vim += 90;
+                            }
                         }
                         if (ctx.side == Side.SERVER) {
                             ZombieTC.network.sendToAll(message);

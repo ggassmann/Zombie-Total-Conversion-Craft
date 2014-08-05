@@ -6,9 +6,7 @@ import net.gigimoi.zombietc.block.ITileEntityActivatable;
 import net.gigimoi.zombietc.block.ITileEntityPurchasable;
 import net.gigimoi.zombietc.block.TileEntitySynced;
 import net.gigimoi.zombietc.event.GameManager;
-import net.gigimoi.zombietc.net.MessageActivateTile;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
@@ -96,11 +94,6 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
     @Override
     public boolean getEnabled() {
         return !ZombieTC.editorModeManager.enabled && !isDown;
-    }
-
-    @Override
-    public void onClientPurchase(EntityPlayer purchaser) {
-        ZombieTC.network.sendToServer(new MessageActivateTile(xCoord, yCoord, zCoord, ZombieTC.proxy.getPlayer()));
     }
 
     @Override
