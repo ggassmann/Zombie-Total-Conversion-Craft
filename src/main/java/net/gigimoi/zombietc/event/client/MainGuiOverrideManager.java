@@ -2,6 +2,8 @@ package net.gigimoi.zombietc.event.client;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.gigimoi.zombietc.gui.GuiStartGame;
+import net.gigimoi.zombietc.helpers.TextAlignment;
+import net.gigimoi.zombietc.helpers.TextRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMainMenu;
@@ -14,6 +16,12 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 public class MainGuiOverrideManager {
     public static final int BUTTON_ID_NEW_GAME = 500;
 
+    @SubscribeEvent
+    public void onDrawGui(GuiScreenEvent.DrawScreenEvent event) {
+        if (event.gui.getClass() == GuiMainMenu.class) {
+            TextRenderHelper.drawString("Zombie Total Conversion Craft", 2, 2, TextAlignment.Left);
+        }
+    }
     @SubscribeEvent
     public void onInitGui(GuiScreenEvent.InitGuiEvent.Post event) {
         if (event.gui.getClass() == GuiMainMenu.class && event.buttonList.size() > 0) {

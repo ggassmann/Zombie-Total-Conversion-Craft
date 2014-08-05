@@ -11,6 +11,7 @@ import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.ITileEntityPurchasable;
 import net.gigimoi.zombietc.helpers.TextAlignment;
 import net.gigimoi.zombietc.helpers.TextRenderHelper;
+import net.gigimoi.zombietc.net.MessagePurchaseTile;
 import net.gigimoi.zombietc.net.MessageChangeEditorMode;
 import net.gigimoi.zombietc.net.MessageRegeneratePathMap;
 import net.gigimoi.zombietc.net.MessageSetWave;
@@ -129,8 +130,9 @@ public class GameManager {
                 ITileEntityPurchasable purchasable = (ITileEntityPurchasable) tilePlayerOver;
                 if (purchasable.getEnabled()) {
                     setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to " + purchasable.getVerb() + ":" + purchasable.getPrice() + "exp");
-                    if (activating) {
-                        purchasable.onClientPurchase(ZombieTC.proxy.getPlayer());
+                    if (activating && PlayerManager.ZombieTCPlayerProperties.get(player).vim >= purchasable.getPrice()) {
+                        TileEntity tile = (TileEntity)purchasable;
+                        ZombieTC.network.sendToServer(new MessagePurchaseTile(tile.xCoord, tile.yCoord, tile.zCoord, player));
                     }
                 }
             }
