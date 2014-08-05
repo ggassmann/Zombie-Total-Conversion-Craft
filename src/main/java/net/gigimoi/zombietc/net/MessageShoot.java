@@ -61,14 +61,20 @@ public class MessageShoot implements IMessage {
             //TODO: Server side raytracing
             if(!message.hit.isDead) {
                 if (message.hit != null && message.shooter != null) {
+                    EntityPlayer player = null;
                     if(EntityPlayer.class.isAssignableFrom(message.shooter.getClass())) {
-                        EntityPlayer player = ZombieTC.proxy.getWorld(ctx.side).getPlayerEntityByName(message.shooter.getCommandSenderName());
-                        PlayerManager.ZombieTCPlayerProperties.get(player).vim += 100;
+                        player = ZombieTC.proxy.getWorld(ctx.side).getPlayerEntityByName(message.shooter.getCommandSenderName());
                     }
-                    message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon) message.weapon).getBulletDamage());
-                }
-                if (ctx.side == Side.SERVER) {
-                    ZombieTC.network.sendToAll(message);
+                    if(player != null) {
+                        PlayerManager.ZombieTCPlayerProperties.get(player).vim += 10;
+                        message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon) message.weapon).getBulletDamage());
+                        if(message.hit.isDead) {
+                            PlayerManager.ZombieTCPlayerProperties.get(player).vim += 90;
+                        }
+                        if (ctx.side == Side.SERVER) {
+                            ZombieTC.network.sendToAll(message);
+                        }
+                    }
                 }
             }
             return null;
