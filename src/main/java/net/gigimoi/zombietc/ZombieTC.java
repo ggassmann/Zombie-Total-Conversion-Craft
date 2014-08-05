@@ -73,7 +73,6 @@ public class ZombieTC {
         new ItemSpawnZZombie();
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);
 
-
         registerItem(ItemBaubleRingOfHealth.instance());
         registerItem(ItemSpawnZZombie.instance());
         registerItem(ItemNodeLinker.instance());
