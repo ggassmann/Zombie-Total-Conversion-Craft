@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.block.purchasable;
 
 import cpw.mods.fml.relauncher.Side;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.ITileEntityActivatable;
 import net.gigimoi.zombietc.block.ITileEntityPurchasable;
 import net.gigimoi.zombietc.helpers.Lang;
@@ -72,7 +73,7 @@ public class TilePurchaseItemStack extends TileEntity implements ITileEntityActi
 
     @Override
     public boolean getEnabled() {
-        return true;
+        return !ZombieTC.editorModeManager.enabled;
     }
 
     @Override
