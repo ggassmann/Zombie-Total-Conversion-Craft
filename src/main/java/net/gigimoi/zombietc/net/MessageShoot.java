@@ -6,9 +6,11 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.event.PlayerManager;
 import net.gigimoi.zombietc.weapon.ItemWeapon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -57,11 +59,17 @@ public class MessageShoot implements IMessage {
         public MessageShoot onMessage(MessageShoot message, MessageContext ctx) {
             World world = ((EntityLivingBase) message.shooter).worldObj;
             //TODO: Server side raytracing
-            if (message.hit != null && message.shooter != null) {
-                message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon) message.weapon).getBulletDamage());
-            }
-            if (ctx.side == Side.SERVER) {
-                ZombieTC.network.sendToAll(message);
+            if(!message.hit.isDead) {
+                if (message.hit != null && message.shooter != null) {
+                    if(EntityPlayer.class.isAssignableFrom(message.shooter.getClass())) {
+                        EntityPlayer player = ZombieTC.proxy.getWorld(ctx.side).getPlayerEntityByName(message.shooter.getCommandSenderName());
+                        PlayerManager.ZombieTCPlayerProperties.get(player).vim += 100;
+                    }
+                    message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon) message.weapon).getBulletDamage());
+                }
+                if (ctx.side == Side.SERVER) {
+                    ZombieTC.network.sendToAll(message);
+                }
             }
             return null;
         }
