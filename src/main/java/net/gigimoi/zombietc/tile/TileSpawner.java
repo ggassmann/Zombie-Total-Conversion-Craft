@@ -39,7 +39,7 @@ public class TileSpawner extends TileEntity {
     public void updateEntity() {
         if (!worldObj.isRemote) {
             timeToRecheckPathing--;
-            if(timeToRecheckPathing == 0) {
+            if(timeToRecheckPathing <= 0) {
                 timeToRecheckPathing = 500;
                 MCNode closest = BlockNode.getClosestToPosition(worldObj, Vec3.createVectorHelper(xCoord, yCoord + 1, zCoord), true);
                 if(closest == null) {
