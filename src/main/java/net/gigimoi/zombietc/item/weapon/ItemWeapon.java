@@ -38,12 +38,12 @@ import static org.lwjgl.opengl.GL11.*;
 public class ItemWeapon extends Item implements IItemRenderer {
     public static ItemWeapon weaponRadomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1).barrelLength(1.0f).sightHeight(0.1f).damage(2);
     public static ItemWeapon weaponStormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.55, 6, 30, 120, 20, 3).barrelLength(2.0f).sightHeight(1.0f).damage(2);
-    public static ItemWeapon weaponThompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.53, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f).damage(2);
+    public static ItemWeapon weaponThompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.5, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f).damage(2);
     public static ItemWeapon weaponKarbine = new ItemWeapon("Karbine", FireMechanism.semiAutomatic, 0.5, 1, 4, 40, 20, 20).barrelLength(2.5f).sightHeight(0.1f).damage(5);
     public static ItemWeapon weaponVBR_B = new ItemWeapon("VBR-B", FireMechanism.automatic, 1, 6, 42, 420, 22, 1).barrelLength(1.0f).sightHeight(0.2f).damage(1);
-    public static ItemWeapon weaponVenusSMP = new ItemWeapon("Venus SMP", FireMechanism.automatic, 0.48, 3.9, 25, 200, 17, 2).barrelLength(2.0f).sightHeight(0.3f).damage(3);
-    public static ItemWeapon weaponFDRbine = new ItemWeapon("FDRbine", FireMechanism.burst3slow, 0.45, 6, 9, 72, 20, 4).barrelLength(2.0f).sightHeight(1.0f).damage(2);
-    public static ItemWeapon weaponACP44 = new ItemWeapon("ACP44", FireMechanism.burst3fast, 0.7, 4, 21, 210, 18, 1).barrelLength(1.2f).sightHeight(0.2f).damage(2);
+    public static ItemWeapon weaponVenusSMP = new ItemWeapon("Venus SMP", FireMechanism.automatic, 0.52, 3.9, 25, 200, 17, 2).barrelLength(2.0f).sightHeight(0.3f).damage(3);
+    public static ItemWeapon weaponFDRbine = new ItemWeapon("FDRbine", FireMechanism.burst3slow, 0.37, 6, 9, 72, 20, 4).barrelLength(2.0f).sightHeight(1.0f).damage(2);
+    public static ItemWeapon weaponACP44 = new ItemWeapon("ACP44", FireMechanism.burst3fast, 0.6, 4, 21, 210, 18, 1).barrelLength(1.2f).sightHeight(0.2f).damage(2);
 
     public static IModelCustom modelFlash;
     private static Random _r = new Random();
