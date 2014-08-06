@@ -36,7 +36,6 @@ public class MessageChangeEditorMode implements IMessage {
     }
 
     public static class MessageChangeEditorModeHandler implements IMessageHandler<MessageChangeEditorMode, MessageChangeEditorMode> {
-
         @Override
         public MessageChangeEditorMode onMessage(MessageChangeEditorMode message, MessageContext ctx) {
             ZombieTC.editorModeManager.enabled = message.enabled;
