@@ -3,7 +3,7 @@ package net.gigimoi.zombietc.util.pathfinding;
 import com.stackframe.pathfinder.Node;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.block.TileNode;
+import net.gigimoi.zombietc.tile.TileNode;
 import net.gigimoi.zombietc.util.Point3;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;

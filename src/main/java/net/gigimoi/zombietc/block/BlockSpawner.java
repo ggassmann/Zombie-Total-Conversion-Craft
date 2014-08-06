@@ -1,5 +1,6 @@
 package net.gigimoi.zombietc.block;
 
+import net.gigimoi.zombietc.tile.TileSpawner;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

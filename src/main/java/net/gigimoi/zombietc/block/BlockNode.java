@@ -4,6 +4,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.client.gui.GuiNode;
 import net.gigimoi.zombietc.item.ItemNodeLinker;
+import net.gigimoi.zombietc.tile.TileNode;
 import net.gigimoi.zombietc.util.Point3;
 import net.gigimoi.zombietc.util.TextureHelper;
 import net.gigimoi.zombietc.net.map.MessageAddNode;

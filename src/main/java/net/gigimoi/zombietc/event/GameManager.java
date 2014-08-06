@@ -8,7 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.block.ITileEntityPurchasable;
+import net.gigimoi.zombietc.api.ITileEntityPurchasable;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
 import net.gigimoi.zombietc.net.MessagePurchaseTile;

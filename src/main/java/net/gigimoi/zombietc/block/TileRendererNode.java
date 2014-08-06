@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.block;
 
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.tile.TileNode;
 import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.gigimoi.zombietc.util.Point3;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

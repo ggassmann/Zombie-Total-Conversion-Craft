@@ -1,4 +1,4 @@
-package net.gigimoi.zombietc.block;
+package net.gigimoi.zombietc.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

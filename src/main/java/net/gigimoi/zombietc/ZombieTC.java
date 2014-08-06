@@ -24,8 +24,10 @@ import net.gigimoi.zombietc.block.BlockNode;
 import net.gigimoi.zombietc.item.ItemBaubleRingOfHealth;
 import net.gigimoi.zombietc.item.ItemSpawnZZombie;
 import net.gigimoi.zombietc.item.ItemNodeLinker;
-import net.gigimoi.zombietc.block.TileNode;
+import net.gigimoi.zombietc.tile.TileBarricade;
+import net.gigimoi.zombietc.tile.TileNode;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
+import net.gigimoi.zombietc.tile.TileSpawner;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -73,7 +75,6 @@ public class ZombieTC {
         MinecraftForge.EVENT_BUS.register(playerManager);
         MinecraftForge.EVENT_BUS.register(new NaturalSpawnStopper());
 
-        new ItemSpawnZZombie();
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);
 
         registerItem(ItemBaubleRingOfHealth.instance());

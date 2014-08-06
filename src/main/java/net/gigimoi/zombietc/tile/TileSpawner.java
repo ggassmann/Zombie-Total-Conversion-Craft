@@ -1,6 +1,7 @@
-package net.gigimoi.zombietc.block;
+package net.gigimoi.zombietc.tile;
 
 import com.stackframe.pathfinder.AStar;
+import net.gigimoi.zombietc.block.BlockNode;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.entity.player.EntityPlayer;

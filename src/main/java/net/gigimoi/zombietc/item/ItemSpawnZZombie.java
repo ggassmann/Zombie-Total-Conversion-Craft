@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 public class ItemSpawnZZombie extends Item {
     static ItemSpawnZZombie _instance;
 
-    ItemSpawnZZombie() {
+    public ItemSpawnZZombie() {
         setUnlocalizedName("[DEBUG]Spawn Z Zombie");
     }
 

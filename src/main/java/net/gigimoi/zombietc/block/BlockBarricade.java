@@ -5,6 +5,7 @@ import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.map.MessageAddBarricade;
 import net.gigimoi.zombietc.net.map.MessageRemoveBarricade;
+import net.gigimoi.zombietc.tile.TileBarricade;
 import net.gigimoi.zombietc.util.Point3;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

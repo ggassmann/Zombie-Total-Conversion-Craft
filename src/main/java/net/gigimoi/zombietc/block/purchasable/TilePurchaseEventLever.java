@@ -2,9 +2,9 @@ package net.gigimoi.zombietc.block.purchasable;
 
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.block.ITileEntityActivatable;
-import net.gigimoi.zombietc.block.ITileEntityPurchasable;
-import net.gigimoi.zombietc.block.TileEntitySynced;
+import net.gigimoi.zombietc.api.ITileEntityActivatable;
+import net.gigimoi.zombietc.api.ITileEntityPurchasable;
+import net.gigimoi.zombietc.tile.TileEntitySynced;
 import net.gigimoi.zombietc.event.GameManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;

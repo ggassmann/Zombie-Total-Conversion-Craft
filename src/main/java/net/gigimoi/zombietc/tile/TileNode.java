@@ -1,7 +1,6 @@
-package net.gigimoi.zombietc.block;
+package net.gigimoi.zombietc.tile;
 
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.block.TileEntitySynced;
 import net.gigimoi.zombietc.event.GameManager;
 import net.minecraft.nbt.NBTTagCompound;
 

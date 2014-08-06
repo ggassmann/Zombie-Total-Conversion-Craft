@@ -4,16 +4,16 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.block.*;
 import net.gigimoi.zombietc.block.purchasable.TilePurchaseItemStack;
 import net.gigimoi.zombietc.block.purchasable.TileRendererPurchaseItemstack;
 import net.gigimoi.zombietc.client.event.FogManager;
 import net.gigimoi.zombietc.client.event.MainGuiOverrideManager;
 import net.gigimoi.zombietc.client.event.PlayerBuffRenderManager;
-import net.gigimoi.zombietc.block.BlockNode;
-import net.gigimoi.zombietc.block.TileNode;
-import net.gigimoi.zombietc.block.TileRendererNode;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.gigimoi.zombietc.CommonProxy;
+import net.gigimoi.zombietc.tile.TileNode;
+import net.gigimoi.zombietc.tile.TileNodeDoor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
@@ -39,6 +39,7 @@ public class ClientProxy extends CommonProxy {
         super.renderers();
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockNode.instance), BlockNode.instance);
         ClientRegistry.bindTileEntitySpecialRenderer(TileNode.class, new TileRendererNode());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileNodeDoor.class, new TileRendererDoorNode());
         ClientRegistry.bindTileEntitySpecialRenderer(TilePurchaseItemStack.class, new TileRendererPurchaseItemstack());
     }
 

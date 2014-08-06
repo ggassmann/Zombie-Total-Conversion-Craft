@@ -1,4 +1,4 @@
-package net.gigimoi.zombietc.block;
+package net.gigimoi.zombietc.tile;
 
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;

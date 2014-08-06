@@ -7,7 +7,7 @@ import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
 import net.gigimoi.zombietc.net.map.MessageChangeNodeDisabledUntilEvent;
 import net.gigimoi.zombietc.net.map.MessageChangeNodeEventWaitFor;
-import net.gigimoi.zombietc.block.TileNode;
+import net.gigimoi.zombietc.tile.TileNode;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;

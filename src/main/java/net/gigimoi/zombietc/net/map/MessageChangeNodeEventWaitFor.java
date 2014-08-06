@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.util.ByteBufHelper;
-import net.gigimoi.zombietc.block.TileNode;
+import net.gigimoi.zombietc.tile.TileNode;
 import net.minecraft.world.World;
 
 /**
