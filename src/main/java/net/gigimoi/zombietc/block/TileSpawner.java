@@ -2,8 +2,7 @@ package net.gigimoi.zombietc.block;
 
 import com.stackframe.pathfinder.AStar;
 import net.gigimoi.zombietc.event.GameManager;
-import net.gigimoi.zombietc.pathfinding.BlockNode;
-import net.gigimoi.zombietc.pathfinding.MCNode;
+import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

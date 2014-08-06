@@ -6,8 +6,8 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.pathfinding.BlockNode;
-import net.gigimoi.zombietc.pathfinding.MCNode;
+import net.gigimoi.zombietc.block.BlockNode;
+import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.util.Vec3;
 
 /**

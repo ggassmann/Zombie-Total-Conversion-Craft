@@ -1,7 +1,7 @@
 package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.weapon.ItemWeapon;
+import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

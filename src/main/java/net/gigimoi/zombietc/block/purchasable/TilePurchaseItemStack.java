@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.ITileEntityActivatable;
 import net.gigimoi.zombietc.block.ITileEntityPurchasable;
-import net.gigimoi.zombietc.helpers.Lang;
+import net.gigimoi.zombietc.util.Lang;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

@@ -14,15 +14,18 @@ import net.gigimoi.zombietc.block.purchasable.BlockPurchaseEventLever;
 import net.gigimoi.zombietc.block.purchasable.BlockPurchaseItemstack;
 import net.gigimoi.zombietc.block.purchasable.TilePurchaseEventLever;
 import net.gigimoi.zombietc.block.purchasable.TilePurchaseItemStack;
+import net.gigimoi.zombietc.client.event.KeyManager;
+import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.*;
-import net.gigimoi.zombietc.event.client.FogManager;
-import net.gigimoi.zombietc.event.client.MainGuiOverrideManager;
-import net.gigimoi.zombietc.event.client.PlayerBuffRenderManager;
-import net.gigimoi.zombietc.pathfinding.BlockNode;
-import net.gigimoi.zombietc.pathfinding.ItemNodeLinker;
-import net.gigimoi.zombietc.pathfinding.TileNode;
-import net.gigimoi.zombietc.proxy.CommonProxy;
-import net.gigimoi.zombietc.weapon.ItemWeapon;
+import net.gigimoi.zombietc.client.event.FogManager;
+import net.gigimoi.zombietc.client.event.MainGuiOverrideManager;
+import net.gigimoi.zombietc.client.event.PlayerBuffRenderManager;
+import net.gigimoi.zombietc.block.BlockNode;
+import net.gigimoi.zombietc.item.ItemBaubleRingOfHealth;
+import net.gigimoi.zombietc.item.ItemSpawnZZombie;
+import net.gigimoi.zombietc.item.ItemNodeLinker;
+import net.gigimoi.zombietc.block.TileNode;
+import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -45,7 +48,7 @@ public class ZombieTC {
     public static FogManager fogManager;
     public static PlayerBuffRenderManager playerBuffRenderManager;
     public static PlayerManager playerManager;
-    @SidedProxy(clientSide = "net.gigimoi.zombietc.proxy.ClientProxy", serverSide = "net.gigimoi.zombietc.proxy.CommonProxy")
+    @SidedProxy(clientSide = "net.gigimoi.zombietc.client.ClientProxy", serverSide = "net.gigimoi.zombietc.CommonProxy")
     public static CommonProxy proxy;
 
     @EventHandler
@@ -87,6 +90,7 @@ public class ZombieTC {
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockNode.instance);
+        registerBlock(BlockNodeDoor.iron);
 
         registerBlock(BlockPurchaseEventLever.instance, false);
         registerBlock(BlockBarricade.wooden);

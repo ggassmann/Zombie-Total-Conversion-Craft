@@ -6,7 +6,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.weapon.ItemWeapon;
+import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 

@@ -1,11 +1,11 @@
 package net.gigimoi.zombietc.block;
 
-import net.gigimoi.zombietc.EntityZZombie;
+import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.map.MessageAddBarricade;
 import net.gigimoi.zombietc.net.map.MessageRemoveBarricade;
-import net.gigimoi.zombietc.pathfinding.Point3;
+import net.gigimoi.zombietc.util.Point3;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

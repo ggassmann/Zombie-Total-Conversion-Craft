@@ -1,7 +1,7 @@
 package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.gui.GuiPurchaseEventLever;
+import net.gigimoi.zombietc.client.gui.GuiPurchaseEventLever;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

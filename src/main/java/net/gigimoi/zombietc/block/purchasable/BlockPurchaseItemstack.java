@@ -1,8 +1,8 @@
 package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.gui.GuiPurchaseItemStack;
-import net.gigimoi.zombietc.weapon.ItemWeapon;
+import net.gigimoi.zombietc.client.gui.GuiPurchaseItemStack;
+import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;

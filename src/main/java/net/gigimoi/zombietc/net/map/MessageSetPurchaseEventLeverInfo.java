@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.purchasable.TilePurchaseEventLever;
-import net.gigimoi.zombietc.helpers.ByteBufHelper;
+import net.gigimoi.zombietc.util.ByteBufHelper;
 
 /**
  * Created by gigimoi on 7/27/2014.
