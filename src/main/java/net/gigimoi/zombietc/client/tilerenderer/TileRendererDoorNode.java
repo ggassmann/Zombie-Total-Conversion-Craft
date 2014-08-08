@@ -29,11 +29,13 @@ public class TileRendererDoorNode extends TileEntitySpecialRenderer {
         TileNodeDoor tile = (TileNodeDoor) tileRaw;
         if (tile.direction == 0) {
             GL11.glTranslated(0.5, 0, 0.5);
+            GL11.glRotated(180, 0, 1, 0);
         } else if (tile.direction == 2) {
             GL11.glTranslated(0.5, 0, 0.5);
         } else if (tile.direction == 3) {
             GL11.glRotated(90, 0, 1, 0);
             GL11.glTranslated(-0.5, 0, 0.5);
+            GL11.glRotated(180, 0, 1, 0);
         } else {
             GL11.glRotated(90, 0, 1, 0);
             GL11.glTranslated(-0.5, 0, 0.5);
