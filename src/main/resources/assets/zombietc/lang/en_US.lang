@@ -12,7 +12,7 @@ item.ACP44.name=ACP44
 item.Ring of Health.name=Ring of Health
 item.Node Linker.name=Node Linker
 
-tile.Barricade.name=Barricade
+tile.Wooden Barricade.name=Wooden Barricade
 tile.Spawner.name=Spawner
 tile.Node.name=Node
 tile.Purchase Itemstack.name=Purchase Item Stack

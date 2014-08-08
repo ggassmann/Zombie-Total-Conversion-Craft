@@ -11,7 +11,7 @@ item.ACP44.name=ACP44
 
 item.Node Linker.name=Knoten Linker
 
-tile.Barricade.name=Barrikade
+tile.Barricade.name=Hölzern Barrikade
 tile.Spawner.name=Laichener
 tile.Node.name=Knoten
 tile.Purchase Itemstack.name=Kaufen Artikelstapel

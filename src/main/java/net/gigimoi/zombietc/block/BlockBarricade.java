@@ -21,11 +21,11 @@ import java.util.List;
  * Created by gigimoi on 7/16/2014.
  */
 public class BlockBarricade extends BlockContainerZTC {
-    public static BlockBarricade wooden = new BlockBarricade();
+    public static BlockBarricade wooden = new BlockBarricade("Wooden");
 
-    public BlockBarricade() {
+    public BlockBarricade(String prefix) {
         super(Material.rock);
-        setBlockName("Barricade");
+        setBlockName(prefix + " Barricade");
         setHardness(1.0f);
     }
 
