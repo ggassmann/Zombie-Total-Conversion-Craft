@@ -52,13 +52,16 @@ public class BlockNodeDoor extends BlockNode {
         if (entity != null) {
             if (entity.getClass() == EntityZZombie.class) {
                 super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
+                super.addCollisionBoxesToList(world, x, y + 1, z, aabb, mask, entity);
             } else {
-                if (!ZombieTC.editorModeManager.enabled && !(getTile(world, x, y, z).animationTime > 50)) {
+                if (!ZombieTC.editorModeManager.enabled && !(getTile(world, x, y, z).animationTime > 80)) {
                     super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
+                    super.addCollisionBoxesToList(world, x, y + 1, z, aabb, mask, entity);
                 }
             }
         } else {
             super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
+            super.addCollisionBoxesToList(world, x, y + 1, z, aabb, mask, entity);
         }
     }
 
