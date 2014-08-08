@@ -86,7 +86,7 @@ public class BlockPurchaseItemstack extends BlockContainer {
                     return;
                 }
                 tile.itemStack = player.getHeldItem().copy();
-                if(tile.itemStack.hasTagCompound() && tile.itemStack.getItem().getClass() == ItemWeapon.class) {
+                if (tile.itemStack.hasTagCompound() && tile.itemStack.getItem().getClass() == ItemWeapon.class) {
                     tile.itemStack.getTagCompound().setBoolean("InSights", false);
                 }
             }

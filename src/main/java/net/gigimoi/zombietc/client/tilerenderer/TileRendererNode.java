@@ -1,9 +1,10 @@
-package net.gigimoi.zombietc.block;
+package net.gigimoi.zombietc.client.tilerenderer;
 
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.block.BlockNode;
 import net.gigimoi.zombietc.tile.TileNode;
-import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.gigimoi.zombietc.util.Point3;
+import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -21,14 +22,12 @@ public class TileRendererNode extends TileEntitySpecialRenderer {
     public static ResourceLocation texture = new ResourceLocation(ZombieTC.MODID, "textures/models/node.png");
     public static IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/node.obj"));
 
-    @Override
-    public void renderTileEntityAt(TileEntity rawTile, double x, double y, double z, float par5) {
+    public static void renderModel(TileEntity rawTile, double x, double y, double z) {
         if (ZombieTC.editorModeManager.enabled) {
             TileNode tile = (TileNode) rawTile;
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
             GL11.glEnable(GL11.GL_BLEND);
-            bindTexture(texture);
             if (tile.deactivated) {
                 GL11.glColor3b((byte) 0, (byte) 0, (byte) 255);
             }
@@ -62,5 +61,11 @@ public class TileRendererNode extends TileEntitySpecialRenderer {
             }
             GL11.glPopMatrix();
         }
+    }
+
+    @Override
+    public void renderTileEntityAt(TileEntity rawTile, double x, double y, double z, float par5) {
+        bindTexture(texture);
+        renderModel(rawTile, x, y, z);
     }
 }

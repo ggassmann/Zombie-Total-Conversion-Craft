@@ -19,6 +19,7 @@ import java.util.List;
 public class TileSpawner extends TileEntity {
     public String entityToSpawn = "";
     public boolean enabled = false;
+    int timeToRecheckPathing = 1;
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
@@ -34,19 +35,18 @@ public class TileSpawner extends TileEntity {
         tag.setBoolean("Enabled", enabled);
     }
 
-    int timeToRecheckPathing = 1;
     @Override
     public void updateEntity() {
         if (!worldObj.isRemote) {
             timeToRecheckPathing--;
-            if(timeToRecheckPathing <= 0) {
+            if (timeToRecheckPathing <= 0) {
                 timeToRecheckPathing = 500;
                 MCNode closest = BlockNode.getClosestToPosition(worldObj, Vec3.createVectorHelper(xCoord, yCoord + 1, zCoord), true);
-                if(closest == null) {
+                if (closest == null) {
                     enabled = false;
                 } else {
                     EntityPlayer closestPlayer = worldObj.getClosestPlayer(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, 50000);
-                    if(closestPlayer == null) {
+                    if (closestPlayer == null) {
                         enabled = false;
                     } else {
                         MCNode goal = BlockNode.getClosestToPosition(worldObj, Vec3.createVectorHelper(closestPlayer.posX, closestPlayer.posY, closestPlayer.posZ), false);
@@ -56,7 +56,7 @@ public class TileSpawner extends TileEntity {
                             ArrayList<MCNode> goals = new ArrayList<MCNode>(1);
                             goals.add(goal);
                             List<MCNode> path = new AStar<MCNode>().findPath(BlockNode.nodes, closest, goals);
-                            if(path == null || path.size() == 0) {
+                            if (path == null || path.size() == 0) {
                                 enabled = false;
                             } else {
                                 enabled = true;
@@ -65,7 +65,7 @@ public class TileSpawner extends TileEntity {
                     }
                 }
             }
-            if(enabled) {
+            if (enabled) {
                 GameManager.spawnPositions.add(new Vector3f(xCoord + 0.5f, yCoord + 1, zCoord + 0.5f));
                 GameManager.worldsSpawnedTo.add(worldObj);
             }

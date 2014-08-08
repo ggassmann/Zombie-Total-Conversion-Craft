@@ -5,8 +5,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
-import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.PlayerManager;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.minecraft.entity.Entity;
@@ -60,18 +60,18 @@ public class MessageShoot implements IMessage {
         public MessageShoot onMessage(MessageShoot message, MessageContext ctx) {
             World world = ((EntityLivingBase) message.shooter).worldObj;
             //TODO: Server side raytracing
-            if(!message.hit.isDead) {
+            if (!message.hit.isDead) {
                 if (message.hit != null && message.shooter != null) {
                     EntityPlayer player = null;
-                    if(EntityPlayer.class.isAssignableFrom(message.shooter.getClass())) {
+                    if (EntityPlayer.class.isAssignableFrom(message.shooter.getClass())) {
                         player = ZombieTC.proxy.getWorld(ctx.side).getPlayerEntityByName(message.shooter.getCommandSenderName());
                     }
-                    if(player != null) {
+                    if (player != null) {
                         PlayerManager.ZombieTCPlayerProperties.get(player).vim += 10;
                         message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon) message.weapon).getBulletDamage());
-                        if(EntityZZombie.class.isAssignableFrom(message.hit.getClass())) {
-                            EntityZZombie zombie = (EntityZZombie)message.hit;
-                            if(zombie.getHealth() <= 0) {
+                        if (EntityZZombie.class.isAssignableFrom(message.hit.getClass())) {
+                            EntityZZombie zombie = (EntityZZombie) message.hit;
+                            if (zombie.getHealth() <= 0) {
                                 PlayerManager.ZombieTCPlayerProperties.get(player).vim += 90;
                             }
                         }

@@ -1,9 +1,9 @@
 package net.gigimoi.zombietc.tile;
 
-import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
 import net.gigimoi.zombietc.client.ClientProxy;
+import net.gigimoi.zombietc.entity.EntityZZombie;
+import net.gigimoi.zombietc.net.activates.MessageActivateRepairBarricade;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;

@@ -1,7 +1,7 @@
 package net.gigimoi.zombietc.block;
 
-import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.map.MessageAddBarricade;
 import net.gigimoi.zombietc.net.map.MessageRemoveBarricade;
@@ -21,7 +21,6 @@ import java.util.List;
 /**
  * Created by gigimoi on 7/16/2014.
  */
-// The magnitude of the bullshit required to make this work compares favorably with that of the national debt.
 public class BlockBarricade extends BlockContainer {
     public static BlockBarricade wooden = new BlockBarricade();
 

@@ -22,6 +22,7 @@ public class MainGuiOverrideManager {
             TextRenderHelper.drawString("Zombie Total Conversion Craft", 2, 2, TextAlignment.Left);
         }
     }
+
     @SubscribeEvent
     public void onInitGui(GuiScreenEvent.InitGuiEvent.Post event) {
         if (event.gui.getClass() == GuiMainMenu.class && event.buttonList.size() > 0) {
@@ -38,7 +39,7 @@ public class MainGuiOverrideManager {
             cancelButton.xPosition -= cancelButton.width + 6;
             cancelButton.width *= 2;
             cancelButton.width += 6;
-            GuiButton createWorldButton = (GuiButton)event.buttonList.get(1);
+            GuiButton createWorldButton = (GuiButton) event.buttonList.get(1);
             createWorldButton.displayString = "New World (Editor mode)";
         }
     }

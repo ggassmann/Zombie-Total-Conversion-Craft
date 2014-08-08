@@ -3,8 +3,8 @@ package net.gigimoi.zombietc.event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.net.MessageChangeEditorMode;
 import net.gigimoi.zombietc.client.ClientProxy;
+import net.gigimoi.zombietc.net.MessageChangeEditorMode;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 /**

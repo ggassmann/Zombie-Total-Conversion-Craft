@@ -36,6 +36,7 @@ public class FireMechanism {
     public boolean checkFire(ItemWeapon weaponType, ItemStack stack) {
         return false;
     }
+
     private static class FireMechanismBurst extends FireMechanism {
         private int burstShotsLeft;
         private ItemWeapon burstingWeapon;
@@ -52,13 +53,13 @@ public class FireMechanism {
         public boolean checkFire(ItemWeapon weaponType, ItemStack stack) {
             NBTTagCompound tag = stack.getTagCompound();
             burstShotDelay = Math.max(0, burstShotDelay - 1);
-            if(burstingWeapon == weaponType && burstShotsLeft > 0 && burstShotDelay == 0) {
+            if (burstingWeapon == weaponType && burstShotsLeft > 0 && burstShotDelay == 0) {
                 burstShotsLeft--;
                 burstShotDelay = delay;
                 return true;
             }
             if (tag.getInteger("ShootCooldown") <= 0) {
-                if(ZombieTC.mouseManager.isLeftPressed()) {
+                if (ZombieTC.mouseManager.isLeftPressed()) {
                     burstingWeapon = weaponType;
                     burstShotsLeft = shots - 1;
                     burstShotDelay = delay;

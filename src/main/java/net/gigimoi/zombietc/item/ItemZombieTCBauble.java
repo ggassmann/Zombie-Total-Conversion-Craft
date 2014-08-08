@@ -33,7 +33,7 @@ public abstract class ItemZombieTCBauble extends Item implements IBauble {
     @Override
     public boolean canUnequip(ItemStack stack, EntityLivingBase entityLivingBase) {
         System.out.println(entityLivingBase.getClass());
-        if(entityLivingBase.getClass() == EntityPlayerMP.class) {
+        if (entityLivingBase.getClass() == EntityPlayerMP.class) {
             EntityPlayer entityPlayer = (EntityPlayer) entityLivingBase;
             entityPlayer.addChatMessage(new ChatComponentText(stack.getDisplayName() + " is bound to you"));
         }
@@ -42,16 +42,17 @@ public abstract class ItemZombieTCBauble extends Item implements IBauble {
 
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
-        if(ZombieTC.editorModeManager.enabled) {
+        if (ZombieTC.editorModeManager.enabled) {
             return;
         }
-        if(EntityPlayer.class.isAssignableFrom(entity.getClass())) {
-            EntityPlayer player = (EntityPlayer)entity;
+        if (EntityPlayer.class.isAssignableFrom(entity.getClass())) {
+            EntityPlayer player = (EntityPlayer) entity;
             BaublesApi.getBaubles(player).setInventorySlotContents(getStackSlot(), stack);
-            for(int i = 0; i < player.inventory.getSizeInventory(); i++) {
-                if(player.inventory.getStackInSlot(i) == stack) {
+            for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+                if (player.inventory.getStackInSlot(i) == stack) {
                     player.inventory.setInventorySlotContents(i, null);
-                    if(world.isRemote) player.addChatMessage(new ChatComponentText(stack.getDisplayName() + " has been equipped"));
+                    if (world.isRemote)
+                        player.addChatMessage(new ChatComponentText(stack.getDisplayName() + " has been equipped"));
                     break;
                 }
             }

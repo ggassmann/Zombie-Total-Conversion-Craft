@@ -4,8 +4,8 @@ import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.api.ITileEntityActivatable;
 import net.gigimoi.zombietc.api.ITileEntityPurchasable;
-import net.gigimoi.zombietc.tile.TileEntitySynced;
 import net.gigimoi.zombietc.event.GameManager;
+import net.gigimoi.zombietc.tile.TileEntitySynced;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -44,8 +44,7 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
         if (ZombieTC.editorModeManager.enabled && isDown) {
             activate(null, Side.SERVER);
             isDown = false;
-        }
-        else if(GameManager.isEventTriggering(event) && !isDown) {
+        } else if (GameManager.isEventTriggering(event) && !isDown) {
             activate(null, worldObj.isRemote ? Side.CLIENT : Side.SERVER);
         }
     }

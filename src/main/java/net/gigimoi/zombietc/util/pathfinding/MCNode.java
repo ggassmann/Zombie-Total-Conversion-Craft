@@ -58,7 +58,7 @@ public class MCNode implements Node<MCNode> {
 
     public boolean isDisabled() {
         World world = ZombieTC.proxy.getWorld(Side.CLIENT);
-        if(world == null) {
+        if (world == null) {
             return true;
         }
         TileEntity tileRaw = world.getTileEntity(position.xCoord, position.yCoord, position.zCoord);

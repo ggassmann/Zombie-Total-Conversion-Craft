@@ -7,13 +7,13 @@ import net.minecraft.entity.player.EntityPlayer;
  */
 public class DirectionHelper {
     public static int getPlayerDirection(EntityPlayer player) {
-        int yaw = (int)player.rotationYaw;
+        int yaw = (int) player.rotationYaw;
         if (yaw < 0) {
             yaw += 360;
         }
         yaw += 22;
         yaw %= 360;
 
-        return yaw/90;
+        return yaw / 90;
     }
 }

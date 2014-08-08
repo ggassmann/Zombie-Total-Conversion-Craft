@@ -1,16 +1,16 @@
 package net.gigimoi.zombietc.item.weapon;
 
-import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.BlockBarricade;
+import net.gigimoi.zombietc.client.ClientProxy;
+import net.gigimoi.zombietc.entity.EntityZZombie;
+import net.gigimoi.zombietc.net.MessageReload;
+import net.gigimoi.zombietc.net.MessageShoot;
+import net.gigimoi.zombietc.net.MessageTryShoot;
 import net.gigimoi.zombietc.util.MouseOverHelper;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
 import net.gigimoi.zombietc.util.TextureHelper;
-import net.gigimoi.zombietc.net.MessageReload;
-import net.gigimoi.zombietc.net.MessageShoot;
-import net.gigimoi.zombietc.net.MessageTryShoot;
-import net.gigimoi.zombietc.client.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
@@ -36,6 +36,9 @@ import static org.lwjgl.opengl.GL11.*;
  * Created by gigimoi on 7/17/2014.
  */
 public class ItemWeapon extends Item implements IItemRenderer {
+    private static final Block[] ignoredBlocksList = new Block[]{
+            BlockBarricade.wooden
+    };
     public static ItemWeapon weaponRadomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1).barrelLength(1.0f).sightHeight(0.1f).damage(2);
     public static ItemWeapon weaponStormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.55, 6, 30, 120, 20, 3).barrelLength(2.0f).sightHeight(1.0f).damage(2);
     public static ItemWeapon weaponThompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.5, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f).damage(2);
@@ -44,7 +47,6 @@ public class ItemWeapon extends Item implements IItemRenderer {
     public static ItemWeapon weaponVenusSMP = new ItemWeapon("Venus SMP", FireMechanism.automatic, 0.52, 3.9, 25, 200, 17, 2).barrelLength(2.0f).sightHeight(0.3f).damage(3);
     public static ItemWeapon weaponFDRbine = new ItemWeapon("FDRbine", FireMechanism.burst3slow, 0.37, 6, 9, 72, 20, 4).barrelLength(2.0f).sightHeight(1.0f).damage(2);
     public static ItemWeapon weaponACP44 = new ItemWeapon("ACP44", FireMechanism.burst3fast, 0.6, 4, 21, 210, 18, 1).barrelLength(1.2f).sightHeight(0.2f).damage(2);
-
     public static IModelCustom modelFlash;
     private static Random _r = new Random();
     public FireMechanism fireMechanism;
@@ -58,9 +60,6 @@ public class ItemWeapon extends Item implements IItemRenderer {
     private int damage;
     private float barrelLength;
     private float sightHeight;
-    private static final Block[] ignoredBlocksList = new Block[] {
-        BlockBarricade.wooden
-    };
 
     public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo, int reloadTime, int fireDelay) {
         this.setUnlocalizedName(name);
@@ -223,8 +222,8 @@ public class ItemWeapon extends Item implements IItemRenderer {
                                     player.posX,
                                     player.posY,
                                     player.posZ,
-                                    player.rotationYaw + ((float)_r.nextInt(100) - 50f) / 20f,
-                                    player.rotationPitch - ((float)_r.nextInt(100)) / 20f
+                                    player.rotationYaw + ((float) _r.nextInt(100) - 50f) / 20f,
+                                    player.rotationPitch - ((float) _r.nextInt(100)) / 20f
                             );
                             ZombieTC.proxy.playSound("pistolShoot", (float) player.posX, (float) player.posY, (float) player.posZ);
                             ZombieTC.network.sendToServer(new MessageTryShoot(player));

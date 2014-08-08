@@ -40,7 +40,7 @@ public class MessageChangeEditorMode implements IMessage {
         public MessageChangeEditorMode onMessage(MessageChangeEditorMode message, MessageContext ctx) {
             ZombieTC.editorModeManager.enabled = message.enabled;
             List<EntityPlayer> players = ZombieTC.proxy.getWorld(ctx.side).playerEntities;
-            for(int i = 0; i < players.size(); i++) {
+            for (int i = 0; i < players.size(); i++) {
                 PlayerManager.ZombieTCPlayerProperties.get(players.get(i)).vim = 100;
             }
             if (!ZombieTC.editorModeManager.enabled) {

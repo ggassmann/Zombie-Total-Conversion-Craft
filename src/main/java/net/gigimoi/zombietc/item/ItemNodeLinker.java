@@ -33,7 +33,7 @@ public class ItemNodeLinker extends Item {
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float i, float j, float k) {
         if (world.isRemote) {
             Block target = world.getBlock(x, y, z);
-            if (target.getClass() == BlockNode.class) {
+            if (BlockNode.class.isAssignableFrom(target.getClass())) {
                 if (!stack.hasTagCompound()) {
                     stack.setTagCompound(new NBTTagCompound());
                     stack.getTagCompound().setInteger("xCoord", x);

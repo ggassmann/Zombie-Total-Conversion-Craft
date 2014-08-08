@@ -27,7 +27,7 @@ public class MouseOverHelper {
         List<Point3> blockPositions = new ArrayList();
         List<NBTTagCompound> blockDatas = new ArrayList();
         List<Block> blocksIgnored = new ArrayList(ignoredBlocks.length);
-        for(int i = 0; i < ignoredBlocks.length; i++) {
+        for (int i = 0; i < ignoredBlocks.length; i++) {
             blocksIgnored.add(ignoredBlocks[i]);
         }
 
@@ -35,15 +35,19 @@ public class MouseOverHelper {
             if (mc.theWorld != null) {
                 pointedEntity = null;
                 double d0 = (double) maxDistance;
-                while(trace == null ||(
-                         trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK &&
-                         blocksIgnored.contains(mc.theWorld.getBlock(trace.blockX, trace.blockY, trace.blockZ))
-                    )){
-                    if(trace != null && trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+                while (trace == null || (
+                        trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK &&
+                                blocksIgnored.contains(mc.theWorld.getBlock(trace.blockX, trace.blockY, trace.blockZ))
+                )) {
+                    if (trace != null && trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                         NBTTagCompound nbt = new NBTTagCompound();
                         TileEntity tile = mc.theWorld.getTileEntity(trace.blockX, trace.blockY, trace.blockZ);
-                        if(tile != null) {tile.writeToNBT(nbt); blockDatas.add(nbt); }
-                        else { blockDatas.add(null); }
+                        if (tile != null) {
+                            tile.writeToNBT(nbt);
+                            blockDatas.add(nbt);
+                        } else {
+                            blockDatas.add(null);
+                        }
                         blocksRemoved.add(mc.theWorld.getBlock(trace.blockX, trace.blockY, trace.blockZ));
                         blockPositions.add(new Point3(trace.blockX, trace.blockY, trace.blockZ));
                         mc.theWorld.setBlock(trace.blockX, trace.blockY, trace.blockZ, Blocks.air);
@@ -103,13 +107,13 @@ public class MouseOverHelper {
                 }
             }
         }
-        for(int i = 0; i < blocksRemoved.size(); i++) {
+        for (int i = 0; i < blocksRemoved.size(); i++) {
             Block block = blocksRemoved.get(i);
             Point3 position = blockPositions.get(i);
             NBTTagCompound data = blockDatas.get(i);
             mc.theWorld.setBlock(position.xCoord, position.yCoord, position.zCoord, block);
             TileEntity tile = mc.theWorld.getTileEntity(position.xCoord, position.yCoord, position.zCoord);
-            if(tile != null && data != null) {
+            if (tile != null && data != null) {
                 tile.readFromNBT(data);
             }
         }

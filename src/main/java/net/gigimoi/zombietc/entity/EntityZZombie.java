@@ -2,8 +2,8 @@ package net.gigimoi.zombietc.entity;
 
 import com.stackframe.pathfinder.Dijkstra;
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.event.PlayerManager;
 import net.gigimoi.zombietc.block.BlockNode;
+import net.gigimoi.zombietc.event.PlayerManager;
 import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -31,6 +31,7 @@ public class EntityZZombie extends EntityZombie {
     boolean hasSetDefaultTarget = false;
     boolean yieldingToOtherZombie = false;
     MCNode lastPassed;
+
     public EntityZZombie(World world) {
         super(world);
         this.tasks.taskEntries = new ArrayList();
@@ -71,7 +72,7 @@ public class EntityZZombie extends EntityZombie {
                     nearest.attackEntityFrom(
                             new DamageSource("Zombie"), 2
                     );
-                    ((PlayerManager.ZombieTCPlayerProperties)nearest.getExtendedProperties(ZombieTC.MODID)).timeSinceHit = 0;
+                    ((PlayerManager.ZombieTCPlayerProperties) nearest.getExtendedProperties(ZombieTC.MODID)).timeSinceHit = 0;
                 }
             } else {
                 this.setSize(0.0F, 0.0F);

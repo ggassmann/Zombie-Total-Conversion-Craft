@@ -2,9 +2,9 @@ package net.gigimoi.zombietc.client.gui;
 
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.purchasable.TilePurchaseEventLever;
+import net.gigimoi.zombietc.net.map.MessageSetPurchaseEventLeverInfo;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
-import net.gigimoi.zombietc.net.map.MessageSetPurchaseEventLeverInfo;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;

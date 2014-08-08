@@ -54,9 +54,9 @@ public class MessagePurchaseTile implements IMessage {
             TileEntity tile = ZombieTC.proxy.getWorld(ctx.side).getTileEntity(message.x, message.y, message.z);
             ITileEntityActivatable activatable = (ITileEntityActivatable) tile;
             activatable.activate(message.activator, ctx.side);
-            if(ITileEntityPurchasable.class.isAssignableFrom(tile.getClass())) {
+            if (ITileEntityPurchasable.class.isAssignableFrom(tile.getClass())) {
                 EntityPlayer player = ZombieTC.proxy.getWorld(ctx.side).getPlayerEntityByName(message.activator.getCommandSenderName());
-                ITileEntityPurchasable purchasable = (ITileEntityPurchasable)tile;
+                ITileEntityPurchasable purchasable = (ITileEntityPurchasable) tile;
                 PlayerManager.ZombieTCPlayerProperties.get(player).vim -= purchasable.getPrice();
             }
             if (ctx.side.isServer()) {

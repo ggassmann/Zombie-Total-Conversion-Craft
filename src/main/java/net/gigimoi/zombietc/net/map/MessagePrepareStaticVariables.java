@@ -6,8 +6,8 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.BlockNode;
-import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.gigimoi.zombietc.util.Point3;
+import net.gigimoi.zombietc.util.pathfinding.MCNode;
 
 import java.util.ArrayList;
 

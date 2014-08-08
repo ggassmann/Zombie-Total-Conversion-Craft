@@ -6,24 +6,24 @@ import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.api.ITileEntityPurchasable;
-import net.gigimoi.zombietc.util.TextAlignment;
-import net.gigimoi.zombietc.util.TextRenderHelper;
-import net.gigimoi.zombietc.net.MessagePurchaseTile;
+import net.gigimoi.zombietc.block.BlockNode;
+import net.gigimoi.zombietc.client.ClientProxy;
+import net.gigimoi.zombietc.entity.EntityZZombie;
+import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.gigimoi.zombietc.net.MessageChangeEditorMode;
+import net.gigimoi.zombietc.net.MessagePurchaseTile;
 import net.gigimoi.zombietc.net.MessageRegeneratePathMap;
 import net.gigimoi.zombietc.net.MessageSetWave;
 import net.gigimoi.zombietc.net.map.MessageAddBarricade;
 import net.gigimoi.zombietc.net.map.MessageAddNode;
 import net.gigimoi.zombietc.net.map.MessageAddNodeConnection;
 import net.gigimoi.zombietc.net.map.MessagePrepareStaticVariables;
-import net.gigimoi.zombietc.block.BlockNode;
-import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.gigimoi.zombietc.util.Point3;
-import net.gigimoi.zombietc.client.ClientProxy;
-import net.gigimoi.zombietc.item.weapon.ItemWeapon;
+import net.gigimoi.zombietc.util.TextAlignment;
+import net.gigimoi.zombietc.util.TextRenderHelper;
+import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -59,6 +59,7 @@ public class GameManager {
     int timeToNextWave = 0;
     int nextWaveZombies = 0;
     int currentWaveMaxZombies = 0;
+    short refreshFoodbarsCooldown = 0;
     private Random _r = new Random();
     private int activateMessageDuration = 0;
     private String activateMessage;
@@ -76,15 +77,15 @@ public class GameManager {
         }
         return false;
     }
-    short refreshFoodbarsCooldown = 0;
+
     @SubscribeEvent
     public void onTick(TickEvent event) {
         refreshFoodbarsCooldown++;
-        if(refreshFoodbarsCooldown > 200 && ZombieTC.proxy.getWorld(event.side) != null) {
+        if (refreshFoodbarsCooldown > 200 && ZombieTC.proxy.getWorld(event.side) != null) {
             refreshFoodbarsCooldown = 0;
             List playerEntities = ZombieTC.proxy.getWorld(event.side).playerEntities;
-            for(int i = 0; i < playerEntities.size(); i++) {
-                EntityPlayer player = (EntityPlayer)playerEntities.get(i);
+            for (int i = 0; i < playerEntities.size(); i++) {
+                EntityPlayer player = (EntityPlayer) playerEntities.get(i);
                 player.getFoodStats().addStats(100, 100);
             }
         }
@@ -125,13 +126,13 @@ public class GameManager {
             }
         } else if (event.side == Side.CLIENT && ZombieTC.proxy.getWorld(Side.CLIENT) != null) {
             EntityPlayer player = ZombieTC.proxy.getPlayer();
-            TileEntity tilePlayerOver = player.worldObj.getTileEntity((int)Math.round(player.posX - 0.5), (int)Math.round(player.posY - 0.5), (int)Math.round(player.posZ - 0.5));
+            TileEntity tilePlayerOver = player.worldObj.getTileEntity((int) Math.round(player.posX - 0.5), (int) Math.round(player.posY - 0.5), (int) Math.round(player.posZ - 0.5));
             if (tilePlayerOver != null && ITileEntityPurchasable.class.isAssignableFrom(tilePlayerOver.getClass())) {
                 ITileEntityPurchasable purchasable = (ITileEntityPurchasable) tilePlayerOver;
                 if (purchasable.getEnabled()) {
                     setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to " + purchasable.getVerb() + ":" + purchasable.getPrice() + "exp");
                     if (activating && PlayerManager.ZombieTCPlayerProperties.get(player).vim >= purchasable.getPrice()) {
-                        TileEntity tile = (TileEntity)purchasable;
+                        TileEntity tile = (TileEntity) purchasable;
                         ZombieTC.network.sendToServer(new MessagePurchaseTile(tile.xCoord, tile.yCoord, tile.zCoord, player));
                     }
                 }
@@ -299,11 +300,11 @@ public class GameManager {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
-        if(event.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && !ZombieTC.editorModeManager.enabled) {
+        if (event.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && !ZombieTC.editorModeManager.enabled) {
             event.setCanceled(true);
             return;
         }
-        if(event.type == RenderGameOverlayEvent.ElementType.FOOD) {
+        if (event.type == RenderGameOverlayEvent.ElementType.FOOD) {
             event.setCanceled(true);
             return;
         }

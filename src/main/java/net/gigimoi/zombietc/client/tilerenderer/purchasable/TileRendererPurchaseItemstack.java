@@ -1,6 +1,7 @@
-package net.gigimoi.zombietc.block.purchasable;
+package net.gigimoi.zombietc.client.tilerenderer.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.block.purchasable.TilePurchaseItemStack;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -19,7 +20,9 @@ import org.lwjgl.opengl.GL11;
 public class TileRendererPurchaseItemstack extends TileEntitySpecialRenderer {
     private static RenderItem renderItem = new RenderItem() {
         @Override
-        public boolean shouldBob() { return false; }
+        public boolean shouldBob() {
+            return false;
+        }
     };
 
     @Override
@@ -48,7 +51,7 @@ public class TileRendererPurchaseItemstack extends TileEntitySpecialRenderer {
             GL11.glScaled(itemWeapon.inventoryScale, itemWeapon.inventoryScale, itemWeapon.inventoryScale);
             itemWeapon.renderItem(IItemRenderer.ItemRenderType.ENTITY, tile.itemStack);
         } else {
-            if(tile.itemStack != null) {
+            if (tile.itemStack != null) {
                 EntityItem eItem = new EntityItem(tile.getWorldObj());
                 eItem.hoverStart = 0.0F;
                 eItem.setEntityItemStack(tile.itemStack);
@@ -59,7 +62,7 @@ public class TileRendererPurchaseItemstack extends TileEntitySpecialRenderer {
                 renderItem.setRenderManager(RenderManager.instance);
                 renderItem.doRender(eItem, 0, 0, 0, 0, 0);
                 GL11.glPopMatrix();
-            } else if(ZombieTC.editorModeManager.enabled) {
+            } else if (ZombieTC.editorModeManager.enabled) {
                 GL11.glScaled(0.1, 0.1, 0.1);
                 GL11.glRotated(90, 0, 0, 1);
                 GL11.glRotated(-90, 0, 1, 0);

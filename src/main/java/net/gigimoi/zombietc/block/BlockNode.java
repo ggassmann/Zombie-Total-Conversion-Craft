@@ -3,13 +3,14 @@ package net.gigimoi.zombietc.block;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.client.gui.GuiNode;
+import net.gigimoi.zombietc.client.tilerenderer.TileRendererNode;
 import net.gigimoi.zombietc.item.ItemNodeLinker;
+import net.gigimoi.zombietc.net.map.MessageAddNode;
+import net.gigimoi.zombietc.net.map.MessageRemoveNode;
 import net.gigimoi.zombietc.tile.TileNode;
 import net.gigimoi.zombietc.util.Point3;
 import net.gigimoi.zombietc.util.TextureHelper;
-import net.gigimoi.zombietc.net.map.MessageAddNode;
-import net.gigimoi.zombietc.net.map.MessageRemoveNode;
-import net.gigimoi.zombietc.util.pathfinding.*;
+import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -35,6 +36,7 @@ public class BlockNode extends BlockContainer implements IItemRenderer {
     public static List<MCNode> nodes = new ArrayList<MCNode>();
     public static List<MCNodePair> nodeConnections = new ArrayList<MCNodePair>();
     private static int renderID = -1;
+
     public BlockNode() {
         super(Material.rock);
         setHardness(1f);

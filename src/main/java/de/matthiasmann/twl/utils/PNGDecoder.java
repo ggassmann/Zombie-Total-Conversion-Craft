@@ -72,6 +72,7 @@ public class PNGDecoder {
     private byte[] palette;
     private byte[] paletteA;
     private byte[] transPixel;
+
     public PNGDecoder(InputStream input) throws IOException {
         this.input = input;
         this.crc = new CRC32();
