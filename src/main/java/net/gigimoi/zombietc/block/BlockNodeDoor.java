@@ -54,7 +54,7 @@ public class BlockNodeDoor extends BlockNode {
                 super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
                 super.addCollisionBoxesToList(world, x, y + 1, z, aabb, mask, entity);
             } else {
-                if (!ZombieTC.editorModeManager.enabled && !(getTile(world, x, y, z).animationTime > 80)) {
+                if (!ZombieTC.editorModeManager.enabled && !(getTile(world, x, y, z).animationTime > 70)) {
                     super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
                     super.addCollisionBoxesToList(world, x, y + 1, z, aabb, mask, entity);
                 }
@@ -71,7 +71,7 @@ public class BlockNodeDoor extends BlockNode {
     }
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z) {
-        return Blocks.stone.getCollisionBoundingBoxFromPool(par1World, x, y, z);
+        return Blocks.stone.getCollisionBoundingBoxFromPool(par1World, x, y, z).expand(0, 1, 0);
     }
 
     @Override
