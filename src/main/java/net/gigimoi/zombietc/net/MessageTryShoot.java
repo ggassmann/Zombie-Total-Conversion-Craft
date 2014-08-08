@@ -38,8 +38,8 @@ public class MessageTryShoot implements IMessage {
     public static class MessagePlayShootSoundHandler implements IMessageHandler<MessageTryShoot, MessageTryShoot> {
         @Override
         public MessageTryShoot onMessage(MessageTryShoot message, MessageContext ctx) {
+            ItemStack stack = ((EntityLivingBase) message.at).getHeldItem();
             if (ctx.side == Side.SERVER) {
-                ItemStack stack = ((EntityLivingBase) message.at).getHeldItem();
                 if (stack != null && stack.hasTagCompound()) {
                     NBTTagCompound tag = stack.getTagCompound();
                     if (stack != null && stack.getItem().getClass() == ItemWeapon.class) {
@@ -50,7 +50,7 @@ public class MessageTryShoot implements IMessage {
                     }
                 }
             } else {
-                ZombieTC.proxy.playSound("pistolShoot", (float) message.at.posX, (float) message.at.posY, (float) message.at.posZ);
+                ZombieTC.proxy.playSound("shoot-" + stack.getUnlocalizedName().substring(5), (float) message.at.posX, (float) message.at.posY, (float) message.at.posZ);
             }
             return null;
         }

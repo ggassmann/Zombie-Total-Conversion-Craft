@@ -1,11 +1,41 @@
 {
-   "pistolShoot": {"category": "master","sounds": [
-        {"name": "pistolShoot1","stream": false},
-        {"name": "pistolShoot2","stream": false},
-        {"name": "pistolShoot3","stream": false},
-        {"name": "pistolShoot4","stream": false}
+   "shoot-FDRbine": {"category": "master", "sounds": [
+        {"name": "fDRbineShoot1","stream": false},
+        {"name": "fDRbineShoot2","stream": false},
+        {"name": "fDRbineShoot3","stream": false},
+        {"name": "fDRbineShoot4","stream": false}
     ]},
-   "barricadeRepair": {"category": "master","sounds": [
+   "shoot-Karbine": {"category": "master", "sounds": [
+        {"name": "karbineShoot1","stream": false},
+        {"name": "karbineShoot2","stream": false},
+        {"name": "karbineShoot3","stream": false},
+        {"name": "karbineShoot4","stream": false}
+    ]},
+   "shoot-Radom Vis": {"category": "master", "sounds": [
+        {"name": "radomVisShoot1","stream": false},
+        {"name": "radomVisShoot2","stream": false},
+        {"name": "radomVisShoot3","stream": false},
+        {"name": "radomVisShoot4","stream": false}
+    ]},
+    "shoot-Storm Rifle": {"category": "master", "sounds": [
+        {"name": "stormRifleShoot1","stream": false},
+        {"name": "stormRifleShoot2","stream": false},
+        {"name": "stormRifleShoot3","stream": false},
+        {"name": "stormRifleShoot4","stream": false}
+    ]},
+    "shoot-Thomspon": {"category": "master", "sounds": [
+        {"name": "thompsonShoot1","stream": false},
+        {"name": "thompsonShoot2","stream": false},
+        {"name": "thompsonShoot3","stream": false},
+        {"name": "thompsonShoot4","stream": false}
+    ]},
+    "shoot-Venus SMP": {"category": "master", "sounds": [
+        {"name": "venusSMPShoot1","stream": false},
+        {"name": "venusSMPShoot2","stream": false},
+        {"name": "venusSMPShoot3","stream": false},
+        {"name": "venusSMPShoot4","stream": false}
+    ]},
+   "barricadeRepair": {"category": "master", "sounds": [
         {"name": "barricadeRepair1","stream": false},
         {"name": "barricadeRepair2","stream": false},
         {"name": "barricadeRepair3","stream": false},
