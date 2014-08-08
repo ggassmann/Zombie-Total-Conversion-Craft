@@ -50,6 +50,7 @@ public class TileNodeDoor extends TileNode implements IListenerZTC {
     public void onEvent(String event) {
         if(deactivatedUntilEvent && eventWaitFor.equals(event)) {
             isEventTriggering = true;
+            deactivated = false;
         }
     }
 }
