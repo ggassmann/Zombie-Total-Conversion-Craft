@@ -1,4 +1,4 @@
-package net.gigimoi.zombietc.block.purchasable;
+package net.gigimoi.zombietc.tile.purchasable;
 
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;

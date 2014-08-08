@@ -3,8 +3,8 @@ package net.gigimoi.zombietc.block.purchasable;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.BlockContainerZTC;
 import net.gigimoi.zombietc.client.gui.GuiPurchaseEventLever;
+import net.gigimoi.zombietc.tile.purchasable.TilePurchaseEventLever;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -105,6 +105,7 @@ public class BlockPurchaseEventLever extends BlockContainerZTC {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+        super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ);
         if (ZombieTC.editorModeManager.enabled) {
             player.openGui(ZombieTC.instance, GuiPurchaseEventLever.GUI_ID, player.worldObj, x, y, z);
             return true;
@@ -113,6 +114,7 @@ public class BlockPurchaseEventLever extends BlockContainerZTC {
     }
 
     public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int par9) {
+        super.onBlockPlaced(world, x, y, z, side, hitX, hitY, hitZ, par9);
         int k1 = par9 & 8;
         int j1 = par9 & 7;
         byte b0 = -1;
@@ -145,6 +147,7 @@ public class BlockPurchaseEventLever extends BlockContainerZTC {
     }
 
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(world, x, y, z, placer, stack);
         int l = world.getBlockMetadata(x, y, z);
         int i1 = l & 7;
         int j1 = l & 8;
@@ -165,6 +168,7 @@ public class BlockPurchaseEventLever extends BlockContainerZTC {
     }
 
     public void onNeighborBlockChange(World world, int x, int y, int z, Block neighborBlock) {
+        super.onNeighborBlockChange(world, x, y, z, neighborBlock);
         if (this.func_149820_e(world, x, y, z)) {
             int l = world.getBlockMetadata(x, y, z) & 7;
             boolean flag = false;
@@ -242,6 +246,7 @@ public class BlockPurchaseEventLever extends BlockContainerZTC {
     }
 
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+        super.breakBlock(world, x, y, z, block, meta);
         if ((meta & 8) > 0) {
             world.notifyBlocksOfNeighborChange(x, y, z, this);
             int i1 = meta & 7;

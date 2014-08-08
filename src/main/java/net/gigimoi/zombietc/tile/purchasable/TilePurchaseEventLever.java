@@ -1,9 +1,10 @@
-package net.gigimoi.zombietc.block.purchasable;
+package net.gigimoi.zombietc.tile.purchasable;
 
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.api.ITileEntityActivatable;
 import net.gigimoi.zombietc.api.ITileEntityPurchasable;
+import net.gigimoi.zombietc.block.purchasable.BlockPurchaseEventLever;
 import net.gigimoi.zombietc.tile.TileZTC;
 import net.gigimoi.zombietc.util.IListenerZTC;
 import net.minecraft.entity.Entity;
@@ -41,6 +42,7 @@ public class TilePurchaseEventLever extends TileZTC implements ITileEntityActiva
     }
     @Override
     public void updateEntity() {
+        super.updateEntity();
         if (ZombieTC.editorModeManager.enabled && isDown) {
             activate(null, Side.SERVER);
             isDown = false;

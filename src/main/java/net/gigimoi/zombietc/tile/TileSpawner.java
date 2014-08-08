@@ -36,6 +36,7 @@ public class TileSpawner extends TileZTC {
 
     @Override
     public void updateEntity() {
+        super.updateEntity();
         if (!worldObj.isRemote) {
             timeToRecheckPathing--;
             if (timeToRecheckPathing <= 0) {

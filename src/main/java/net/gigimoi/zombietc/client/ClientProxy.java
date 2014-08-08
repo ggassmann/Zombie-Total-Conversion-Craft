@@ -7,7 +7,7 @@ import net.gigimoi.zombietc.CommonProxy;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.block.BlockNode;
 import net.gigimoi.zombietc.block.BlockNodeDoor;
-import net.gigimoi.zombietc.block.purchasable.TilePurchaseItemStack;
+import net.gigimoi.zombietc.tile.purchasable.TilePurchaseItemStack;
 import net.gigimoi.zombietc.client.event.FogManager;
 import net.gigimoi.zombietc.client.event.MainGuiOverrideManager;
 import net.gigimoi.zombietc.client.event.PlayerBuffRenderManager;
