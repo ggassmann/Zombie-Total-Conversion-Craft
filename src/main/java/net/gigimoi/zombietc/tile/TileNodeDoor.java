@@ -43,14 +43,13 @@ public class TileNodeDoor extends TileNode implements IListenerZTC {
             }
             animationDirection = -animationDirection;
         }
-        animationTime = Math.min(100, Math.max(0, animationTime + animationDirection * 4));
+        animationTime = Math.min(100, Math.max(0, animationTime + animationDirection * 5));
     }
 
     @Override
     public void onEvent(String event) {
         if(deactivatedUntilEvent && eventWaitFor.equals(event)) {
             isEventTriggering = true;
-            System.out.println("Triggered event for door");
         }
     }
 }
