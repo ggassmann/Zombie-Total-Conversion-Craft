@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by gigimoi on 7/16/2014.
  */
-public class BlockNode extends BlockContainer implements IItemRenderer {
+public class BlockNode extends BlockContainerZTC implements IItemRenderer {
     public static final BlockNode instance = new BlockNode();
     public static List<MCNode> nodes = new ArrayList<MCNode>();
     public static List<MCNodePair> nodeConnections = new ArrayList<MCNodePair>();

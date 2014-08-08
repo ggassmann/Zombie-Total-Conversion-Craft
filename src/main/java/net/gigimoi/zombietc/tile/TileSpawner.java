@@ -6,7 +6,6 @@ import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 
 import javax.vecmath.Vector3f;
@@ -16,7 +15,7 @@ import java.util.List;
 /**
  * Created by gigimoi on 7/14/2014.
  */
-public class TileSpawner extends TileEntity {
+public class TileSpawner extends TileZTC {
     public String entityToSpawn = "";
     public boolean enabled = false;
     int timeToRecheckPathing = 1;
@@ -70,5 +69,9 @@ public class TileSpawner extends TileEntity {
                 GameManager.worldsSpawnedTo.add(worldObj);
             }
         }
+    }
+
+    @Override
+    public void onEvent(String event) {
     }
 }

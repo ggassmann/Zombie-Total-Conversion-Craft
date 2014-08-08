@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.api.ITileEntityActivatable;
 import net.gigimoi.zombietc.api.ITileEntityPurchasable;
+import net.gigimoi.zombietc.tile.TileZTC;
 import net.gigimoi.zombietc.util.Lang;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,12 +14,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
 /**
  * Created by gigimoi on 7/21/2014.
  */
-public class TilePurchaseItemStack extends TileEntity implements ITileEntityActivatable, ITileEntityPurchasable {
+public class TilePurchaseItemStack extends TileZTC implements ITileEntityActivatable, ITileEntityPurchasable {
     public ItemStack itemStack;
     int price = 100;
 
@@ -81,5 +81,10 @@ public class TilePurchaseItemStack extends TileEntity implements ITileEntityActi
         return itemStack != null ?
                 "Purchase " + Lang.get(itemStack.getUnlocalizedName() + ".name") :
                 Lang.get("ui.purchaseItemStack.setItemInEditor");
+    }
+
+    @Override
+    public void onEvent(String event) {
+
     }
 }

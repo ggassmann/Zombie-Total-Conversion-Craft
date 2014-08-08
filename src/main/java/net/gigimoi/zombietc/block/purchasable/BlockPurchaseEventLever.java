@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.block.BlockContainerZTC;
 import net.gigimoi.zombietc.client.gui.GuiPurchaseEventLever;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -20,7 +21,7 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
 /**
  * Created by gigimoi on 7/26/2014.
  */
-public class BlockPurchaseEventLever extends BlockContainer {
+public class BlockPurchaseEventLever extends BlockContainerZTC {
     public static final BlockPurchaseEventLever instance = new BlockPurchaseEventLever();
 
     public BlockPurchaseEventLever() {

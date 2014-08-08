@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by gigimoi on 7/15/2014.
  */
-public class TileBarricade extends TileEntitySynced {
+public class TileBarricade extends TileZTC {
     public int damage = 0;
     public int ticker = 0;
     public int playerTicker = 0;
@@ -65,5 +65,10 @@ public class TileBarricade extends TileEntitySynced {
                 }
             }
         }
+    }
+
+    @Override
+    public void onEvent(String event) {
+
     }
 }

@@ -20,6 +20,8 @@ import net.gigimoi.zombietc.net.map.MessageAddBarricade;
 import net.gigimoi.zombietc.net.map.MessageAddNode;
 import net.gigimoi.zombietc.net.map.MessageAddNodeConnection;
 import net.gigimoi.zombietc.net.map.MessagePrepareStaticVariables;
+import net.gigimoi.zombietc.tile.TileZTC;
+import net.gigimoi.zombietc.util.IListenerZTC;
 import net.gigimoi.zombietc.util.Point3;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
@@ -38,10 +40,7 @@ import org.lwjgl.input.Keyboard;
 
 import javax.vecmath.Vector3f;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by gigimoi on 7/14/2014.
@@ -50,8 +49,6 @@ public class GameManager {
     public static ArrayList<Point3> blockBarricades = new ArrayList<Point3>();
     public static ArrayList<Vector3f> spawnPositions = new ArrayList<Vector3f>();
     public static ArrayList<World> worldsSpawnedTo = new ArrayList<World>();
-    public static ArrayList<String> currentEvents = new ArrayList<String>();
-    public static ArrayList<String> somewhatcurrentEvents = new ArrayList<String>();
     public boolean activating;
     public int wave = 0;
     int zombiesToSpawn = 0;
@@ -64,20 +61,6 @@ public class GameManager {
     private int activateMessageDuration = 0;
     private String activateMessage;
 
-    public static boolean isEventTriggering(String event) {
-        for (int i = 0; i < currentEvents.size(); i++) {
-            if (currentEvents.get(i).equals(event)) {
-                return true;
-            }
-        }
-        for (int i = 0; i < somewhatcurrentEvents.size(); i++) {
-            if (somewhatcurrentEvents.get(i).equals(event)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @SubscribeEvent
     public void onTick(TickEvent event) {
         refreshFoodbarsCooldown++;
@@ -88,10 +71,6 @@ public class GameManager {
                 EntityPlayer player = (EntityPlayer) playerEntities.get(i);
                 player.getFoodStats().addStats(100, 100);
             }
-        }
-        if (event.phase == TickEvent.Phase.END && currentEvents.size() > 0 || somewhatcurrentEvents.size() > 0) {
-            somewhatcurrentEvents = currentEvents;
-            currentEvents = new ArrayList<String>();
         }
         if (event.side == Side.SERVER && event.phase == TickEvent.Phase.START) {
             if (ZombieTC.editorModeManager.enabled) {
@@ -339,6 +318,23 @@ public class GameManager {
                 }
             }
         }
+    }
+    private List<IListenerZTC> listeners = new ArrayList<IListenerZTC>();
+    public void invokeEvent(String event) {
+        for(int i = 0; i < listeners.size(); i++) {
+            listeners.get(i).onEvent(event);
+        }
+    }
+
+    public void registerListener(IListenerZTC listenerZTC) {
+        listeners.add(listenerZTC);
+    }
+    public void unregisterListener(IListenerZTC listenerZTC) {
+        listeners.remove(listenerZTC);
+    }
+
+    public boolean isRegisteredListener(TileZTC tileZTC) {
+        return listeners.contains(tileZTC);
     }
 
     private static class GameData {

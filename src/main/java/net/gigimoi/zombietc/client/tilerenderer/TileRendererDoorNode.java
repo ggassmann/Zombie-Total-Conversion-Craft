@@ -38,6 +38,7 @@ public class TileRendererDoorNode extends TileEntitySpecialRenderer {
             GL11.glRotated(90, 0, 1, 0);
             GL11.glTranslated(-0.5, 0, 0.5);
         }
+        GL11.glTranslated(0, tile.animationTime / 49f, 0);
         GL11.glColor3d(1, 1, 1);
         model.renderAll();
         glPopMatrix();

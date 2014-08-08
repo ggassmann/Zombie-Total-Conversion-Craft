@@ -1,9 +1,9 @@
 package net.gigimoi.zombietc.block.purchasable;
 
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.block.BlockContainerZTC;
 import net.gigimoi.zombietc.client.gui.GuiPurchaseItemStack;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by gigimoi on 7/21/2014.
  */
-public class BlockPurchaseItemstack extends BlockContainer {
+public class BlockPurchaseItemstack extends BlockContainerZTC {
     public static final BlockPurchaseItemstack instance = new BlockPurchaseItemstack();
 
     public BlockPurchaseItemstack() {

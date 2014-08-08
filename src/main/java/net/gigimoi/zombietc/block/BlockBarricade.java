@@ -8,7 +8,6 @@ import net.gigimoi.zombietc.net.map.MessageRemoveBarricade;
 import net.gigimoi.zombietc.tile.TileBarricade;
 import net.gigimoi.zombietc.util.Point3;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -21,7 +20,7 @@ import java.util.List;
 /**
  * Created by gigimoi on 7/16/2014.
  */
-public class BlockBarricade extends BlockContainer {
+public class BlockBarricade extends BlockContainerZTC {
     public static BlockBarricade wooden = new BlockBarricade();
 
     public BlockBarricade() {

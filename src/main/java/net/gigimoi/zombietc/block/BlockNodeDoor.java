@@ -1,10 +1,13 @@
 package net.gigimoi.zombietc.block;
 
+import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.tile.TileNodeDoor;
 import net.gigimoi.zombietc.util.DirectionHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -46,30 +49,35 @@ public class BlockNodeDoor extends BlockNode {
 
     @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List mask, Entity entity) {
-        super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
-        /*
         if (entity != null) {
             if (entity.getClass() == EntityZZombie.class) {
                 super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
             } else {
-                if (!ZombieTC.editorModeManager.enabled) {
+                if (!ZombieTC.editorModeManager.enabled && !(getTile(world, x, y, z).animationTime > 50)) {
                     super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
                 }
             }
         } else {
             super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
         }
-        */
     }
 
     @Override
     public boolean isOpaqueCube() {
         return false;
     }
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z) {
+        return Blocks.stone.getCollisionBoundingBoxFromPool(par1World, x, y, z);
+    }
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
-        super.setBlockBoundsBasedOnState(access, x, y, z);
+        if(!ZombieTC.editorModeManager.enabled) {
+            setBlockBounds(0, 0, 0, 0, 0, 0);
+            return;
+        }
+        setBlockBounds(0, 0, 0, 1, 2, 1);
     }
 
     @Override

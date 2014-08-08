@@ -76,7 +76,7 @@ public class ZombieTC {
         MinecraftForge.EVENT_BUS.register(editorModeManager);
         MinecraftForge.EVENT_BUS.register(keyManager);
         MinecraftForge.EVENT_BUS.register(playerManager);
-        MinecraftForge.EVENT_BUS.register(new NaturalSpawnStopper());
+        MinecraftForge.EVENT_BUS.register(new NaturalSpawnManager());
 
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);
 
@@ -143,7 +143,7 @@ public class ZombieTC {
 
         @Override
         public Item getTabIconItem() {
-            return ItemSpawnZZombie.instance();
+            return ItemWeapon.weaponRadomVis;
         }
     }
 }

@@ -4,24 +4,18 @@ import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.api.ITileEntityActivatable;
 import net.gigimoi.zombietc.api.ITileEntityPurchasable;
-import net.gigimoi.zombietc.event.GameManager;
-import net.gigimoi.zombietc.tile.TileEntitySynced;
+import net.gigimoi.zombietc.tile.TileZTC;
+import net.gigimoi.zombietc.util.IListenerZTC;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
 
 /**
  * Created by gigimoi on 7/26/2014.
  */
-public class TilePurchaseEventLever extends TileEntitySynced implements ITileEntityActivatable, ITileEntityPurchasable {
+public class TilePurchaseEventLever extends TileZTC implements ITileEntityActivatable, ITileEntityPurchasable, IListenerZTC {
     public String event = "";
     boolean isDown;
     int price = 500;
-
-    public AxisAlignedBB getPurchaseBounds() {
-        return AxisAlignedBB.getBoundingBox(xCoord + 0.1, yCoord - 1, zCoord + 0.1, xCoord + 0.9, yCoord + 1.9, zCoord + 0.9);
-    }
-
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
@@ -38,13 +32,20 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
         tag.setString("Event", event);
         super.writeToNBT(tag);
     }
-
+    boolean isEventTriggering = false;
+    @Override
+    public void onEvent(String event) {
+        if(event.equals(this.event)) {
+            isEventTriggering = true;
+        }
+    }
     @Override
     public void updateEntity() {
         if (ZombieTC.editorModeManager.enabled && isDown) {
             activate(null, Side.SERVER);
             isDown = false;
-        } else if (GameManager.isEventTriggering(event) && !isDown) {
+        } else if (isEventTriggering && !isDown) {
+            isEventTriggering = false;
             activate(null, worldObj.isRemote ? Side.CLIENT : Side.SERVER);
         }
     }
@@ -52,7 +53,7 @@ public class TilePurchaseEventLever extends TileEntitySynced implements ITileEnt
     @Override
     public void activate(Entity activator, Side side) {
         if (activator != null) {
-            GameManager.currentEvents.add(event);
+            ZombieTC.gameManager.invokeEvent(event);
         }
         isDown = true;
         //Copypasta from BlockLever.onBlockActivated
