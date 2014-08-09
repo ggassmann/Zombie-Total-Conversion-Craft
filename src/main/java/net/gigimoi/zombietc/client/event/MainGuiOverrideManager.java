@@ -36,7 +36,7 @@ public class MainGuiOverrideManager {
             button.displayString = Lang.get("ui.Continue");
             button.width /= 2;
             button.width -= 2;
-            GuiButton buttonNewGame = new GuiButton(BUTTON_ID_NEW_GAME, button.xPosition + button.width + 4, button.yPosition, button.width, button.height, "ui.newGame");
+            GuiButton buttonNewGame = new GuiButton(BUTTON_ID_NEW_GAME, button.xPosition + button.width + 4, button.yPosition, button.width, button.height, Lang.get("ui.newGame"));
             event.buttonList.add(buttonNewGame);
         }
         else if (event.gui.getClass() == GuiSelectWorld.class && event.buttonList.size() > 0) {
