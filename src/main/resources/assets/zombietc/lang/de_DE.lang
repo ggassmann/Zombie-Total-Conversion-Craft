@@ -10,18 +10,31 @@ item.FDRbine.name=FDRbine
 item.ACP44.name=ACP44
 
 item.Node Linker.name=Knoten Linker
+item.Ring of Health.name=Ring von Leben
 
-tile.Barricade.name=Hölzern Barrikade
+tile.Wooden Barricade.name=Hölzern Barrikade
 tile.Spawner.name=Laichener
 tile.Node.name=Knoten
 tile.Purchase Itemstack.name=Kaufen Artikelstapel
 tile.Purchase Event Lever.name=Kaufen Ereignis Hebel
 
-item.Ring of Health.name=Ring von Leben
-
+ui.yes=Ja
+ui.no=Nicht
 ui.Wave=Welle
 ui.Scoreboard=Anzeigetafel
 ui.purchaseItemStack.setItemInEditor=Ins Editiermodus Artikel gelegen
+ui.New World (Editor mode)=Neu Welt
+ui.Continue=Fortsetzen
+ui.newGame=Neu Spiel
+ui.selectAMap=Eine Karte auswählen
+ui.downloading=Downloading
+ui.play=Spiele
+ui.close=Schließen
+ui.price=Kosten
+ui.event=Auslöser
+ui.node.disableUntilPurchase=Deaktivieren, bis Kauf?
+ui.overlay.editorModeEnabled=Editiermodus ist aktiv
+ui.overlay.zombiesLeft=Untoten links
 
 key.categories.zombietc=Zombie Total Conversion Craft
 key.binding.activate=Aktivieren

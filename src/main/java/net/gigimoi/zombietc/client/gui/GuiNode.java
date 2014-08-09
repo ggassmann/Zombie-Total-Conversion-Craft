@@ -6,6 +6,7 @@ import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.net.map.MessageChangeNodeDisabledUntilEvent;
 import net.gigimoi.zombietc.net.map.MessageChangeNodeEventWaitFor;
 import net.gigimoi.zombietc.tile.TileNode;
+import net.gigimoi.zombietc.util.Lang;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
 import net.minecraft.client.gui.GuiButton;
@@ -41,7 +42,7 @@ public class GuiNode extends GuiScreen {
 
     @Override
     public void drawScreen(int par1, int par2, float par3) {
-        TextRenderHelper.drawString("Disable until purchase?", width / 2 - 100, height / 2 - 100 + 32, TextAlignment.Right);
+        TextRenderHelper.drawString(Lang.get("ui.node.disableUntilPurchase"), width / 2 - 100, height / 2 - 100 + 32, TextAlignment.Right);
         super.drawScreen(par1, par2, par3);
         textFieldEvent.drawTextBox();
     }
@@ -78,8 +79,8 @@ public class GuiNode extends GuiScreen {
     @Override
     public void initGui() {
         buttonDone = new GuiButtonExt(0, width / 2 - 100, height / 2 - 100, 200, 20, I18n.format("gui.done", new Object[0]));
-        buttonYesOnlyAfterEvent = new GuiButtonExt(1, buttonDone.xPosition, buttonDone.yPosition + 22, 30, 20, "Yes");
-        buttonNoOnlyAfterEvent = new GuiButtonExt(1, buttonDone.xPosition + 32, buttonDone.yPosition + 22, 30, 20, "No");
+        buttonYesOnlyAfterEvent = new GuiButtonExt(1, buttonDone.xPosition, buttonDone.yPosition + 22, 30, 20, Lang.get("ui.yes"));
+        buttonNoOnlyAfterEvent = new GuiButtonExt(1, buttonDone.xPosition + 32, buttonDone.yPosition + 22, 30, 20, Lang.get("ui.no"));
 
         textFieldEvent = new GuiTextField(mc.fontRenderer, width / 2 - 100 + 64, height / 2 - 100 + 22, 200 - 64, 20);
         textFieldEvent.setText(getTile().eventWaitFor);

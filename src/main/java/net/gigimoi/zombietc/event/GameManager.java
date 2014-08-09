@@ -21,10 +21,7 @@ import net.gigimoi.zombietc.net.map.MessageAddNode;
 import net.gigimoi.zombietc.net.map.MessageAddNodeConnection;
 import net.gigimoi.zombietc.net.map.MessagePrepareStaticVariables;
 import net.gigimoi.zombietc.tile.TileZTC;
-import net.gigimoi.zombietc.util.IListenerZTC;
-import net.gigimoi.zombietc.util.Point3;
-import net.gigimoi.zombietc.util.TextAlignment;
-import net.gigimoi.zombietc.util.TextRenderHelper;
+import net.gigimoi.zombietc.util.*;
 import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -40,7 +37,10 @@ import org.lwjgl.input.Keyboard;
 
 import javax.vecmath.Vector3f;
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by gigimoi on 7/14/2014.
@@ -109,7 +109,7 @@ public class GameManager {
             if (tilePlayerOver != null && ITileEntityPurchasable.class.isAssignableFrom(tilePlayerOver.getClass())) {
                 ITileEntityPurchasable purchasable = (ITileEntityPurchasable) tilePlayerOver;
                 if (purchasable.getEnabled()) {
-                    setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to " + purchasable.getVerb() + ":" + purchasable.getPrice() + "exp");
+                    setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to " + purchasable.getVerb() + ": " + purchasable.getPrice() + " vim");
                     if (activating && PlayerManager.ZombieTCPlayerProperties.get(player).vim >= purchasable.getPrice()) {
                         TileEntity tile = (TileEntity) purchasable;
                         ZombieTC.network.sendToServer(new MessagePurchaseTile(tile.xCoord, tile.yCoord, tile.zCoord, player));
@@ -289,10 +289,10 @@ public class GameManager {
         }
         if (event.type == RenderGameOverlayEvent.ElementType.CHAT) {
             if (ZombieTC.editorModeManager.enabled) {
-                TextRenderHelper.drawString("Editor mode enabled", 2, 2, TextAlignment.Left);
+                TextRenderHelper.drawString(Lang.get("ui.overlay.editorModeEnabled"), 2, 2, TextAlignment.Left);
             }
-            TextRenderHelper.drawString("Wave: " + wave, 2, event.resolution.getScaledHeight() - 10, TextAlignment.Left);
-            TextRenderHelper.drawString("Zombies Left: " + (zombiesToSpawn + zombiesAlive), 2, (int) (event.resolution.getScaledHeight()) - 20, TextAlignment.Left);
+            TextRenderHelper.drawString(Lang.get("ui.wave") + ": " + wave, 2, event.resolution.getScaledHeight() - 10, TextAlignment.Left);
+            TextRenderHelper.drawString(Lang.get("ui.overlay.zombiesLeft") + ": " + (zombiesToSpawn + zombiesAlive), 2, (int) (event.resolution.getScaledHeight()) - 20, TextAlignment.Left);
             ItemStack heldItem = ZombieTC.proxy.getPlayer().getHeldItem();
             if (heldItem != null && heldItem.getItem().getClass() == ItemWeapon.class) {
                 ((ItemWeapon) heldItem.getItem()).drawUIFor(heldItem, event);

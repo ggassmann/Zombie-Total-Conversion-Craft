@@ -1,8 +1,9 @@
 package net.gigimoi.zombietc.client.gui;
 
 import net.gigimoi.zombietc.ZombieTC;
-import net.gigimoi.zombietc.tile.purchasable.TilePurchaseEventLever;
 import net.gigimoi.zombietc.net.map.MessageSetPurchaseEventLeverInfo;
+import net.gigimoi.zombietc.tile.purchasable.TilePurchaseEventLever;
+import net.gigimoi.zombietc.util.Lang;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
 import net.minecraft.client.gui.GuiButton;
@@ -43,8 +44,8 @@ public class GuiPurchaseEventLever extends GuiScreen {
         this.drawDefaultBackground();
         textFieldPrice.drawTextBox();
         textFieldEvent.drawTextBox();
-        TextRenderHelper.drawString("Price: ", textFieldPrice.xPosition - 2, textFieldPrice.yPosition + 5, TextAlignment.Right);
-        TextRenderHelper.drawString("Event: ", textFieldEvent.xPosition - 2, textFieldEvent.yPosition + 5, TextAlignment.Right);
+        TextRenderHelper.drawString(Lang.get("ui.price") + ": ", textFieldPrice.xPosition - 2, textFieldPrice.yPosition + 5, TextAlignment.Right);
+        TextRenderHelper.drawString(Lang.get("ui.event") + ": ", textFieldEvent.xPosition - 2, textFieldEvent.yPosition + 5, TextAlignment.Right);
         super.drawScreen(par1, par2, par3);
     }
 

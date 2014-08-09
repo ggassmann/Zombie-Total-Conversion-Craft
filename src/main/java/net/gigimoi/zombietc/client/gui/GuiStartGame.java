@@ -2,6 +2,7 @@ package net.gigimoi.zombietc.client.gui;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import de.matthiasmann.twl.utils.PNGDecoder;
+import net.gigimoi.zombietc.util.Lang;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
 import net.lingala.zip4j.core.ZipFile;
@@ -48,7 +49,7 @@ public class GuiStartGame extends GuiScreen {
     @Override
     public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
-        TextRenderHelper.drawString("Select a map:", width / 2, 2, TextAlignment.Center);
+        TextRenderHelper.drawString(Lang.get("ui.selectAMap") + ":", width / 2, 2, TextAlignment.Center);
         for (int i = 0; i < mapNames.size(); i++) {
             TextRenderHelper.drawString(mapNames.get(i), width / 2 - 5, 64 + i * 30, TextAlignment.Left);
             glBindTexture(GL_TEXTURE_2D, mapThumbnailTextureNames.get(i));
@@ -59,7 +60,7 @@ public class GuiStartGame extends GuiScreen {
             GL11.glPopMatrix();
         }
         if (downloading != null) {
-            TextRenderHelper.drawString("Downloading...", 0, 0, TextAlignment.Left);
+            TextRenderHelper.drawString(Lang.get("ui.downloading") + "...", 0, 0, TextAlignment.Left);
             hasRenderedDownloading = true;
         }
         super.drawScreen(par1, par2, par3);

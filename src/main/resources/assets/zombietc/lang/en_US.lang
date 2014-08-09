@@ -9,8 +9,8 @@ item.Venus SMP.name=Venus SMP
 item.FDRbine.name=FDRbine
 item.ACP44.name=ACP44
 
-item.Ring of Health.name=Ring of Health
 item.Node Linker.name=Node Linker
+item.Ring of Health.name=Ring of Health
 
 tile.Wooden Barricade.name=Wooden Barricade
 tile.Spawner.name=Spawner
@@ -18,9 +18,23 @@ tile.Node.name=Node
 tile.Purchase Itemstack.name=Purchase Item Stack
 tile.Purchase Event Lever.name=Purchase Event Lever
 
+ui.yes=Yes
+ui.no=No
 ui.Wave=Wave
 ui.Scoreboard=Scoreboard
 ui.purchaseItemStack.setItemInEditor=Set item in editor mode
+ui.New World (Editor mode)=New World (Editor mode)
+ui.Continue=Continue
+ui.newGame=New Game
+ui.selectAMap=Select a Map
+ui.downloading=Downloading
+ui.play=Play
+ui.close=Close
+ui.price=Price
+ui.event=Event
+ui.node.disableUntilPurchase=Disable Until Purchase?
+ui.overlay.editorModeEnabled=Editor mode enabled
+ui.overlay.zombiesLeft=Undead Left
 
 key.categories.zombietc=Zombie Total Conversion Craft
 key.binding.activate=Activate
