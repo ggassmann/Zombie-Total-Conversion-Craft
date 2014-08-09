@@ -94,7 +94,7 @@ public class GuiStartGame extends GuiScreen {
         mapUrls = new ArrayList<String>();
         mapNames = new ArrayList<String>();
         mapThumbnailTextureNames = new ArrayList<Integer>();
-        closebutton = new GuiButton(CLOSE_BUTTON_ID, 10, this.height - 28, 40, 20, "Close");
+        closebutton = new GuiButton(CLOSE_BUTTON_ID, 10, this.height - 28, 80, 20, Lang.get("ui.close"));
         buttonList.add(closebutton);
         ArrayList<String> mapsList = new ArrayList<String>();
         try {
@@ -108,7 +108,7 @@ public class GuiStartGame extends GuiScreen {
         for (int i = 0; i < mapsList.size(); i++) {
             String mapName = mapsList.get(i).substring(0, mapsList.get(i).lastIndexOf(":"));
             mapName = mapName.substring(0, mapName.lastIndexOf(":"));
-            buttonList.add(new GuiButton(700 + i, width / 2 - 10, 72 + i * 30, 150, 20, "Play"));
+            buttonList.add(new GuiButton(700 + i, width / 2 - 10, 72 + i * 30, 150, 20, Lang.get("ui.play")));
             mapUrls.add(mapsList.get(i).substring(mapName.length() + 1));
             mapNames.add(mapName);
             File thumbnail = new File(".imagecache/" + mapName + ".png");

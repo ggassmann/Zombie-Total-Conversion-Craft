@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.entity.EntityZZombie;
+import net.gigimoi.zombietc.util.Lang;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
 import net.minecraft.entity.Entity;
@@ -32,7 +33,7 @@ public class PlayerManager {
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
         if (!ZombieTC.editorModeManager.enabled && event.type == RenderGameOverlayEvent.ElementType.TEXT) {
-            TextRenderHelper.drawString("Scoreboard", 2, 2, TextAlignment.Left);
+            TextRenderHelper.drawString(Lang.get("ui.scoreboard"), 2, 2, TextAlignment.Left);
             TextRenderHelper.drawString("==========", 2, 10, TextAlignment.Left);
             List players = ZombieTC.proxy.getWorld(Side.CLIENT).playerEntities;
             for (int i = 0; i < players.size(); i++) {

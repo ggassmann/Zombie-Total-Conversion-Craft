@@ -15,13 +15,14 @@ item.Ring of Health.name=Ring von Leben
 tile.Wooden Barricade.name=Hölzern Barrikade
 tile.Spawner.name=Laichener
 tile.Node.name=Knoten
+tile.Node Door.name=Knoten Tür
 tile.Purchase Itemstack.name=Kaufen Artikelstapel
 tile.Purchase Event Lever.name=Kaufen Ereignis Hebel
 
 ui.yes=Ja
 ui.no=Nicht
-ui.Wave=Welle
-ui.Scoreboard=Anzeigetafel
+ui.wave=Welle
+ui.scoreboard=Anzeigetafel
 ui.purchaseItemStack.setItemInEditor=Ins Editiermodus Artikel gelegen
 ui.New World (Editor mode)=Neu Welt
 ui.Continue=Fortsetzen
