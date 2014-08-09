@@ -23,7 +23,6 @@ import net.gigimoi.zombietc.client.event.MainGuiOverrideManager;
 import net.gigimoi.zombietc.client.event.PlayerBuffRenderManager;
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.*;
-import net.gigimoi.zombietc.item.ItemBaubleRingOfHealth;
 import net.gigimoi.zombietc.item.ItemNodeLinker;
 import net.gigimoi.zombietc.item.ItemSpawnZZombie;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
@@ -80,7 +79,6 @@ public class ZombieTC {
 
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);
 
-        registerItem(ItemBaubleRingOfHealth.instance());
         registerItem(ItemSpawnZZombie.instance());
         registerItem(ItemNodeLinker.instance());
         registerItem(ItemWeapon.weaponRadomVis, false);

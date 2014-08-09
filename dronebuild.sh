@@ -3,7 +3,7 @@ chmod +x gradlew
 ./gradlew build
 mkdir packaging
 cp build/libs/* packaging/
-cp -rf eclipse/mods/* packaging/
+cp -rf eclipse/assets/mods/* packaging/
 mkdir out
 cd packaging
 mkdir mods
