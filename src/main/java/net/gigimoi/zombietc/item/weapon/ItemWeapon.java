@@ -188,7 +188,13 @@ public class ItemWeapon extends Item implements IItemRenderer {
         if (tag.getInteger("Reload Timer") > 0) {
             tag.setInteger("Reload Timer", tag.getInteger("Reload Timer") - 1);
             if (tag.getInteger("Reload Timer") == 0) {
+                int oldAmmoInClip = tag.getInteger("Rounds");
                 tag.setInteger("Rounds", clipSize);
+                tag.setInteger("Ammo", tag.getInteger("Ammo") + oldAmmoInClip - clipSize);
+                if(tag.getInteger("Ammo") < 0) {
+                    tag.setInteger("Rounds", tag.getInteger("Ammo") + tag.getInteger("Rounds"));
+                    tag.setInteger("Ammo", 0);
+                }
                 tag.setInteger("ShootCooldown", 0);
             }
         }
@@ -209,7 +215,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
                 player.isSwingInProgress = false;
                 player.swingProgressInt = 0;
                 if (world.isRemote) {
-                    if (ClientProxy.reload.isPressed() && tag.getInteger("Reload Timer") == 0 && tag.getInteger("Rounds") != clipSize) {
+                    if (ClientProxy.reload.isPressed() && tag.getInteger("Reload Timer") == 0 && tag.getInteger("Rounds") != clipSize && tag.getInteger("Ammo") > 0) {
                         tag.setInteger("Reload Timer", reloadTime);
                         ZombieTC.network.sendToServer(new MessageReload(player));
                     }
