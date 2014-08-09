@@ -7,10 +7,7 @@ import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.net.MessageReload;
 import net.gigimoi.zombietc.net.MessageShoot;
 import net.gigimoi.zombietc.net.MessageTryShoot;
-import net.gigimoi.zombietc.util.MouseOverHelper;
-import net.gigimoi.zombietc.util.TextAlignment;
-import net.gigimoi.zombietc.util.TextRenderHelper;
-import net.gigimoi.zombietc.util.TextureHelper;
+import net.gigimoi.zombietc.util.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
@@ -255,10 +252,10 @@ public class ItemWeapon extends Item implements IItemRenderer {
         NBTTagCompound tag = stack.getTagCompound();
         int rounds = tag.getInteger("Rounds");
         int totalAmmo = tag.getInteger("Ammo");
-        String out = "Ammo: " + rounds + "/" + clipSize + " - " + totalAmmo;
+        String out = Lang.get("ui.overlay.ammo") + ": " + rounds + "/" + clipSize + " - " + totalAmmo;
         TextRenderHelper.drawString(out, event.resolution.getScaledWidth() - 2, 2, TextAlignment.Right);
         if (tag.getInteger("Reload Timer") > 0) {
-            TextRenderHelper.drawString("Reloading...", event.resolution.getScaledWidth() - 2, 12, TextAlignment.Right);
+            TextRenderHelper.drawString(Lang.get("ui.overlay.reloading") + "...", event.resolution.getScaledWidth() - 2, 12, TextAlignment.Right);
         }
     }
 

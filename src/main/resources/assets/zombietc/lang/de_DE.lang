@@ -36,6 +36,8 @@ ui.event=Auslöser
 ui.node.disableUntilPurchase=Deaktivieren, bis Kauf?
 ui.overlay.editorModeEnabled=Editiermodus ist aktiv
 ui.overlay.zombiesLeft=Untoten links
+ui.overlay.ammo=Munition
+ui.overlay.reloading=Neuladen
 
 key.categories.zombietc=Zombie Total Conversion Craft
 key.binding.activate=Aktivieren

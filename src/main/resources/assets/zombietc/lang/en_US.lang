@@ -36,6 +36,8 @@ ui.event=Event
 ui.node.disableUntilPurchase=Disable Until Purchase?
 ui.overlay.editorModeEnabled=Editor mode enabled
 ui.overlay.zombiesLeft=Undead Left
+ui.overlay.ammo=Ammo
+ui.overlay.reloading=Reloading
 
 key.categories.zombietc=Zombie Total Conversion Craft
 key.binding.activate=Activate
