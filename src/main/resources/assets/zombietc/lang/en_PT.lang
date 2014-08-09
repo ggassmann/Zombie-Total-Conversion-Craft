@@ -1,0 +1,45 @@
+itemGroup.Zombie Total Conversion=
+
+item.Radom Vis.name=Itty bitty cannon boat
+item.Storm Rifle.name=Lightning cannon boat
+item.Thompson.name=Tom's Cannon boat
+item.Karbine.name=Six pounder boat
+item.VBR-B.name=Tim's Cannon boat
+item.Venus SMP.name=Cannon cutlass boat
+item.FDRbine.name=Patriot cannon boat
+item.ACP44.name=Knave's cannon boat
+
+item.Node Linker.name=Newfangled bumbo boat
+item.Ring of Health.name=Jewel of Life boat
+
+tile.Wooden Barricade.name=Wood Hull boat
+tile.Spawner.name=Newfangled mumbo boat
+tile.Node.name=Newfangled jumbo boat
+tile.Node Door.name=Newfangled jumbo openning boat
+tile.Purchase Itemstack.name=Newfangled shopkeep boat
+tile.Purchase Event Lever.name=Newfangled brothel boat
+
+ui.yes=Yarr boat
+ui.no=Nay boat
+ui.wave=Reef splash boat
+ui.scoreboard=Tallyplank boat
+ui.purchaseItemStack.setItemInEditor=yarrabargg Gabarg boat
+ui.New World (Editor mode)=Yo ho ho boat
+ui.Continue=Yo ho let's go boat
+ui.newGame=New boat
+ui.selectAMap=Select a boat
+ui.downloading=Would you download a boat?
+ui.play=Play with your boat
+ui.close=Close your boat
+ui.price=Price of boat
+ui.event=Event of boat
+ui.node.disableUntilPurchase=Disable Until Boat?
+ui.overlay.editorModeEnabled=Editor mode boat
+ui.overlay.zombiesLeft=Undead boat
+ui.overlay.ammo=Ammo boat
+ui.overlay.reloading=Reloading boat
+
+key.categories.zombietc=Zombie Total Conversion Craft boat
+key.binding.activate=Activate boat
+key.binding.reload=Reload boat
+key.binding.toggleEditorMode=Toggle Editor Mode boat
