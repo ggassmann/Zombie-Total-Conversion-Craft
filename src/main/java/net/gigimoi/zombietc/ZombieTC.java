@@ -38,11 +38,14 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod(modid = ZombieTC.MODID, version = ZombieTC.VERSION)
 public class ZombieTC {
     public static final String MODID = "zombietc";
-    public static final String VERSION = "0.2";
+    public static final String VERSION = "0.3";
     public static final String NETWORK_CHANNEL = "channel_zombie_tc";
+
     public static final CreativeTabs tab = new CreativeTabsExt("Zombie Total Conversion");
+
     @Mod.Instance("zombietc")
     public static ZombieTC instance;
+
     public static SimpleNetworkWrapper network;
     public static GameManager gameManager;
     public static EditorModeManager editorModeManager;
@@ -52,6 +55,7 @@ public class ZombieTC {
     public static FogManager fogManager;
     public static PlayerBuffRenderManager playerBuffRenderManager;
     public static PlayerManager playerManager;
+
     @SidedProxy(clientSide = "net.gigimoi.zombietc.client.ClientProxy", serverSide = "net.gigimoi.zombietc.CommonProxy")
     public static CommonProxy proxy;
 
