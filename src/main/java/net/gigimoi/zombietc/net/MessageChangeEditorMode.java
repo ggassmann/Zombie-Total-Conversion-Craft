@@ -7,6 +7,8 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.event.PlayerManager;
+import net.gigimoi.zombietc.tile.TileBarricade;
+import net.gigimoi.zombietc.util.Point3;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.List;
@@ -42,6 +44,13 @@ public class MessageChangeEditorMode implements IMessage {
             List<EntityPlayer> players = ZombieTC.proxy.getWorld(ctx.side).playerEntities;
             for (int i = 0; i < players.size(); i++) {
                 PlayerManager.ZombieTCPlayerProperties.get(players.get(i)).vim = 100;
+            }
+            for(int i = 0; i < ZombieTC.gameManager.blockBarricades.size(); i++) {
+                Point3 pos = ZombieTC.gameManager.blockBarricades.get(i);
+                TileBarricade barricade = (TileBarricade) ZombieTC.proxy.getWorld(ctx.side).getTileEntity(pos.xCoord, pos.yCoord ,pos.zCoord);
+                if(barricade != null) {
+                    barricade.damage = 0;
+                }
             }
             if (!ZombieTC.editorModeManager.enabled) {
                 ZombieTC.gameManager.regeneratePathMap();
