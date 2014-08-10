@@ -35,7 +35,7 @@ public class MessageTryShoot implements IMessage {
         buf.writeInt(at.getEntityId());
     }
 
-    public static class MessagePlayShootSoundHandler implements IMessageHandler<MessageTryShoot, MessageTryShoot> {
+    public static class MessageTryShootSoundHandler implements IMessageHandler<MessageTryShoot, MessageTryShoot> {
         @Override
         public MessageTryShoot onMessage(MessageTryShoot message, MessageContext ctx) {
             ItemStack stack = ((EntityLivingBase) message.at).getHeldItem();
