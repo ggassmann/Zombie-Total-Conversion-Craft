@@ -72,7 +72,7 @@ public class MessageShoot implements IMessage {
                         if (EntityZZombie.class.isAssignableFrom(message.hit.getClass())) {
                             EntityZZombie zombie = (EntityZZombie) message.hit;
                             if (zombie.getHealth() <= 0) {
-                                PlayerManager.ZombieTCPlayerProperties.get(player).vim += 90;
+                                PlayerManager.ZombieTCPlayerProperties.get(player).vim += 40;
                             }
                         }
                         if (ctx.side == Side.SERVER) {
