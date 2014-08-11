@@ -7,6 +7,8 @@ Extra Utilities(extrautilities-*.jar) - RWTema, http://www.minecraftforum.net/fo
 Not Enough Items(NotEnoughItems-*-universal.jar) - chicken_bones, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1279956-chickenbones-mods
 Code Chicken Core(CodeChickenCore-*-universal.jar) - chicken_bones, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1279956-chickenbones-mods
 Forge Multipart(ForgeMultipart-*-universal.jar) - chicken_bones, https://github.com/Chicken-Bones/ForgeMultipart
+Open Blocks(OpenBlocks-*.jar) - OpenMods, https://github.com/OpenMods/OpenBlocks
+Open Mods Lib(OpenModsLib-*.jar) - OpenMods, https://github.com/OpenMods/OpenModsLib
 
 Library credits:
 PNGDecoder
