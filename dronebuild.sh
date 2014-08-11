@@ -10,4 +10,6 @@ mkdir mods
 mv *.jar mods 
 rm -rf "1.7.10"
 cd ../libs && cp *.jar ../packaging/mods && cd ../packaging
+mkdir config
+cp -rf ../eclipse/assets/config/* config
 tar czf ../out/zombie-total-conversion.tar.gz .

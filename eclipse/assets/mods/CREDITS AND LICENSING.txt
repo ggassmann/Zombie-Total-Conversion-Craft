@@ -3,12 +3,13 @@ Source code can be found at https://github.com/gigimoi/Zombie-Total-Conversion-C
 Modpack credits
 All mods used and distributed with permission.
 
-Extra Utilities(extrautilities-*.jar) - RWTema, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/1443963-extra-utilities-v1-1-0e#c2
-Not Enough Items(NotEnoughItems-*-universal.jar) - chicken_bones, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1279956-chickenbones-mods
-Code Chicken Core(CodeChickenCore-*-universal.jar) - chicken_bones, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1279956-chickenbones-mods
-Forge Multipart(ForgeMultipart-*-universal.jar) - chicken_bones, https://github.com/Chicken-Bones/ForgeMultipart
-Open Blocks(OpenBlocks-*.jar) - OpenMods, https://github.com/OpenMods/OpenBlocks
-Open Mods Lib(OpenModsLib-*.jar) - OpenMods, https://github.com/OpenMods/OpenModsLib
+Extra Utilities(extrautilities*.jar) - RWTema, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/1443963-extra-utilities-v1-1-0e#c2
+Not Enough Items(NotEnoughItems*.jar) - chicken_bones, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1279956-chickenbones-mods
+Code Chicken Core(CodeChickenCore*.jar) - chicken_bones, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1279956-chickenbones-mods
+Forge Multipart(ForgeMultipart*.jar) - chicken_bones, https://github.com/Chicken-Bones/ForgeMultipart
+Open Blocks(OpenBlocks*.jar) - OpenMods, https://github.com/OpenMods/OpenBlocks
+Open Mods Lib(OpenModsLib*.jar) - OpenMods, https://github.com/OpenMods/OpenModsLib
+EiraIRC(eira-irc*.jar) - blay09, https://github.com/blay09/EiraIRC
 
 Library credits:
 PNGDecoder
@@ -126,3 +127,5 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Baubles uses the following license:
 Creative Commons Attribution-NonCommercial-ShareAlike 3.0
 http://creativecommons.org/licenses/by-nc-sa/3.0/
+
+EiraIRC uses the license at https://github.com/blay09/EiraIRC/blob/master/LICENSE
