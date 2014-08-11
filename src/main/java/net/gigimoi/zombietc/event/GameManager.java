@@ -123,22 +123,22 @@ public class GameManager {
         if (zombiesToSpawn == 0) {
             return false;
         }
-        if (wave < 3 && _r.nextInt(60) != 0) {
+        if (wave < 3 && _r.nextInt(55) != 0) {
             return false;
         }
-        if (wave >= 3 && wave < 5 && _r.nextInt(50) != 0) {
+        if (wave >= 3 && wave < 5 && _r.nextInt(48) != 0) {
             return false;
         }
         if (wave >= 5 && wave < 8 && _r.nextInt(40) != 0) {
             return false;
         }
-        if (wave >= 8 && wave < 13 && _r.nextInt(30) != 0) {
+        if (wave >= 8 && wave < 13 && _r.nextInt(47) != 0) {
             return false;
         }
-        if (wave >= 13 && wave < 20 && _r.nextInt(20) != 0) {
+        if (wave >= 13 && wave < 20 && _r.nextInt(27) != 0) {
             return false;
         }
-        return true;
+        return _r.nextInt(20) != 0;
     }
 
     public String getSaveFilePath(World world) {
