@@ -51,8 +51,7 @@ public class BlockNodeDoor extends BlockNode {
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List mask, Entity entity) {
         if (entity != null) {
             if (entity.getClass() == EntityZZombie.class) {
-                super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
-                super.addCollisionBoxesToList(world, x, y + 1, z, aabb, mask, entity);
+                return;
             } else {
                 if (!ZombieTC.editorModeManager.enabled && !(getTile(world, x, y, z).animationTime > 70)) {
                     super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
