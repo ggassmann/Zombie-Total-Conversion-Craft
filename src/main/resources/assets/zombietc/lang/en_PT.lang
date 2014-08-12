@@ -38,6 +38,7 @@ ui.overlay.editorModeEnabled=Editor mode boat
 ui.overlay.zombiesLeft=Undead boat
 ui.overlay.ammo=Ammo boat
 ui.overlay.reloading=Reloading boat
+ui.debug.ongameover=Yar, this mod is in alpha, you may press Shift+G to respawn. boat.
 
 key.categories.zombietc=Zombie Total Conversion Craft boat
 key.binding.activate=Activate boat

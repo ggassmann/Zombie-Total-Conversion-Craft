@@ -38,6 +38,7 @@ ui.overlay.editorModeEnabled=Editiermodus ist aktiv
 ui.overlay.zombiesLeft=Untoten links
 ui.overlay.ammo=Munition
 ui.overlay.reloading=Neuladen
+ui.debug.ongameover=[TRANSLATEME]Since this mod is in alpha, you may press Shift+G to respawn.
 
 key.categories.zombietc=Zombie Total Conversion Craft
 key.binding.activate=Aktivieren
