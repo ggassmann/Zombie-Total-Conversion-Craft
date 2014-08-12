@@ -147,7 +147,7 @@ public class EntityZZombie extends EntityZombie {
             }
         }
         */
-        getMoveHelper().setMoveTo(targetX, targetY, targetZ, Properties.getSpeed(this) * (ZombieTC.gameManager.wave > 4 ? 1.2f : 0.85f));
+        getMoveHelper().setMoveTo(targetX, targetY, targetZ, Properties.getSpeed(this) * (ZombieTC.gameManager.wave > 4 ? 0.95f : 0.85f));
         if (targetY > posY) {
             getJumpHelper().setJumping();
         }
