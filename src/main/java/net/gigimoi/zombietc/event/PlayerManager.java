@@ -94,6 +94,8 @@ public class PlayerManager {
         if(event.distance > 3 && EntityPlayer.class.isAssignableFrom(event.entityLiving.getClass())) {
             EntityPlayer player = (EntityPlayer) event.entityLiving;
             player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 15, 3));
+            ZombieTCPlayerProperties playerProperties = ZombieTCPlayerProperties.get(player);
+            playerProperties.timeSinceHit = 0;
         }
     }
 
