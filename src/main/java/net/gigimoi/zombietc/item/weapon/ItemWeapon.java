@@ -11,7 +11,6 @@ import net.gigimoi.zombietc.util.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -159,11 +158,6 @@ public class ItemWeapon extends Item implements IItemRenderer {
         ensureTagCompund(stack);
         stack.getTagCompound().setBoolean("InSights", !stack.getTagCompound().getBoolean("InSights"));
         return stack;
-    }
-
-    @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase attacker, EntityLivingBase attacked) {
-        return false; //TODO: Deal no damage
     }
 
     public void ensureTagCompund(ItemStack stack) {

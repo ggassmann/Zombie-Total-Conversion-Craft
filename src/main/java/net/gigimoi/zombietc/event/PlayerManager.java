@@ -20,6 +20,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 import java.util.List;
 
@@ -83,6 +84,13 @@ public class PlayerManager {
     public void onAllowDespawn(LivingSpawnEvent.AllowDespawn event) {
         if (event.entityLiving.getClass() == EntityZZombie.class) {
             event.setResult(Event.Result.DENY);
+        }
+    }
+
+    @SubscribeEvent
+    public void onAttackEntity(AttackEntityEvent event) {
+        if (event.target.getClass() == EntityZZombie.class) {
+            event.setCanceled(true);
         }
     }
 
