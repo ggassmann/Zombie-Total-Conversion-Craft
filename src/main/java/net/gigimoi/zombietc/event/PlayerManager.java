@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
@@ -85,6 +86,14 @@ public class PlayerManager {
     public void onAllowDespawn(LivingSpawnEvent.AllowDespawn event) {
         if (event.entityLiving.getClass() == EntityZZombie.class) {
             event.setResult(Event.Result.DENY);
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingFall(LivingFallEvent event) {
+        if(event.distance > 3 && EntityPlayer.class.isAssignableFrom(event.entityLiving.getClass())) {
+            EntityPlayer player = (EntityPlayer) event.entityLiving;
+            player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 15, 3));
         }
     }
 
