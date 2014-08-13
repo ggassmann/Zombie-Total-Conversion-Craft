@@ -144,7 +144,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         modelGun.renderAll();
         if (shoot) {
-            TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/models/muzzleflash.png"));
+            TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/misc/muzzleflash.png"));
             glTranslated(_r.nextInt(100) / 100f - 0.5f, _r.nextInt(100) / 100f - 0.3f, _r.nextInt(100) / 100f - 0.5f);
             glTranslated(-barrelLength * 4, 0, sightHeight * 1.5f);
             modelFlash.renderAll();

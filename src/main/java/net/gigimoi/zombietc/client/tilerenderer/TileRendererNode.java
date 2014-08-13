@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL11.*;
  * Created by gigimoi on 7/16/2014.
  */
 public class TileRendererNode extends TileEntitySpecialRenderer {
-    public static ResourceLocation texture = new ResourceLocation(ZombieTC.MODID, "textures/models/node.png");
+    public static ResourceLocation texture = new ResourceLocation(ZombieTC.MODID, "textures/blocks/Node.png");
     public static IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/node.obj"));
 
     public static void renderModel(TileEntity rawTile, double x, double y, double z) {
