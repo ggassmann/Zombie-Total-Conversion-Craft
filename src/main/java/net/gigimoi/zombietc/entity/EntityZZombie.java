@@ -75,9 +75,9 @@ public class EntityZZombie extends EntityZombie {
         this.registerExtendedProperties(Properties.PropertiesIdentifier, new Properties());
         Properties.setSpeed(this, 1f);
         if(ZombieTC.gameManager.wave > 2) {
-            if(_r.nextBoolean() || _r.nextBoolean()) {
+            if(_r.nextBoolean()) {
                 this.setCurrentItemOrArmor(1, new ItemStack(Items.leather_boots));
-                Properties.setSpeed(this, Properties.getSpeed(this) + 0.3f);
+                Properties.setSpeed(this, Properties.getSpeed(this) + 0.2f);
             }
         }
     }
@@ -93,7 +93,7 @@ public class EntityZZombie extends EntityZombie {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue((int)(ZombieTC.gameManager.wave * 1.3) + 4);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue((int)(ZombieTC.gameManager.wave * 1.7) + 4);
     }
 
     @Override
