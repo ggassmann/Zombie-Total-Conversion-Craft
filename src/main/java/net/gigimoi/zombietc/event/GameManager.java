@@ -63,6 +63,7 @@ public class GameManager {
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
+        if(ZombieTC.proxy.getWorld(event.side) != null) ZombieTC.proxy.getWorld(event.side).setWorldTime(ZombieTC.editorModeManager.enabled ? 1000 : 15000);
         refreshFoodbarsCooldown++;
         if (refreshFoodbarsCooldown > 200 && ZombieTC.proxy.getWorld(event.side) != null) {
             refreshFoodbarsCooldown = 0;
