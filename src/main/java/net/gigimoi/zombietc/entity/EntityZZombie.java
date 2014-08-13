@@ -83,14 +83,15 @@ public class EntityZZombie extends EntityZombie {
         this.registerExtendedProperties(Properties.PropertiesIdentifier, new Properties());
         Properties.setSpeed(this, 1f);
         Properties.setDamage(this, 2f);
+        System.out.println(ZombieTC.gameManager.wave);
         if(_r.nextBoolean() && ZombieTC.gameManager.wave > 1) {
             this.setCurrentItemOrArmor(1, new ItemStack(Items.leather_boots));
             Properties.setSpeed(this, Properties.getSpeed(this) + 0.1f);
-            if(ZombieTC.gameManager.wave >= 5 || _r.nextBoolean()) {
+            if(ZombieTC.gameManager.wave >= 5 && _r.nextBoolean()) {
                 this.setCurrentItemOrArmor(1, new ItemStack(Items.iron_boots));
                 Properties.setSpeed(this, Properties.getSpeed(this) + 0.1f);
             }
-            else if(ZombieTC.gameManager.wave >= 8 || _r.nextBoolean()) {
+            else if(ZombieTC.gameManager.wave >= 8 && _r.nextBoolean()) {
                 this.setCurrentItemOrArmor(1, new ItemStack(Items.diamond_boots));
                 Properties.setSpeed(this, Properties.getSpeed(this) + 0.2f);
             }
