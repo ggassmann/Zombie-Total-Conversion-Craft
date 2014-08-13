@@ -215,6 +215,10 @@ public class ItemWeapon extends Item implements IItemRenderer {
                             tag.setInteger("ShootCooldown", fireDelay);
                             tag.setBoolean("Shoot", true);
                             tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
+                            if(tag.getInteger("Rounds") == 0) {
+                                tag.setInteger("Reload Timer", reloadTime);
+                                ZombieTC.network.sendToServer(new MessageReload(player));
+                            }
                             player.setPositionAndRotation(
                                     player.posX,
                                     player.posY,
