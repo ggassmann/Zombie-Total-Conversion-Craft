@@ -31,6 +31,7 @@ import java.util.Random;
 public class EntityZZombie extends EntityZombie {
     public static class Properties implements IExtendedEntityProperties {
         float speed;
+        float damage;
         public static String PropertiesIdentifier = "Entity ZZombie Properties";
         private static Properties getProp(Entity entity) {
             return (Properties) entity.getExtendedProperties(PropertiesIdentifier);
@@ -41,19 +42,26 @@ public class EntityZZombie extends EntityZombie {
         public static void setSpeed(Entity entity, float speed) {
             getProp(entity).speed = speed;
         }
+        public static float getDamage(Entity entity) {
+            return getProp(entity).damage;
+        }
+        public static void setDamage(Entity entity, float damage) {
+            getProp(entity).damage = damage;
+        }
         @Override
         public void saveNBTData(NBTTagCompound tag) {
             tag.setFloat("Speed", speed);
+            tag.setFloat("Damage", damage);
         }
 
         @Override
         public void loadNBTData(NBTTagCompound tag) {
             speed = tag.getFloat("Speed");
+            damage = tag.getFloat("Damage");
         }
 
         @Override
         public void init(Entity entity, World world) {
-            speed = 1f;
         }
     }
     static Random _r = new Random();
@@ -74,11 +82,14 @@ public class EntityZZombie extends EntityZombie {
         this.setSize(0.6F, 1.8F);
         this.registerExtendedProperties(Properties.PropertiesIdentifier, new Properties());
         Properties.setSpeed(this, 1f);
-        if(ZombieTC.gameManager.wave > 2) {
-            if(_r.nextBoolean()) {
-                this.setCurrentItemOrArmor(1, new ItemStack(Items.leather_boots));
-                Properties.setSpeed(this, Properties.getSpeed(this) + 0.2f);
-            }
+        Properties.setDamage(this, 2f);
+        if(ZombieTC.gameManager.wave > 1 && _r.nextBoolean()) {
+            this.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword));
+            Properties.setDamage(this, Properties.getDamage(this) + 3);
+        }
+        if(ZombieTC.gameManager.wave > 2 && _r.nextBoolean()) {
+            this.setCurrentItemOrArmor(1, new ItemStack(Items.leather_boots));
+            Properties.setSpeed(this, Properties.getSpeed(this) + 0.2f);
         }
     }
 
@@ -116,7 +127,7 @@ public class EntityZZombie extends EntityZombie {
                 EntityPlayer nearest = worldObj.getClosestPlayerToEntity(this, Int.MaxValue());
                 if (nearest != null && Vec3.createVectorHelper(posX, posY, posZ).distanceTo(Vec3.createVectorHelper(nearest.posX, nearest.posY, nearest.posZ)) < 1.5) {
                     nearest.attackEntityFrom(
-                            new DamageSource("Zombie"), 2
+                            new DamageSource("Zombie"), Properties.getDamage(this)
                     );
                     ((PlayerManager.ZombieTCPlayerProperties) nearest.getExtendedProperties(ZombieTC.MODID)).timeSinceHit = 0;
                 }
