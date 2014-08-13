@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.entity.EntityZZombie;
+import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.gigimoi.zombietc.util.Lang;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
@@ -89,7 +90,10 @@ public class PlayerManager {
 
     @SubscribeEvent
     public void onAttackEntity(AttackEntityEvent event) {
-        if (event.target.getClass() == EntityZZombie.class) {
+        if (event.entityPlayer != null &&
+            event.entityPlayer.getHeldItem() != null &&
+            ItemWeapon.class.isAssignableFrom(event.entityPlayer.getHeldItem().getItem().getClass())
+            ) {
             event.setCanceled(true);
         }
     }
