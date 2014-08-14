@@ -5,6 +5,12 @@
         {"name": "aCP44Shoot3","stream": false},
         {"name": "aCP44Shoot4","stream": false}
     ]},
+    "shoot-Arktic Persuader": {"category": "master", "sounds": [
+        {"name": "arkticPersuaderShoot1","stream": false},
+        {"name": "arkticPersuaderShoot2","stream": false},
+        {"name": "arkticPersuaderShoot3","stream": false},
+        {"name": "arkticPersuaderShoot4","stream": false}
+    ]},
     "shoot-FDRbine": {"category": "master", "sounds": [
         {"name": "fDRbineShoot1","stream": false},
         {"name": "fDRbineShoot2","stream": false},

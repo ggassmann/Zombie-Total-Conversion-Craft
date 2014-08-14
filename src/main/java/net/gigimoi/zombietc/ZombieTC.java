@@ -93,6 +93,7 @@ public class ZombieTC {
         registerItem(ItemWeapon.weaponVenusSMP, false);
         registerItem(ItemWeapon.weaponFDRbine, false);
         registerItem(ItemWeapon.weaponACP44, false);
+        registerItem(ItemWeapon.weaponArkticPersuader, false);
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockNode.instance);

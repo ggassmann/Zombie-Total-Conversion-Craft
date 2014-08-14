@@ -1,4 +1,4 @@
-itemGroup.Zombie Total Conversion=
+itemGroup.Zombie Total Conversion=boat conversion
 
 item.Radom Vis.name=Itty bitty cannon boat
 item.Storm Rifle.name=Lightning cannon boat
@@ -8,6 +8,7 @@ item.VBR-B.name=Tim's Cannon boat
 item.Venus SMP.name=Cannon cutlass boat
 item.FDRbine.name=Patriot cannon boat
 item.ACP44.name=Knave's cannon boat
+item.Arktic Persuader.name=Frozen cannon boat
 
 item.Node Linker.name=Newfangled bumbo boat
 item.Ring of Health.name=Jewel of Life boat
