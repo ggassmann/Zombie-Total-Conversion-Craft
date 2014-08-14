@@ -1,4 +1,10 @@
 {
+    "shoot-ACP44": {"category": "master", "sounds": [
+        {"name": "aCP44Shoot1","stream": false},
+        {"name": "aCP44Shoot2","stream": false},
+        {"name": "aCP44Shoot3","stream": false},
+        {"name": "aCP44Shoot4","stream": false}
+    ]},
     "shoot-FDRbine": {"category": "master", "sounds": [
         {"name": "fDRbineShoot1","stream": false},
         {"name": "fDRbineShoot2","stream": false},

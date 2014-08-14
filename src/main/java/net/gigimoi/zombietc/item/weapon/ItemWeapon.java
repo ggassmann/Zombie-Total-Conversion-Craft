@@ -35,7 +35,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
     private static final Block[] ignoredBlocksList = new Block[]{
             BlockBarricade.wooden
     };
-    public static ItemWeapon weaponACP44 = new ItemWeapon("ACP44", FireMechanism.burst3fast, 0.6, 4, 21, 210, 18, 1).barrelLength(1.2f).sightHeight(0.2f).damage(2);
+    public static ItemWeapon weaponACP44 = new ItemWeapon("ACP44", FireMechanism.burst3fast, 0.6, 4, 21, 210, 18, 1).barrelLength(1.2f).sightHeight(0.6f).damage(2);
     public static ItemWeapon weaponFDRbine = new ItemWeapon("FDRbine", FireMechanism.burst3slow, 0.37, 6, 9, 72, 20, 4).barrelLength(2.0f).sightHeight(1.0f).damage(2);
     public static ItemWeapon weaponKarbine = new ItemWeapon("Karbine", FireMechanism.semiAutomatic, 0.5, 1, 4, 40, 20, 20).barrelLength(2.5f).sightHeight(0.1f).damage(5);
     public static ItemWeapon weaponRadomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1).barrelLength(1.0f).sightHeight(0.1f).damage(2);
