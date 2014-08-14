@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.item.weapon;
 
 import net.gigimoi.zombietc.ZombieTC;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -11,7 +12,7 @@ public class FireMechanism {
     public static final FireMechanism semiAutomatic = new FireMechanism() {
         @Override
         public boolean checkFire(ItemWeapon weaponType, ItemStack stack) {
-            if (ZombieTC.mouseManager.isLeftPressed()) {
+            if (ZombieTC.mouseManager.isLeftPressed() && Minecraft.getMinecraft().currentScreen == null) {
                 if (stack.getTagCompound().getInteger("ShootCooldown") <= 0) {
                     return true;
                 }
@@ -22,7 +23,7 @@ public class FireMechanism {
     public static final FireMechanism automatic = new FireMechanism() {
         @Override
         public boolean checkFire(ItemWeapon weaponType, ItemStack stack) {
-            if (ZombieTC.mouseManager.isLeftDown()) {
+            if (ZombieTC.mouseManager.isLeftDown() && Minecraft.getMinecraft().currentScreen == null) {
                 if (stack.getTagCompound().getInteger("ShootCooldown") <= 0) {
                     return true;
                 }
@@ -59,7 +60,7 @@ public class FireMechanism {
                 return true;
             }
             if (tag.getInteger("ShootCooldown") <= 0) {
-                if (ZombieTC.mouseManager.isLeftPressed()) {
+                if (ZombieTC.mouseManager.isLeftPressed() && Minecraft.getMinecraft().currentScreen == null) {
                     burstingWeapon = weaponType;
                     burstShotsLeft = shots - 1;
                     burstShotDelay = delay;
