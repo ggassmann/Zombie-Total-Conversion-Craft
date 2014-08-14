@@ -35,6 +35,12 @@
         {"name": "thompsonShoot3","stream": false},
         {"name": "thompsonShoot4","stream": false}
     ]},
+	"shoot-VBR-B": {"category": "master", "sounds": [
+        {"name": "vBR-BShoot1","stream": false},
+        {"name": "vBR-BShoot2","stream": false},
+        {"name": "vBR-BShoot3","stream": false},
+        {"name": "vBR-BShoot4","stream": false}
+    ]},
     "shoot-Venus SMP": {"category": "master", "sounds": [
         {"name": "venusSMPShoot1","stream": false},
         {"name": "venusSMPShoot2","stream": false},
