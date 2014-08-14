@@ -17,9 +17,9 @@ public class FogManager {
     @SubscribeEvent
     public void onFogColor(EntityViewRenderEvent.FogColors event) {
         if (!ZombieTC.editorModeManager.enabled) {
-            event.red = 0.25f;
-            event.blue = 0.25f;
-            event.green = 0.25f;
+            event.red = 0.28f;
+            event.blue = 0.28f;
+            event.green = 0.28f;
         }
     }
 }
