@@ -116,14 +116,6 @@ public class EntityZZombie extends EntityZombie {
     }
 
     @Override
-    public void setFire(int duration) {
-        if (duration == 8) {
-            return;
-        }
-        super.setFire(duration);
-    }
-
-    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue((int)(ZombieTC.gameManager.wave * 1.7) + 4);
