@@ -13,7 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 /**
@@ -68,9 +67,9 @@ public class MessageShoot implements IMessage {
                     }
                     if (player != null) {
                         PlayerManager.ZombieTCPlayerProperties.get(player).vim += 10;
-                        message.hit.attackEntityFrom(DamageSource.generic, ((ItemWeapon) message.weapon).getBulletDamage());
                         if (EntityZZombie.class.isAssignableFrom(message.hit.getClass())) {
                             EntityZZombie zombie = (EntityZZombie) message.hit;
+                            ((ItemWeapon) message.weapon).bulletType.onHit(player, zombie);
                             if (zombie.getHealth() <= 0) {
                                 PlayerManager.ZombieTCPlayerProperties.get(player).vim += 40;
                             }

@@ -7,4 +7,12 @@ public class WeaponData {
     public String bulletType = "smallLead";
     public String fireMechanism = "automatic";
     public String name = "WeaponName";
+    public float inventoryScale;
+    public float adsLift;
+    public float barrelLength;
+    public float sightHeight;
+    public int clipSize;
+    public int initialAmmo;
+    public int reloadTime;
+    public int fireDelay;
 }

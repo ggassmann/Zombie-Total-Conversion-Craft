@@ -1,7 +1,117 @@
-[
-    {
-     "bulletType":"smallLead",
-     "fireMechanism":"automatic",
-     "name":"WeaponName"
-    }
-]
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: ACP44,
+    bulletType: mediumLead,
+    fireMechanism: burst3Fast,
+    inventoryScale: 0.6,
+    adsLift: 4,
+    barrelLength: 1.2,
+    sightHeight: 0.1,
+    clipSize: 21,
+    initialAmmo: 210,
+    reloadTime: 18,
+    fireDelay: 1
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: Arktic Persuader,
+    bulletType: mediumLead,
+    fireMechanism: semiAutomatic,
+    inventoryScale: 0.8,
+    adsLift: 0.3,
+    barrelLength: 1.2,
+    sightHeight: 0.1,
+    clipSize: 14,
+    initialAmmo: 140,
+    reloadTime: 20,
+    fireDelay: 1
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: FDRbine,
+    bulletType: mediumLead,
+    fireMechanism: burst3Slow,
+    inventoryScale: 0.37,
+    adsLift: 6,
+    barrelLength: 2,
+    sightHeight: 1,
+    clipSize: 9,
+    initialAmmo: 90,
+    reloadTime: 20,
+    fireDelay: 4
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: Karbine,
+    bulletType: mediumBolt,
+    fireMechanism: semiAutomatic,
+    inventoryScale: 0.5,
+    adsLift: 1,
+    barrelLength: 2.5,
+    sightHeight: 0.1,
+    clipSize: 5,
+    initialAmmo: 55,
+    reloadTime: 25,
+    fireDelay: 20
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: Radom Vis,
+    bulletType: mediumLead,
+    fireMechanism: semiAutomatic,
+    inventoryScale: 1,
+    adsLift: 1,
+    barrelLength: 1,
+    sightHeight: 0.1,
+    clipSize: 9,
+    initialAmmo: 90,
+    reloadTime: 20,
+    fireDelay: 1
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: Storm Rifle,
+    bulletType: mediumLead,
+    fireMechanism: automatic,
+    inventoryScale: 0.55,
+    adsLift: 6,
+    barrelLength: 2.0,
+    sightHeight: 1,
+    clipSize: 30,
+    initialAmmo: 160,
+    reloadTime: 20,
+    fireDelay: 3
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: Thompson,
+    bulletType: mediumLead,
+    fireMechanism: automatic,
+    inventoryScale: 0.5,
+    adsLift: 6,
+    barrelLength: 1.8,
+    sightHeight: 1,
+    clipSize: 30,
+    initialAmmo: 160,
+    reloadTime: 20,
+    fireDelay: 2
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: VBR-B,
+    bulletType: smallLead,
+    fireMechanism: automatic,
+    inventoryScale: 1,
+    adsLift: 6,
+    barrelLength: 1,
+    sightHeight: 0.4,
+    clipSize: 42,
+    initialAmmo: 420,
+    reloadTime: 22,
+    fireDelay: 1
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: Venus SMP,
+    bulletType: largeLead,
+    fireMechanism: automatic,
+    inventoryScale: 0.52,
+    adsLift: 3.9,
+    barrelLength: 2,
+    sightHeight: 0.3,
+    clipSize: 25,
+    initialAmmo: 225,
+    reloadTime: 20,
+    fireDelay: 2
+}

@@ -15,8 +15,6 @@ import net.gigimoi.zombietc.block.BlockNodeDoor;
 import net.gigimoi.zombietc.block.BlockSpawner;
 import net.gigimoi.zombietc.block.purchasable.BlockPurchaseEventLever;
 import net.gigimoi.zombietc.block.purchasable.BlockPurchaseItemstack;
-import net.gigimoi.zombietc.tile.purchasable.TilePurchaseEventLever;
-import net.gigimoi.zombietc.tile.purchasable.TilePurchaseItemStack;
 import net.gigimoi.zombietc.client.event.FogManager;
 import net.gigimoi.zombietc.client.event.KeyManager;
 import net.gigimoi.zombietc.client.event.MainGuiOverrideManager;
@@ -25,11 +23,12 @@ import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.*;
 import net.gigimoi.zombietc.item.ItemNodeLinker;
 import net.gigimoi.zombietc.item.ItemSpawnZZombie;
-import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.gigimoi.zombietc.tile.TileBarricade;
 import net.gigimoi.zombietc.tile.TileNode;
 import net.gigimoi.zombietc.tile.TileNodeDoor;
 import net.gigimoi.zombietc.tile.TileSpawner;
+import net.gigimoi.zombietc.tile.purchasable.TilePurchaseEventLever;
+import net.gigimoi.zombietc.tile.purchasable.TilePurchaseItemStack;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -85,15 +84,7 @@ public class ZombieTC {
 
         registerItem(ItemSpawnZZombie.instance());
         registerItem(ItemNodeLinker.instance());
-        registerItem(ItemWeapon.weaponRadomVis, false);
-        registerItem(ItemWeapon.weaponStormRifle, false);
-        registerItem(ItemWeapon.weaponThompson, false);
-        registerItem(ItemWeapon.weaponKarbine, false);
-        registerItem(ItemWeapon.weaponVBR_B, false);
-        registerItem(ItemWeapon.weaponVenusSMP, false);
-        registerItem(ItemWeapon.weaponFDRbine, false);
-        registerItem(ItemWeapon.weaponACP44, false);
-        registerItem(ItemWeapon.weaponArkticPersuader, false);
+        WeaponLoader.register();
 
         registerBlock(BlockSpawner.zombie);
         registerBlock(BlockNode.instance);
@@ -146,7 +137,7 @@ public class ZombieTC {
 
         @Override
         public Item getTabIconItem() {
-            return ItemWeapon.weaponRadomVis;
+            return ItemNodeLinker.instance();
         }
     }
 }

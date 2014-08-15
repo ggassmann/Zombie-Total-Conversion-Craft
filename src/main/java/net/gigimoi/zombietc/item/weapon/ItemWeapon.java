@@ -35,18 +35,10 @@ public class ItemWeapon extends Item implements IItemRenderer {
     private static final Block[] ignoredBlocksList = new Block[]{
             BlockBarricade.wooden
     };
-    public static ItemWeapon weaponACP44 = new ItemWeapon("ACP44", FireMechanism.burst3fast, 0.6, 4, 21, 210, 18, 1).barrelLength(1.2f).sightHeight(0.65f).damage(2);
-    public static ItemWeapon weaponArkticPersuader = new ItemWeapon("Arktic Persuader", FireMechanism.semiAutomatic, 0.8, 0.3f, 14, 140, 20, 1).barrelLength(1.2f).sightHeight(0.1f).damage(2);
-    public static ItemWeapon weaponFDRbine = new ItemWeapon("FDRbine", FireMechanism.burst3slow, 0.37, 6, 9, 72, 20, 4).barrelLength(2.0f).sightHeight(1.0f).damage(2);
-    public static ItemWeapon weaponKarbine = new ItemWeapon("Karbine", FireMechanism.semiAutomatic, 0.5, 1, 4, 40, 20, 20).barrelLength(2.5f).sightHeight(0.1f).damage(5);
-    public static ItemWeapon weaponRadomVis = new ItemWeapon("Radom Vis", FireMechanism.semiAutomatic, 1, 1, 9, 90, 20, 1).barrelLength(1.0f).sightHeight(0.1f).damage(2);
-    public static ItemWeapon weaponStormRifle = new ItemWeapon("Storm Rifle", FireMechanism.automatic, 0.55, 6, 30, 120, 20, 3).barrelLength(2.0f).sightHeight(1.0f).damage(2);
-    public static ItemWeapon weaponThompson = new ItemWeapon("Thompson", FireMechanism.automatic, 0.5, 6, 30, 120, 20, 2).barrelLength(1.8f).sightHeight(0.1f).damage(2);
-    public static ItemWeapon weaponVBR_B = new ItemWeapon("VBR-B", FireMechanism.automatic, 1, 6, 42, 420, 22, 1).barrelLength(1.0f).sightHeight(0.4f).damage(1);
-    public static ItemWeapon weaponVenusSMP = new ItemWeapon("Venus SMP", FireMechanism.automatic, 0.52, 3.9, 25, 200, 17, 2).barrelLength(2.0f).sightHeight(0.3f).damage(3);
     public static IModelCustom modelFlash;
     private static Random _r = new Random();
     public FireMechanism fireMechanism;
+    public BulletType bulletType;
     public double inventoryScale;
     public int clipSize;
     public int initialAmmo;
@@ -54,7 +46,6 @@ public class ItemWeapon extends Item implements IItemRenderer {
     public int fireDelay;
     public IModelCustom modelGun;
     double adsLift;
-    private int damage;
     private float barrelLength;
     private float sightHeight;
 
@@ -79,11 +70,6 @@ public class ItemWeapon extends Item implements IItemRenderer {
 
     public ItemWeapon sightHeight(float height) {
         this.sightHeight = height;
-        return this;
-    }
-
-    public ItemWeapon damage(int damage) {
-        this.damage = damage;
         return this;
     }
 
@@ -148,7 +134,9 @@ public class ItemWeapon extends Item implements IItemRenderer {
             TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID, "textures/misc/muzzleflash.png"));
             glTranslated(_r.nextInt(100) / 100f - 0.5f, _r.nextInt(100) / 100f - 0.3f, _r.nextInt(100) / 100f - 0.5f);
             glTranslated(-barrelLength * 4, 0, sightHeight * 1.5f);
+            glDisable(GL_LIGHTING);
             modelFlash.renderAll();
+            glEnable(GL_LIGHTING);
         }
         glDisable(GL_BLEND);
         glPopMatrix();
@@ -256,9 +244,5 @@ public class ItemWeapon extends Item implements IItemRenderer {
         if (tag.getInteger("Reload Timer") > 0) {
             TextRenderHelper.drawString(Lang.get("ui.overlay.reloading") + "...", event.resolution.getScaledWidth() - 2, 12, TextAlignment.Right);
         }
-    }
-
-    public float getBulletDamage() {
-        return damage;
     }
 }
