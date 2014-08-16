@@ -44,6 +44,7 @@ public class MessageChangeEditorMode implements IMessage {
             List<EntityPlayer> players = ZombieTC.proxy.getWorld(ctx.side).playerEntities;
             for (int i = 0; i < players.size(); i++) {
                 PlayerManager.ZombieTCPlayerProperties.get(players.get(i)).vim = 100;
+                players.get(i).inventory.clearInventory(null, -1);
             }
             for(int i = 0; i < ZombieTC.gameManager.blockBarricades.size(); i++) {
                 Point3 pos = ZombieTC.gameManager.blockBarricades.get(i);

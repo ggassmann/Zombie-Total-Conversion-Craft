@@ -58,9 +58,12 @@ public class GameManager {
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if(ZombieTC.proxy.getWorld(event.side) != null) ZombieTC.proxy.getWorld(event.side).setWorldTime(ZombieTC.editorModeManager.enabled ? 1000 : 15000);
+        if(ZombieTC.proxy.getWorld(event.side) == null) {
+            return;
+        }
+        ZombieTC.proxy.getWorld(event.side).setWorldTime(ZombieTC.editorModeManager.enabled ? 1000 : 15000);
         refreshFoodbarsCooldown++;
-        if (refreshFoodbarsCooldown > 200 && ZombieTC.proxy.getWorld(event.side) != null) {
+        if (refreshFoodbarsCooldown > 200) {
             refreshFoodbarsCooldown = 0;
             List playerEntities = ZombieTC.proxy.getWorld(event.side).playerEntities;
             for (int i = 0; i < playerEntities.size(); i++) {
