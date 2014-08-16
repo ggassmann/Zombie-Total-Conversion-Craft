@@ -5,13 +5,11 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.api.ITileEntityPurchasable;
 import net.gigimoi.zombietc.block.BlockNode;
 import net.gigimoi.zombietc.client.ClientProxy;
 import net.gigimoi.zombietc.entity.EntityZZombie;
-import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.gigimoi.zombietc.net.MessageChangeEditorMode;
 import net.gigimoi.zombietc.net.MessagePurchaseTile;
 import net.gigimoi.zombietc.net.MessageRegeneratePathMap;
@@ -21,16 +19,15 @@ import net.gigimoi.zombietc.net.map.MessageAddNode;
 import net.gigimoi.zombietc.net.map.MessageAddNodeConnection;
 import net.gigimoi.zombietc.net.map.MessagePrepareStaticVariables;
 import net.gigimoi.zombietc.tile.TileZTC;
-import net.gigimoi.zombietc.util.*;
+import net.gigimoi.zombietc.util.IListenerZTC;
+import net.gigimoi.zombietc.util.Point3;
 import net.gigimoi.zombietc.util.pathfinding.MCNode;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import org.lwjgl.input.Keyboard;
@@ -51,15 +48,13 @@ public class GameManager {
     public static ArrayList<World> worldsSpawnedTo = new ArrayList<World>();
     public boolean activating;
     public int wave = 0;
-    int zombiesToSpawn = 0;
-    int zombiesAlive = 0;
+    public int zombiesToSpawn = 0;
+    public int zombiesAlive = 0;
     int timeToNextWave = 0;
     int nextWaveZombies = 0;
     int currentWaveMaxZombies = 0;
     short refreshFoodbarsCooldown = 0;
     private Random _r = new Random();
-    private int activateMessageDuration = 0;
-    private String activateMessage;
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
@@ -110,7 +105,7 @@ public class GameManager {
             if (tilePlayerOver != null && ITileEntityPurchasable.class.isAssignableFrom(tilePlayerOver.getClass())) {
                 ITileEntityPurchasable purchasable = (ITileEntityPurchasable) tilePlayerOver;
                 if (purchasable.getEnabled()) {
-                    setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to " + purchasable.getVerb() + ": " + purchasable.getPrice() + " vim");
+                    ZombieTC.gameOverlayManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to " + purchasable.getVerb() + ": " + purchasable.getPrice() + " vim");
                     if (activating && PlayerManager.ZombieTCPlayerProperties.get(player).vim >= purchasable.getPrice()) {
                         TileEntity tile = (TileEntity) purchasable;
                         ZombieTC.network.sendToServer(new MessagePurchaseTile(tile.xCoord, tile.yCoord, tile.zCoord, player));
@@ -269,39 +264,6 @@ public class GameManager {
     public void onLivingDeath(LivingDeathEvent event) {
         if (event.entityLiving.getClass() == EntityZZombie.class && !event.entity.worldObj.isRemote) {
             zombiesAlive--;
-        }
-    }
-
-    public void setActivateMessage(String message) {
-        activateMessageDuration = 10;
-        activateMessage = message;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
-        if (event.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && !ZombieTC.editorModeManager.enabled) {
-            event.setCanceled(true);
-            return;
-        }
-        if (event.type == RenderGameOverlayEvent.ElementType.FOOD) {
-            event.setCanceled(true);
-            return;
-        }
-        if (event.type == RenderGameOverlayEvent.ElementType.CHAT) {
-            if (ZombieTC.editorModeManager.enabled) {
-                TextRenderHelper.drawString(Lang.get("ui.overlay.editorModeEnabled"), 2, 2, TextAlignment.Left);
-            }
-            TextRenderHelper.drawString(Lang.get("ui.wave") + ": " + wave, 2, event.resolution.getScaledHeight() - 10, TextAlignment.Left);
-            TextRenderHelper.drawString(Lang.get("ui.overlay.zombiesLeft") + ": " + (zombiesToSpawn + zombiesAlive), 2, (int) (event.resolution.getScaledHeight()) - 20, TextAlignment.Left);
-            ItemStack heldItem = ZombieTC.proxy.getPlayer().getHeldItem();
-            if (heldItem != null && heldItem.getItem().getClass() == ItemWeapon.class) {
-                ((ItemWeapon) heldItem.getItem()).drawUIFor(heldItem, event);
-            }
-            if (activateMessageDuration > 0) {
-                TextRenderHelper.drawString(activateMessage, event.resolution.getScaledWidth() / 2, event.resolution.getScaledHeight() - 90, TextAlignment.Center);
-                activateMessageDuration--;
-            }
         }
     }
 

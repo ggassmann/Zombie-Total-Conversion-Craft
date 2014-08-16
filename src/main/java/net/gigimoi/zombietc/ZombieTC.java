@@ -15,10 +15,7 @@ import net.gigimoi.zombietc.block.BlockNodeDoor;
 import net.gigimoi.zombietc.block.BlockSpawner;
 import net.gigimoi.zombietc.block.purchasable.BlockPurchaseEventLever;
 import net.gigimoi.zombietc.block.purchasable.BlockPurchaseItemstack;
-import net.gigimoi.zombietc.client.event.FogManager;
-import net.gigimoi.zombietc.client.event.KeyManager;
-import net.gigimoi.zombietc.client.event.MainGuiOverrideManager;
-import net.gigimoi.zombietc.client.event.PlayerBuffRenderManager;
+import net.gigimoi.zombietc.client.event.*;
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.*;
 import net.gigimoi.zombietc.item.ItemNodeLinker;
@@ -54,6 +51,7 @@ public class ZombieTC {
     public static FogManager fogManager;
     public static PlayerBuffRenderManager playerBuffRenderManager;
     public static PlayerManager playerManager;
+    public static GameOverlayManager gameOverlayManager;
 
     @SidedProxy(clientSide = "net.gigimoi.zombietc.client.ClientProxy", serverSide = "net.gigimoi.zombietc.CommonProxy")
     public static CommonProxy proxy;
@@ -68,16 +66,19 @@ public class ZombieTC {
         gameManager = new GameManager();
         keyManager = new KeyManager();
         playerManager = new PlayerManager();
+        gameOverlayManager = new GameOverlayManager();
         FMLCommonHandler.instance().bus().register(editorModeManager);
         FMLCommonHandler.instance().bus().register(gameManager);
         FMLCommonHandler.instance().bus().register(mouseManager);
         FMLCommonHandler.instance().bus().register(keyManager);
         FMLCommonHandler.instance().bus().register(playerManager);
+        FMLCommonHandler.instance().bus().register(gameOverlayManager);
         MinecraftForge.EVENT_BUS.register(gameManager);
         MinecraftForge.EVENT_BUS.register(mouseManager);
         MinecraftForge.EVENT_BUS.register(editorModeManager);
         MinecraftForge.EVENT_BUS.register(keyManager);
         MinecraftForge.EVENT_BUS.register(playerManager);
+        MinecraftForge.EVENT_BUS.register(gameOverlayManager);
         MinecraftForge.EVENT_BUS.register(new NaturalSpawnManager());
 
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);
