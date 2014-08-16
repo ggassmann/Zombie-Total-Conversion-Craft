@@ -97,7 +97,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
             glRotated(90, 0, 1, 0);
             glTranslated(0, 1, 0);
         }
-        ensureTagCompund(stack);
+        ensureTagCompound(stack);
         glScaled(0.2f, 0.2f, 0.2f);
         glRotated(90, 1, 0, 0);
         glRotated(135, 0, 0, 1);
@@ -144,12 +144,12 @@ public class ItemWeapon extends Item implements IItemRenderer {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        ensureTagCompund(stack);
+        ensureTagCompound(stack);
         stack.getTagCompound().setBoolean("InSights", !stack.getTagCompound().getBoolean("InSights"));
         return stack;
     }
 
-    public void ensureTagCompund(ItemStack stack) {
+    public void ensureTagCompound(ItemStack stack) {
         if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
             stack.getTagCompound().setBoolean("InSights", false);
@@ -163,7 +163,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
 
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
-        ensureTagCompund(stack);
+        ensureTagCompound(stack);
         NBTTagCompound tag = stack.getTagCompound();
         if (tag.getInteger("Reload Timer") > 0) {
             tag.setInteger("Reload Timer", tag.getInteger("Reload Timer") - 1);
@@ -235,7 +235,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
     }
 
     public void drawUIFor(ItemStack stack, RenderGameOverlayEvent event) {
-        ensureTagCompund(stack);
+        ensureTagCompound(stack);
         NBTTagCompound tag = stack.getTagCompound();
         int rounds = tag.getInteger("Rounds");
         int totalAmmo = tag.getInteger("Ammo");
