@@ -5,4 +5,5 @@
 *.blend1
 *.mtl
 out/
-lobs/
+logs/
+build/

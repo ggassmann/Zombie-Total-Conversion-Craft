@@ -57,7 +57,7 @@ public class TileBarricade extends TileZTC {
             }
         }
         playerTicker = Math.max(0, playerTicker - 1);
-        if (damage > 0 && worldObj.isRemote) {
+        if ((damage > 0 || playerTicker > 0) && worldObj.isRemote) {
             if (worldObj.getEntitiesWithinAABB(EntityPlayer.class, getBoundsAround()).contains(ZombieTC.proxy.getPlayer())) {
                 ZombieTC.gameOverlayManager.setActivateMessage("Press [" + Keyboard.getKeyName(ClientProxy.activate.getKeyCode()) + "] to repair" + (playerTicker == 0 ? "" : "..."));
                 if (playerTicker == 0 && Keyboard.isKeyDown(ClientProxy.activate.getKeyCode())) {
