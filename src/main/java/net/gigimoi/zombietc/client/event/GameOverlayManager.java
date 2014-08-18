@@ -30,6 +30,7 @@ public class GameOverlayManager {
         activateMessageDuration = 10;
         activateMessage = message;
     }
+    @SuppressWarnings("unused")
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent.Pre event) {

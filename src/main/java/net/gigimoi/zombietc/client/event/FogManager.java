@@ -8,12 +8,14 @@ import net.minecraftforge.client.event.EntityViewRenderEvent;
  * Created by gigimoi on 7/30/2014.
  */
 public class FogManager {
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onFogDensity(EntityViewRenderEvent.FogDensity event) {
         event.setCanceled(true);
         event.density = ZombieTC.editorModeManager.enabled ? 0.0001f : 0.03f;
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onFogColor(EntityViewRenderEvent.FogColors event) {
         if (!ZombieTC.editorModeManager.enabled) {

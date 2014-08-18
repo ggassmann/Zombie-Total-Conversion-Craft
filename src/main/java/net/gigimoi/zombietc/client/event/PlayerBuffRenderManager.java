@@ -20,6 +20,7 @@ public class PlayerBuffRenderManager {
     private static final ResourceLocation textureRingOfHealth = new ResourceLocation(ZombieTC.MODID, "textures/misc/ringOfHealth.png");
     private static final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation(ZombieTC.MODID, "models/playerBuffShadow.obj"));
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onRenderPlayerEventPost(RenderLivingEvent.Post event) {
         if (event.entity != Minecraft.getMinecraft().thePlayer) {
@@ -38,6 +39,7 @@ public class PlayerBuffRenderManager {
         }
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onRenderWorldLastEvent(RenderWorldLastEvent event) {
         glPushMatrix();

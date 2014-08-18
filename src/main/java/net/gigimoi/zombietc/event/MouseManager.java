@@ -19,6 +19,7 @@ public class MouseManager {
         return leftPressed;
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {

@@ -13,13 +13,14 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 public class EditorModeManager {
     public boolean enabled = false;
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (((ClientProxy) ZombieTC.proxy).reset.isPressed()) {
             ZombieTC.network.sendToServer(new MessageChangeEditorMode(!ZombieTC.editorModeManager.enabled));
         }
     }
-
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void getBreakSpeed(PlayerEvent.BreakSpeed event) {
         if (!enabled) {

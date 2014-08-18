@@ -16,6 +16,7 @@ import org.lwjgl.input.Keyboard;
 public class MainGuiOverrideManager {
     public static final int BUTTON_ID_NEW_GAME = 500;
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onDrawGui(GuiScreenEvent.DrawScreenEvent event) {
         if (event.gui.getClass() == GuiMainMenu.class) {
@@ -30,6 +31,7 @@ public class MainGuiOverrideManager {
         }
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onInitGui(GuiScreenEvent.InitGuiEvent.Post event) {
         if(event.gui.getClass() == GuiGameOver.class) {
@@ -63,6 +65,7 @@ public class MainGuiOverrideManager {
         }
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onGuiActivate(GuiScreenEvent.ActionPerformedEvent.Pre event) {
         if (event.gui.getClass() == GuiMainMenu.class) {

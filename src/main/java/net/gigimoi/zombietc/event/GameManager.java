@@ -56,6 +56,7 @@ public class GameManager {
     short refreshFoodbarsCooldown = 0;
     private Random _r = new Random();
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onTick(TickEvent event) {
         if(ZombieTC.proxy.getWorld(event.side) == null) {
@@ -162,6 +163,7 @@ public class GameManager {
         return location;
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onLoad(WorldEvent.Load event) throws FileNotFoundException {
         if (event.world.getSaveHandler().getWorldDirectoryName().equals("none")) {
@@ -214,6 +216,7 @@ public class GameManager {
         regeneratePathMap();
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onSave(WorldEvent.Save event) throws FileNotFoundException {
         Gson gson = new Gson();
@@ -223,6 +226,7 @@ public class GameManager {
         writer.close();
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
         if (!MinecraftServer.getServer().isSinglePlayer()) {
@@ -263,6 +267,7 @@ public class GameManager {
         }
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
         if (event.entityLiving.getClass() == EntityZZombie.class && !event.entity.worldObj.isRemote) {

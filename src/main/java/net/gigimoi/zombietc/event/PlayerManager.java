@@ -32,6 +32,7 @@ import java.util.List;
 public class PlayerManager {
     int applyTicker = 0;
 
+    @SuppressWarnings("unused")
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
@@ -47,6 +48,7 @@ public class PlayerManager {
         }
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onEntityConstructing(EntityEvent.EntityConstructing event) {
         if (EntityPlayer.class.isAssignableFrom(event.entity.getClass())) {
@@ -54,6 +56,7 @@ public class PlayerManager {
         }
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onTick(TickEvent event) {
         applyTicker++;
@@ -78,10 +81,12 @@ public class PlayerManager {
         }
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onLivingSpawnEvent(LivingSpawnEvent event) {
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onAllowDespawn(LivingSpawnEvent.AllowDespawn event) {
         if (event.entityLiving.getClass() == EntityZZombie.class) {
@@ -89,6 +94,7 @@ public class PlayerManager {
         }
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onLivingFall(LivingFallEvent event) {
         if(event.distance > 3 && EntityPlayer.class.isAssignableFrom(event.entityLiving.getClass())) {
@@ -99,6 +105,7 @@ public class PlayerManager {
         }
     }
 
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void onAttackEntity(AttackEntityEvent event) {
         if (event.entityPlayer != null &&
