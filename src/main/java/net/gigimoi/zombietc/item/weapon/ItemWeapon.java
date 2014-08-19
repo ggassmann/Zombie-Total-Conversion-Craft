@@ -86,8 +86,14 @@ public class ItemWeapon extends Item implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack stack, Object... data) {
         glPushMatrix();
+        if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+            EntityPlayer player = (EntityPlayer) data[1];
+            if(player.isSprinting()) {
+                glRotated(45, 0, 1, 0);
+                glRotated(-40, 1, 0, 0);
+            }
+        }
         if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
-            //EntityPlayer player = (EntityPlayer) data[1];
             glTranslated(0, 1, 0);
         }
         if (type == ItemRenderType.INVENTORY) {
@@ -145,7 +151,10 @@ public class ItemWeapon extends Item implements IItemRenderer {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         ensureTagCompound(stack);
-        stack.getTagCompound().setBoolean("InSights", !stack.getTagCompound().getBoolean("InSights"));
+        if(!player.isSprinting()) {
+            stack.getTagCompound().setBoolean("InSights", !stack.getTagCompound().getBoolean("InSights"));
+            stack.getTagCompound().setInteger("Reload Timer", 0);
+        }
         return stack;
     }
 
@@ -165,7 +174,12 @@ public class ItemWeapon extends Item implements IItemRenderer {
     public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
         ensureTagCompound(stack);
         NBTTagCompound tag = stack.getTagCompound();
+        if(entity.isSprinting()) {
+            tag.setInteger("Reload Timer", 0);
+            tag.setBoolean("InSights", false);
+        }
         if (tag.getInteger("Reload Timer") > 0) {
+            tag.setBoolean("InSights", false);
             tag.setInteger("Reload Timer", tag.getInteger("Reload Timer") - 1);
             if (tag.getInteger("Reload Timer") == 0) {
                 int oldAmmoInClip = tag.getInteger("Rounds");
@@ -195,11 +209,11 @@ public class ItemWeapon extends Item implements IItemRenderer {
                 player.isSwingInProgress = false;
                 player.swingProgressInt = 0;
                 if (world.isRemote) {
-                    if (ClientProxy.reload.isPressed() && tag.getInteger("Reload Timer") == 0 && tag.getInteger("Rounds") != clipSize && tag.getInteger("Ammo") > 0) {
+                    if (!entity.isSprinting() && ClientProxy.reload.isPressed() && tag.getInteger("Reload Timer") == 0 && tag.getInteger("Rounds") != clipSize && tag.getInteger("Ammo") > 0) {
                         tag.setInteger("Reload Timer", reloadTime);
                         ZombieTC.network.sendToServer(new MessageReload(player));
                     }
-                    if (tag.getInteger("Reload Timer") == 0 && fireMechanism.checkFire(this, stack)) {
+                    if (!entity.isSprinting() && tag.getInteger("Reload Timer") == 0 && fireMechanism.checkFire(this, stack)) {
                         if (tag.getInteger("Rounds") > 0) {
                             tag.setInteger("ShootCooldown", fireDelay);
                             tag.setBoolean("Shoot", true);
