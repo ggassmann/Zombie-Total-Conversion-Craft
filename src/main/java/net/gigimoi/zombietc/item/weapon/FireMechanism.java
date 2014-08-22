@@ -45,6 +45,10 @@ public class FireMechanism {
         WeaponLoader.fireMechanisms.put(id, this);
     }
 
+    public boolean canReload(ItemWeapon weaponType, ItemStack stack) {
+        return true;
+    }
+
     private static class FireMechanismBurst extends FireMechanism {
         private int burstShotsLeft;
         private ItemWeapon burstingWeapon;
@@ -75,6 +79,14 @@ public class FireMechanism {
                     stack.setTagCompound(tag);
                     return true;
                 }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean canReload(ItemWeapon weaponType, ItemStack stack) {
+            if(burstShotsLeft == 0) {
+                return super.canReload(weaponType, stack);
             }
             return false;
         }

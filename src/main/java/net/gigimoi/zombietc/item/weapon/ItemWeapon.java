@@ -209,7 +209,13 @@ public class ItemWeapon extends Item implements IItemRenderer {
                 player.isSwingInProgress = false;
                 player.swingProgressInt = 0;
                 if (world.isRemote) {
-                    if (!entity.isSprinting() && ClientProxy.reload.isPressed() && tag.getInteger("Reload Timer") == 0 && tag.getInteger("Rounds") != clipSize && tag.getInteger("Ammo") > 0) {
+                    if (!entity.isSprinting() &&
+                        ClientProxy.reload.isPressed() &&
+                        tag.getInteger("Reload Timer") == 0 &&
+                        tag.getInteger("Rounds") != clipSize &&
+                        tag.getInteger("Ammo") > 0 &&
+                        fireMechanism.canReload(this, stack))
+                    {
                         tag.setInteger("Reload Timer", reloadTime);
                         ZombieTC.network.sendToServer(new MessageReload(player));
                     }
