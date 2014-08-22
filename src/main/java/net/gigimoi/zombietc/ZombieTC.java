@@ -19,7 +19,6 @@ import net.gigimoi.zombietc.client.event.*;
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.*;
 import net.gigimoi.zombietc.item.ItemNodeLinker;
-import net.gigimoi.zombietc.item.ItemSpawnZZombie;
 import net.gigimoi.zombietc.tile.TileBarricade;
 import net.gigimoi.zombietc.tile.TileNode;
 import net.gigimoi.zombietc.tile.TileNodeDoor;
@@ -83,7 +82,6 @@ public class ZombieTC {
 
         EntityRegistry.registerModEntity(EntityZZombie.class, "Z Zombie", 1, this, 80, 3, true);
 
-        registerItem(ItemSpawnZZombie.instance());
         registerItem(ItemNodeLinker.instance());
         WeaponLoader.register();
 
