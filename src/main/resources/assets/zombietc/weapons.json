@@ -51,6 +51,19 @@
     fireDelay: 20
 }
 - !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: MPR,
+    bulletType: mediumLead,
+    fireMechanism: automatic,
+    inventoryScale: 0.52,
+    adsLift: 3.9,
+    barrelLength: 2,
+    sightHeight: 0.3,
+    clipSize: 35,
+    initialAmmo: 350,
+    reloadTime: 20,
+    fireDelay: 2
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
     name: Radom Vis,
     bulletType: mediumLead,
     fireMechanism: semiAutomatic,
