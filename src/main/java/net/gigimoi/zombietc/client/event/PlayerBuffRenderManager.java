@@ -29,10 +29,10 @@ public class PlayerBuffRenderManager {
             glTranslated(event.x, event.y, event.z);
             if (EntityPlayer.class.isAssignableFrom(event.entity.getClass())) {
                 /*IInventory baubles = BaublesApi.getBaubles((EntityPlayer) event.entity);
-                if (baubles.getStackInSlot(2) != null) {*/
+                if (baubles.getStackInSlot(2) != null) {
                     TextureHelper.bindTexture(textureRingOfHealth);
                     model.renderAll();
-                //} TODO: Baubles replacement
+                } TODO: Baubles replacement*/
             }
             glDisable(GL_BLEND);
             glPopMatrix();
@@ -45,11 +45,11 @@ public class PlayerBuffRenderManager {
         glPushMatrix();
         glTranslated(0, -1.6, 0);
         glEnable(GL_BLEND);
-        //IInventory baubles = BaublesApi.getBaubles(Minecraft.getMinecraft().thePlayer);
-        //if (baubles.getStackInSlot(2) != null) {
+        /*IInventory baubles = BaublesApi.getBaubles(Minecraft.getMinecraft().thePlayer);
+        if (baubles.getStackInSlot(2) != null) {
             TextureHelper.bindTexture(textureRingOfHealth);
             model.renderAll();
-        //} TODO: Baubles replacement
+        } TODO: Baubles replacement*/
         glDisable(GL_BLEND);
         glPopMatrix();
     }
