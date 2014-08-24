@@ -56,27 +56,30 @@ public class CommonProxy implements IGuiHandler {
     public void network() {
         SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(ZombieTC.NETWORK_CHANNEL);
         ZombieTC.network = network;
-        regMessage(MessageSetWave.class, Side.CLIENT);
-        regMessage(MessageChangeEditorMode.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageAddNode.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageRemoveNode.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageAddNodeConnection.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageRemoveNodeConnection.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageShoot.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageTryShoot.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageReload.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageActivateRepairBarricade.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageSetPurchaseItemStackPrice.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageAddBarricade.class, Side.CLIENT);
-        regMessage(MessageRemoveBarricade.class, Side.CLIENT);
-        regMessage(MessagePrepareStaticVariables.class, Side.CLIENT);
-        regMessage(MessageRegeneratePathMap.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageChangeNodeDisabledUntilEvent.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageChangeNodeEventWaitFor.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessagePurchaseTile.class, Side.CLIENT, Side.SERVER);
-        regMessage(MessageSetPurchaseEventLeverInfo.class, Side.CLIENT, Side.SERVER);
+        regMessage(MessageSetWave.class);
+        regMessage(MessageChangeEditorMode.class);
+        regMessage(MessageAddNode.class);
+        regMessage(MessageRemoveNode.class);
+        regMessage(MessageAddNodeConnection.class);
+        regMessage(MessageRemoveNodeConnection.class);
+        regMessage(MessageShoot.class);
+        regMessage(MessageTryShoot.class);
+        regMessage(MessageReload.class);
+        regMessage(MessageActivateRepairBarricade.class);
+        regMessage(MessageSetPurchaseItemStackPrice.class);
+        regMessage(MessageAddBarricade.class);
+        regMessage(MessageRemoveBarricade.class);
+        regMessage(MessagePrepareStaticVariables.class);
+        regMessage(MessageRegeneratePathMap.class);
+        regMessage(MessageChangeNodeDisabledUntilEvent.class);
+        regMessage(MessageChangeNodeEventWaitFor.class);
+        regMessage(MessagePurchaseTile.class);
+        regMessage(MessageSetPurchaseEventLeverInfo.class);
     }
     private int messageID;
+    private void regMessage(Class<? extends IMessage> message) {
+        regMessage(message, Side.CLIENT, Side.SERVER);
+    }
     private void regMessage(Class<? extends IMessage> message, Side side) {
         regMessage(message, side, null);
     }
