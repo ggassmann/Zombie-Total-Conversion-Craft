@@ -54,7 +54,7 @@ public class BlockBarricade extends BlockContainerZTC implements IItemRenderer {
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List mask, Entity entity) {
         if (entity != null) {
             if (entity.getClass() == EntityZZombie.class) {
-                if (((TileBarricade) world.getTileEntity(x, y, z)).damage == 5) {
+                if (((TileBarricade) world.getTileEntity(x, y, z)).damage == 6) {
                     return;
                 }
                 super.addCollisionBoxesToList(world, x, y, z, aabb, mask, entity);
