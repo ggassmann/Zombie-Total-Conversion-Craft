@@ -46,11 +46,11 @@ public class TileBarricade extends TileZTC {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if (damage < 5) {
+        if (damage < 6) {
             List<EntityZZombie> zombies = worldObj.getEntitiesWithinAABB(EntityZZombie.class, getBoundsAround());
             if (zombies.size() > 0) {
                 ticker++;
-                if (ticker > 30) {
+                if (ticker > 25) {
                     damage++;
                     ticker = 0;
                 }

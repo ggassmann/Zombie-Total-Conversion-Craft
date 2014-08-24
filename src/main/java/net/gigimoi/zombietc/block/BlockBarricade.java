@@ -1,26 +1,32 @@
 package net.gigimoi.zombietc.block;
 
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.client.tilerenderer.TileRendererBarricade;
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.GameManager;
 import net.gigimoi.zombietc.net.map.MessageAddBarricade;
 import net.gigimoi.zombietc.net.map.MessageRemoveBarricade;
 import net.gigimoi.zombietc.tile.TileBarricade;
 import net.gigimoi.zombietc.util.Point3;
+import net.gigimoi.zombietc.util.TextureHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.IItemRenderer;
+import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
 /**
  * Created by gigimoi on 7/16/2014.
  */
-public class BlockBarricade extends BlockContainerZTC {
+public class BlockBarricade extends BlockContainerZTC implements IItemRenderer {
     public static BlockBarricade wooden = new BlockBarricade("Wooden");
 
     public BlockBarricade(String prefix) {
@@ -99,5 +105,36 @@ public class BlockBarricade extends BlockContainerZTC {
             }
         }
         ZombieTC.network.sendToAll(new MessageRemoveBarricade(x, y, z));
+    }
+
+
+    @Override
+    public int getRenderType() {
+        return -1;
+    }
+
+    @Override
+    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+        return true;
+    }
+
+    @Override
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glPushMatrix();
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+            //EntityPlayer player = (EntityPlayer) data[1];
+            GL11.glTranslated(0, 1, 0);
+        }
+        TextureHelper.bindTexture(new ResourceLocation(ZombieTC.MODID,
+                "textures/blocks/" + getUnlocalizedName().substring(5) + ".png")
+        );
+        TileRendererBarricade.model.renderAll();
+        GL11.glPopMatrix();
     }
 }

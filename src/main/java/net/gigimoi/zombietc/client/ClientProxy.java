@@ -5,18 +5,21 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.CommonProxy;
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.block.BlockBarricade;
 import net.gigimoi.zombietc.block.BlockNode;
 import net.gigimoi.zombietc.block.BlockNodeDoor;
-import net.gigimoi.zombietc.tile.purchasable.TilePurchaseItemStack;
 import net.gigimoi.zombietc.client.event.FogManager;
 import net.gigimoi.zombietc.client.event.MainGuiOverrideManager;
 import net.gigimoi.zombietc.client.event.PlayerBuffRenderManager;
+import net.gigimoi.zombietc.client.tilerenderer.TileRendererBarricade;
 import net.gigimoi.zombietc.client.tilerenderer.TileRendererDoorNode;
 import net.gigimoi.zombietc.client.tilerenderer.TileRendererNode;
 import net.gigimoi.zombietc.client.tilerenderer.purchasable.TileRendererPurchaseItemstack;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
+import net.gigimoi.zombietc.tile.TileBarricade;
 import net.gigimoi.zombietc.tile.TileNode;
 import net.gigimoi.zombietc.tile.TileNodeDoor;
+import net.gigimoi.zombietc.tile.purchasable.TilePurchaseItemStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
@@ -42,9 +45,11 @@ public class ClientProxy extends CommonProxy {
         super.renderers();
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockNode.instance), BlockNode.instance);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockNodeDoor.iron), BlockNodeDoor.iron);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockBarricade.wooden), BlockBarricade.wooden);
         ClientRegistry.bindTileEntitySpecialRenderer(TileNode.class, new TileRendererNode());
         ClientRegistry.bindTileEntitySpecialRenderer(TileNodeDoor.class, new TileRendererDoorNode());
         ClientRegistry.bindTileEntitySpecialRenderer(TilePurchaseItemStack.class, new TileRendererPurchaseItemstack());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileBarricade.class, new TileRendererBarricade());
     }
 
     @Override
