@@ -23,6 +23,12 @@
         {"name": "karbineShoot3","stream": false},
         {"name": "karbineShoot4","stream": false}
     ]},
+    "shoot-Merlini Pump-Action": {"category": "master", "sounds": [
+        {"name": "merliniShoot1","stream": false},
+        {"name": "merliniShoot2","stream": false},
+        {"name": "merliniShoot3","stream": false},
+        {"name": "merliniShoot4","stream": false}
+    ]},
     "shoot-MPR": {"category": "master", "sounds": [
         {"name": "mprShoot1","stream": false},
         {"name": "mprShoot2","stream": false},

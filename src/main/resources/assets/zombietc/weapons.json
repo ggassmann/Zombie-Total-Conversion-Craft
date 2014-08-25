@@ -51,6 +51,19 @@
     fireDelay: 20
 }
 - !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: Merlini Pump-Action,
+    bulletType: mediumLead,
+    fireMechanism: semiAutomatic,
+    inventoryScale: 0.48,
+    adsLift: 6,
+    barrelLength: 2,
+    sightHeight: 0.3,
+    clipSize: 6,
+    initialAmmo: 48,
+    reloadTime: 20,
+    fireDelay: 10
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
     name: MPR,
     bulletType: mediumLead,
     fireMechanism: automatic,
