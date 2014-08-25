@@ -10,6 +10,7 @@ import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.PlayerManager;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -65,7 +66,7 @@ public class MessageShoot implements IMessage {
                     if (EntityPlayer.class.isAssignableFrom(message.shooter.getClass())) {
                         player = ZombieTC.proxy.getWorld(ctx.side).getPlayerEntityByName(message.shooter.getCommandSenderName());
                     }
-                    if (player != null) {
+                    if (player != null && ((EntityLiving)message.hit).getHealth() > 0) {
                         PlayerManager.ZombieTCPlayerProperties.get(player).vim += 10;
                         if (EntityZZombie.class.isAssignableFrom(message.hit.getClass())) {
                             EntityZZombie zombie = (EntityZZombie) message.hit;
