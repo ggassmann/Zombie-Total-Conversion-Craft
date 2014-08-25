@@ -52,7 +52,7 @@
 }
 - !!net.gigimoi.zombietc.item.weapon.WeaponData {
     name: Merlini Pump-Action,
-    bulletType: mediumLead,
+    bulletType: smallLead,
     fireMechanism: semiAutomatic,
     inventoryScale: 0.48,
     adsLift: 6,
