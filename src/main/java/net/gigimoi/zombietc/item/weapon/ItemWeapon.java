@@ -48,6 +48,8 @@ public class ItemWeapon extends Item implements IItemRenderer {
     double adsLift;
     private float barrelLength;
     private float sightHeight;
+    public int inaccuracy;
+    public int bulletsFired;
 
     public ItemWeapon(String name, FireMechanism fireMechanism, double inventoryScale, double adsLift, int clipSize, int initialAmmo, int reloadTime, int fireDelay) {
         this.setUnlocalizedName(name);
@@ -238,12 +240,13 @@ public class ItemWeapon extends Item implements IItemRenderer {
                             ZombieTC.proxy.playSound("shoot-" + getUnlocalizedName().substring(5), (float) player.posX, (float) player.posY, (float) player.posZ);
                             ZombieTC.network.sendToServer(new MessageTryShoot(player));
 
-                            MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F, ignoredBlocksList);
-
-                            if (trace.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
-                                Entity hit = trace.entityHit;
-                                if (hit != null && hit.getClass() == EntityZZombie.class) {
-                                    ZombieTC.network.sendToServer(new MessageShoot(player, trace.entityHit, this));
+                            for(int i = 0; i < bulletsFired; i++) {
+                                MovingObjectPosition trace = MouseOverHelper.getMouseOver(5000.0F, inaccuracy, ignoredBlocksList);
+                                if (trace.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
+                                    Entity hit = trace.entityHit;
+                                    if (hit != null && hit.getClass() == EntityZZombie.class) {
+                                        ZombieTC.network.sendToServer(new MessageShoot(player, trace.entityHit, this));
+                                    }
                                 }
                             }
                         }

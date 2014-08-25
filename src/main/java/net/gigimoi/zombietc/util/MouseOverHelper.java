@@ -12,6 +12,7 @@ import net.minecraft.util.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by gigimoi on 7/17/2014.
@@ -19,9 +20,15 @@ import java.util.List;
 public class MouseOverHelper {
     private static Entity pointedEntity;
 
-    public static MovingObjectPosition getMouseOver(float maxDistance, Block[] ignoredBlocks) {
+    private static Random _r = new Random();
+
+    public static MovingObjectPosition getMouseOver(float maxDistance, int inaccuracy, Block[] ignoredBlocks) {
         MovingObjectPosition trace = null;
         Minecraft mc = Minecraft.getMinecraft();
+        float oldYaw = mc.renderViewEntity.rotationYaw;
+        float oldPitch = mc.renderViewEntity.rotationPitch;
+        mc.renderViewEntity.rotationPitch += (_r.nextInt(inaccuracy + 1) - inaccuracy / 2f) * 2;
+        mc.renderViewEntity.rotationYaw += (_r.nextInt(inaccuracy + 1) - inaccuracy / 2f) * 2;
 
         List<Block> blocksRemoved = new ArrayList();
         List<Point3> blockPositions = new ArrayList();
@@ -117,6 +124,8 @@ public class MouseOverHelper {
                 tile.readFromNBT(data);
             }
         }
+        mc.renderViewEntity.rotationPitch = oldPitch;
+        mc.renderViewEntity.rotationYaw = oldYaw;
         return trace;
     }
 }

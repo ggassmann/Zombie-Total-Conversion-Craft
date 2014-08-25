@@ -62,6 +62,8 @@ public class WeaponLoader {
         ).barrelLength(weaponData.barrelLength
         ).sightHeight(weaponData.sightHeight
         );
+        weapon.inaccuracy = weaponData.inaccuracy;
+        weapon.bulletsFired = weaponData.bulletsFired;
         weapon.bulletType = bulletType;
         ZombieTC.instance.registerItem(weapon, false);
     }

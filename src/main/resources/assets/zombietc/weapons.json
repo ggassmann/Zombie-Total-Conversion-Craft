@@ -61,7 +61,9 @@
     clipSize: 6,
     initialAmmo: 48,
     reloadTime: 20,
-    fireDelay: 10
+    fireDelay: 10,
+    inaccuracy: 10,
+    bulletsFired: 12
 }
 - !!net.gigimoi.zombietc.item.weapon.WeaponData {
     name: MPR,

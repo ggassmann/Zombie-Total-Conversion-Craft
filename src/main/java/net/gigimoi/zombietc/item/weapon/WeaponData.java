@@ -15,4 +15,6 @@ public class WeaponData {
     public int initialAmmo;
     public int reloadTime;
     public int fireDelay;
+    public int inaccuracy = 0;
+    public int bulletsFired = 1;
 }
