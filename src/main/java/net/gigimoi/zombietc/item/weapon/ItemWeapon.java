@@ -16,6 +16,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -156,6 +158,9 @@ public class ItemWeapon extends Item implements IItemRenderer {
         if(!player.isSprinting()) {
             stack.getTagCompound().setBoolean("InSights", !stack.getTagCompound().getBoolean("InSights"));
             stack.getTagCompound().setInteger("Reload Timer", 0);
+            if(stack.getTagCompound().getBoolean("InSights") && !player.isPotionActive(Potion.moveSlowdown)) {
+                player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 1, 3, true));
+            }
         }
         return stack;
     }
@@ -198,6 +203,12 @@ public class ItemWeapon extends Item implements IItemRenderer {
             return;
         }
         if (entity != null) {
+            if(tag.getBoolean("InSights") && EntityPlayerMP.class.isAssignableFrom(entity.getClass())) {
+                EntityPlayerMP holder = (EntityPlayerMP) entity;
+                if(!holder.isPotionActive(Potion.moveSlowdown)) {
+                    holder.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 1, 3, true));
+                }
+            }
             if (world.isRemote && entity.getClass() != EntityClientPlayerMP.class) {
                 return;
             }
