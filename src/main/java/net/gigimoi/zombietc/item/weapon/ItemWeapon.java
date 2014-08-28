@@ -116,6 +116,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
             glTranslated(-1, 3.45, -0.65 + -adsLift / 5f);
         }
         if (type != ItemRenderType.INVENTORY && stack.getTagCompound().getInteger("Reload Timer") > 0) {
+            glTranslated(0, 0, 2);
             glRotated(10, 0, 1, 0);
             glRotated(50, 0, 0, -1);
         }
