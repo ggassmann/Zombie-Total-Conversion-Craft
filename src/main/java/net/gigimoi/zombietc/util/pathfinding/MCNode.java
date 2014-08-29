@@ -19,9 +19,6 @@ public class MCNode implements Node<MCNode> {
 
     public transient ArrayList<MCNode> linksTo;
 
-    //GameManager should have a
-    //method to reset all links.
-    //Reset links on editor mode toggle and join
     public MCNode() {
         this.linksTo = new ArrayList();
     }
