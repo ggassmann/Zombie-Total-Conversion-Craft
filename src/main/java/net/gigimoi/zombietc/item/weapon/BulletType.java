@@ -21,7 +21,7 @@ public class BulletType {
             @Override
             public void onHit(EntityPlayer attacker, EntityZZombie attacked) {
                 attacked.attackEntityFrom(DamageSource.generic, 3);
-                PotionEffect effect = new PotionEffect(Potion.moveSlowdown.getId(), 10, 3, false); //TODO: Zombies should pay attention to slowing effects when walking
+                PotionEffect effect = new PotionEffect(Potion.moveSlowdown.getId(), 60, 1, false);
                 if(attacked.isPotionApplicable(effect)) {
                     attacked.addPotionEffect(effect);
                 }
