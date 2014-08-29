@@ -3,6 +3,8 @@ package net.gigimoi.zombietc.item.weapon;
 import net.gigimoi.zombietc.WeaponLoader;
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 
 /**
@@ -10,17 +12,22 @@ import net.minecraft.util.DamageSource;
  */
 public class BulletType {
     public static void init() {
-        smallLead = new BulletTypeDefault("smallLead", 1);
-        mediumLead = new BulletTypeDefault("mediumLead", 2);
-        largeLead = new BulletTypeDefault("largeLead", 3);
-        smallBolt = new BulletTypeDefault("mediumBolt", 4); //TODO: Bolts should pierce through zombies, losing 1/2 damage a piece
-        mediumBolt = new BulletTypeDefault("mediumBolt", 5);
+        new BulletTypeDefault("smallLead", 1);
+        new BulletTypeDefault("mediumLead", 2);
+        new BulletTypeDefault("largeLead", 3);
+        new BulletTypeDefault("mediumBolt", 4); //TODO: Bolts should pierce through zombies, losing 1/2 damage a piece
+        new BulletTypeDefault("mediumBolt", 5);
+        new BulletType("goorand") {
+            @Override
+            public void onHit(EntityPlayer attacker, EntityZZombie attacked) {
+                attacked.attackEntityFrom(DamageSource.generic, 3);
+                PotionEffect effect = new PotionEffect(Potion.moveSlowdown.getId(), 10, 3, false); //TODO: Zombies should pay attention to slowing effects when walking
+                if(attacked.isPotionApplicable(effect)) {
+                    attacked.addPotionEffect(effect);
+                }
+            }
+        };
     }
-    public static BulletType smallLead;
-    public static BulletType mediumLead;
-    public static BulletType largeLead;
-    public static BulletType smallBolt;
-    public static BulletType mediumBolt;
 
     public BulletType(String id) {
         WeaponLoader.bulletTypes.put(id, this);

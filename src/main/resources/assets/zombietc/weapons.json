@@ -51,6 +51,19 @@
     fireDelay: 20
 }
 - !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: M1Goorand,
+    bulletType: goorand,
+    fireMechanism: semiAutomatic,
+    inventoryScale: 0.5,
+    adsLift: 1,
+    barrelLength: 2.5,
+    sightHeight: 0.1,
+    clipSize: 12,
+    initialAmmo: 120,
+    reloadTime: 20,
+    fireDelay: 1
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
     name: Merlini Pump-Action,
     bulletType: smallLead,
     fireMechanism: semiAutomatic,

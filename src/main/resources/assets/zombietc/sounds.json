@@ -23,6 +23,12 @@
         {"name": "karbineShoot3","stream": false},
         {"name": "karbineShoot4","stream": false}
     ]},
+    "shoot-M1Goorand": {"category": "master", "sounds": [
+        {"name": "goorandShoot1","stream": false},
+        {"name": "goorandShoot2","stream": false},
+        {"name": "goorandShoot3","stream": false},
+        {"name": "goorandShoot4","stream": false}
+    ]},
     "shoot-Merlini Pump-Action": {"category": "master", "sounds": [
         {"name": "merliniShoot1","stream": false},
         {"name": "merliniShoot2","stream": false},
