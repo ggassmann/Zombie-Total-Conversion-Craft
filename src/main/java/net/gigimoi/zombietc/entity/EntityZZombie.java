@@ -15,6 +15,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -161,18 +162,18 @@ public class EntityZZombie extends EntityZombie {
             targetY = posY;
             targetZ = posZ;
             hasSetDefaultTarget = true;
-        }/* This does not work because rounding 1 block wide corners has the wrong zombie yield while the other attempts to push it out of the way.
+        }
         List nearbyEntities = worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(posX - 1, posY - 1, posZ - 1, posX + 1, posY + 1, posZ + 1));
         for(int i = 0; i < nearbyEntities.size(); i++) {
             Entity entityRaw = (Entity)nearbyEntities.get(i);
             if(entityRaw.getClass() == EntityZZombie.class) {
-                if(entityRaw != this) {
+                if(entityRaw != this && _r.nextInt(2) == 0) {
                     ((EntityZZombie)entityRaw).yieldingToOtherZombie = true;
                 }
             }
         }
-        */
-        getMoveHelper().setMoveTo(targetX, targetY, targetZ, Properties.getSpeed(this) * (ZombieTC.gameManager.wave > 4 ? 0.95f : 0.85f));
+        float speed = Properties.getSpeed(this) * (ZombieTC.gameManager.wave > 4 ? 0.95f : 0.85f);
+        getMoveHelper().setMoveTo(targetX, targetY, targetZ, speed);
         if (targetY > posY) {
             getJumpHelper().setJumping();
         }
