@@ -19,6 +19,7 @@ import net.gigimoi.zombietc.client.event.*;
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.*;
 import net.gigimoi.zombietc.item.ItemNodeLinker;
+import net.gigimoi.zombietc.item.weapon.WeaponLoader;
 import net.gigimoi.zombietc.tile.TileBarricade;
 import net.gigimoi.zombietc.tile.TileNode;
 import net.gigimoi.zombietc.tile.TileNodeDoor;

@@ -1,6 +1,5 @@
 package net.gigimoi.zombietc.item.weapon;
 
-import net.gigimoi.zombietc.WeaponLoader;
 import net.gigimoi.zombietc.ZombieTC;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;

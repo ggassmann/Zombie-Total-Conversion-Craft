@@ -1,9 +1,6 @@
-package net.gigimoi.zombietc;
+package net.gigimoi.zombietc.item.weapon;
 
-import net.gigimoi.zombietc.item.weapon.BulletType;
-import net.gigimoi.zombietc.item.weapon.FireMechanism;
-import net.gigimoi.zombietc.item.weapon.ItemWeapon;
-import net.gigimoi.zombietc.item.weapon.WeaponData;
+import net.gigimoi.zombietc.ZombieTC;
 import org.apache.commons.io.IOUtils;
 import org.yaml.snakeyaml.Yaml;
 
@@ -62,6 +59,7 @@ public class WeaponLoader {
         ).barrelLength(weaponData.barrelLength
         ).sightHeight(weaponData.sightHeight
         );
+        weapon.hasCustomMuzzleFlash = weaponData.hasCustomMuzzleFlash;
         weapon.inaccuracy = weaponData.inaccuracy;
         weapon.bulletsFired = weaponData.bulletsFired;
         weapon.bulletType = bulletType;

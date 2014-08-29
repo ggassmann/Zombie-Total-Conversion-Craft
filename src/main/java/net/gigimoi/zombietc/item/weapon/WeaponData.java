@@ -17,4 +17,5 @@ public class WeaponData {
     public int fireDelay;
     public int inaccuracy = 0;
     public int bulletsFired = 1;
+    public boolean hasCustomMuzzleFlash = false;
 }

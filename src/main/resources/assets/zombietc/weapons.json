@@ -61,7 +61,8 @@
     clipSize: 12,
     initialAmmo: 120,
     reloadTime: 20,
-    fireDelay: 1
+    fireDelay: 1,
+    hasCustomMuzzleFlash: true
 }
 - !!net.gigimoi.zombietc.item.weapon.WeaponData {
     name: Merlini Pump-Action,
