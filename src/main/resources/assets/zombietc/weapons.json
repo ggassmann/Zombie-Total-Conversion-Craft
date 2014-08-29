@@ -59,7 +59,7 @@
     barrelLength: 2.5,
     sightHeight: 0.1,
     clipSize: 12,
-    initialAmmo: 120,
+    initialAmmo: 180,
     reloadTime: 20,
     fireDelay: 1,
     hasCustomMuzzleFlash: true
