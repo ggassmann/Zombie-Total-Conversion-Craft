@@ -59,7 +59,6 @@ public class MessageShoot implements IMessage {
         public MessageShoot onMessage(MessageShoot message, MessageContext ctx) {
             World world = ((EntityLivingBase) message.shooter).worldObj;
             //TODO: Server side raytracing
-            System.out.println(ctx.side.isServer());
             if(ctx.side.isClient() || (ctx.side.isServer() && ZombieTC.proxy.getPlayer() == null)) { //Do not run twice on integrated server
                 if (!message.hit.isDead) {
                     if (message.hit != null && message.shooter != null) {
