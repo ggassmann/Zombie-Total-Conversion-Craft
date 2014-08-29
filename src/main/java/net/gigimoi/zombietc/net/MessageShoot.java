@@ -59,27 +59,35 @@ public class MessageShoot implements IMessage {
         public MessageShoot onMessage(MessageShoot message, MessageContext ctx) {
             World world = ((EntityLivingBase) message.shooter).worldObj;
             //TODO: Server side raytracing
-            if (!message.hit.isDead) {
-                if (message.hit != null && message.shooter != null) {
-                    EntityPlayer player = null;
-                    if (EntityPlayer.class.isAssignableFrom(message.shooter.getClass())) {
-                        player = ZombieTC.proxy.getWorld(ctx.side).getPlayerEntityByName(message.shooter.getCommandSenderName());
-                    }
-                    if (player != null) {
-                        PlayerManager.ZombieTCPlayerProperties.get(player).vim += 10;
-                        if (EntityZZombie.class.isAssignableFrom(message.hit.getClass())) {
-                            EntityZZombie zombie = (EntityZZombie) message.hit;
-                            if(zombie.getHealth() > 0) {
-                                ((ItemWeapon) message.weapon).bulletType.onHit(player, zombie);
-                                if (zombie.getHealth() <= 0) {
-                                    PlayerManager.ZombieTCPlayerProperties.get(player).vim += 40;
+            System.out.println(ctx.side.isServer());
+            if(ctx.side.isClient() || (ctx.side.isServer() && ZombieTC.proxy.getPlayer() == null)) { //Do not run twice on integrated server
+                if (!message.hit.isDead) {
+                    if (message.hit != null && message.shooter != null) {
+                        EntityPlayer player = null;
+                        if (EntityPlayer.class.isAssignableFrom(message.shooter.getClass())) {
+                            player = ZombieTC.proxy.getWorld(ctx.side).getPlayerEntityByName(message.shooter.getCommandSenderName());
+                        }
+                        if (player != null) {
+                            PlayerManager.ZombieTCPlayerProperties.get(player).vim += 10;
+                            if (EntityZZombie.class.isAssignableFrom(message.hit.getClass())) {
+                                EntityZZombie zombie = (EntityZZombie) message.hit;
+                                if (zombie.getHealth() > 0) {
+                                    ((ItemWeapon) message.weapon).bulletType.onHit(player, zombie);
+                                    if (zombie.getHealth() <= 0) {
+                                        PlayerManager.ZombieTCPlayerProperties.get(player).vim += 40;
+                                    } else {
+                                    }
                                 }
                             }
-                        }
-                        if (ctx.side == Side.SERVER) {
-                            ZombieTC.network.sendToAll(message);
+                            if (ctx.side == Side.SERVER) {
+                                ZombieTC.network.sendToAll(message);
+                            }
                         }
                     }
+                }
+            } else {
+                if(ctx.side.isServer()) {
+                    ZombieTC.network.sendToAll(message);
                 }
             }
             return null;
