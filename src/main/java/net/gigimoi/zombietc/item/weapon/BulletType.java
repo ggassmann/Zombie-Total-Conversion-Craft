@@ -16,7 +16,7 @@ public class BulletType {
         new BulletTypeDefault("mediumLead", 2);
         new BulletTypeDefault("largeLead", 3);
         new BulletTypeDefault("mediumBolt", 4); //TODO: Bolts should pierce through zombies, losing 1/2 damage a piece
-        new BulletTypeDefault("mediumBolt", 5);
+        new BulletTypeDefault("largeBolt", 5);
         new BulletType("goorand") {
             @Override
             public void onHit(EntityPlayer attacker, EntityZZombie attacked) {
