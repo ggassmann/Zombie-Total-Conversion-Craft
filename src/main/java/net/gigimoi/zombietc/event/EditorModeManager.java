@@ -12,11 +12,12 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
  */
 public class EditorModeManager {
     public boolean enabled = false;
+    public boolean isEditor = false;
 
     @SuppressWarnings("unused")
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (((ClientProxy) ZombieTC.proxy).reset.isPressed()) {
+        if (isEditor && ((ClientProxy) ZombieTC.proxy).reset.isPressed()) {
             ZombieTC.network.sendToServer(new MessageChangeEditorMode(!ZombieTC.editorModeManager.enabled));
         }
     }
