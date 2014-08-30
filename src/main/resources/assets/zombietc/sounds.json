@@ -29,6 +29,12 @@
         {"name": "goorandShoot3","stream": false},
         {"name": "goorandShoot4","stream": false}
     ]},
+    "shoot-M4MG": {"category": "master", "sounds": [
+        {"name": "m4MGShoot1","stream": false},
+        {"name": "m4MGShoot2","stream": false},
+        {"name": "m4MGShoot3","stream": false},
+        {"name": "m4MGShoot4","stream": false}
+    ]},
     "shoot-Merlini Pump-Action": {"category": "master", "sounds": [
         {"name": "merliniShoot1","stream": false},
         {"name": "merliniShoot2","stream": false},

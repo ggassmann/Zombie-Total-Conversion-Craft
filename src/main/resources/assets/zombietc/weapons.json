@@ -65,6 +65,19 @@
     hasCustomMuzzleFlash: true
 }
 - !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: M4MG,
+    bulletType: largeLead,
+    fireMechanism: automatic,
+    inventoryScale: 0.4,
+    adsLift: 6,
+    barrelLength: 2.3,
+    sightHeight: 1,
+    clipSize: 80,
+    initialAmmo: 480,
+    reloadTime: 35,
+    fireDelay: 2
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
     name: Merlini Pump-Action,
     bulletType: smallLead,
     fireMechanism: semiAutomatic,
