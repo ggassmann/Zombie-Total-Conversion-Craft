@@ -44,6 +44,7 @@ public class ClientProxy extends CommonProxy {
     public void renderers() {
         super.renderers();
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockNode.instance), BlockNode.instance);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockNodeDoor.instance), BlockNodeDoor.instance);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockNodeDoor.iron), BlockNodeDoor.iron);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockBarricade.wooden), BlockBarricade.wooden);
         ClientRegistry.bindTileEntitySpecialRenderer(TileNode.class, new TileRendererNode());

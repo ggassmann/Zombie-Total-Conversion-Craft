@@ -1,9 +1,11 @@
 package net.gigimoi.zombietc.block;
 
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.client.tilerenderer.TileRendererDoorNode;
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.tile.TileNodeDoor;
 import net.gigimoi.zombietc.util.DirectionHelper;
+import net.gigimoi.zombietc.util.TextureHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +17,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.List;
+
+import static org.lwjgl.opengl.GL11.*;
 
 /**
  * Created by gigimoi on 8/5/2014.
@@ -80,6 +84,29 @@ public class BlockNodeDoor extends BlockNode {
             return;
         }
         setBlockBounds(0, 0, 0, 1, 2, 1);
+    }
+
+    @Override
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+        glPushMatrix();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glScaled(0.7, 0.7, 0.7);
+        glTranslated(0, -1, 0);
+        glRotated(40, 0, 1, 0);
+        if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+            glTranslated(0, 2, 0);
+            glRotated(90, 0, 1, 0);
+        }
+        TextureHelper.bindTexture(TileRendererDoorNode.texture);
+        TileRendererDoorNode.model.renderAll();
+        glPopMatrix();
+        glPushMatrix();
+        if(type != ItemRenderType.EQUIPPED_FIRST_PERSON) {
+            glTranslated(0, -0.3, 0);
+        }
+        super.renderItem(type, item, data);
+        glPopMatrix();
     }
 
     @Override
