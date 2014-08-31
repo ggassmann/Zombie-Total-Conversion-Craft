@@ -2,6 +2,7 @@ package net.gigimoi.zombietc.client.tilerenderer;
 
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.tile.TileNodeDoor;
+import net.gigimoi.zombietc.util.GLHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -24,19 +25,7 @@ public class TileRendererDoorNode extends TileEntitySpecialRenderer {
         bindTexture(texture);
         GL11.glTranslated(x, y, z);
         TileNodeDoor tile = (TileNodeDoor) tileRaw;
-        if (tile.direction == 0) {
-            GL11.glTranslated(0.5, 0, 0.5);
-            GL11.glRotated(180, 0, 1, 0);
-        } else if (tile.direction == 2) {
-            GL11.glTranslated(0.5, 0, 0.5);
-        } else if (tile.direction == 3) {
-            GL11.glRotated(90, 0, 1, 0);
-            GL11.glTranslated(-0.5, 0, 0.5);
-            GL11.glRotated(180, 0, 1, 0);
-        } else {
-            GL11.glRotated(90, 0, 1, 0);
-            GL11.glTranslated(-0.5, 0, 0.5);
-        }
+        GLHelper.glRotateDirection(tile.direction);
         GL11.glTranslated(0, tile.animationTime / 49f, 0);
         GL11.glColor3d(1, 1, 1);
         glEnable(GL_BLEND);

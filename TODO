@@ -1,11 +1,8 @@
-High Priority:
-Weapon recoil
-Noclip zombies/ghosts
-
-Low Priority:
-Bosses
-Improve Radom Vis UV map
-
-BUGS:
--Some packets are leaking, maybe the MessageShoot ?
--Zombies alive not synced to client in dedicated server
+TODO:
+    Guns:
+        Snail gun
+        Railgun
+        Snake gun
+        Gun on fire that damages you
+        Gatling Laser Gun
+        Experimental MIRV

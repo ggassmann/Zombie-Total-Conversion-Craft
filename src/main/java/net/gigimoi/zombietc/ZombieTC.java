@@ -9,10 +9,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.gigimoi.zombietc.block.BlockBarricade;
-import net.gigimoi.zombietc.block.BlockNode;
-import net.gigimoi.zombietc.block.BlockNodeDoor;
-import net.gigimoi.zombietc.block.BlockSpawner;
+import net.gigimoi.zombietc.block.*;
 import net.gigimoi.zombietc.block.purchasable.BlockPurchaseEventLever;
 import net.gigimoi.zombietc.block.purchasable.BlockPurchaseItemstack;
 import net.gigimoi.zombietc.client.event.*;
@@ -20,10 +17,7 @@ import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.event.*;
 import net.gigimoi.zombietc.item.ItemNodeLinker;
 import net.gigimoi.zombietc.item.weapon.WeaponLoader;
-import net.gigimoi.zombietc.tile.TileBarricade;
-import net.gigimoi.zombietc.tile.TileNode;
-import net.gigimoi.zombietc.tile.TileNodeDoor;
-import net.gigimoi.zombietc.tile.TileSpawner;
+import net.gigimoi.zombietc.tile.*;
 import net.gigimoi.zombietc.tile.purchasable.TilePurchaseEventLever;
 import net.gigimoi.zombietc.tile.purchasable.TilePurchaseItemStack;
 import net.minecraft.block.Block;
@@ -93,6 +87,7 @@ public class ZombieTC {
         registerBlock(BlockPurchaseEventLever.instance, false);
         registerBlock(BlockBarricade.wooden);
         registerBlock(BlockPurchaseItemstack.instance);
+        registerBlock(BlockChanceChest.instance);
 
         registerTileEntity(TileSpawner.class);
         registerTileEntity(TileBarricade.class);
@@ -100,6 +95,7 @@ public class ZombieTC {
         registerTileEntity(TilePurchaseItemStack.class);
         registerTileEntity(TilePurchaseEventLever.class);
         registerTileEntity(TileNodeDoor.class);
+        registerTileEntity(TileChanceChest.class);
 
         proxy.renderers();
         proxy.network();
