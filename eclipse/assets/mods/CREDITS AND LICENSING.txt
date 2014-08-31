@@ -9,6 +9,7 @@ Modpack credits:
 		Open Blocks(OpenBlocks*.jar) - OpenMods, https://github.com/OpenMods/OpenBlocks
 		Open Mods Lib(OpenModsLib*.jar) - OpenMods, https://github.com/OpenMods/OpenModsLib
 		EiraIRC(eira-irc*.jar) - blay09, https://github.com/blay09/EiraIRC
+		BiblioCraft(BiblioCraft*.jar) - Nuchaz, http://www.bibliocraftmod.com
 
 Library credits:
 	PNGDecoderis released under the MIT license.
