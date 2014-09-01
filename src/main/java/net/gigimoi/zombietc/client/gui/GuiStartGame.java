@@ -51,10 +51,10 @@ public class GuiStartGame extends GuiScreen {
         this.drawDefaultBackground();
         TextRenderHelper.drawString(Lang.get("ui.selectAMap") + ":", width / 2, 2, TextAlignment.Center);
         for (int i = 0; i < mapNames.size(); i++) {
-            TextRenderHelper.drawString(mapNames.get(i), width / 2 - 5, 64 + i * 30, TextAlignment.Left);
+            TextRenderHelper.drawString(mapNames.get(i), width / 2 - 5, 64 + i * 100, TextAlignment.Left);
             glBindTexture(GL_TEXTURE_2D, mapThumbnailTextureNames.get(i));
             GL11.glPushMatrix();
-            GL11.glTranslated(width / 2 - 110, 20 + i * 30, 0);
+            GL11.glTranslated(width / 2 - 110, 20 + i * 100, 0);
             GL11.glScaled(0.3, 0.3, 0.3);
             drawTexturedModalRect(0, 0, 0, 0, 250, 250);
             GL11.glPopMatrix();
@@ -108,7 +108,7 @@ public class GuiStartGame extends GuiScreen {
         for (int i = 0; i < mapsList.size(); i++) {
             String mapName = mapsList.get(i).substring(0, mapsList.get(i).lastIndexOf(":"));
             mapName = mapName.substring(0, mapName.lastIndexOf(":"));
-            buttonList.add(new GuiButton(700 + i, width / 2 - 10, 72 + i * 30, 150, 20, Lang.get("ui.play")));
+            buttonList.add(new GuiButton(700 + i, width / 2 - 10, 72 + i * 100, 150, 20, Lang.get("ui.play")));
             mapUrls.add(mapsList.get(i).substring(mapName.length() + 1));
             mapNames.add(mapName);
             File thumbnail = new File(".imagecache/" + mapName + ".png");
