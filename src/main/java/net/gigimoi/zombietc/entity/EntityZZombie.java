@@ -119,7 +119,7 @@ public class EntityZZombie extends EntityZombie {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue((int)(ZombieTC.gameManager.wave * 1.7) + 4);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue((int)(ZombieTC.gameManager.wave * 1.7) + 1.3);
     }
 
     @Override

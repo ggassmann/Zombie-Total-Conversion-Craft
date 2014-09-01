@@ -2,6 +2,7 @@ package net.gigimoi.zombietc.block;
 
 import net.gigimoi.zombietc.tile.TileChanceChest;
 import net.gigimoi.zombietc.util.DirectionHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +25,14 @@ public class BlockChanceChest extends BlockContainerZTC {
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
         TileChanceChest tile = (TileChanceChest) world.getTileEntity(x, y, z);
         tile.direction = DirectionHelper.getPlayerDirection((EntityPlayer) player);
+        if(tile.direction == 0 || tile.direction == 2) {
+            world.setBlock(x + 1, y, z, BlockChanceChest.instance);
+            world.setBlock(x - 1, y, z, BlockChanceChest.instance);
+        }
+        if(tile.direction == 3 || tile.direction == 1) {
+            world.setBlock(x, y, z + 1, BlockChanceChest.instance);
+            world.setBlock(x, y, z - 1, BlockChanceChest.instance);
+        }
     }
 
     @Override
@@ -44,5 +53,28 @@ public class BlockChanceChest extends BlockContainerZTC {
         TileChanceChest tileChanceChest = new TileChanceChest();
         tileChanceChest.direction = -1;
         return tileChanceChest;
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+        TileChanceChest tile = (TileChanceChest) world.getTileEntity(x, y, z);
+        if(tile.direction == 0 || tile.direction == 2) {
+            world.setBlockToAir(x + 1, y, z);
+            world.setBlockToAir(x - 1, y, z);
+        }
+        if(tile.direction == 3 || tile.direction == 1) {
+            world.setBlockToAir(x, y, z + 1);
+            world.setBlockToAir(x, y, z - 1);
+        }
+        if(tile.direction == -1) {
+            for(int i = x - 1; i <= x + 1; i++) {
+                for(int j = z - 1; j <= z + 1; j++) {
+                    if(world.getBlock(i, y, j) == this) {
+                        world.setBlockToAir(i, y, j);
+                    }
+                }
+            }
+        }
+        super.breakBlock(world, x, y, z, block, meta);
     }
 }

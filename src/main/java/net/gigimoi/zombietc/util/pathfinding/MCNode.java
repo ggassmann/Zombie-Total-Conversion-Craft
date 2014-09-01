@@ -45,7 +45,7 @@ public class MCNode implements Node<MCNode> {
         }
         ArrayList<MCNode> links = (ArrayList<MCNode>) linksTo.clone();
         for (int i = 0; i < links.size(); i++) {
-            if (links.get(i).isDisabled()) {
+            if (links.get(i) == null || links.get(i).isDisabled()) {
                 links.remove(i);
             }
         }

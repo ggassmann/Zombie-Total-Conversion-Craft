@@ -30,6 +30,7 @@ public class TileRendererChanceChest extends TileEntitySpecialRenderer {
         glTranslated(0, 1, 0);
         bindTexture(texture);
         model.renderPart("ChestBody_Cube");
+        glRotated(- 90, 1, 0, 0);
         model.renderPart("ChestTop_Cylinder");
         glPopMatrix();
     }

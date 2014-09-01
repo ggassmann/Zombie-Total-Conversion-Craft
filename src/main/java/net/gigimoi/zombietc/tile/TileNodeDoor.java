@@ -28,7 +28,6 @@ public class TileNodeDoor extends TileNode implements IListenerZTC {
         super.writeToNBT(tag);
     }
 
-    boolean isEventTriggering;
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -36,21 +35,15 @@ public class TileNodeDoor extends TileNode implements IListenerZTC {
             animationTime = 0;
             animationDirection = -1;
         }
-        if (isEventTriggering) {
-            isEventTriggering = false;
-            if(animationDirection == 0) {
-                animationDirection = -1;
-            }
-            animationDirection = -animationDirection;
-        }
         animationTime = Math.min(100, Math.max(0, animationTime + animationDirection * 5));
     }
 
     @Override
     public void onEvent(String event) {
-        if(deactivatedUntilEvent && eventWaitFor.equals(event)) {
+        if(deactivatedUntilEvent && event.equals(eventWaitFor)) {
             isEventTriggering = true;
             deactivated = false;
+            animationDirection = 1;
         }
     }
 }

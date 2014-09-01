@@ -3,10 +3,8 @@ package net.gigimoi.zombietc.tile;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.api.ITileEntityActivatable;
 import net.gigimoi.zombietc.api.ITileEntityPurchasable;
-import net.gigimoi.zombietc.block.BlockChanceChest;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 
 /**
  * Created by gigimoi on 8/30/2014.
@@ -52,19 +50,5 @@ public class TileChanceChest extends TileZTC implements ITileEntityPurchasable, 
     public void writeToNBT(NBTTagCompound tag) {
         tag.setInteger("Direction", direction);
         super.writeToNBT(tag);
-    }
-
-    boolean firstUpdate = false;
-
-    @Override
-    public void updateEntity() {
-        super.updateEntity();
-        World world = getWorldObj();
-        if(!firstUpdate) {
-            if(world.getBlock(xCoord, yCoord - 1, zCoord) != BlockChanceChest.instance) {
-                world.setBlock(xCoord, yCoord + 1, zCoord, BlockChanceChest.instance);
-            }
-        }
-        firstUpdate = true;
     }
 }
