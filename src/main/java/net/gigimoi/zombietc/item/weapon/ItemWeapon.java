@@ -207,7 +207,7 @@ public class ItemWeapon extends Item implements IItemRenderer {
         if (entity != null) {
             if(tag.getBoolean("InSights") && EntityPlayerMP.class.isAssignableFrom(entity.getClass())) {
                 EntityPlayerMP holder = (EntityPlayerMP) entity;
-                if(!holder.isPotionActive(Potion.moveSlowdown)) {
+                if(holder.getHeldItem() == stack && !holder.isPotionActive(Potion.moveSlowdown)) {
                     holder.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 1, 3, true));
                 }
             }
