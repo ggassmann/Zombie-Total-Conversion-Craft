@@ -1,6 +1,0 @@
-language: java
-jdk:
- - openjdk6
-script:
- - chmod +x dronebuild.sh
- - ./dronebuild.sh
