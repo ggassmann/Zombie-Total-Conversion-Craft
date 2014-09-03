@@ -11,6 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class TileChanceChest extends TileZTC implements ITileEntityPurchasable, ITileEntityActivatable {
     public int direction;
+    public int animTick = 0;
+    public boolean openning = false;
     @Override
     public void onEvent(String event) {
     }
