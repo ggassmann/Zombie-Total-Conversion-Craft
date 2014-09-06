@@ -53,6 +53,12 @@
         {"name": "mprShoot3","stream": false},
         {"name": "mprShoot4","stream": false}
     ]},
+    "shoot-Murrmurr": {"category": "master", "sounds": [
+        {"name": "murrmurrShoot1","stream": false},
+        {"name": "murrmurrShoot2","stream": false},
+        {"name": "murrmurrShoot3","stream": false},
+        {"name": "murrmurrShoot4","stream": false}
+    ]},
     "shoot-Radom Vis": {"category": "master", "sounds": [
         {"name": "radomVisShoot1","stream": false},
         {"name": "radomVisShoot2","stream": false},

@@ -119,6 +119,19 @@
     fireDelay: 2
 }
 - !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: Murrmurr,
+    bulletType: largeBolt,
+    fireMechanism: semiAutomatic,
+    inventoryScale: 0.5,
+    adsLift: 1,
+    barrelLength: 2.7,
+    sightHeight: 0.1,
+    clipSize: 12,
+    initialAmmo: 144,
+    reloadTime: 20,
+    fireDelay: 5
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
     name: Radom Vis,
     bulletType: mediumLead,
     fireMechanism: semiAutomatic,
