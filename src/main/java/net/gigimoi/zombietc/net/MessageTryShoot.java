@@ -9,8 +9,12 @@ import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 /**
  * Created by gigimoi on 7/17/2014.
@@ -46,7 +50,13 @@ public class MessageTryShoot implements IMessage {
                         ItemWeapon weapon = (ItemWeapon) stack.getItem();
                         tag.setInteger("Rounds", tag.getInteger("Rounds") - 1);
                         tag.setInteger("ShootCooldown", weapon.fireDelay);
-                        ZombieTC.network.sendToAll(message);
+                        List players = MinecraftServer.getServer().getEntityWorld().playerEntities;
+                        for(int i = 0; i < players.size(); i++) {
+                            EntityPlayerMP player = (EntityPlayerMP) players.get(i);
+                            if(player != message.at) {
+                                ZombieTC.network.sendTo(message, player);
+                            }
+                        }
                     }
                 }
             } else {
