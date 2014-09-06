@@ -11,6 +11,12 @@
         {"name": "arkticPersuaderShoot3","stream": false},
         {"name": "arkticPersuaderShoot4","stream": false}
     ]},
+    "shoot-G3DC": {"category": "master", "sounds": [
+        {"name": "G3DCShoot1","stream": false},
+        {"name": "G3DCShoot2","stream": false},
+        {"name": "G3DCShoot3","stream": false},
+        {"name": "G3DCShoot4","stream": false}
+    ]},
     "shoot-FDRbine": {"category": "master", "sounds": [
         {"name": "fDRbineShoot1","stream": false},
         {"name": "fDRbineShoot2","stream": false},

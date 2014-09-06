@@ -25,6 +25,19 @@
     fireDelay: 1
 }
 - !!net.gigimoi.zombietc.item.weapon.WeaponData {
+    name: G3DC,
+    bulletType: largeLead,
+    fireMechanism: semiAutomatic,
+    inventoryScale: 0.55,
+    adsLift: 8.5,
+    barrelLength: 2.0,
+    sightHeight: 1,
+    clipSize: 15,
+    initialAmmo: 100,
+    reloadTime: 20,
+    fireDelay: 1
+}
+- !!net.gigimoi.zombietc.item.weapon.WeaponData {
     name: FDRbine,
     bulletType: mediumLead,
     fireMechanism: burst3Slow,
