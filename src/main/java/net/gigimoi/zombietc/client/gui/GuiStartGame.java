@@ -92,7 +92,7 @@ public class GuiStartGame extends GuiScreen {
     @Override
     public void initGui() {
         super.initGui();
-        ZombieTC.editorModeManager.enabled = false;
+        ZombieTC.editorModeManager.isEditor = false;
         mapUrls = new ArrayList<String>();
         mapNames = new ArrayList<String>();
         mapThumbnailTextureNames = new ArrayList<Integer>();

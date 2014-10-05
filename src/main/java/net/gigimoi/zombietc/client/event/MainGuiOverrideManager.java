@@ -63,7 +63,7 @@ public class MainGuiOverrideManager {
             cancelButton.width += 6;
             GuiButton createWorldButton = (GuiButton) event.buttonList.get(1);
             createWorldButton.displayString = Lang.get("ui.New World (Editor mode)");
-            ZombieTC.editorModeManager.enabled = true;
+            ZombieTC.editorModeManager.isEditor = true;
         }
         else if (event.gui.getClass() == GuiIngameMenu.class) {
             ((GuiButton)event.buttonList.get(1)).yPosition += 24;
