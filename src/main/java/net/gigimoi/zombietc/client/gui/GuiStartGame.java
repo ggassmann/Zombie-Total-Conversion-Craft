@@ -2,6 +2,7 @@ package net.gigimoi.zombietc.client.gui;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import de.matthiasmann.twl.utils.PNGDecoder;
+import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.util.Lang;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
@@ -91,6 +92,7 @@ public class GuiStartGame extends GuiScreen {
     @Override
     public void initGui() {
         super.initGui();
+        ZombieTC.editorModeManager.enabled = false;
         mapUrls = new ArrayList<String>();
         mapNames = new ArrayList<String>();
         mapThumbnailTextureNames = new ArrayList<Integer>();

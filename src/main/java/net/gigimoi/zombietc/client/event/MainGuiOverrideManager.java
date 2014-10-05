@@ -3,6 +3,7 @@ package net.gigimoi.zombietc.client.event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.gigimoi.zombietc.ZombieTC;
 import net.gigimoi.zombietc.client.gui.GuiStartGame;
+import net.gigimoi.zombietc.event.EditorModeManager;
 import net.gigimoi.zombietc.util.Lang;
 import net.gigimoi.zombietc.util.TextAlignment;
 import net.gigimoi.zombietc.util.TextRenderHelper;
@@ -62,6 +63,7 @@ public class MainGuiOverrideManager {
             cancelButton.width += 6;
             GuiButton createWorldButton = (GuiButton) event.buttonList.get(1);
             createWorldButton.displayString = Lang.get("ui.New World (Editor mode)");
+            ZombieTC.editorModeManager.enabled = true;
         }
         else if (event.gui.getClass() == GuiIngameMenu.class) {
             ((GuiButton)event.buttonList.get(1)).yPosition += 24;
