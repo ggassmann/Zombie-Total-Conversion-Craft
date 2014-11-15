@@ -12,7 +12,8 @@ Modpack credits:
 		BiblioCraft(BiblioCraft*.jar) - Nuchaz, http://www.bibliocraftmod.com
 		Chisel(Chisel*.jar) - pokefenn, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1294901-chisel
 		EnderIO(EnderIO*.jar) - CrazyPants, http://enderio.com/
+		Botania(Botania*.jar) - Vazkii, http://vazkii.us/mod/Botania
 Library credits:
-	PNGDecoderis released under the MIT license.
+	PNGDecoder is released under the MIT license.
 	Zip4j is released under the Apache 2.0 license.
 	SnakeYAML is released under the Apache 2.0 license.

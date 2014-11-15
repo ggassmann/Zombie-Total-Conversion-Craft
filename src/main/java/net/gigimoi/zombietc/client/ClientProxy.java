@@ -11,16 +11,10 @@ import net.gigimoi.zombietc.block.BlockNodeDoor;
 import net.gigimoi.zombietc.client.event.FogManager;
 import net.gigimoi.zombietc.client.event.MainGuiOverrideManager;
 import net.gigimoi.zombietc.client.event.PlayerBuffRenderManager;
-import net.gigimoi.zombietc.client.tilerenderer.TileRendererBarricade;
-import net.gigimoi.zombietc.client.tilerenderer.TileRendererChanceChest;
-import net.gigimoi.zombietc.client.tilerenderer.TileRendererDoorNode;
-import net.gigimoi.zombietc.client.tilerenderer.TileRendererNode;
+import net.gigimoi.zombietc.client.tilerenderer.*;
 import net.gigimoi.zombietc.client.tilerenderer.purchasable.TileRendererPurchaseItemstack;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
-import net.gigimoi.zombietc.tile.TileBarricade;
-import net.gigimoi.zombietc.tile.TileChanceChest;
-import net.gigimoi.zombietc.tile.TileNode;
-import net.gigimoi.zombietc.tile.TileNodeDoor;
+import net.gigimoi.zombietc.tile.*;
 import net.gigimoi.zombietc.tile.purchasable.TilePurchaseItemStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -54,6 +48,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TilePurchaseItemStack.class, new TileRendererPurchaseItemstack());
         ClientRegistry.bindTileEntitySpecialRenderer(TileBarricade.class, new TileRendererBarricade());
         ClientRegistry.bindTileEntitySpecialRenderer(TileChanceChest.class, new TileRendererChanceChest());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileBlockImpassible.class, new TileRendererImpassibleBlock());
     }
 
     @Override

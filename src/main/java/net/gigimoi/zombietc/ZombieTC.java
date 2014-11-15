@@ -84,6 +84,8 @@ public class ZombieTC {
         registerBlock(BlockNode.instance);
         registerBlock(BlockNodeDoor.iron);
 
+        registerBlock(BlockPlayerImpassible.instance);
+
         registerBlock(BlockPurchaseEventLever.instance, false);
         registerBlock(BlockBarricade.wooden);
         registerBlock(BlockPurchaseItemstack.instance);
@@ -96,6 +98,7 @@ public class ZombieTC {
         registerTileEntity(TilePurchaseEventLever.class);
         registerTileEntity(TileNodeDoor.class);
         registerTileEntity(TileChanceChest.class);
+        registerTileEntity(TileBlockImpassible.class);
 
         proxy.renderers();
         proxy.network();

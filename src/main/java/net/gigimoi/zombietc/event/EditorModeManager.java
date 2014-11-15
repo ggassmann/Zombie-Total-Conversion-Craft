@@ -28,5 +28,4 @@ public class EditorModeManager {
             event.setCanceled(true);
         }
     }
-
 }
