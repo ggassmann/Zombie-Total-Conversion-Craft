@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldSettings;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -53,6 +54,8 @@ public class PlayerManager {
     public void onEntityConstructing(EntityEvent.EntityConstructing event) {
         if (EntityPlayer.class.isAssignableFrom(event.entity.getClass())) {
             event.entity.registerExtendedProperties(ZombieTC.MODID, new ZombieTCPlayerProperties());
+            EntityPlayer player = (EntityPlayer) event.entity;
+            player.setGameType(WorldSettings.GameType.SURVIVAL);
         }
     }
 

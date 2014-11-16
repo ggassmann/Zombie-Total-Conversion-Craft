@@ -141,7 +141,6 @@ public class GuiStartGame extends GuiScreen {
                 FMLClientHandler.instance().tryLoadExistingWorld(null, mapName, mapName);
                 ZombieTC.editorModeManager.enabled = false;
                 ZombieTC.editorModeManager.isEditor = false;
-                Minecraft.getMinecraft().thePlayer.setGameType(WorldSettings.GameType.SURVIVAL);
             } catch (IOException e) {
                 e.printStackTrace();
                 downloading = null;
