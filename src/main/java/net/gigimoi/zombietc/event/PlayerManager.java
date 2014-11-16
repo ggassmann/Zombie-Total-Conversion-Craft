@@ -55,7 +55,6 @@ public class PlayerManager {
         if (EntityPlayer.class.isAssignableFrom(event.entity.getClass())) {
             event.entity.registerExtendedProperties(ZombieTC.MODID, new ZombieTCPlayerProperties());
             EntityPlayer player = (EntityPlayer) event.entity;
-            player.setGameType(WorldSettings.GameType.SURVIVAL);
         }
     }
 
@@ -73,6 +72,9 @@ public class PlayerManager {
             }
             for (int i = 0; i < world.playerEntities.size(); i++) {
                 EntityPlayer player = (EntityPlayer) world.playerEntities.get(i);
+                if(!ZombieTC.editorModeManager.isEditor) {
+                    world.getWorldInfo().setGameType(WorldSettings.GameType.SURVIVAL);
+                }
                 ZombieTCPlayerProperties playerProperties = ZombieTCPlayerProperties.get(player);
                 PotionEffect effect = new PotionEffect(Potion.regeneration.getId(), 10, 3);
                 if (playerProperties.timeSinceHit < 140) {
