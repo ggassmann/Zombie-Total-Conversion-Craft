@@ -2,6 +2,9 @@ Source code can be found at https://github.com/gigimoi/Zombie-Total-Conversion-C
 
 Modpack credits:
 	All mods used and distributed with permission. Licenses for these mods can be found at the links associated with them.
+		Railcraft(Railcraft*.jar) - CovertJaguar, http://www.railcraft.info/
+		Carpenter's Blocks(Carpenter's Blocks*.jar) - Mineshopper, http://www.carpentersblocks.com/
+		Baubles(Baubles*.jar) - Azanor, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1294623-baubles-1-0-1-8-updated-11-9-2014
 		Extra Utilities(extrautilities*.jar) - RWTema, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/1443963-extra-utilities-v1-1-0e#c2
 		Not Enough Items(NotEnoughItems*.jar) - chicken_bones, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1279956-chickenbones-mods
 		Code Chicken Core(CodeChickenCore*.jar) - chicken_bones, http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1279956-chickenbones-mods

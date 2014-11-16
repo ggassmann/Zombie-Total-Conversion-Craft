@@ -36,6 +36,7 @@ public class BlockNode extends BlockContainerZTC implements IItemRenderer {
     public static List<MCNode> nodes = new ArrayList<MCNode>();
     public static List<MCNodePair> nodeConnections = new ArrayList<MCNodePair>();
     private static int renderID = -1;
+    public int guiToOpen = GuiNode.GUI_ID;
 
     public BlockNode() {
         super(Material.rock);
@@ -179,7 +180,7 @@ public class BlockNode extends BlockContainerZTC implements IItemRenderer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         if (player.getHeldItem() == null || player.getHeldItem().getItem().getClass() != ItemNodeLinker.class) {
-            player.openGui(ZombieTC.instance, GuiNode.GUI_ID, world, x, y, z);
+            player.openGui(ZombieTC.instance, guiToOpen, world, x, y, z);
             return true;
         }
         return false;

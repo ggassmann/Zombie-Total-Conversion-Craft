@@ -41,6 +41,7 @@ ui.quit=Verlassen
 ui.price=Kosten
 ui.event=Auslöser
 ui.node.disableUntilPurchase=Deaktivieren, bis Kauf?
+ui.nodedoor.texture=Bild?
 ui.overlay.editorModeEnabled=Editiermodus ist aktiv
 ui.overlay.zombiesLeft=Untoten links
 ui.overlay.ammo=Munition

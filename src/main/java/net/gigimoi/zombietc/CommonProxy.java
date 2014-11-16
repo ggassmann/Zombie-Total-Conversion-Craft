@@ -7,6 +7,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import net.gigimoi.zombietc.client.gui.GuiNode;
+import net.gigimoi.zombietc.client.gui.GuiNodeDoor;
 import net.gigimoi.zombietc.client.gui.GuiPurchaseEventLever;
 import net.gigimoi.zombietc.client.gui.GuiPurchaseItemStack;
 import net.gigimoi.zombietc.item.weapon.ItemWeapon;
@@ -46,6 +47,8 @@ public class CommonProxy implements IGuiHandler {
             return new GuiNode(x, y, z);
         if (ID == GuiPurchaseEventLever.GUI_ID)
             return new GuiPurchaseEventLever(x, y, z);
+        if (ID == GuiNodeDoor.GUI_ID)
+            return new GuiNodeDoor(x, y, z);
         return null;
     }
 
@@ -75,6 +78,7 @@ public class CommonProxy implements IGuiHandler {
         regMessage(MessageChangeNodeEventWaitFor.class);
         regMessage(MessagePurchaseTile.class);
         regMessage(MessageSetPurchaseEventLeverInfo.class);
+        regMessage(MessageChangeNodeDoorTexture.class);
     }
     private int messageID;
     private void regMessage(Class<? extends IMessage> message) {

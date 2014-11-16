@@ -41,6 +41,7 @@ ui.quit=Abandon ship
 ui.price=Price of boat
 ui.event=Event of boat
 ui.node.disableUntilPurchase=Disable Until Boat?
+ui.nodedoor.texture=Boat?
 ui.overlay.editorModeEnabled=Editor mode boat
 ui.overlay.zombiesLeft=Undead boats
 ui.overlay.ammo=Ammo boat

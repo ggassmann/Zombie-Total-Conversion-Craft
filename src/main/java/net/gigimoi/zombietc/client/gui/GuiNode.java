@@ -111,8 +111,8 @@ public class GuiNode extends GuiScreen {
     }
 
     @Override
-    protected void mouseClicked(int par1, int par2, int par3) {
-        super.mouseClicked(par1, par2, par3);
-        this.textFieldEvent.mouseClicked(par1, par2, par3);
+    protected void mouseClicked(int x, int y, int buttonID) {
+        super.mouseClicked(x, y, buttonID);
+        this.textFieldEvent.mouseClicked(x, y, buttonID);
     }
 }

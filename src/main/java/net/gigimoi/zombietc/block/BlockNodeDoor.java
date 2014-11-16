@@ -1,6 +1,7 @@
 package net.gigimoi.zombietc.block;
 
 import net.gigimoi.zombietc.ZombieTC;
+import net.gigimoi.zombietc.client.gui.GuiNodeDoor;
 import net.gigimoi.zombietc.client.tilerenderer.TileRendererDoorNode;
 import net.gigimoi.zombietc.entity.EntityZZombie;
 import net.gigimoi.zombietc.tile.TileNodeDoor;
@@ -29,6 +30,7 @@ public class BlockNodeDoor extends BlockNode {
     public BlockNodeDoor() {
         setBlockName("Node Door");
         setHardness(1.0f);
+        guiToOpen = GuiNodeDoor.GUI_ID;
     }
 
     @Override
@@ -98,7 +100,7 @@ public class BlockNodeDoor extends BlockNode {
             glTranslated(0, 2, 0);
             glRotated(90, 0, 1, 0);
         }
-        TextureHelper.bindTexture(TileRendererDoorNode.texture);
+        TextureHelper.bindTexture(TileRendererDoorNode.textures[0]);
         TileRendererDoorNode.model.renderAll();
         glPopMatrix();
         glPushMatrix();

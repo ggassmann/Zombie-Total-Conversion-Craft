@@ -11,12 +11,14 @@ public class TileNodeDoor extends TileNode implements IListenerZTC {
     public int direction;
     public int animationTime;
     public int animationDirection = -1;
+    public int textureID = 0;
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         direction = tag.getInteger("Direction");
         animationTime = tag.getInteger("Animation Time");
         animationDirection = tag.getInteger("Animation Direction");
+        textureID = tag.getInteger("TextureID");
         super.readFromNBT(tag);
     }
 
@@ -25,6 +27,7 @@ public class TileNodeDoor extends TileNode implements IListenerZTC {
         tag.setInteger("Direction", direction);
         tag.setInteger("Animation Time", animationTime);
         tag.setInteger("Animation Direction", animationDirection);
+        tag.setInteger("TextureID", textureID);
         super.writeToNBT(tag);
     }
 

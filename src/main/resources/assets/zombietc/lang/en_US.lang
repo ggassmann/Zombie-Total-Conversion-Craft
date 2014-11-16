@@ -41,6 +41,7 @@ ui.quit=Quit
 ui.price=Price
 ui.event=Event
 ui.node.disableUntilPurchase=Disable Until Purchase?
+ui.nodedoor.texture=Texture?
 ui.overlay.editorModeEnabled=Editor mode enabled
 ui.overlay.zombiesLeft=Undead Left
 ui.overlay.ammo=Ammo
