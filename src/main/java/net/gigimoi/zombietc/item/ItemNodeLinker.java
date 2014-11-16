@@ -31,58 +31,67 @@ public class ItemNodeLinker extends Item {
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float i, float j, float k) {
-        if (world.isRemote) {
-            Block target = world.getBlock(x, y, z);
-            if (BlockNode.class.isAssignableFrom(target.getClass())) {
-                if (!stack.hasTagCompound()) {
-                    stack.setTagCompound(new NBTTagCompound());
-                    stack.getTagCompound().setInteger("xCoord", x);
-                    stack.getTagCompound().setInteger("yCoord", y);
-                    stack.getTagCompound().setInteger("zCoord", z);
-                    player.addChatMessage(new ChatComponentTranslation("Selected node"));
-                } else {
-                    int oX = stack.getTagCompound().getInteger("xCoord");
-                    int oY = stack.getTagCompound().getInteger("yCoord");
-                    int oZ = stack.getTagCompound().getInteger("zCoord");
-                    if (oX == x && oY == y && oZ == z) {
-                        stack.setTagCompound(null);
+        Block target = world.getBlock(x, y, z);
+        if (target instanceof BlockNode) {
+            if (!stack.hasTagCompound()) {
+                stack.setTagCompound(new NBTTagCompound());
+            }
+            if(!stack.getTagCompound().getBoolean("Selecting")) {
+                stack.getTagCompound().setBoolean("Selecting", true);
+                stack.getTagCompound().setInteger("xCoord", x);
+                stack.getTagCompound().setInteger("yCoord", y);
+                stack.getTagCompound().setInteger("zCoord", z);
+                if(world.isRemote) {
+                    player.addChatMessage(new ChatComponentTranslation("Selected node (" + x + "," + y + "," + z + ")"));
+                }
+            } else {
+                int oX = stack.getTagCompound().getInteger("xCoord");
+                int oY = stack.getTagCompound().getInteger("yCoord");
+                int oZ = stack.getTagCompound().getInteger("zCoord");
+                if (oX == x && oY == y && oZ == z) {
+                    stack.setTagCompound(null);
+                    if(world.isRemote) {
                         player.addChatMessage(new ChatComponentTranslation("Cancelling node link"));
-                    } else {
-                        Vec3 cVec = Vec3.createVectorHelper(x, y, z);
-                        Vec3 oVec = Vec3.createVectorHelper(oX, oY, oZ);
-                        boolean unlinked = false;
-                        for (int index = 0; index < BlockNode.nodeConnections.size(); index++) {
-                            BlockNode.MCNodePair pair = BlockNode.nodeConnections.get(index);
-                            if ((pair.n1.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f) &&
-                                    (pair.n1.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f)) {
-                                stack.setTagCompound(null);
-                                ZombieTC.network.sendToServer(new MessageRemoveNodeConnection(cVec, oVec));
-                                unlinked = true;
-                                player.addChatMessage(new ChatComponentTranslation("Unlinked nodes"));
-                                break;
-                            }
-                        }
-                        if (!unlinked) {
-                            boolean node1good = false;
-                            boolean node2good = false;
-                            for (int bi = 0; bi < BlockNode.nodes.size(); bi++) {
-                                if (BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(cVec)) < 0.01) {
-                                    node1good = true;
-                                }
-                                if (BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(oVec)) < 0.01) {
-                                    node2good = true;
-                                }
-                            }
-                            if (node1good && node2good) {
-                                ZombieTC.network.sendToServer(new MessageAddNodeConnection(cVec, oVec));
-                                player.addChatMessage(new ChatComponentTranslation("Linked nodes"));
-                            }
+                    }
+                } else {
+                    Vec3 cVec = Vec3.createVectorHelper(x, y, z);
+                    Vec3 oVec = Vec3.createVectorHelper(oX, oY, oZ);
+                    boolean unlinked = false;
+                    for (int index = 0; index < BlockNode.nodeConnections.size(); index++) {
+                        BlockNode.MCNodePair pair = BlockNode.nodeConnections.get(index);
+                        if ((pair.n1.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(cVec)) < 0.01f) &&
+                                (pair.n1.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f || pair.n2.position.distanceTo(Point3.fromVec3(oVec)) < 0.01f)) {
                             stack.setTagCompound(null);
+                            ZombieTC.network.sendToServer(new MessageRemoveNodeConnection(cVec, oVec));
+                            unlinked = true;
+                            if(world.isRemote) {
+                                player.addChatMessage(new ChatComponentTranslation("Unlinked nodes"));
+                            }
+                            break;
                         }
                     }
+                    if (!unlinked) {
+                        boolean node1good = false;
+                        boolean node2good = false;
+                        for (int bi = 0; bi < BlockNode.nodes.size(); bi++) {
+                            if (BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(cVec)) < 0.01) {
+                                node1good = true;
+                            }
+                            if (BlockNode.nodes.get(bi).position.distanceTo(Point3.fromVec3(oVec)) < 0.01) {
+                                node2good = true;
+                            }
+                        }
+                        if (node1good && node2good) {
+                            ZombieTC.network.sendToServer(new MessageAddNodeConnection(cVec, oVec));
+                            if(world.isRemote) {
+                                player.addChatMessage(new ChatComponentTranslation("Linked nodes"));
+                            }
+                        }
+                        stack.setTagCompound(null);
+                    }
                 }
-                return true;
             }
+            return true;
         }
         return super.onItemUse(stack, player, world, x, y, z, side, i, j, k);
     }

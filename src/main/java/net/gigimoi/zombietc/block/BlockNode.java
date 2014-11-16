@@ -169,12 +169,8 @@ public class BlockNode extends BlockContainerZTC implements IItemRenderer {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         super.breakBlock(world, x, y, z, block, meta);
-        if (!world.isRemote) {
-            BlockNode.removeNodeAt(x, y, z);
-            if (!MinecraftServer.getServer().isSinglePlayer()) {
-                ZombieTC.network.sendToAll(new MessageRemoveNode(x, y, z));
-            }
-        }
+        BlockNode.removeNodeAt(x, y, z);
+        ZombieTC.network.sendToAll(new MessageRemoveNode(x, y, z));
     }
 
     @Override
