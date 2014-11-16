@@ -37,6 +37,7 @@ public class MessageRemoveNode implements IMessage {
     public static class MessageRemoveNodeHandler implements IMessageHandler<MessageRemoveNode, MessageRemoveNode> {
         @Override
         public MessageRemoveNode onMessage(MessageRemoveNode message, MessageContext ctx) {
+            System.out.println("Removed node on " + ctx.side);
             BlockNode.removeNodeAt(message.pos.xCoord, message.pos.yCoord, message.pos.zCoord);
             ZombieTC.gameManager.regeneratePathMap();
             if (ctx.side == Side.SERVER) {
