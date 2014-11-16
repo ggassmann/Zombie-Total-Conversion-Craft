@@ -59,7 +59,10 @@ public class MCNode implements Node<MCNode> {
             return true;
         }
         TileEntity tileRaw = world.getTileEntity(position.xCoord, position.yCoord, position.zCoord);
-        TileNode tile = (TileNode) tileRaw;
-        return tile == null || tile.deactivated;
+        if(tileRaw instanceof TileNode) {
+            TileNode tile = (TileNode) tileRaw;
+            return tile == null || tile.deactivated;
+        }
+        return true;
     }
 }
