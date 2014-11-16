@@ -29,6 +29,8 @@ public class MainGuiOverrideManager {
     public void onDrawGui(GuiScreenEvent.DrawScreenEvent event) {
         if (event.gui.getClass() == GuiMainMenu.class) {
             TextRenderHelper.drawString(Lang.get("itemGroup.Zombie Total Conversion"), 2, 2, TextAlignment.Left);
+            TextRenderHelper.drawString("Developed by:", 2, 22, TextAlignment.Left);
+            TextRenderHelper.drawString("Gavin Gassmann: @TheGassmama", 2, 42, TextAlignment.Left);
         }
         else if(event.gui.getClass() == GuiGameOver.class) {
             if(Keyboard.isKeyDown(Keyboard.KEY_G) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
