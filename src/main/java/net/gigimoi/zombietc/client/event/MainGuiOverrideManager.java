@@ -54,6 +54,8 @@ public class MainGuiOverrideManager {
             button.id = BUTTON_ID_EDITOR_MODE;
             button.width /= 2;
             button.width -= 2;
+            ZombieTC.editorModeManager.isEditor = true;
+            ZombieTC.editorModeManager.enabled = true;
             GuiButton buttonNewGame = new GuiButton(BUTTON_ID_NEW_GAME, button.xPosition + button.width + 4, button.yPosition, button.width, button.height, Lang.get("ui.newGame"));
             event.buttonList.add(buttonNewGame);
         }

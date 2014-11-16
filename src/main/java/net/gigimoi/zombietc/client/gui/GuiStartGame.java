@@ -11,6 +11,7 @@ import net.lingala.zip4j.exception.ZipException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.world.WorldSettings;
 import org.apache.commons.io.FileUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
@@ -138,6 +139,9 @@ public class GuiStartGame extends GuiScreen {
                 downloading = null;
                 hasRenderedDownloading = false;
                 FMLClientHandler.instance().tryLoadExistingWorld(null, mapName, mapName);
+                ZombieTC.editorModeManager.enabled = false;
+                ZombieTC.editorModeManager.isEditor = false;
+                Minecraft.getMinecraft().thePlayer.setGameType(WorldSettings.GameType.SURVIVAL);
             } catch (IOException e) {
                 e.printStackTrace();
                 downloading = null;
